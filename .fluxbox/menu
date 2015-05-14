@@ -1,0 +1,49 @@
+[begin] (Start) 
+  [exec] (Google Chrome) {$BROWSER}              <~/.fluxbox/pixmaps/google-chrome.png>
+  [exec] (Terminator)    {$TERM}                 <~/.fluxbox/pixmaps/gnome-terminal.xpm> 
+  [exec] (Sublime)       {$EDITOR}               <~/.fluxbox/pixmaps/sublime-text.png>
+  [exec] (Files)         {nautilus --no-desktop} <~/.fluxbox/pixmaps/files.xpm>
+  [exec] (VLC)           {vlc}                   <~/.fluxbox/pixmaps/vlc.png>
+  [exec] (Skype)         {skype}                 <~/.fluxbox/pixmaps/skype.png>
+  [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>
+  [submenu] (Tools)
+    [exec] (Easystroke) {easystroke}
+    [exec] (fluxconf) {fluxconf}
+    [exec] (fluxkeys) {fluxkeys}
+    [exec] (fluxmenu) {fluxmenu}
+    [exec] (windowname) {xprop|grep "WM_CLASS\|WM_NAME" |cut -d \" -f 2|xmessage -file - -center}
+    [exec] (screenshot) {import screenshot.png && qiv -W 50 screenshot.png}
+  [end]
+  [separator]
+  [submenu] (Keyboard)
+     [exec] (US) {setxkbmap us}
+     [exec] (FA) {setxkbmap ir}
+  [end]
+  [separator]
+  [submenu] (Settings)
+     [config] (Configuration)
+     [submenu] (Styles) {}
+        [stylesdir] (/usr/share/fluxbox/styles)
+        [stylesdir] (~/.fluxbox/styles)
+     [end]
+     [workspaces] (Workspaces)
+     [submenu] (Edit) {Edit}
+       [exec] (Keys) {subl ~/.fluxbox/keys}
+       [exec] (Menu) {subl ~/.fluxbox/menu}
+       [exec] (WindowMenu) {subl ~/.fluxbox/windowmenu}
+       [exec] (Init) {subl ~/.fluxbox/init}
+       [exec] (Startup) {subl ~/.fluxbox/startup}
+       [exec] (Slitlist) {subl ~/.fluxbox/slitlist}
+       [exec] (Current Style) {subl `sed -n /styleFile/p .fluxbox/init | cut -f 2` }
+     [end]
+     [reconfig] (Reconfigure)
+     [restart] (Restart)
+  [end]
+  [separator]
+  [submenu] (System)
+     [exec] (Logout) {exit}
+     [exec] (Suspend) {sudo pm-suspend}
+     [exec] (Shutdown) {sudo poweroff}
+     [exec] (Restart) {sudo reboot}
+  [end]
+[end]

@@ -1,0 +1,114 @@
+! black for blackbox
+! window.roundCorners:  TopLeft  TopRight BottomLeft BottomRight
+
+
+! miscellaneous settings
+style.name                           : akira
+style.author                         : akira
+style.date                           : 030819
+
+toolbar                              : flat solid
+toolbar.borderWith                   : 0
+toolbar.color                        : #555566
+toolbar.textColor                    : #ffffff
+toolbar.justify                      : center
+
+toolbar.label                        : flat solid
+toolbar.label.color                  : #555566
+toolbar.label.textColor              : #ffffff
+
+toolbar.windowlabel                  : flat solid
+toolbar.windowlabel.color            : #555566
+toolbar.windowlabel.textColor        : #ffffff
+
+toolbar.clock                        : flat solid
+toolbar.clock.color                  : #555566
+toolbar.clock.textColor              : #ffffff
+
+toolbar.workspace                    : flat solid
+toolbar.workspace.justify            : center
+toolbar.workspace.color              : #555566
+toolbar.workspace.textColor          : #ffffff
+
+toolbar.iconbar.empty                : flat solid
+toolbar.iconbar.empty.color          : #555566
+
+toolbar.iconbar.focused              : flat solid
+toolbar.iconbar.focused.justify      : left
+toolbar.iconbar.focused.color        : #777788
+toolbar.iconbar.focused.textColor    : #ffffff
+
+toolbar.iconbar.unfocused            : flat solid
+toolbar.iconbar.unfocused.justify    : left
+toolbar.iconbar.unfocused.color      : #555566
+toolbar.iconbar.unfocused.textColor  : #ffffff
+
+
+! menu settings...
+menu.frame                           : flat solid
+menu.frame.color                     : #555566
+menu.frame.textColor                 : #ccccee
+menu.frame.justify                   : right
+
+menu.title                           : flat solid
+menu.title.color                     : #ccccee
+menu.title.textColor                 : #555566
+menu.title.justify                   : center
+
+menu.hilite                          : flat solid
+menu.hilite.color                    : #ccccee
+menu.hilite.textColor                : #555566
+
+menu.bullet                          : square
+menu.bullet.position                 : right
+menu.frame.disablecolor              : #ffffff
+
+! window settings...
+window.button.focus                  : flat solid
+window.button.focus.color            : #777788
+window.button.focus.piccolor         : #ccccee
+
+window.button.unfocus                : flat solid
+window.button.unfocus.color          : #777777
+window.button.unfocus.piccolor       : #aaaabb
+
+window.grip.focus                    : flat solid
+window.grip.focus.color              : #aaaabb
+
+window.grip.unfocus                  : flat solid
+window.grip.unfocus.color            : #9999aa
+
+window.handle.focus                  : flat solid
+window.handle.focus.color            : #aaaabb
+
+window.handle.unfocus                : flat solid
+window.handle.unfocus.color          : #aaaabb
+
+window.label.focus                   : flat solid
+window.label.focus.color             : #777788
+window.label.focus.textColor         : #ffffff
+window.label.focus.justify           : left
+
+window.justify                       : left
+window.label.unfocus                 : flat solid
+window.label.unfocus.color           : #555566
+window.label.unfocus.textColor       : #ffffff
+
+window.title.focus                   : flat solid
+window.title.focus.color             : #777788
+
+window.title.unfocus                 : flat solid
+window.title.unfocus.color           : #555566
+
+window.button.pressed                : flat solid
+window.button.pressed.color          : #ccccee
+
+slit                                 : flat solid
+slit.color                           : #333344
+
+*font                                : -artwiz-*
+*handleWidth                         : 3
+*borderColor                         : #555566
+
+rootCommand                          : bsetroot -gradient verticalgradient -from '#9999aa' -to '#333344'
+

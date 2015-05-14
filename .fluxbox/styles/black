@@ -1,0 +1,153 @@
+!
+! toolbar.shape                               : <bool> ,
+! menu.shape                                  : <shape thingy>,
+! window.shape                                : <shape thingy>
+!
+! TopRight TopLeft BottomLeft BottomRight ...
+!
+! menu.roundCorners                           : TopLeft TopRight
+! window.roundCorners                         : TopLeft TopRight
+! toolbar.shaped                              : true
+
+
+
+!
+! basic settings
+!
+
+*font                                         : -artwiz-*
+
+
+*bevelWidth                                   : 1
+*handleWidth                                  : 5
+*borderColor                                  : #222244
+*borderWidth                                  : 3
+
+
+!
+! toolbar
+!
+
+toolbar                                       : flat gradient crossdiagonal
+toolbar*justify                               : center
+toolbar*color                                 : #555566
+toolbar*colorTo                               : #ffffff
+toolbar*textColor                             : #222244
+
+toolbar.button                                : flat gradient crossdiagonal
+toolbar.button.color                          : #555566
+toolbar.button.colorTo                        : #ffffff
+toolbar.button.picColor                       : #222244
+toolbar.button.borderWidth                    : 0
+
+toolbar.windowLabel                           : parentrelative
+toolbar.label                                 : parentrelative
+
+toolbar.clock                                 : flat solid
+toolbar.clock.color                           : #777788
+toolbar.clock.textColor                       : #eeeeff
+
+toolbar.workspace                             : flat solid
+toolbar.workspace.color                       : #777788
+toolbar.workspace.textColor                   : #eeeeff
+
+toolbar.iconbar.empty                         : flat solid
+toolbar.iconbar.empty.color                   : #777788
+
+toolbar.iconbar.focused                       : flat solid
+toolbar.iconbar.focused.color                 : #777788
+toolbar.iconbar.focused.textColor             : #eeeeff
+toolbar.iconbar.unfocused                     : flat solid
+toolbar.iconbar.unfocused.color               : #666688
+toolbar.iconbar.unfocused.textColor           : #eeeeff
+
+
+!
+! menu
+!
+
+menu.title                                    : flat solid
+menu.title.color                              : #ccccee
+menu.title.textColor                          : #444455
+menu.title.justify                            : center
+
+menu.frame                                    : flat solid
+menu.frame.color                              : #555566
+menu.frame.textColor                          : #ccccee
+! menu.frame.disableColor                     : #ccccee
+
+menu.bullet.position                          : right
+menu.bullet                                   : square
+!menu.bullet                                  : ring
+!menu.bullet                                  : disc
+
+menu.hilite                                   : flat solid
+menu.hilite.color                             : #ccccee
+menu.hilite.textColor                         : #444455
+! menu.hilite.disableColor                    : #444455
+
+
+!
+! windows
+!
+window.justify                                : left
+window.title.focus                            : flat gradient crossdiagonal
+window.title.focus.color                      : #777788
+window.title.focus.colorTo                    : #ffffff
+window.title.unfocus                          : flat gradient crossdiagonal
+window.title.unfocus.color                    : #555566
+window.title.unfocus.colorTo                  : #ffffff
+
+window.label.focus                            : flat gradient crossdiagonal
+window.label.focus.textColor                  : #222244
+window.label.focus.color                      : #777788
+window.label.focus.colorTo                    : #ffffff
+
+window.label.unfocus                          : flat gradient crossdiagonal
+window.label.unfocus.textColor                : #000000
+window.label.unfocus.colorTo                  : #aaaaaa
+window.label.unfocus.color                    : #777788
+
+window.handle.focus                           : flat gradient crossdiagonal
+window.handle.focus.color                     : #aaaabb
+window.handle.focus.colorTo                   : #ffffff
+window.handle.unfocus                         : flat solid
+window.handle.unfocus.color                   : #aaaabb
+window.handle.unfocus.colorTo                 : #ffffff
+
+window.grip.focus                             : flat solid
+window.grip.focus.color                       : #aaaabb
+window.grip.unfocus                           : flat solid
+window.grip.unfocus.color                     : #9999aa
+
+window.frame.focus.Color                      : #9999aa
+window.frame.unfocus.Color                    : #aaaabb
+window.frame.focus.colorTo                    : #ffffff
+window.frame.unfocus.colorTo                  : #ffffff
+
+window.button.pressed                         : flat gradient crossdiagonal
+window.button.pressed.color                   : #ccccee
+window.button.pressed.colorTo                 : #ffffff
+window.button.pressed.picColor                : #eeeeff
+
+window.button.focus                           : flat gradient crossdiagonal
+window.button.focus.color                     : #777788
+window.button.focus.colorTo                   : #ffffff
+window.button.focus.picColor                  : #222244
+
+window.button.unfocus                         : flat gradient crossdiagonal
+window.button.unfocus.color                   : #777777
+window.button.unfocus.colorTo                 : #ffffff
+window.button.unfocus.picColor                : #222244
+
+
+!
+! background
+!
+
+! http://www.liquisoft.com/wallpapers.html
+!rootCommand                                  : fbsetbg -c ~/.fluxbox/backgrounds/Awakening.png
+
+! http://gallery.deviantart.com/wallpaper/
+!rootCommand                                  : fbsetbg ~/.fluxbox/styles/black.jpg
+

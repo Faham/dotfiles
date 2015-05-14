@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# fluxbox startup-script:
+#
+# Lines starting with a '#' are ignored.
+
+# Change your keymap:
+xmodmap ~/.Xmodmap
+
+# Applications you want to run with fluxbox.
+# MAKE SURE THAT APPS THAT KEEP RUNNING HAVE AN ''&'' AT THE END.
+#
+# unclutter -idle 2 &
+# wmnd &
+# wmsmixer -w &
+# idesk &
+#
+# Debian-local change:
+#   - fbautostart has been added with a quick hack to check to see if it
+#     exists. If it does, we'll start it up by default.
+which fbautostart > /dev/null
+if [ $? -eq 0 ]; then
+    fbautostart
+fi
+
+# run my start up application here
+xset r rate 200 40
+xset +fp /home/mathias/.fonts
+xsetroot -solid "#110011"
+xinput --set-prop "USB Optical Mouse" "Device Accel Constant Deceleration" 0.75
+unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
+nm-applet &         # network applet
+goldendict &
+sudo orientation & # lenovo yoga 2 screen rotation auto detection
+sudo light & # lenovo yoga 2 screen backlight auto adjustment
+# easystroke hide &
+# gnome-do &
+conky &
+sudo setkeycodes e03e 231 # for yoga tranformation to tablet event
+
+export BROWSER=google-chrome
+export EDITOR=subl
+export TERM=terminator
+
+# And last but not least we start fluxbox.
+# Because it is the last app you have to run it with ''exec'' before it.
+
+exec fluxbox
+# or if you want to keep a log:
+# exec fluxbox -log "/home/faham/.fluxbox/log"

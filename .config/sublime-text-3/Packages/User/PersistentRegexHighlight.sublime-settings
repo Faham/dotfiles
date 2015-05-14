@@ -1,0 +1,40 @@
+{
+    // Please see the README for more information on settings.
+
+    // Array of objects containing a regular expression
+    // and an optional coloring scheme
+    "regex": [
+        // {
+        //     "pattern": "\\[36m.*?\\[00m",
+        //     "color": "00FF00",
+        //     "ignore_case": false
+        // },
+        // {
+        //     "pattern_scope": "constant.language",
+        //     "color_scope": "constant.language"
+        // },
+        // {
+        //     "pattern": "SomeUnderlinePattern",
+        //     "underline": true
+        // },
+    ],
+
+    // If highlighting is enabled
+    "enabled": true,
+
+    // If highlighting should occur when a view is loaded
+    "on_load": true,
+
+    // If highlighting should occur as modifications happen
+    "on_modify": true,
+
+    // File pattern to disable on. Should be specified as Unix style patterns
+    // Note, this looks at the absolute path to match the pattern. So if trying
+    // ignore a single file (e.g. README.md), you will need to specify "**/README.md"
+    "disable_pattern": [
+    ],
+
+    // Maximum file size to run the the PersistentRegexHighlight on.
+    // Any value less than or equal to zero will be treated as a non limiting value.
+    "max_file_size": 0
+}

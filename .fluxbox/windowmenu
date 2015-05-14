@@ -1,0 +1,19 @@
+[begin]
+  [exec] (aterm) {aterm}
+  [maximize] (maximize)
+  [iconify] (minimize)
+  [submenu] (advanced)
+    [layer]
+    [sendto]
+    [extramenus] (remember)
+  [end]
+  [separator]
+  [shade]
+  [stick]
+  [raise]
+  [lower]
+  [settitledialog]
+  [alpha]
+  [separator]
+  [close] (close)
+[end]

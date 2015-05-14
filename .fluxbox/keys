@@ -1,0 +1,294 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! file   : $HOME/.fluxbox/keys
+! about  : fluxbox key bindings
+! author : mathias gumz <akira at fluxbox dot org>
+!          ( ak|ra or akira )
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!  hints:
+!
+!  o syntax of the fluxbox-keys-file:
+!
+!       <mod> [<mod> <mod>] key [key key] :command <commanoptions>
+!
+!    so, what is a <mod> ? its called "modifier" and you can use
+!    'xmodmap -pm' to see, what modifiers are available. if you 
+!    dont want to press any "modifier" then use 'None'
+!
+!  o what are those $XTERM, $EDITOR entries?
+!
+!    if you set a variable like XTERM to a sane value like
+!    "xterm" before fluxbox comes up, fluxbox would use that
+!    variable in the :ExecCommand. one can use the :Export or 
+!    :Setenv command to change that variable on the fly... eg to
+!    "urxvt" or "aterm".
+!
+!  o you can find a valid syntaxfile for vim here:
+!
+!       http://www.vim.org/scripts/script.php?script_id=882
+!       http://darkshed.net/files/vim/syntax/fluxkeys.vim
+!
+!    if you like it, rate it. (if not too :))
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Mod4 Delete               :Reconfigure
+Mod4 Shift Delete         :Restart
+Control Mod1 Delete       :Exit
+Mod4 l                    :ExecCommand xdg-screensaver lock
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!  menus
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Mod4 w                    :RootMenu # when logo key is pressed!
+Control Menu              :WorkspaceMenu
+Mod1 space                :WindowMenu
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!  frame - handling
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!Mod4 Left                 :PrevTab
+!Mod4 Right                :NextTab
+!Shift Mod4 d              :DetachClient
+!Shift Mod4 Left           :MoveTabLeft
+!Shift Mod4 Right          :MoveTabRight
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!  window - handling
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Mod4 s                    :Stick
+Mod4 m                    :Minimize
+Shift Mod4 m              :Deiconify LastWorkspace
+Mod4 d                    :ShowDesktop
+Control q                 :Close
+Mod4 e                    :ToggleDecor
+
+Mod1 Tab                  :NextWindow {groups} (workspace=[current])
+Mod1 Shift Tab            :PrevWindow {groups} (workspace=[current])
+Mod4 Tab                  :NextWindow {static groups} (workspace=[current])
+Mod4 Shift Tab            :PrevWindow {static groups} (workspace=[current])
+
+Mod1 Mod4 Up              :FocusUp
+Mod1 Mod4 Down            :FocusDown
+Mod1 Mod4 Left            :FocusLeft
+Mod1 Mod4 Right           :FocusRight
+
+OnTitlebar Mouse1         :MacroCmd {Raise} {Focus} {ActivateTab}
+OnTitlebar Move1          :StartMoving
+OnTitlebar Mouse2         :Lower
+OnTitlebar Mouse3         :WindowMenu
+OnToolbar Mouse4          :PrevWindow {static groups} (iconhidden=no)
+OnToolbar Mouse5          :NextWindow {static groups} (iconhidden=no)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! accessibility + screen rotation
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Mod1 Control Up              :ExecCommand xrandr -o normal; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
+Mod1 Control Down            :ExecCommand xrandr -o inverted; xinput disable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+Mod1 Control Left            :ExecCommand xrandr -o left; xinput disable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1
+Mod1 Control Right           :ExecCommand xrandr -o right; xinput disable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! accessibility + mousehandling
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!Control Mod1 a            :ExecCommand accessx
+!Control Mod1 Mod4 m       :ExecCommand ax +mousekeys
+!Control Mod1 m            :ExecCommand ax -mousekeys
+
+!Control Mod4 KP_Home      :ExecCommand xwit -rwarp  -50 -50
+!Control Mod4 KP_Up        :ExecCommand xwit -rwarp    0 -50
+!Control Mod4 KP_Prior     :ExecCommand xwit -rwarp   50 -50
+!Control Mod4 KP_Left      :ExecCommand xwit -rwarp  -50   0
+!Control Mod4 KP_Right     :ExecCommand xwit -rwarp   50   0
+!Control Mod4 KP_End       :ExecCommand xwit -rwarp  -50  50
+!Control Mod4 KP_Down      :ExecCommand xwit -rwarp    0  50
+!Control Mod4 KP_Next      :ExecCommand xwit -rwarp   50  50
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!  workspace - handling
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!Control Mod4 Right        :RightWorkspace
+!Control Mod4 Left         :LeftWorkspace
+!Control Mod4 Right        :NextWorkspace 
+!Control Mod4 Left         :PrevWorkspace 
+!Control Mod4 Down         :RightWorkspace 3
+!Control Mod4 Up           :LeftWorkspace 3
+
+Mod4 KP_Home              :Workspace 1
+Mod4 KP_Up                :Workspace 2
+Mod4 KP_Prior             :Workspace 3
+Mod4 KP_Left              :Workspace 4
+Mod4 KP_Begin             :Workspace 5
+Mod4 KP_Right             :Workspace 6
+Mod4 KP_End               :Workspace 7
+Mod4 KP_Down              :Workspace 8
+Mod4 KP_Next              :Workspace 9
+Mod4 KP_0                 :ExecCommand fbcmd_osd.sh print ws_name
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! resize / movement of window
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Shift Mod4 Up             :MoveUp 50
+Shift Mod4 Left           :MoveLeft 50
+Shift Mod4 Right          :MoveRight 50
+Shift Mod4 Down           :MoveDown 50
+
+Control Mod4 Up           :Resize   0 -50
+Control Mod4 Left         :Resize -50   0
+Control Mod4 Right        :Resize  50   0
+Control Mod4 Down         :Resize   0  50
+
+Control Shift Mod4 Left   :Resize -1    0
+Control Shift Mod4 Right  :Resize  1    0
+Control Shift Mod4 Up     :Resize  0   -1
+Control Shift Mod4 Down   :Resize  0    1
+
+Mod4 Left                 :MoveTo 0 * Left
+Mod4 Right                :MoveTo 0 * Right
+Mod4 Up                   :MoveTo * 0 Upper
+Mod4 Down                 :MoveTo * 0 Lower
+
+Mod4 Return               :MaximizeWindow
+Mod4 v                    :MaximizeVertical
+Mod4 h                    :MaximizeHorizontal
+Mod4 f                    :Fullscreen
+Control Mod4 p            :TakeToNextWorkspace 1
+Control Mod4 o            :TakeToPrevWorkspace 1
+Control Mod1 p            :SendToNextWorkspace 1
+Control Mod1 o            :SendToPrevWorkspace 1
+
+OnWindow Mod1 Mouse1      :MacroCmd {Raise} {Focus} {StartMoving}
+OnWindowBorder Move1      :StartMoving
+
+OnWindow Mod1 Mouse2      :MacroCmd {Raise} {Focus} {StartResizing NearestCorner}
+OnLeftGrip Move1          :StartResizing bottomleft
+OnRightGrip Move1         :StartResizing bottomright
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! execute commands
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!Control Mod1 1            :ExecCommand urxvt-rc
+!Control Mod4 e            :ExecCommand licqsh -o
+!Control Mod4 m            :ExecCommand quax
+!Control Mod4 y            :ExecCommand xterm -name mutt -title "mutt : mails" -e mutt
+!Control Mod4 s            :ExecCommand xterm -name abook -T "addresses" -e abook
+Mod4 t                    :ExecCommand goldendict
+Control Mod4 c            :ExecCommand xcalc
+Mod4 c                    :ExecCommand date | aosd_cat --fore-color=white -p 8 --font="lucida 50" --x-offset=-40 --y-offset=-0 --transparency=2 --fade-in=1000 --fade-full=2000 --fade-out=1000
+Mod4 r                    :ExecCommand fbrun -nearmouse -font Matto -w 500 -h 50
+Mod4 g                    :ExecCommand fbrun -nearmouse -font Matto -title "enter url..." -text "$BROWSER http://www.google.com/search?q=" -w 500 -h 50 -hf ~/.fluxbox/browse_history
+!Mod4 colon                :CommandDialog
+Shift Mod4 e              :ExecCommand env | sort | xmessage -file -
+Mod4 Mod1 d               :ExecCommand ding
+!Mod4 e                    :ExecCommand $EDITOR
+Mod4 n                    :ExecCommand $EDITOR $HOME/.notes
+Mod4 t                    :ExecCommand $EDITOR $HOME/.todo/
+Mod4 x                    :ExecCommand xmag
+!Mod1 Mod4 x               :ExecCommand wmagnify
+Shift Mod4 x              :ExecCommand xkill
+None 231                  :ExecCommand ~/.fluxbox/scripts/yoga-auto-rotate.sh
+
+!
+! soundkungfoo - volume control
+!
+
+! sound stuff, basicly control the volume via amixer (alsa)
+None XF86AudioMute        :ExecCommand amixer -c 1 -a sset Master,0 toggle 2&>1 > /dev/null
+None XF86AudioLowerVolume :ExecCommand amixer -c 1 -q sset Master 5%-
+None XF86AudioRaiseVolume :ExecCommand amixer -c 1 -q sset Master 5%+
+
+! screenshots
+! xmodmap -pke | grep -i print => xmodmap -e "keycode 107 = F13"
+! => i press "Print" and it dumps the screen :)
+None F13                  :ExecCommand sleep 1 && scrot -s -q 75 ~/Pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
+
+!
+! brightness
+!
+None 232 :Exec xbacklight -dec 10
+None 233 :Exec xbacklight -inc 10
+Shift 232 :Exec xbacklight -dec 1
+Shift 233 :Exec xbacklight -inc 1
+
+!
+! keyboard layout
+!
+Mod4 30 :Exec setxkbmap us
+Mod4 31 :Exec setxkbmap ir
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! below this line only experimental stuff is listed. its not supposed to WORK
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!
+! skip bad songs quickly :)
+Mod4 Tab                  :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc next &> /dev/null
+Control Mod4 Tab          :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc prev &> /dev/null
+Mod4 1                    :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc toggle &> /dev/null
+Mod1 Shift a              :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc volume +10 &> /dev/null
+Mod1 Shift y              :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc volume -10 &> /dev/null
+
+!
+! dvd / cdcontrol stuff
+!
+
+Mod4 plus                 :ExecCommand cdctrl speed 32 /dev/dvd
+Mod4 minus                :ExecCommand cdctrl speed 4 /dev/dvd
+Control Mod4 plus         :ExecCommand cdctrl close /dev/dvd
+Control Mod4 minus        :ExecCommand cdctrl open /dev/dvd
+
+Shift Mod4 plus           :ExecCommand cdctrl speed 32 /dev/cdrom
+Shift Mod4 minus          :ExecCommand cdctrl speed 4 /dev/cdrom
+Control Shift Mod4 plus   :ExecCommand cdctrl close /dev/cdrom
+Control Shift Mod4 minus  :ExecCommand cdctrl open /dev/cdrom
+
+!
+!Shift Mod4 p :FocusTo (xterm)
+!Shift Mod4 o :DumpTheme
+
+!Mod4 p m                  :Place max_space allow_smaller
+!Mod4 p v                  :Place expand_vertical allow_smaller
+!Mod4 p V                  :Place max_vertical_space allow_smaller
+!Mod4 p h                  :Place expand_horizontal allow_smaller
+!Mod4 p H                  :Place max_horizontqal_space allow_smaller
+!Mod4 p g                  :Place draw_grid
+
+Control Mod4 colon :FocusCommandTool
+
+Mod1 x p :ExecCommand urxvt -tint red
+
+! attention: the next command is just to show that syntax-hl in vim works
+Control Mod1 Mod4 x :MacroCmd {Exec xterm} {Move 10 10} {Exec bla} {Move 10 10}
+
+!Mod1 t v :TileVertical 3
+!Mod1 t s :TileHorizontal 3
+Mod1 t w :ArrangeWindows
+
+
+Mod4 Mod1 p            :CycleDecor
+
+! vim:ft=fluxkeys

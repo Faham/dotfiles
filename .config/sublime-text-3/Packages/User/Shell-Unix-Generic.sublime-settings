@@ -1,0 +1,11 @@
+{
+	"extensions":
+	[
+		"ac",
+		"gdb",
+		"inc",
+		"bb",
+		"bbappend",
+		"cfg"
+	]
+}
