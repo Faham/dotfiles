@@ -137,3 +137,11 @@ C_Brown='0;33'
 
 _CLR="\\e["
 PS1="${_CLR}${C_Green}m\\u${_CLR}m@${_CLR}${C_Blue}m\\h${_CLR}m:${_CLR}${C_LBlack}m\\w${_CLR}m\\n>"
+
+ms="~/.machine_specific.sh"
+
+if [[ -f "$ms" ]]; then
+    source "$ms"
+else
+    echo "Could not source ${ms}. File does not exist."
+fi

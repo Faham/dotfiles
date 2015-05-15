@@ -1,9 +1,0 @@
- htsubl
-wgoogle-chrome http://www.google.com/search?q=test
--chrome test
-subl
-google-chrome google aprofile_ctl
-google-chrome google test
-open google-chrome http://www.google.com/search?q=test
-google-chrome http://www.google.com/search?q=test
-google-chrome http://www.google.com/search?q=find a test
