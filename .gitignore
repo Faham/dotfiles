@@ -42,6 +42,8 @@
 .config/user-dirs.locale
 .config/vlc/
 .config/sublime-text-3/
+.config/terminator/
+.fluxbox/apps
 .dbus/
 .debug/
 .dmrc
