@@ -41,6 +41,7 @@
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/vlc/
+.config/sublime-text-3/
 .dbus/
 .debug/
 .dmrc
@@ -84,7 +85,4 @@ test-streams/
 test.sh
 virtual-udp-server.sh
 .fluxbox/fbrun_history
-.config/sublime-text-3/Installed\ Packages/
-.config/sublime-text-3/Packages/User/Package\ Control.cache/
-.config/sublime-text-3/Packages/User/Package\ Control.last-run
-.config/sublime-text-3/Local/Auto\ Save\ Session.sublime_session
+
