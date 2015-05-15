@@ -3,7 +3,8 @@
     // Example: ${folder:/path/to/file} is replaced with "/path/to".
     // "workingdir": "/tmp",
     // "workingdir": "/home/fahamne/gst/master",
-    "workingdir": "/home/fahamne/projects",
+    "workingdir": "/home/fahamne/dev/projects",
+    // "workingdir": "/home/fahamne/dev/penderwood/4X_Atom_dave/target_src/bin/mmfd/src",
 
     // NOTE: You MUST provide --interpreter=mi for the plugin to work
     // "commandline": "gdb --interpreter=mi",
@@ -36,8 +37,8 @@
     "registers_group":   0, "registers_open":   false,
     "disassembly_group": 0, "disassembly_open": false,
     "variables_group":   0, "variables_open":   true,
-    "threads_group":     3, "threads_open":     true,
     "breakpoints_group": 3, "breakpoints_open": true,
+    "threads_group":     3, "threads_open":     true,
     "file_group":        1,
     "callstack_group":   2, "callstack_open":   true,
     "session_group":     4, "session_open":     true,

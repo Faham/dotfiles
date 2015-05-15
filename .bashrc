@@ -85,13 +85,15 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -halF'
 alias la='ls -A'
 alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias nautilus='nautilus --no-desktop'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -118,20 +120,20 @@ export CVS_RSH=ssh
 #default prompt:
 #PS1="\u@\h:\w\$"A
 
-CLR_LBlack='1;30'
-CLR_LBlue='1;34'
-CLR_LGreen='1;32'
-CLR_LCyan='1;36'
-CLR_LRed='1;31'
-CLR_LPurple='1;35'
-CLR_LBrown='1;33'
-CLR_Black='0;30'
-CLR_Blue='0;34'
-CLR_Green='0;32'
-CLR_Cyan='0;36'
-CLR_Red='0;31'
-CLR_Purple='0;35'
-CLR_Brown='0;33'
+C_LBlack='1;30'
+C_LBlue='1;34'
+C_LGreen='1;32'
+C_LCyan='1;36'
+C_LRed='1;31'
+C_LPurple='1;35'
+C_LBrown='1;33'
+C_Black='0;30'
+C_Blue='0;34'
+C_Green='0;32'
+C_Cyan='0;36'
+C_Red='0;31'
+C_Purple='0;35'
+C_Brown='0;33'
 
 _CLR="\\e["
-PS1="${_CLR}${CLR_Green}m\\u${_CLR}m@${_CLR}${CLR_Blue}m\\h${_CLR}m:${_CLR}${CLR_LBlack}m\\w${_CLR}m\\n>"
+PS1="${_CLR}${C_Green}m\\u${_CLR}m@${_CLR}${C_Blue}m\\h${_CLR}m:${_CLR}${C_LBlack}m\\w${_CLR}m\\n>"
