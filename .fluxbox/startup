@@ -23,20 +23,13 @@ if [ $? -eq 0 ]; then
     fbautostart
 fi
 
-# run my start up application here
 xset r rate 200 40
 xset +fp /home/mathias/.fonts
 xsetroot -solid "#110011"
-xinput --set-prop "USB Optical Mouse" "Device Accel Constant Deceleration" 0.75
 unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
-nm-applet &         # network applet
+nm-applet &                          # network applet
 goldendict &
-sudo orientation & # lenovo yoga 2 screen rotation auto detection
-sudo light & # lenovo yoga 2 screen backlight auto adjustment
-# easystroke hide &
-# gnome-do &
 conky &
-sudo setkeycodes e03e 231 # for yoga tranformation to tablet event
 
 export BROWSER=google-chrome
 export EDITOR=subl
