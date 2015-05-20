@@ -35,6 +35,10 @@ export BROWSER=google-chrome
 export EDITOR=subl
 export TERM=terminator
 
+synergy &
+xscreensaver &
+terminator &
+
 echo "this is a test
 this is a test
 this is a test
