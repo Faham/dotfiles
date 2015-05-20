@@ -37,7 +37,7 @@
 Mod4 Delete               :Reconfigure
 Mod4 Shift Delete         :Restart
 Control Mod1 Delete       :Exit
-Mod4 l                    :ExecCommand xdg-screensaver lock
+Mod4 l                    :ExecCommand xscreensaver-command -lock
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
