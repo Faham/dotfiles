@@ -8,7 +8,8 @@
 		"Makefile",
 		"Vintage",
 		"Markdown",
-		"RestructuredText"
+		"RestructuredText",
+		"GitGutter"
 	],
 	"line_numbers": true,
 	"margin": 0,
