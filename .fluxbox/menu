@@ -8,7 +8,7 @@
   [exec] (Viber)         {viber}                 <~/.fluxbox/pixmaps/viber.png>
   [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>
   [exec] (Pidgin)        {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
-  [exec] (Synergy)       {synergy}               <~/.fluxbox/pixmaps/gimp.png>
+  [exec] (Synergy)       {synergy}               <~/.fluxbox/pixmaps/synergy.png>
   [exec] (Thunderbird)   {thunderbird}           <~/.fluxbox/pixmaps/thunderbird.png>
   [exec] (Remmina)       {remmina}               <~/.fluxbox/pixmaps/remmina.png>
   [submenu] (Tools)
