@@ -1,11 +1,16 @@
 [begin] (Start) 
   [exec] (Google Chrome) {$BROWSER}              <~/.fluxbox/pixmaps/google-chrome.png>
-  [exec] (Terminator)    {$TERM}                 <~/.fluxbox/pixmaps/gnome-terminal.xpm> 
+  [exec] (Terminator)    {$TERM}                 <~/.fluxbox/pixmaps/gnome-terminal.png> 
   [exec] (Sublime)       {$EDITOR}               <~/.fluxbox/pixmaps/sublime-text.png>
-  [exec] (Files)         {nautilus --no-desktop} <~/.fluxbox/pixmaps/files.xpm>
+  [exec] (Files)         {nautilus --no-desktop} <~/.fluxbox/pixmaps/files.png>
   [exec] (VLC)           {vlc}                   <~/.fluxbox/pixmaps/vlc.png>
   [exec] (Skype)         {skype}                 <~/.fluxbox/pixmaps/skype.png>
+  [exec] (Viber)         {viber}                 <~/.fluxbox/pixmaps/viber.png>
   [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>
+  [exec] (Pidgin)        {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
+  [exec] (Synergy)       {synergy}               <~/.fluxbox/pixmaps/gimp.png>
+  [exec] (Thunderbird)   {thunderbird}           <~/.fluxbox/pixmaps/thunderbird.png>
+  [exec] (Remmina)       {remmina}               <~/.fluxbox/pixmaps/remmina.png>
   [submenu] (Tools)
     [exec] (Easystroke) {easystroke}
     [exec] (fluxconf) {fluxconf}
