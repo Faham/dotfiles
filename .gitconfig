@@ -1,3 +1,23 @@
+[push]
+ default = upstream
 [user]
-	name = Faham Negini
-	email = faham.negini@gmail.com
+ name = Faham Negini
+ email = Faham.Negini@vecima.com
+[commit]
+ template = /home/fahamne/.gitmessage
+[alias]
+ lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+ br = branch -vv
+ st = status -uno
+[color]
+ ui = true
+ status = auto
+ branch = auto
+ diff = auto
+[merge]
+ tool = kdiff3
+[core]
+ editor = vim
+ excludesfile = /home/fahamne/.gitignore
+[pull]
+ rebase = true
