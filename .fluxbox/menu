@@ -4,13 +4,18 @@
   [exec] (Sublime)       {$EDITOR}               <~/.fluxbox/pixmaps/sublime-text.png>
   [exec] (Files)         {nautilus --no-desktop} <~/.fluxbox/pixmaps/files.png>
   [exec] (VLC)           {vlc}                   <~/.fluxbox/pixmaps/vlc.png>
-  [exec] (Skype)         {skype}                 <~/.fluxbox/pixmaps/skype.png>
-  [exec] (Viber)         {viber}                 <~/.fluxbox/pixmaps/viber.png>
-  [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>
-  [exec] (Pidgin)        {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
-  [exec] (Synergy)       {synergy}               <~/.fluxbox/pixmaps/synergy.png>
-  [exec] (Thunderbird)   {thunderbird}           <~/.fluxbox/pixmaps/thunderbird.png>
-  [exec] (Remmina)       {remmina}               <~/.fluxbox/pixmaps/remmina.png>
+  [separator]
+  [exec]                 {skype}                 <~/.fluxbox/pixmaps/skype.png>
+  [exec]                 {/opt/viber/Viber}      <~/.fluxbox/pixmaps/viber.png>
+  [exec]                 {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
+  [exec]                 {hipchat}               <~/.fluxbox/pixmaps/hipchat.png>
+  [separator]
+  [submenu] (Misc)
+    [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>
+    [exec] (Synergy)       {synergy}               <~/.fluxbox/pixmaps/synergy.png>
+    [exec] (Thunderbird)   {thunderbird}           <~/.fluxbox/pixmaps/thunderbird.png>
+    [exec] (Remmina)       {remmina}               <~/.fluxbox/pixmaps/remmina.png>
+  [end]
   [submenu] (Tools)
     [exec] (Easystroke) {easystroke}
     [exec] (fluxconf) {fluxconf}
@@ -19,12 +24,10 @@
     [exec] (windowname) {xprop|grep "WM_CLASS\|WM_NAME" |cut -d \" -f 2|xmessage -file - -center}
     [exec] (screenshot) {import screenshot.png && qiv -W 50 screenshot.png}
   [end]
-  [separator]
   [submenu] (Keyboard)
      [exec] (US) {setxkbmap us}
      [exec] (FA) {setxkbmap ir}
   [end]
-  [separator]
   [submenu] (Settings)
      [config] (Configuration)
      [submenu] (Styles) {}
@@ -44,7 +47,6 @@
      [reconfig] (Reconfigure)
      [restart] (Restart)
   [end]
-  [separator]
   [submenu] (System)
      [exec] (Logout) {exit}
      [exec] (Suspend) {sudo pm-suspend}
