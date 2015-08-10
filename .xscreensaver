@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.15 for fahamne on Wed May 20 15:41:05 2015.
+# Written by xscreensaver-demo 5.15 for fahamne on Mon Aug 10 13:43:04 2015.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:05:00
@@ -35,7 +35,7 @@ chooseRandomImages: False
 imageDirectory:	
 
 mode:		blank
-selected:	91
+selected:	157
 
 textMode:	url
 textLiteral:	XScreenSaver
