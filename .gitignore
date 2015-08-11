@@ -1,2 +1,19 @@
-# ignore everything by default
-*
+# ignore general directories
+desktop/
+dev/
+doc/
+downloads/
+goto/
+gst/
+mail/
+music/
+pictures/
+projfiles/
+public/
+templates/
+videos/
+tmp/
+
+# ignore general files
+Vecima.ics
+examples.desktop
