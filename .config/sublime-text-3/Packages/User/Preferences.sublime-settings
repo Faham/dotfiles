@@ -6,9 +6,9 @@
 	"ignored_packages":
 	[
 		"Markdown",
+		"Vintage",
 		"Makefile",
-		"RestructuredText",
-		"Vintage"
+		"RestructuredText"
 	],
 	"line_numbers": true,
 	"margin": 0,

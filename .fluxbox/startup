@@ -23,29 +23,14 @@ if [ $? -eq 0 ]; then
     fbautostart
 fi
 
-xset r rate 200 40
-xset +fp /home/mathias/.fonts
-xsetroot -solid "#110011"
-unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
 nm-applet &                          # network applet
 goldendict &
 conky &
-
-export BROWSER=google-chrome
-export EDITOR=subl
-export TERM=terminator
-
-xrandr --output VGA1 --auto --output HDMI2 --auto --left-of VGA1
 synergy &
 xscreensaver &
 thunderbird &
 google-chrome &
 terminator &
-
-echo "this is a test
-this is a test
-this is a test
-this is a test" > /tmp/aes.ecb
 
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.

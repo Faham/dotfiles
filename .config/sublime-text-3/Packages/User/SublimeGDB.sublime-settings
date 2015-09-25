@@ -3,7 +3,7 @@
     // Example: ${folder:/path/to/file} is replaced with "/path/to".
     // "workingdir": "/tmp",
     // "workingdir": "/home/fahamne/gst/master",
-    "workingdir": "/home/fahamne/projects",
+    "workingdir": "/home/fahamne/dev/sublime-projects",
 
     // NOTE: You MUST provide --interpreter=mi for the plugin to work
     // "commandline": "gdb --interpreter=mi",
