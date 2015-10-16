@@ -9,7 +9,7 @@ session.screen0.titlebar.right:
 
 session.screen0.menu.alpha:              255
 
-session.screen0.toolbar.autoHide:        false
+session.screen0.toolbar.autoHide:        true
 session.screen0.toolbar.tools:           clock, iconbar, systemtray
 session.screen0.toolbar.widthPercent:    100
 session.screen0.toolbar.placement:       TopCenter
@@ -18,7 +18,7 @@ session.screen0.toolbar.alpha:           255
 session.screen0.toolbar.onhead:          1
 session.screen0.toolbar.visible:         true
 session.screen0.toolbar.layer:           Dock
-session.screen0.toolbar.height:          20
+session.screen0.toolbar.height:          35
 
 session.screen0.iconbar.iconWidth:       128
 session.screen0.iconbar.usePixmap:       true

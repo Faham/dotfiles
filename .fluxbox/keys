@@ -34,8 +34,8 @@
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-Mod4 Delete               :Reconfigure
-Mod4 Shift Delete         :Restart
+Mod4 Shift c              :Reconfigure
+Mod4 Shift r              :Restart
 Control Mod1 Delete       :Exit
 Mod4 l                    :ExecCommand xscreensaver-command -lock
 
@@ -187,16 +187,17 @@ OnRightGrip Move1         :StartResizing bottomright
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+Mod4 t                    :ExecCommand goldendict
+Mod4 r                    :ExecCommand fbrun -nearmouse -font Matto -w 500 -h 50
+Mod4 c                    :ExecCommand date | xosd --fore-color=white -p 8 --font="lucida 50" --x-offset=-40 --y-offset=-0 --transparency=2 --fade-in=1000 --fade-full=2000 --fade-out=1000
+!Mod4 c                    :ExecCommand date | aosd_cat --fore-color=white -p 8 --font="lucida 50" --x-offset=-40 --y-offset=-0 --transparency=2 --fade-in=1000 --fade-full=2000 --fade-out=1000
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
 !Control Mod4 m            :ExecCommand quax
 !Control Mod4 y            :ExecCommand xterm -name mutt -title "mutt : mails" -e mutt
 !Control Mod4 s            :ExecCommand xterm -name abook -T "addresses" -e abook
-Mod4 t                    :ExecCommand goldendict
-Control Mod4 c            :ExecCommand xcalc
-Mod4 c                    :ExecCommand date | aosd_cat --fore-color=white -p 8 --font="lucida 50" --x-offset=-40 --y-offset=-0 --transparency=2 --fade-in=1000 --fade-full=2000 --fade-out=1000
-Mod4 r                    :ExecCommand fbrun -nearmouse -font Matto -w 500 -h 50
-Mod4 g                    :ExecCommand fbrun -nearmouse -font Matto -title "enter url..." -text "$BROWSER http://www.google.com/search?q=" -w 500 -h 50 -hf ~/.fluxbox/browse_history
+!Control Mod4 c            :ExecCommand xcalc
+!Mod4 g                    :ExecCommand fbrun -nearmouse -font Matto -title "enter url..." -text "$BROWSER http://www.google.com/search?q=" -w 500 -h 50 -hf ~/.fluxbox/browse_history
 !Mod4 colon                :CommandDialog
 Shift Mod4 e              :ExecCommand env | sort | xmessage -file -
 Mod4 Mod1 d               :ExecCommand ding
@@ -208,27 +209,19 @@ Mod4 x                    :ExecCommand xmag
 Shift Mod4 x              :ExecCommand xkill
 None 231                  :ExecCommand ~/.fluxbox/scripts/yoga-auto-rotate.sh
 
-!
-! soundkungfoo - volume control
-!
+! volume control
+None XF86AudioMute        :ExecCommand /home/faham/script/volume.sh toggle
+None XF86AudioLowerVolume :ExecCommand /home/faham/script/volume.sh down
+None XF86AudioRaiseVolume :ExecCommand /home/faham/script/volume.sh up
 
-! sound stuff, basicly control the volume via amixer (alsa)
-None XF86AudioMute        :ExecCommand amixer -c 1 -a sset Master,0 toggle 2&>1 > /dev/null
-None XF86AudioLowerVolume :ExecCommand amixer -c 1 -q sset Master 5%-
-None XF86AudioRaiseVolume :ExecCommand amixer -c 1 -q sset Master 5%+
+! brightness control
+None 232 :Exec /home/faham/script/brightness.sh -30
+None 233 :Exec /home/faham/script/brightness.sh 30
 
 ! screenshots
 ! xmodmap -pke | grep -i print => xmodmap -e "keycode 107 = F13"
 ! => i press "Print" and it dumps the screen :)
-None F13                  :ExecCommand sleep 1 && scrot -s -q 75 ~/Pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
-
-!
-! brightness
-!
-None 232 :Exec xbacklight -dec 10
-None 233 :Exec xbacklight -inc 10
-Shift 232 :Exec xbacklight -dec 1
-Shift 233 :Exec xbacklight -inc 1
+None F13                  :ExecCommand sleep 1 && scrot -s -q 75 ~/pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
 
 !
 ! keyboard layout
