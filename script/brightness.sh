@@ -16,7 +16,7 @@ echo $val | sudo tee $device/brightness
 # xbacklight -dec 10
 # xbacklight -inc 10
 
-percent=$(($cur * 100 / $max))
+percent=$(($val * 100 / $max))
 
 osd_pid='/tmp/osd-brightness.pid'
 osd_cmd="osd_cat \
