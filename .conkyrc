@@ -1,106 +1,102 @@
+
+# ----------------------------------------------------------------------------
+
+# for more inforamtion on variables go to:
+# http://conky.sourceforge.net/config_settings.html
+# http://conky.sourceforge.net/docs.html
+
+# --- Window Layout & Options --- #
 background yes
-# font 7x13
-use_xft yes
-xftfont MaiandraGD:size=8
-on_bottom yes
-
-# mpd_host 192.168.150.2
-# mpd_port 6600
-
-update_interval 2.0
-
-total_run_times 0
-
 own_window no
-
+own_window_colour brown
 own_window_transparent yes
-
+own_window_type normal
+# own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 double_buffer yes
+use_spacer right
+use_xft yes
+alignment top_right
+gap_x 100
+gap_y 100
 
-minimum_size 280 5
-
-draw_shades yes
-draw_outline no
-draw_borders no
-stippled_borders 8
-border_margin 4
-border_width 1
-
+# # --- Colours, Sizes, Fonts & Margins --- #
+update_interval 3.0
+maximum_width 800
+stippled_borders 3
+border_margin 9
+border_width 10
 default_color white
 default_shade_color black
 default_outline_color black
 
-alignment top_right
-
-maximum_width 1000
-
-gap_x 100
-gap_y 100
-
-no_buffers yes
-
+# # --- Text --- #
+format_human_readable yes
+out_to_console no
+draw_outline no
+draw_borders no
+xftfont MaiandraGD:size=10
 uppercase no
-
+draw_shades no
+override_utf8_locale yes
 cpu_avg_samples 2
 net_avg_samples 2
 
-override_utf8_locale no
-
-use_spacer no
+# ----------------------------------------------------------------------------
 
 # stuff after 'TEXT' will be formatted on screen
-
 TEXT
-${color #5b6dad}$nodename   linux-$kernel${alignr}${time %T}
+# ----------------------------------------------------------------------------
+${color #7f8ed3}${time %d %b, %a} ${time %k:%M:%S}
+${color #5b6dad}System: ${color #7f8ed3}$nodename
+${color #5b6dad}Linux kernel: ${color #7f8ed3}$kernel
 
-${color #5b6dad}Battery: ${color #7f8ed3} ${battery BAT1} ${battery_bar BAT1}
-
+# ----------------------------------------------------------------------------
 ${color #5b6dad}System:
-${color #5b6dad} Uptime:${color #7f8ed3} $uptime ${color #5b6dad}- Load:${color #7f8ed3} $loadavg
-${color #5b6dad} CPU Frequency:${color #7f8ed3} $freq_dyn_g ${color #5b6dad} Maximum:${color #7f8ed3} $freq_g
-${color #5b6dad} CPU Usage:${color #7f8ed3} $cpu% ${cpubar}
+${color #5b6dad}Battery: ${color #7f8ed3} ${battery BAT1} ${battery_bar BAT1}
+${color #5b6dad}Uptime:${color #7f8ed3} $uptime ${color #5b6dad}- Load:${color #7f8ed3} $loadavg
+${color #5b6dad}CPU Frequency:${color #7f8ed3} $freq_dyn_g ${color #5b6dad} Maximum:${color #7f8ed3} $freq_g
+${color #5b6dad}CPU Temp: ${color #7f8ed3}${acpitemp}°C
+${color #5b6dad}CPU Usage:${color #7f8ed3} $cpu% ${cpubar}
 ${color #000000}${cpugraph cpu0 32,309 000000 7f8ed3}
-${color #5b6dad} RAM Usage:${color #7f8ed3} $mem/$memmax - $memperc% ${membar}
-${color #5b6dad} Swap Usage:${color #7f8ed3} $swap/$swapmax - $swapperc% ${swapbar}
-${color #5b6dad} Processes:${color #7f8ed3} $processes  ${color #5b6dad}Running:${color #7f8ed3} $running_processes
+${color #5b6dad}RAM Usage:${color #7f8ed3} $mem/$memmax - $memperc% ${membar}
+${color #5b6dad}Swap Usage:${color #7f8ed3} $swap/$swapmax - $swapperc% ${swapbar}
+${color #5b6dad}Processes:${color #7f8ed3} $processes  ${color #5b6dad}Running:${color #7f8ed3} $running_processes
 
+# ----------------------------------------------------------------------------
 ${color #5b6dad}Networking:
- ${color #5b6dad}Down:${color #7f8ed3} ${downspeed wlan0} k/s${color #5b6dad}${offset 80}Up:${color #7f8ed3} ${upspeed wlan0} k/s
-${color #000000}${downspeedgraph wlan0 32,150 000000 7f8ed3} ${color #000000}${upspeedgraph wlan0 32,150 000000 7f8ed3}
- ${color #5b6dad}Address: ${color #7f8ed3}${addr wlan0}${alignr}${color #5b6dad}TCP Connections: ${color #7f8ed3}${tcp_portmon 1 65535 count}
+${color #5b6dad}Down:${color #7f8ed3} ${downspeed wlp1s0} k/s${color #5b6dad}${alignr}Up:${color #7f8ed3} ${upspeed wlp1s0} k/s
+${color #000000}${downspeedgraph wlp1s0 32,150 000000 7f8ed3}${color #000000}${alignr}${upspeedgraph wlp1s0 32,150 000000 7f8ed3}
+${color #5b6dad}Address: ${color #7f8ed3}${addr wlp1s0}${alignr}${color #5b6dad}${alignr}TCP Connections: ${color #7f8ed3}${tcp_portmon 1 65535 count}
 
-# ${color #5b6dad}File Systems:
-#  ${color #5b6dad}/ ${color #7f8ed3}${fs_used /}/${fs_size /} ${color #7f8ed3}${fs_bar /}
-#  ${color #5b6dad}~ ${color #7f8ed3}${fs_used /mnt/storage/}/${fs_size /mnt/storage/} ${color #7f8ed3}${fs_bar /mnt/storage/}
-#  ${color #5b6dad}w2k ${color #7f8ed3}${fs_used /mnt/windows}/${fs_size /mnt/windows} ${color #7f8ed3}${fs_bar /mnt/windows}
-
-# ${color #5b6dad}Monitors          CPU     FAN1   FAN2
-# ${color #7f8ed3}                  ${i8k_cpu_temp}C     ${i8k_left_fan_status}    ${i8k_right_fan_status}
+# ----------------------------------------------------------------------------
+${color #5b6dad}File Systems:
+${color #5b6dad}/     ${color #7f8ed3}${fs_used /}/${fs_size /} ${color #7f8ed3}${fs_bar /}
+${color #5b6dad}/home ${color #7f8ed3}${fs_used /home/}/${fs_size /home/} ${color #7f8ed3}${fs_bar /home/}
 
 # ${color #5b6dad}MPD: ${color #7f8ed3}${alignc}$mpd_artist - $mpd_title
 # ${color #7f8ed3}$mpd_bar
 # ${color #7f8ed3}${alignc}$mpd_status
-
-${color #5b6dad}Name              PID     CPU%   MEM%
-${color #7f8ed3} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
-${color #7f8ed3} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
-${color #7f8ed3} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+# 
+${color #5b6dad}Name                   PID          CPU%         MEM%
+${color #7f8ed3}${top name 1}$alignr${top pid 1} ${top cpu 1} ${top mem 1}
+${color #7f8ed3}${top name 2}$alignr${top pid 2} ${top cpu 2} ${top mem 2}
+${color #7f8ed3}${top name 3}$alignr${top pid 3} ${top cpu 3} ${top mem 3}
 ${color #5b6dad}Mem usage
-${color #7f8ed3} ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
-${color #7f8ed3} ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
-${color #7f8ed3} ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+${color #7f8ed3}${top_mem name 1}$alignr${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
+${color #7f8ed3}${top_mem name 2}$alignr${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
+${color #7f8ed3}${top_mem name 3}$alignr${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
 
 # ${color #5b6dad}Portage:
- # ${color #5b6dad}Last Sync        ${color #7f8ed3}${execi 300 /home/hellfire/scripts/lastsync.pl}
- # ${color #5b6dad}Current Progress ${color #7f8ed3}${execibar 30 /home/hellfire/scripts/emerge-progress.sh}
- # ${color #5b6dad}Current Package  ${color #7f8ed3}${execi 30 /home/hellfire/scripts/emerge-current.sh}
- # ${color #5b6dad}Current Status   ${color #7f8ed3}${execi 30 /home/hellfire/scripts/emerge-status.sh}
-
+# ${color #5b6dad}Last Sync        ${color #7f8ed3}${execi 300 /home/hellfire/scripts/lastsync.pl}
+# ${color #5b6dad}Current Progress ${color #7f8ed3}${execibar 30 /home/hellfire/scripts/emerge-progress.sh}
+# ${color #5b6dad}Current Package  ${color #7f8ed3}${execi 30 /home/hellfire/scripts/emerge-current.sh}
+# ${color #5b6dad}Current Status   ${color #7f8ed3}${execi 30 /home/hellfire/scripts/emerge-status.sh}
+# 
 # ${color #5b6dad}Local Weather:
 # ${color #7f8ed3}${execi 1800 /home/hellfire/scripts/weather/weather.sh}
-
+# 
 # ${color #5b6dad}Gentoo Linux Security Advisories:
 # ${color #7f8ed3}${execi 300 /home/hellfire/scripts/conky-rss.sh http://www.gentoo.org/rdf/en/glsa-index.rdf 5 1}
-
+# 
 # ${color #5b6dad}Fox News Latest Headlines:
 # ${color #7f8ed3}${execi 300 /home/hellfire/scripts/conky-rss.sh http://www.foxnews.com/xmlfeed/rss/0,4313,0,00.rss 5 2}
