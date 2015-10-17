@@ -1,14 +1,14 @@
 {
 	"color_scheme": "Packages/User/ColorScheme/fahamMonokai.tmTheme",
+	"dpi_scale": 2.0,
 	"draw_centered": true,
-	"font_size": 10,
+	"font_size": 11,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Markdown",
 		"Vintage",
-		"Makefile",
-		"RestructuredText"
+		"RestructuredText",
+		"Makefile"
 	],
 	"line_numbers": true,
 	"margin": 0,
