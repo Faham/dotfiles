@@ -5,7 +5,7 @@ fluxbox & wmpid=$!
 
 # startup apps
 xset r rate 200 40
-xset +fp /home/mathias/.fonts
+xset +fp ~/.fonts
 xsetroot -solid "#110011"
 xrandr --output VGA1 --auto --left-of DP2
 xrandr --output DP2 --primary

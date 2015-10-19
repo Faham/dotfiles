@@ -1,5 +1,9 @@
 # Don't wrap line or the coloring regexp won't work.
 set width 0
+set print elements 2000
+set pagination off
+set print pretty on
+set breakpoint pending on
 
 # Create a named pipe to get outputs from gdb
 shell test -e /tmp/coloutPipe && rm /tmp/coloutPipe

@@ -15,6 +15,7 @@ function virtualenv_info {
 PR_GIT_UPDATE=1
 
 setopt prompt_subst
+setopt no_share_history
 unsetopt share_history
 
 autoload -U add-zsh-hook
