@@ -91,3 +91,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nautilus='nautilus --no-desktop'
 
+function _google()  { xdg-open "https://www.google.ca/search?q=$*" }; alias google=_google
+function _map()     { xdg-open "https://maps.google.ca/maps?q=$*" }; alias map=_map
+function _youtube() { xdg-open "https://www.youtube.com/results?search_query=$*&page={startPage?}&utm_source=opensearch" }; alias youtube=_youtube
+function _wiki()    { xdg-open "https://en.wikipedia.org/wiki/Special:Search?search=$*" }; alias wiki=_wiki
+function _amazon()  { xdg-open "http://www.amazon.ca/exec/obidos/external-search/?field-keywords=$*&mode=blended&tag=wwwcanoniccom-20" }; alias amazon=_amazon
+function _alix()    { xdg-open "http://www.aliexpress.com/wholesale?SearchText=$*&opensearch=true" }; alias alix=_alix
+function _ebay()    { xdg-open "http://www.ebay.ca/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR0.TRC0.H0.XEAX64282201.TRS0&_nkw=$*&_sacat=0" }; alias ebay=_ebay
+function _kijiji()  { xdg-open "http://www.kijiji.ca/b-search.html?locationId=1700197&categoryId=174&formSubmit=true&urgentOnly=false&highlightOnly=false&gpTopAd=false&hpGallery=false&minPrice=&maxPrice=&adType=&adPriceType=&sortByName=dateDesc&keywords=$*" }; alias kijiji=_kijiji
