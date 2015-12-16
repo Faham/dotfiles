@@ -1,5 +1,9 @@
 xrdb -I$HOME ~/.Xresources
 
+# required linux packages for my setup
+# fluxbox unclutter conky xscreensaver
+# 
+
 # i3 & wmpid=$!
 fluxbox & wmpid=$!
 

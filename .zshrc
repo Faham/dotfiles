@@ -98,4 +98,4 @@ function _wiki()    { xdg-open "https://en.wikipedia.org/wiki/Special:Search?sea
 function _amazon()  { xdg-open "http://www.amazon.ca/exec/obidos/external-search/?field-keywords=$*&mode=blended&tag=wwwcanoniccom-20" }; alias amazon=_amazon
 function _alix()    { xdg-open "http://www.aliexpress.com/wholesale?SearchText=$*&opensearch=true" }; alias alix=_alix
 function _ebay()    { xdg-open "http://www.ebay.ca/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR0.TRC0.H0.XEAX64282201.TRS0&_nkw=$*&_sacat=0" }; alias ebay=_ebay
-function _kijiji()  { xdg-open "http://www.kijiji.ca/b-search.html?locationId=1700197&categoryId=174&formSubmit=true&urgentOnly=false&highlightOnly=false&gpTopAd=false&hpGallery=false&minPrice=&maxPrice=&adType=&adPriceType=&sortByName=dateDesc&keywords=$*" }; alias kijiji=_kijiji
+function _kijiji()  { xdg-open "http://www.kijiji.ca/b-search.html?locationId=1700197&keywords=$*" }; alias kijiji=_kijiji

@@ -12,7 +12,7 @@ session.screen0.menu.alpha:              255
 session.screen0.toolbar.autoHide:        true
 session.screen0.toolbar.tools:           clock, iconbar, systemtray
 session.screen0.toolbar.widthPercent:    100
-session.screen0.toolbar.placement:       TopCenter
+session.screen0.toolbar.placement:       BottomCenter
 session.screen0.toolbar.maxOver:         false
 session.screen0.toolbar.alpha:           255
 session.screen0.toolbar.onhead:          1

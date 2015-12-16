@@ -22,7 +22,8 @@ if [[ $mixer_option == 'toggle' ]]; then
         amixer -c 1 -q set Headphone unmute
     fi
 else
-    amixer -c 1 -q sset Master $mixer_option > /dev/null
+    ! amixer -c 1 -q sset Master $mixer_option > /dev/null \
+    && amixer -c 1 -q sset Headphone $mixer_option > /dev/null 
 fi
 
 volume_percent=$(amixer -c 1 get Master,0 | awk '/Mono:/ {print $4}' | tr -d '[]')
