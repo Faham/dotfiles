@@ -1,0 +1,82 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler
+  borderless = True
+  handle_size = 1
+  suppress_multiple_term_dialog = True
+[keybindings]
+  rotate_cw = <Primary><Shift>r
+  resize_up = <Shift><Alt>Up
+  resize_left = <Shift><Alt>Left
+  rotate_ccw = <Primary><Shift><Alt>r
+  resize_right = <Shift><Alt>Right
+  resize_down = <Shift><Alt>Down
+[profiles]
+  [[default]]
+    use_system_font = False
+    login_shell = True
+    background_darkness = 1.2
+    scrollback_lines = 9999
+    background_image = None
+    foreground_color = "#ffffff"
+    use_custom_command = True
+    show_titlebar = False
+    custom_command = /bin/zsh
+    font = Monospace 10
+    background_color = "#272822"
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      position = 0:24
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 1056
+    [[[child0]]]
+      position = 532
+      type = VPaned
+      order = 0
+      parent = window0
+    [[[terminal3]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child0
+    [[[terminal2]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child0
+  [[three-vert]]
+    [[[child0]]]
+      position = 0:24
+      type = Window
+      order = 0
+      parent = ""
+      size = 1914, 1056
+    [[[child1]]]
+      position = 581
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[child3]]]
+      position = 703
+      type = HPaned
+      order = 1
+      parent = child1
+    [[[terminal2]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child1
+    [[[terminal5]]]
+      profile = default
+      type = Terminal
+      order = 1
+      parent = child3
+    [[[terminal4]]]
+      profile = default
+      type = Terminal
+      order = 0
+      parent = child3
+[plugins]
