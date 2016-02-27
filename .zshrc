@@ -3,16 +3,16 @@ HISTSIZE=2000
 SAVEHIST=5000
 bindkey -v
 
-# . /home/fahamne/.local/lib/python2.7/site-packages/powerline/bindings/rc/powerline.rc
+# . /home/$USER/.local/lib/python2.7/site-packages/powerline/bindings/rc/powerline.rc
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/fahamne/.oh-my-zsh
+export ZSH=/home/$USER/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="faham-steeef"
+ZSH_THEME="../../.oh-my-zsh-custom-themes/faham-steeef"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
