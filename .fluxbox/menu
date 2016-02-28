@@ -2,9 +2,8 @@
   [exec] (Browser)       {$BROWSER}                <~/.fluxbox/pixmaps/google-chrome.png>
   [exec] (Terminal)      {$TERM}                   <~/.fluxbox/pixmaps/gnome-terminal.png> 
   [exec] (Text Editor)   {$EDITOR}                 <~/.fluxbox/pixmaps/sublime-text.png>
-  [exec] (Idea)          {~/apps/idea/bin/idea.sh} <~/.fluxbox/pixmaps/sublime-text.png>
-  [exec] (Files)         {pcmanfm --no-desktop} <~/.fluxbox/pixmaps/files.png>
-  [exec] (VLC)           {vlc}                   <~/.fluxbox/pixmaps/vlc.png>
+  [exec] (Files)         {$FILES}                  <~/.fluxbox/pixmaps/files.png>
+  [exec] (VLC)           {$PLAYER}                 <~/.fluxbox/pixmaps/vlc.png>
   [separator]
   [exec] (Skype)         {skype}                 <~/.fluxbox/pixmaps/skype.png>
   [exec] (Telegram)      {~/apps/telegram}       <~/.fluxbox/pixmaps/skype.png>
