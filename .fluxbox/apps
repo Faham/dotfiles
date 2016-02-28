@@ -1,0 +1,17 @@
+[app] (name=fbrun)
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{2}
+[end]
+[app] (name=terminator) (class=Terminator)
+  [Dimensions]	{100% 100%}
+  [Position]	(UPPERLEFT)	{0% 0%}
+  [Maximized]	{yes}
+  [Close]	{yes}
+[end]
+[app] (name=goldendict) (class=Goldendict)
+  [Dimensions]	{36% 40%}
+  [Position]    (CENTER)    {0 0}
+[end]
+[app] (name=bashrun) (class=XTerm)
+  [Position]    (CENTER)    {0 0}
+[end]
