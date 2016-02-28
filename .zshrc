@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 HISTFILE=~/.histfile
 HISTSIZE=2000
 SAVEHIST=5000
@@ -8,10 +7,6 @@ bindkey -v
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/$USER/.oh-my-zsh
-=======
-# Path to your oh-my-zsh installation.
-export ZSH=/home/faham/.oh-my-zsh
->>>>>>> 78074f8... update to configs mostly fluxbox and general user configs
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -101,7 +96,3 @@ function _google()  { xdg-open "https://www.google.ca/search?q=$*" }; alias goog
 function _map()     { xdg-open "https://maps.google.ca/maps?q=$*" }; alias map=_map
 function _youtube() { xdg-open "https://www.youtube.com/results?search_query=$*&page={startPage?}&utm_source=opensearch" }; alias youtube=_youtube
 function _wiki()    { xdg-open "https://en.wikipedia.org/wiki/Special:Search?search=$*" }; alias wiki=_wiki
-function _amazon()  { xdg-open "http://www.amazon.ca/exec/obidos/external-search/?field-keywords=$*&mode=blended&tag=wwwcanoniccom-20" }; alias amazon=_amazon
-function _alix()    { xdg-open "http://www.aliexpress.com/wholesale?SearchText=$*&opensearch=true" }; alias alix=_alix
-function _ebay()    { xdg-open "http://www.ebay.ca/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR0.TRC0.H0.XEAX64282201.TRS0&_nkw=$*&_sacat=0" }; alias ebay=_ebay
-function _kijiji()  { xdg-open "http://www.kijiji.ca/b-search.html?locationId=1700197&keywords=$*" }; alias kijiji=_kijiji
