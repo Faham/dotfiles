@@ -7,7 +7,6 @@ unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
 conky &
 xscreensaver &
 goldendict &
-pcmanfm -d &
 $TERM &
 $BROWSER &
 # xrandr --output VGA1 --auto --left-of DP2
