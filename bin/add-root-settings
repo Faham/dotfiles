@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function _add_line_if_not_exists { 
+    grep -qx -F "$2" $1 || echo "$2" >> $1
+}
+
+groupadd sudo
+usermod -a -G sudo faham
+
+sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
+sed  -i "s/^# %sudo   ALL=(ALL) ALL$/%sudo   ALL=(ALL) ALL/" /etc/sudoers
+sed  -i "s/^\(# Defaults targetpw\)\(.*\)$/Defaults targetpw\2/" /etc/sudoers
+
+_add_line_if_not_exists /etc/sudoers \
+    "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend /usr/bin/pm-hibernate /usr/bin/poweroff  /usr/bin/reboot /usr/faham/bin/brightness"

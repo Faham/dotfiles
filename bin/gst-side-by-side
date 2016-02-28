@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# putting two video files side by side in a single video with text overlays on both
+
+export GST_DEBUG=1
+# export GST_DEBUG_DUMP_DOT_DIR=/home/faham/Downloads/
+FILE1=/home/faham/Downloads/Media1.mp4
+FILE2=/home/faham/Downloads/Media2.mp4
+
+# gst-launch-1.0 playbin uri="file://$FILE1"
+# gst-launch-1.0 filesrc location=$FILE2 ! qtdemux ! h264parse ! avdec_h264 ! xvimagesink
+
+gst-launch-1.0 \
+  filesrc location=$FILE2 ! qtdemux ! h264parse ! avdec_h264 ! queue ! textoverlay font-desc="Sans 26" text="SRS Muscles" ! queue ! \
+   videobox fill=blue border-alpha=0 left=-800 ! queue ! mix. \
+  filesrc location=$FILE1 ! qtdemux ! h264parse ! avdec_h264 ! queue ! textoverlay font-desc="Sans 26" text="Hill-type Muscles" ! queue ! mix. \
+  videomixer name=mix ! videoconvert ! x264enc bitrate=498 ! mp4mux ! filesink location=test1.mp4
+
+# sink_0::alpha=1 sink_1::alpha=0.5

@@ -188,8 +188,11 @@ OnRightGrip Move1         :StartResizing bottomright
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Mod4 t                    :ExecCommand goldendict
-Mod4 r                    :ExecCommand fbrun -nearmouse -font Matto -w 500 -h 50
+Mod4 r                    :ExecCommand bashrun -nearmouse -font Matto -w 500 -h 50
 Mod4 c                    :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Shift Mod4 e              :ExecCommand env | sort | xmessage -file -
+Mod4 n                    :ExecCommand $EDITOR $HOME/.notes
+Shift Mod4 x              :ExecCommand xkill
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
 !Control Mod4 m            :ExecCommand quax
@@ -198,27 +201,24 @@ Mod4 c                    :ExecCommand date | osd_cat --shadow=1 --shadowcolour=
 !Control Mod4 c            :ExecCommand xcalc
 !Mod4 g                    :ExecCommand fbrun -nearmouse -font Matto -title "enter url..." -text "$BROWSER http://www.google.com/search?q=" -w 500 -h 50 -hf ~/.fluxbox/browse_history
 !Mod4 colon                :CommandDialog
-Shift Mod4 e              :ExecCommand env | sort | xmessage -file -
-Mod4 Mod1 d               :ExecCommand ding
+!Mod4 Mod1 d               :ExecCommand ding
 !Mod4 e                    :ExecCommand $EDITOR
-Mod4 n                    :ExecCommand $EDITOR $HOME/.notes
-Mod4 t                    :ExecCommand $EDITOR $HOME/.todo/
-Mod4 x                    :ExecCommand xmag
+!Mod4 x                    :ExecCommand xmag
 !Mod1 Mod4 x               :ExecCommand wmagnify
-Shift Mod4 x              :ExecCommand xkill
-None 231                  :ExecCommand ~/.fluxbox/scripts/yoga-auto-rotate.sh
+
+None 231                  :ExecCommand ~/bin/yoga-auto-rotate
 
 ! volume control
-None XF86AudioMute        :ExecCommand ~/script/volume.sh toggle
-None XF86AudioLowerVolume :ExecCommand ~/script/volume.sh down
-None XF86AudioRaiseVolume :ExecCommand ~/script/volume.sh up
+None XF86AudioMute        :ExecCommand ~/bin/volume toggle
+None XF86AudioLowerVolume :ExecCommand ~/bin/volume down
+None XF86AudioRaiseVolume :ExecCommand ~/bin/volume up
 
 ! brightness control
-None 232 :Exec ~/script/brightness.sh -10
-None 233 :Exec ~/script/brightness.sh 10
+None 232 :Exec xbacklight -dec 10
+None 233 :Exec xbacklight -inc 10
 
 ! HDMI output dual screen
-None 133:Exec ~/script/setup-screen.sh
+None 133:Exec ~/bin/setup-screen
 
 ! screenshots
 ! xmodmap -pke | grep -i print => xmodmap -e "keycode 107 = F13"

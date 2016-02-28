@@ -60,9 +60,6 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -89,10 +86,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export VISUAL="vim"
-
-function _google()  { xdg-open "https://www.google.ca/search?q=$*" }; alias google=_google
-function _map()     { xdg-open "https://maps.google.ca/maps?q=$*" }; alias map=_map
-function _youtube() { xdg-open "https://www.youtube.com/results?search_query=$*&page={startPage?}&utm_source=opensearch" }; alias youtube=_youtube
-function _wiki()    { xdg-open "https://en.wikipedia.org/wiki/Special:Search?search=$*" }; alias wiki=_wiki

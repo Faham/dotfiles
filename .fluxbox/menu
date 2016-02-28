@@ -6,7 +6,7 @@
   [exec] (VLC)           {$PLAYER}                 <~/.fluxbox/pixmaps/vlc.png>
   [separator]
   [exec] (Skype)         {skype}                 <~/.fluxbox/pixmaps/skype.png>
-  [exec] (Telegram)      {~/apps/telegram}       <~/.fluxbox/pixmaps/skype.png>
+  [exec] (Telegram)      {telegram}              <~/.fluxbox/pixmaps/skype.png>
   [exec] (Viber)         {/opt/viber/Viber}      <~/.fluxbox/pixmaps/viber.png>
   [exec] (Pidgin)        {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
   [exec] (Hipchat)       {hipchat}               <~/.fluxbox/pixmaps/hipchat.png>
@@ -24,10 +24,6 @@
     [exec] (fluxmenu) {fluxmenu}
     [exec] (windowname) {xprop|grep "WM_CLASS\|WM_NAME" |cut -d \" -f 2|xmessage -file - -center}
     [exec] (screenshot) {import screenshot.png && qiv -W 50 screenshot.png}
-  [end]
-  [submenu] (Keyboard)
-     [exec] (US) {setxkbmap us}
-     [exec] (FA) {setxkbmap ir}
   [end]
   [submenu] (Settings)
      [config] (Configuration)
@@ -49,7 +45,7 @@
      [restart] (Restart)
   [end]
   [submenu] (System)
-     [exec] (Logout) {exit}
+     [exec] (Logout) {Exit}
      [exec] (Suspend) {sudo pm-suspend}
      [exec] (Hibernate) {sudo pm-hibernate}
      [exec] (Shutdown) {sudo poweroff}

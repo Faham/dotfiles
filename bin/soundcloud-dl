@@ -1,0 +1,36 @@
+#!/bin/bash
+
+client_id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+
+playlist=$1
+tracks=`curl -s http://api.soundcloud.com/resolve.json\?url\=$playlist\&client_id\=$client_id | jq -r ".location" | xargs curl -s | jq -r ".tracks[].uri"`
+
+for t in $tracks; do
+  track_uri=$t
+  track_desc=`curl -s $track_uri\?client_id\=$client_id`
+  track_ext=`echo $track_desc | jq -r '.original_format'`
+  track_downloadable=`echo $track_desc | jq -r '.downloadable'`
+  track_streamable=`echo $track_desc | jq -r '.streamable'`
+  track_title=`echo $track_desc | jq -r '.title'`
+  out_file=` echo "$track_title.$track_ext" | sed 's/\//-/g'`
+
+  if [ $track_downloadable == 'true' ]; then
+    track_download_url=`echo $track_desc | jq -r '.download_url'`
+    wget -q -O "$out_file" $track_download_url\?client_id\=$client_id
+    echo "downloaded $track_uri to $out_file"
+  elif [ $track_streamable == 'true' ]; then
+    track_stream_url=`echo $track_desc | jq -r '.stream_url'`
+    track_download_url=`curl -s $track_stream_url\?client_id\=$client_id | jq -r ".location"`
+    wget -q -O "$out_file" $track_download_url
+    echo "streamed from $track_uri to $out_file"
+  else
+    echo "could not do anything about $track_uri"
+  fi
+done;
+
+# wget -O test https://api.soundcloud.com/tracks/155585394/download\?client_id\=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+# curl https://api.soundcloud.com/users/18560213/playlists\?client_id\=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+# curl https://api.soundcloud.com/users/18551582/tracks\?client_id\=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+# curl https://api.soundcloud.com/tracks/228585863\?client_id\=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+# curl http://api.soundcloud.com/resolve.json\?url\=https://soundcloud.com/sina-jafarieh/\&client_id\=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+# curl http://api.soundcloud.com/resolve.json\?url\=https://soundcloud.com/sina-jafarieh/sets/modern-iran\&client_id\=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+FILE=$1
+OUTDIR=$2
+
+ffmpeg -i "$FILE" -ss 00:00:00 -to 00:01:55 -async 1  "$OUTDIR/the way you make me feel.mp3"
+ffmpeg -i "$FILE" -ss 00:10:32 -to 00:12:45 -async 1  "$OUTDIR/i'm begging.mp3"
