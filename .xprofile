@@ -1,0 +1,11 @@
+
+xset r rate 200 40
+xset +fp ~/.fonts
+xsetroot -solid "#110011"
+setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
+unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
+# conky &
+xscreensaver &
+$TERM &
+$BROWSER &
+pcmanfm -d &

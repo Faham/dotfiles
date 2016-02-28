@@ -18,7 +18,6 @@ xscreensaver &
 $TERM &
 $BROWSER &
 pcmanfm -d &
-sudo netctl restart wlp1s0-SHAW-BE6B24
 # xrandr --output VGA1 --auto --left-of DP2
 # xrandr --output DP2 --primary
 # nm-applet &
