@@ -10,8 +10,8 @@
 [end]
 [app] (name=goldendict) (class=Goldendict)
   [Dimensions]	{36% 40%}
-  [Position]    (CENTER)    {0 0}
+  [Position]	(CENTER)	{0 0}
 [end]
 [app] (name=bashrun) (class=XTerm)
-  [Position]    (CENTER)    {0 0}
+  [Position]	(CENTER)	{0 0}
 [end]

@@ -12,4 +12,4 @@ sed  -i "s/^# %sudo   ALL=(ALL) ALL$/%sudo   ALL=(ALL) ALL/" /etc/sudoers
 sed  -i "s/^\(# Defaults targetpw\)\(.*\)$/Defaults targetpw\2/" /etc/sudoers
 
 _add_line_if_not_exists /etc/sudoers \
-    "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend /usr/bin/pm-hibernate /usr/bin/poweroff  /usr/bin/reboot /usr/faham/bin/brightness"
+    "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot, /usr/faham/bin/brightness"
