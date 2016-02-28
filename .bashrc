@@ -137,3 +137,5 @@ C_Brown='0;33'
 
 _CLR="\\e["
 PS1="${_CLR}${C_Green}m\\u${_CLR}m@${_CLR}${C_Blue}m\\h${_CLR}m:${_CLR}${C_LBlack}m\\w${_CLR}m\\n>"
+
+export VISUAL="vim"

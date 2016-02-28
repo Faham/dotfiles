@@ -3,12 +3,12 @@
     // Example: ${folder:/path/to/file} is replaced with "/path/to".
     // "workingdir": "/tmp",
     // "workingdir": "/home/fahamne/gst/master",
-    "workingdir": "/home/fahamne/dev/sublime-projects",
+    "workingdir": "/home/faham/src/amazon-interview-challenge",
 
     // NOTE: You MUST provide --interpreter=mi for the plugin to work
     // "commandline": "gdb --interpreter=mi",
     // "commandline": "gdb --interpreter=mi ./executable",
-    "commandline": "gdb --interpreter=mi --command=mmfd.gdb",
+    "commandline": "gdb --interpreter=mi --command=amazon.gdb",
 
     // The command to use to run the program.
     // If you are attaching to a remote program, you

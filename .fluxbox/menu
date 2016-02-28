@@ -1,14 +1,16 @@
 [begin] (Start) 
-  [exec] (Google Chrome) {$BROWSER}              <~/.fluxbox/pixmaps/google-chrome.png>
-  [exec] (Terminator)    {$TERM}                 <~/.fluxbox/pixmaps/gnome-terminal.png> 
-  [exec] (Sublime)       {$EDITOR}               <~/.fluxbox/pixmaps/sublime-text.png>
-  [exec] (Files)         {nautilus --no-desktop} <~/.fluxbox/pixmaps/files.png>
+  [exec] (Browser)       {$BROWSER}                <~/.fluxbox/pixmaps/google-chrome.png>
+  [exec] (Terminal)      {$TERM}                   <~/.fluxbox/pixmaps/gnome-terminal.png> 
+  [exec] (Text Editor)   {$EDITOR}                 <~/.fluxbox/pixmaps/sublime-text.png>
+  [exec] (Idea)          {~/apps/idea/bin/idea.sh} <~/.fluxbox/pixmaps/sublime-text.png>
+  [exec] (Files)         {pcmanfm --no-desktop} <~/.fluxbox/pixmaps/files.png>
   [exec] (VLC)           {vlc}                   <~/.fluxbox/pixmaps/vlc.png>
   [separator]
-  [exec]                 {skype}                 <~/.fluxbox/pixmaps/skype.png>
-  [exec]                 {/opt/viber/Viber}      <~/.fluxbox/pixmaps/viber.png>
-  [exec]                 {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
-  [exec]                 {hipchat}               <~/.fluxbox/pixmaps/hipchat.png>
+  [exec] (Skype)         {skype}                 <~/.fluxbox/pixmaps/skype.png>
+  [exec] (Telegram)      {~/apps/telegram}       <~/.fluxbox/pixmaps/skype.png>
+  [exec] (Viber)         {/opt/viber/Viber}      <~/.fluxbox/pixmaps/viber.png>
+  [exec] (Pidgin)        {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
+  [exec] (Hipchat)       {hipchat}               <~/.fluxbox/pixmaps/hipchat.png>
   [separator]
   [submenu] (Misc)
     [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>
@@ -36,13 +38,13 @@
      [end]
      [workspaces] (Workspaces)
      [submenu] (Edit) {Edit}
-       [exec] (Keys) {subl ~/.fluxbox/keys}
-       [exec] (Menu) {subl ~/.fluxbox/menu}
-       [exec] (WindowMenu) {subl ~/.fluxbox/windowmenu}
-       [exec] (Init) {subl ~/.fluxbox/init}
-       [exec] (Startup) {subl ~/.fluxbox/startup}
-       [exec] (Slitlist) {subl ~/.fluxbox/slitlist}
-       [exec] (Current Style) {subl `sed -n /styleFile/p .fluxbox/init | cut -f 2` }
+       [exec] (Keys) {$EDITOR ~/.fluxbox/keys}
+       [exec] (Menu) {$EDITOR ~/.fluxbox/menu}
+       [exec] (WindowMenu) {$EDITOR ~/.fluxbox/windowmenu}
+       [exec] (Init) {$EDITOR ~/.fluxbox/init}
+       [exec] (Startup) {$EDITOR ~/.fluxbox/startup}
+       [exec] (Slitlist) {$EDITOR ~/.fluxbox/slitlist}
+       [exec] (Current Style) {$EDITOR `sed -n /styleFile/p .fluxbox/init | cut -f 2` }
      [end]
      [reconfig] (Reconfigure)
      [restart] (Restart)
@@ -50,6 +52,7 @@
   [submenu] (System)
      [exec] (Logout) {exit}
      [exec] (Suspend) {sudo pm-suspend}
+     [exec] (Hibernate) {sudo pm-hibernate}
      [exec] (Shutdown) {sudo poweroff}
      [exec] (Restart) {sudo reboot}
   [end]

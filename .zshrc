@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HISTFILE=~/.histfile
 HISTSIZE=2000
 SAVEHIST=5000
@@ -7,6 +8,10 @@ bindkey -v
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/$USER/.oh-my-zsh
+=======
+# Path to your oh-my-zsh installation.
+export ZSH=/home/faham/.oh-my-zsh
+>>>>>>> 78074f8... update to configs mostly fluxbox and general user configs
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -60,7 +65,7 @@ plugins=(git)
 
 # User configuration
 
-# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -89,7 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nautilus='nautilus --no-desktop'
+
+export VISUAL="vim"
 
 function _google()  { xdg-open "https://www.google.ca/search?q=$*" }; alias google=_google
 function _map()     { xdg-open "https://maps.google.ca/maps?q=$*" }; alias map=_map

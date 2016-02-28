@@ -11,13 +11,21 @@ fluxbox & wmpid=$!
 xset r rate 200 40
 xset +fp ~/.fonts
 xsetroot -solid "#110011"
-xrandr --output VGA1 --auto --left-of DP2
-xrandr --output DP2 --primary
+setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
 unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
-echo "this is a test\nthis is a test\nthis is a test\nthis is a test" > /tmp/aes.ecb
+conky &
+xscreensaver &
+$TERM &
+$BROWSER &
+pcmanfm -d &
+sudo netctl restart wlp1s0-SHAW-BE6B24
+# xrandr --output VGA1 --auto --left-of DP2
+# xrandr --output DP2 --primary
+# nm-applet &
+# goldendict &
+# synergy &
+# thunderbird &
 
-export BROWSER=google-chrome
-export EDITOR=subl
-export TERM=terminator
+echo "this is a test\nthis is a test\nthis is a test\nthis is a test" > /tmp/aes.ecb
 
 wait $wmpid

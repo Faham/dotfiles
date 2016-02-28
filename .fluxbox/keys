@@ -68,7 +68,7 @@ Mod4 s                    :Stick
 Mod4 m                    :Minimize
 Shift Mod4 m              :Deiconify LastWorkspace
 Mod4 d                    :ShowDesktop
-Control q                 :Close
+Control Shift q           :Close
 Mod4 e                    :ToggleDecor
 
 Mod1 Tab                  :NextWindow {groups} (workspace=[current])
@@ -94,9 +94,9 @@ OnToolbar Mouse5          :NextWindow {static groups} (iconhidden=no)
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Mod1 Control Up              :ExecCommand xrandr -o normal; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
-Mod1 Control Down            :ExecCommand xrandr -o inverted; xinput disable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
-Mod1 Control Left            :ExecCommand xrandr -o left; xinput disable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1
-Mod1 Control Right           :ExecCommand xrandr -o right; xinput disable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
+Mod1 Control Down            :ExecCommand xrandr -o inverted; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+Mod1 Control Left            :ExecCommand xrandr -o left; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1
+Mod1 Control Right           :ExecCommand xrandr -o right; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
@@ -189,8 +189,7 @@ OnRightGrip Move1         :StartResizing bottomright
 
 Mod4 t                    :ExecCommand goldendict
 Mod4 r                    :ExecCommand fbrun -nearmouse -font Matto -w 500 -h 50
-Mod4 c                    :ExecCommand date | xosd --fore-color=white -p 8 --font="lucida 50" --x-offset=-40 --y-offset=-0 --transparency=2 --fade-in=1000 --fade-full=2000 --fade-out=1000
-!Mod4 c                    :ExecCommand date | aosd_cat --fore-color=white -p 8 --font="lucida 50" --x-offset=-40 --y-offset=-0 --transparency=2 --fade-in=1000 --fade-full=2000 --fade-out=1000
+Mod4 c                    :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
 !Control Mod4 m            :ExecCommand quax
@@ -213,24 +212,18 @@ None 231                  :ExecCommand ~/.fluxbox/scripts/yoga-auto-rotate.sh
 None XF86AudioMute        :ExecCommand ~/script/volume.sh toggle
 None XF86AudioLowerVolume :ExecCommand ~/script/volume.sh down
 None XF86AudioRaiseVolume :ExecCommand ~/script/volume.sh up
-Mod4 68                   :ExecCommand ~/script/volume.sh toggle
-Mod4 69                   :ExecCommand ~/script/volume.sh down
-Mod4 70                   :ExecCommand ~/script/volume.sh up
 
 ! brightness control
-None 232 :Exec ~/script/brightness.sh -30
-None 233 :Exec ~/script/brightness.sh 30
+None 232 :Exec ~/script/brightness.sh -10
+None 233 :Exec ~/script/brightness.sh 10
+
+! HDMI output dual screen
+None 133:Exec ~/script/setup-screen.sh
 
 ! screenshots
 ! xmodmap -pke | grep -i print => xmodmap -e "keycode 107 = F13"
 ! => i press "Print" and it dumps the screen :)
 None F13                  :ExecCommand sleep 1 && scrot -s -q 75 ~/pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
-
-!
-! keyboard layout
-!
-Mod4 30 :Exec setxkbmap us
-Mod4 31 :Exec setxkbmap ir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

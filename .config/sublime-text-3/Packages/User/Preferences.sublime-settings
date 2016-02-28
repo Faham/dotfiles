@@ -1,14 +1,15 @@
 {
+	"animation_enabled": false,
 	"color_scheme": "Packages/User/ColorScheme/fahamMonokai.tmTheme",
 	"dpi_scale": 2.0,
 	"draw_centered": true,
-	"font_size": 11,
+	"font_size": 12,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage",
+		"Makefile",
 		"RestructuredText",
-		"Makefile"
+		"Vintage"
 	],
 	"line_numbers": true,
 	"margin": 0,
@@ -18,6 +19,7 @@
 	"show_tab_close_buttons": false,
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": false,
+	"update_check": false,
 	"word_wrap": "auto",
 	"wrap_width": 0
 }

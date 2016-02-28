@@ -159,16 +159,20 @@ bar {
         status_command i3status
 }
 
+# sound stuff, basicly control the volume via amixer (alsa)
+bindsym --release XF86AudioMute        exec amixer -c 1 -a sset Master,0 toggle 2&>1 > /dev/null
+bindsym --release XF86AudioLowerVolume exec amixer -c 1 -q sset Master 5%-
+bindsym --release XF86AudioRaiseVolume exec amixer -c 1 -q sset Master 5%+
+
+# brightness
+bindcode 232 exec --no-startup-id /home/faham/script/brightness.sh -50
+bindcode 233 exec --no-startup-id /home/faham/script/brightness.sh 50
+# bindcode --release Shift+232 exec xbacklight -dec 1
+# bindcode --release Shift+233 exec xbacklight -inc 1
+
 # Handy apps keybindings
 bindsym --release $mod+Shift+x exec --no-startup-id xkill
 bindsym --release Ctrl+Shift+l exec --no-startup-id i3lock -c 272822 -n
-
-# Startup apps
-exec --no-startup-id xset r rate 200 40
-exec --no-startup-id xset +fp /home/mathias/.fonts
-exec --no-startup-id xsetroot -solid "#110011"
-exec --no-startup-id unclutter -idle 2 -jitter 10 -root # hide cursor when idle
-exec --no-startup-id echo "this is a test\nthis is a test\nthis is a test\nthis is a test\n" > /tmp/aes.ecb
 
 # for_window [title="(has no name)" ] floating enable
 # floating_minimum_size 640 x 480

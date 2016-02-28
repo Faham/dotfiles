@@ -1,16 +1,23 @@
 
 ! Xcursor --------------------------------------------------------------------
 
+# Xcursor.theme: Hicolor
 Xcursor.theme: Vanilla-DMZ-AA
-Xcursor.size:  22
+# Xcursor.size:  32
+Xcursor.size:  64
 
 ! Xft settings ---------------------------------------------------------------
 
-Xft.dpi:        96
+# Xft.dpi:        96
+# Xft.dpi:        276
+Xft.dpi:        200
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
 
 ! xterm ----------------------------------------------------------------------
 
