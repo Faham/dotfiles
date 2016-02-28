@@ -1,13 +1,15 @@
 #!/bin/sh
 
-DISPLAY_0=eDP1
-DISPLAY_1=DP1
+DISPLAY_0=LDVS1
+DISPLAY_1=HDMI1
 
 if [[ 'connected' == `xrandr --query | grep "^$DISPLAY_1" | cut -d' ' -f2` ]]; then
     xrandr --auto --output $DISPLAY_1 --right-of $DISPLAY_0 --primary
     echo "extended to two screens"
     [ `cat /etc/hostname` = "x1-faham" ] && \
       xrandr --output $DISPLAY_1 --mode 3840x2160 --primary --output $DISPLAY_0 --auto  --left-of $DISPLAY_1;
+    [ `cat /etc/hostname` = "u260" ] && \
+      xrandr --output $DISPLAY_0 --off --output $DISPLAY_1 --primary
 else
     xrandr --auto --output $DISPLAY_0 --primary
 fi

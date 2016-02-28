@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DISP=$1
+IN="LVDS1"
+EXT="HDMI1"
+
+if [ $(xrandr | grep "$EXT disconnected") ]; then
+    xrandr --output $EXT --off --output $IN --auto
+elif [ $DISP -eq 1 ]; then
+    xrandr --output $EXT --off --output $IN --auto
+elif [ $DISP -eq 2 ]; then
+    xrandr --output $IN --off --output $EXT --auto
+else
+    xrandr --output $IN --auto --output $EXT --auto --primary --left-of $IN
+fi

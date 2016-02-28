@@ -8,6 +8,10 @@ xsetroot -solid "#110011"
 [ -f ~/.bg ] && xloadimage -onroot ~/.bg
 setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
 unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
-xscreensaver &
+xset -dpms
+xset s off -dpms
+setterm -blank 0 -powerdown 0
+pcmanfm --desktop &
+bin/lights_on.sh 120 &
 detect-displays
 

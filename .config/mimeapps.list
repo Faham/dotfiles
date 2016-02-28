@@ -56,6 +56,7 @@ image/x-xpixmap=gpicview.desktop;
 image/xpm=gpicview.desktop;
 x-scheme-handler/magnet=userapp-transmission-gtk-TXU0MY.desktop;
 audio/mpeg=vlc.desktop;
+inode/symlink=vlc.desktop;
 
 [Default Applications]
 application/pdf=evince.desktop
@@ -92,3 +93,4 @@ x-scheme-handler/mailto=google-chrome.desktop
 x-scheme-handler/tg=telegramdesktop.desktop
 x-scheme-handler/unknown=google-chrome.desktop
 x-scheme-handler/webcal=google-chrome.desktop
+inode/symlink=vlc.desktop

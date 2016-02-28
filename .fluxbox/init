@@ -18,7 +18,7 @@ session.screen0.toolbar.alpha:           255
 session.screen0.toolbar.onhead:          1
 session.screen0.toolbar.visible:         true
 session.screen0.toolbar.layer:           Dock
-session.screen0.toolbar.height:          35
+session.screen0.toolbar.height:          20
 
 session.screen0.iconbar.iconWidth:       128
 session.screen0.iconbar.usePixmap:       true
