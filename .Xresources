@@ -5,7 +5,7 @@ bashrun*faceName:           Terminus:style=Regular:size=10
 
 ! Xcursor --------------------------------------------------------------------
 
-# Xcursor.theme: Hicolor
+! Xcursor.theme: Hicolor
 Xcursor.theme: Vanilla-DMZ-AA
 # Xcursor.size:  32
 Xcursor.size:  64
@@ -17,7 +17,7 @@ Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
-Xft.autohint: 0
+Xft.autohint:   0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
 
