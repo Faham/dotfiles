@@ -5,11 +5,20 @@ function _add_line_if_not_exists {
 }
 
 groupadd sudo
-usermod -a -G sudo faham
+usermod -a -G sudo $USER
+
+groupadd users
+usermod -a -G users $USER
 
 sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 sed  -i "s/^# %sudo   ALL=(ALL) ALL$/%sudo   ALL=(ALL) ALL/" /etc/sudoers
 sed  -i "s/^\(# Defaults targetpw\)\(.*\)$/Defaults targetpw\2/" /etc/sudoers
 
 _add_line_if_not_exists /etc/sudoers \
-    "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot, /usr/faham/bin/brightness"
+    "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot"
+
+
+grep -qx -F "[archlinuxfr]" /etc/pacman.conf  || echo "
+[archlinuxfr]
+SigLevel    = Never
+Server = http://repo.archlinux.fr/x86_64" >> /etc/pacman.conf
