@@ -1,24 +1,28 @@
 #!/bin/bash
 
+USER=$1
+
 function _add_line_if_not_exists { 
     grep -qx -F "$2" $1 || echo "$2" >> $1
 }
 
-groupadd sudo
-usermod -a -G sudo $USER
+groupadd -f sudo
+groupadd -f users
+usermod -a -G users sudo $USER
 
-groupadd users
-usermod -a -G users $USER
-
-sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
+[ -f /etc/gdm/custom.conf ] && sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 sed  -i "s/^# %sudo   ALL=(ALL) ALL$/%sudo   ALL=(ALL) ALL/" /etc/sudoers
 sed  -i "s/^\(# Defaults targetpw\)\(.*\)$/Defaults targetpw\2/" /etc/sudoers
 
 _add_line_if_not_exists /etc/sudoers \
     "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot"
 
-
-grep -qx -F "[archlinuxfr]" /etc/pacman.conf  || echo "
+[ -f /etc/pacman.conf ] && grep -qx -F "[archlinuxfr]" /etc/pacman.conf || echo "
 [archlinuxfr]
 SigLevel    = Never
-Server = http://repo.archlinux.fr/x86_64" >> /etc/pacman.conf
+Server = http://repo.archlinux.fr/x86_64
+" >> /etc/pacman.conf
+
+[ -f /etc/ssh/sshd_config ] && grep -qx -F "AllowUsers .*" /etc/ssh/sshd_config || echo "
+AllowUsers $USER
+" >> /etc/ssh/sshd_config

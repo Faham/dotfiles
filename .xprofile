@@ -9,9 +9,8 @@ xscreensaver &
 goldendict &
 $TERM &
 $BROWSER &
-# xrandr --output VGA1 --auto --left-of DP2
-# xrandr --output DP2 --primary
-# nm-applet &
-# synergy &
-# thunderbird &
-# echo "this is a test\nthis is a test\nthis is a test\nthis is a test" > /tmp/aes.ecb
+
+[ `cat /etc/hostname` = "PC2164" ] && \
+  xrandr --output VGA1 --auto --left-of DP2; \
+  xrandr --output DP2 --primary; \
+  echo "this is a test\nthis is a test\nthis is a test\nthis is a test" > /tmp/aes.ecb
