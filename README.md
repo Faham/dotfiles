@@ -3,9 +3,9 @@
 required packages:
 fluxbox xosd terminator zsh pcmanfm vlc
 unclutter conky xscreensaver goldendict yaourt
-xmessage xdotool xterm bashrun git vim
+xdotool xterm bashrun git vim
 xorg-server xorg-apps xorg-server-utils xf86-video-intel mesa-libgl
-xorg-xinit ttf-dejavu htop openssh wget
+xorg-xinit ttf-dejavu htop openssh wget pulseaudio
 
 yaourt packages:
-google-chrome-dev subl-text-dev
+google-chrome subl-text-dev
