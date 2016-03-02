@@ -1,6 +1,6 @@
 [begin] (Start) 
   [exec] (Browser)       {$BROWSER}                <~/.fluxbox/pixmaps/google-chrome.png>
-  [exec] (Terminal)      {$TERM}                   <~/.fluxbox/pixmaps/gnome-terminal.png> 
+  [exec] (Terminal)      {$TERM_EMU}               <~/.fluxbox/pixmaps/gnome-terminal.png> 
   [exec] (Text Editor)   {$EDITOR}                 <~/.fluxbox/pixmaps/sublime-text.png>
   [exec] (Files)         {$FILES}                  <~/.fluxbox/pixmaps/files.png>
   [exec] (VLC)           {$PLAYER}                 <~/.fluxbox/pixmaps/vlc.png>

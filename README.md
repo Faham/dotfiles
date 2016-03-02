@@ -1,11 +1,19 @@
 # personal-linux-config
 
-required packages:
-fluxbox xosd terminator zsh pcmanfm vlc
-unclutter conky xscreensaver goldendict yaourt
-xdotool xterm bashrun git vim
-xorg-server xorg-apps xorg-server-utils xf86-video-intel mesa-libgl
-xorg-xinit ttf-dejavu htop openssh wget pulseaudio
+after pulling the repo do the followings
 
-yaourt packages:
-google-chrome subl-text-dev
+git submodule update --init --recursive
+
+install the required packages:
+
+sudo pacman -S fluxbox xosd terminator zsh pcmanfm vlc \
+unclutter conky xscreensaver goldendict yaourt xdotool xterm bashrun git vim \
+xorg-server xorg-apps xorg-server-utils xf86-video-intel mesa-libgl \
+xorg-xinit ttf-dejavu htop openssh wget pulseaudio cmake
+
+then:
+~/bin/config-machine
+
+yaourt -S google-chrome subl-text-dev viber
+
+then go to .vim/bundle/YouCompleteMe and run ./install.py
