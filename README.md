@@ -9,7 +9,7 @@ install the required packages:
 sudo pacman -S fluxbox xosd terminator zsh pcmanfm vlc \
 unclutter conky xscreensaver goldendict yaourt xdotool xterm bashrun git vim \
 xorg-server xorg-apps xorg-server-utils xf86-video-intel mesa-libgl \
-xorg-xinit ttf-dejavu htop openssh wget pulseaudio cmake
+xorg-xinit ttf-dejavu htop openssh wget pulseaudio cmake evince
 
 then:
 ~/bin/config-machine

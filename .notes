@@ -1,1 +1,302 @@
-... here goes my notes
+TEMP:
+=====
+
+----------------------------------------------------
+searches:
+https://www.glassdoor.ca/Job/ontario-c-software-developer-graphics-jobs-SRCH_IL.0,7_IS4080_KO8,37.htm
+http://www.kijiji.ca/b-cars-trucks/saskatoon/suv/honda__hyundai__mazda__nissan__toyota-2007__/k0c174l1700197a54a68?price=6000__12000&kilometers=__130000
+http://www.kijiji.ca/b-saskatoon/sleeping-bag/k0l1700197
+http://www.kijiji.ca/b-fishing-camping-outdoor/saskatoon/tent/k0c656l1700197
+----------------------------------------------------
+ssh mer521@bayes.usask.ca
+password: Mrf1050247
+
+use fan780@tuxworld.usask.ca to ssh to university machines.
+
+kevin (fan780@waffle.usask.ca - user: mycms pass: 7d9as0d8 database: mycms)
+mysql -u mycms -p7d9as0d8 -h localhost 'mycms' < database.sql
+mysql -u username -ppassword -h localhost 'database_name' < file.csv
+
+regan (faham@hci.usask.ca same password - -u mycms_hci -p al80skd8 -h hciweb.usask.ca database: mycms_hci)
+mysql -u mycms_hci -pal80skd8 -h hciweb.usask.ca 'mycms_hci' < database.sql
+old website db: user:webuser pass:B47FPNFZuqQTSm6Q dbname:webdb
+
+ian (fan780@graphics.usask.ca)
+mysql: user: mycms_graphics, pass: 1fd2s5fd, database: mycms_graphics
+mysql -u mycms_graphics -p1fd2s5fd -h localhost 'mycms_graphics' < database.sql
+
+mysqldump -h 127.0.0.1 --single-transaction -u webuser -pB47FPNFZuqQTSm6Q webdb > export_old_hci_db_6182014.sql
+----------------------------------------------------
+
+TODO:
+=====
+
+Global:
+- apply for visa
+- online scam for baba's trip to LA
+    ​www.ftccomplaintassistant.gov
+    online scam complain
+    filed complain id: 55775748​
+- finish ian's website
+- finish hci's website
+- tim project
+  - find a image management tool
+  - work on the random collage generations out of archives
+  - finish bracsync and update tims machine
+hci website
+    todo:
+    - refrence removal hover button
+    - refrence ordering
+    - _view all_ for publications and researches of people
+    - add search box for publications
+    - removing video/doc/image
+    - set a maximum for number of images/video/doc
+    - revise thumbnail generation code
+- soundcloud check these:
+    Sharab e Nasazegaram
+    سینا حجازی - گلخونه
+    https://soundcloud.com/tannaz-sn
+    https://soundcloud.com/maahoor
+    https://soundcloud.com/sh-ereh
+    https://soundcloud.com/pirbadian-2
+    https://soundcloud.com/reza-pirbadian
+    https://soundcloud.com/pirbadian1
+    https://soundcloud.com/pirbadian3
+
+My own professional interests:
+- for image recognition, different layers of algorithms should engage based on an LOD (level of details) approach to detect/filter out unwanted parts quickly
+- computer vision: work on descriptive vision, meaning developing algorithms to transform 2D/3D visuals into machine understandable coded descriptions (like how human describe shapes), and use this method for matching and identifying objects
+- a real Inteligent software which can ask questions (look at Thought Vector, Richard Socher NaSent)
+- create a new menuing system for fluxbox which extens items when clicked instead of cascading menus, and supports complex ordering of items
+- create the collaborative web application "brainstorm" in which people can develop ideas collaboratively! it is a source for ideas, discovering possibilities.
+    all cool projects i think of can be inserted into brainstorm like:
+    - "digenome" project, a software mimiking nature by reading genome sequences and creating animated "matter" in a vitural reality world!
+- learn more about automake
+- a sublime-like dark theme for thunderbird, pidgin and nautilus
+- write a tool to create interactive html diagram of standards parsing details, it should take a c style (or json) struct and generate a nice diagram 
+- finish your work on cea608dec element for your testing purposes, use the followings:
+    http://en.wikipedia.org/wiki/EIA-608
+    http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/CC_CHARS.HTML
+    http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/CC_CODES.HTML
+    http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/SCC_TOOLS.HTML
+    http://www.theneitherworld.com/mcpoodle/links.html
+    https://dvcs.w3.org/hg/text-tracks/raw-file/default/608toVTT/608toVTT.html
+    http://www.pixeltools.com/tech-tip-closed-captioning-existing.html
+- learn about haskell (http://book.realworldhaskell.org/read/types-and-functions.html)
+- work on gimp interface
+- read about unix architecture and linux kernel source
+- create an app to censor women body parts when surfing the net (such apps are useful for censoring people bodies when walking in the streets, but it requires some kind of glasses too)
+odesk job
+- study on the idea of depth in natural selection, how deep the unguided nature would alow conditions to follow one another instead of contradict and block one another.
+- converting electromagnetism to movement can happen just through changing the movement parts charge within its rotating path.
+  https://www.youtube.com/watch?v=dT9s33X9D4I#t=92
+  http://www.greenoptimistic.com/2008/12/21/screws-magnetic-motor-build/
+- create a database out of quran relating things as much as you can
+- create a lite and fast dictionary for android
+- create a better azan program for android
+- create an app to store all membership and store cards, instead of your wallet
+- read these:
+    The Hidden Face of God: Science Reveals the Ultimate Truth
+    IQBAL: Manifestation of the Islamic Spirit
+    Meshkat ulmasabih
+    Mafhoome Nas by Morteza Karimi
+
+------------------------------------------------------------------------------
+
+Git
+===
+
+see branches with details:       git branch -vv
+removing dangling git commits:   git reflog expire --expire-unreachable=now --all
+                                 git gc --prune=now
+point branch to commit:          git branch -f branch-name new-tip-commit
+make patch from commit:          git format-patch -1 <sha>
+apply patch and preserve author: git am filename.patch
+set current branch upstream:   git branch -u upstream/branch (like origin/develop)
+push current branch to new upstream:   git push -u upstream branch (like origin develop)
+
+------------------------------------------------------------------------------
+
+Yocto
+=====
+
+bitbake commands:
+source ./yocto-init-build-env meta-atom
+bitbake -c populate_sdk core-image-atom
+bitbake core-image-atom
+MACHINE=atom-linux4 bitbake core-image-atom
+bitbake gstreamer1.0-libav
+bitbake gstreamer1.0-libav -c clean
+when got an SDK installed do the following to get the toolchain in the environment:
+source /opt/atom/1.7/environment-setup-core2-64-atom-linux
+
+------------------------------------------------------------------------------
+
+Networking
+==========
+
+manually configuring and running network:
+ifconfig enp4s0 down
+ifconfig enp4s0 172.16.6.81 netmask 252.0.0.0 up
+route add default gw 172.16.6.1
+/etc/init.d/networking restart
+
+------------------------------------------------------------------------------
+
+Linux
+=====
+
+command-line:
+copy:                      dd if=input.img of=/dev/output-device
+hex view:                  xxd
+enable debugging in vtune: echo "0"|sudo tee /proc/sys/kernel/yama/ptrace_scope
+organazing windows:        j=0; for i in `wmctrl -l -p | grep N/A | cut -c1-10`; do
+                             top="$(( ($j*380)%1140 ))"
+                             left="$(( 1920+(640*($j/3))%2000 ))"
+                             wmctrl -i -r $i -e 0,$left,$top,640,480;
+                             j="$(( $j+1 ))"
+                           done;
+tcpdump                    sudo tcpdump -s 0 -w output.pcap -i eth0 udp port 6100
+replace in stdin           sed -e 's///g'
+untar with target dir      tar -xvf tarfile -C target_dir
+grep directory for text    grep -Irli "string" /path
+find binary files          find -type f -executable
+
+debugging/monitoring commands:
+top -Hid1
+watch -n1 'cat /proc/interrupts | grep "CPU\|107:"'      interrupts per core stat
+procinfo -n1                                             interrupts stat
+watch -n1 'mpstat -I SUM -P ALL'                         multi-process statu
+perf stat ./appname                                      measure cache misses
+sshfs fahamne@feanor:/ /media/fahamne/feanor             mounting ssh as filesystem
+perf stat -a sleep 30
+perf stat -a -e cache-misses timeout 30
+perf record -a -F 97 --call-graph dwarf -o mmfd.data -- sleep 30
+perf report -g graph -i mmfd.data
+perf timechart record -a -o 1proc.data timeout 30
+for i in `seq 0 1`; do ./mmfd $i -config ./mmfd.cfg 2> /dev/null; done;
+
+installing arch:
+http://jorisvandijk.com/2014/installing-arch-on-a-uefi-gpt-system
+https://wiki.archlinux.org/index.php/Systemd-boot
+
+to read:
+http://www.crashcourse.ca/introduction-linux-kernel-programming/introduction-linux-kernel-programming
+http://www.thegeekstuff.com/2012/08/gprof-tutorial/
+http://www.youtube.com/watch?v=aNmo2bpW3dI
+http://www.advancedlinuxprogramming.com/alp-folder/alp-ch04-threads.pdf
+http://www.mulix.org/lectures/kernel_workshop_mar_2004/things.pdf
+http://www.redbooks.ibm.com/redpapers/pdfs/redp4285.pdf
+http://www.brendangregg.com/Slides/SCaLE_Linux_Performance2013.pdf
+
+working env packages:
+terminator fluxbox git gnome-do synergy xscreensaver unclutter numlockx vim
+
+build toolchain packages:
+libtool autoconf automake autopoint 
+
+applications to try:
+cifs-utils       Common Internet File System utilities
+iperf            Perform network throughput tests
+minicom          Friendly serial communication program
+nmap             Network exploration tool and security / port scanner
+snmp             Simple Network Management Protocol applications
+synergy          Share mouse, keyboard and clipboard over the network
+tftp             Trivial file transfer protocol client
+traceroute       Print the route packets trace to network host
+wireshark        Interactively dump and analyze network traffic
+freefilesync     Visual folder comparison and synchronization
+valgrind --tool=massif .objs/.libs/lt-mmfd 0 -foreground -config ./mmfd.cfg
+geary            email client
+
+------------------------------------------------------------------------------
+
+C Programming
+=============
+
+to read:
+optimization: http://www.codeproject.com/Articles/6154/Writing-Efficient-C-and-C-Code-Optimization
+
+------------------------------------------------------------------------------
+
+GDB
+=========
+
+use colout and .gdbinit to colorize gdb outputs
+
+------------------------------------------------------------------------------
+
+GStreamer
+=========
+
+to read:
+http://developer.ridgerun.com/wiki/index.php/GStreamer_Debugging#GStreamer_Daemon
+http://developer.ridgerun.com/wiki/index.php?title=Embedded_GStreamer_Performance_Tuning
+
+required packages:
+bison flex gtk-doc-tools libglib2.0-dev gitk indent liborc-0.4-dev
+libvorbis-dev libogg-dev i965-va-driver g++ libxv-dev libgl1-mesa-dev
+libva-dev yasm freeglut3-dev graphviz
+
+------------------------------------------------------------------------------
+
+Computer Science
+================
+
+General:
+- http://videolectures.net/Top/Computer_Science/
+
+
+Machine Learning:
+- https://www.quora.com/How-do-I-learn-machine-learning-1
+- https://www.coursera.org/course/ml
+
+------------------------------------------------------------------------------
+
+Talks, Reads and Presentations
+=======================
+
+Vecima Film Festival:
+- Embracing Disruption: You Are Your Process |+0| URL: http://www.infoq.com/presentations/create-personal-process
+- Continuous Integration for Infrastructure |+0| URL: http://www.infoq.com/presentations/continuous-integration-infrastructure
+- Humble Programmers’ Reflections by Example on Unit Tests, TDD and BDD |+0| URL: http://www.infoq.com/presentations/unit-test-specflow-cucumber
+- Collaboration Superpowers: Stories Of Remote Teams Doing Great Things |+1| URL: http://www.infoq.com/presentations/stories-collaboration-remote-teams
+- Architecture War Stories |+0| URL: http://www.infoq.com/presentations/architecture-disaster
+- Delivering Continuous Delivery Continuously |+0| URL: http://www.infoq.com/presentations/guardian-continuous-delivery
+- How to Make Agile and Continuous Delivery Work at Your Company: Lessons Learned in the Trenches |+1| URL: http://www.infoq.com/presentations/agile-adoption-organization
+- TestOps: Continuous Integration when Infrastructure is the Product |+0| URL: http://www.infoq.com/presentations/acquia-cloud-paas
+- 2014 JUC Berlin - Seven Habits of Highly Effective Jenkins Users |+0| URL: http://www.youtube.com/watch?v=VyjIX50KS9M
+- CppCon 2014: Zaika Antoun &quot;Microsoft w/ C++ to Deliver Office Across Different Platforms, Part II&quot; |+1| URL: https://www.youtube.com/watch?v=MGMoRu5yrVc
+- Open Compute Project and the Changing Data Center |+0| URL: https://www.usenix.org/conference/lisa14/conference-program/presentation/patchett
+- Monitoring: The Math Behind Bad Behavior |+1| URL: https://www.usenix.org/conference/lisa14/conference-program/presentation/schlossnagle
+- Source Code Analysis for Security |+0| URL: http://llvm.org/devmtg/2014-10/Videos/Source%20Code%20Analysis%20For%20Security-720.mov
+- Using LLVM to protect applications from the OS |+0| URL: http://llvm.org/devmtg/2014-10/Videos/Virtual%20Ghost-720.mov
+- LLVM Debug Info Tutorial |+0| URL: http://llvm.org/devmtg/2014-10/Videos/Debug%20Info%20Tutorial-720.mov
+- Using Clang to query code-bases |+0| URL: http://llvm.org/devmtg/2014-10/Videos/Using%20Clang%20to%20Query%20Codebases-720.mov
+- Ian Cooper: TDD, where did it all go wrong |+0| URL: http://vimeo.com/68375232
+- Using functional programming techniques:  http://www.infoq.com/presentations/fp-principles-oop
+- "Good enough" is good enough! |+0| URL: https://www.youtube.com/watch?v=yo4Uqq7NXQc
+- Getting Started with the Yocto Project - New Developer Screencast Tutorial |+0| URL: http://vimeo.com/36450321
+- How NOT to Measure Latency |+0| URL: http://www.infoq.com/presentations/latency-pitfalls
+- Programming Should Be More than Coding |+0| URL: http://www.infoq.com/presentations/programming-design-coding
+
+Misc Video:
+- 8. SFU CMPT 300: Process in memory; Processes VS threads; Multithreading URL: https://www.youtube.com/watch?v=aNmo2bpW3dI
+
+Misc Doc:
+- 10 Things Every Linux Programmer Should Know URL: http://www.mulix.org/lectures/kernel_workshop_mar_2004/things.pdf
+- On Threads, Processes and Co-Processes URL: http://elinux.org/images/1/1c/Ben-Yossef-GoodBadUgly.pdf
+- Linux Performance and Tuning Guidelines URL: http://www.redbooks.ibm.com/redpapers/pdfs/redp4285.pdf
+- Processor Affinity URL: http://www.glennklockwood.com/comp/affinity.php
+- PERF tutorial: Finding execution hot spots URL: http://sandsoftwaresound.net/perf/perf-tutorial-hot-spots/
+- GDB Essentials 1 URL: http://openclassroom.stanford.edu/MainFolder/VideoPage.php?course=PracticalUnix&video=gdb-essentials-1&speed=100
+- GDB Essentials 2 URL: http://openclassroom.stanford.edu/MainFolder/VideoPage.php?course=PracticalUnix&video=gdb-essentials-2&speed=100
+- Analyzing and Optimizing the Linux Networking Stack URL: http://www.ingrid07.cnit.it/PPT/11.pdf
+
+Misc Links:
+- http://discoveringspirituality.com/the-top-10-most-influential-spiritual-teachers/
+- http://en.wikipedia.org/wiki/Rajneesh#As_charismatic_leader
+- http://en.wikipedia.org/wiki/Computer_vision
+- http://stanford.edu/~rezab/
+
+------------------------------------------------------------------------------
