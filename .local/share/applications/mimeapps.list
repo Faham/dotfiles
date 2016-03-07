@@ -2,6 +2,8 @@
 [Default Applications]
 text/html=google-chrome.desktop
 application/pdf=evince.desktop
+image/jpeg=gpicview.desktop
+image/png=gpicview.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/about=google-chrome.desktop

@@ -14,6 +14,8 @@ usermod -a -G users sudo $USER
 sed  -i "s/^# %sudo   ALL=(ALL) ALL$/%sudo   ALL=(ALL) ALL/" /etc/sudoers
 sed  -i "s/^\(# Defaults targetpw\)\(.*\)$/Defaults targetpw\2/" /etc/sudoers
 
+sed  -i "s/^#\[multilib\]$/[multilib]/" /etc/pacman.conf
+
 _add_line_if_not_exists /etc/sudoers \
     "%users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot"
 
@@ -26,3 +28,6 @@ Server = http://repo.archlinux.fr/x86_64
 [ -f /etc/ssh/sshd_config ] && grep -qx -F "AllowUsers .*" /etc/ssh/sshd_config || echo "
 AllowUsers $USER
 " >> /etc/ssh/sshd_config
+
+rm /bin/python
+ln -s /bin/python2 /bin/python
