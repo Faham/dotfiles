@@ -137,7 +137,7 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-let mapleader = ","
+let mapleader = ";"
 
 nnoremap <c-o> :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor

@@ -3,15 +3,26 @@
   [Layer]	{2}
 [end]
 [app] (name=terminator) (class=Terminator)
-  [Dimensions]	{100% 100%}
-  [Position]	(UPPERLEFT)	{0% 0%}
+  [Dimensions]	{64% 76%}
+  [Position]	(UPPERLEFT)	{18% 12%}
   [Maximized]	{yes}
-  [Close]	{yes}
 [end]
-[app] (name=goldendict) (class=Goldendict)
+[app] (name=goldendict) (class=Goldendict) (role=pop-up)
   [Dimensions]	{36% 40%}
   [Position]	(CENTER)	{0 0}
+  [Layer]	{6}
 [end]
 [app] (name=bashrun) (class=XTerm)
   [Position]	(CENTER)	{0 0}
+  [Layer]	{6}
+[end]
+[app] (name=crx_nckgahadagoaajjgafhacjanaoiihapd) (class=google-chrome) (role=pop-up)
+  [Dimensions]	{11% 29%}
+  [Position]	(LOWERRIGHT)	{25% 0%}
+  [Layer]	{6}
+[end]
+[app] (name=subl) (class=Subl)
+  [Dimensions]	{66% 69%}
+  [Position]	(UPPERLEFT)	{15% 11%}
+  [Maximized]	{yes}
 [end]

@@ -208,6 +208,7 @@ wireshark        Interactively dump and analyze network traffic
 freefilesync     Visual folder comparison and synchronization
 valgrind --tool=massif .objs/.libs/lt-mmfd 0 -foreground -config ./mmfd.cfg
 geary            email client
+shashlik         for running android apps on linux
 
 ------------------------------------------------------------------------------
 
