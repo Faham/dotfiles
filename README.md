@@ -15,6 +15,6 @@ evince ctags gpicview zip unzip
 then:
 ~/bin/config-machine
 
-yaourt -S google-chrome subl-text-dev viber acroread
+yaourt -S google-chrome subl-text-dev viber acroread acroread-fonts
 
 then go to .vim/bundle/YouCompleteMe and run ./install.py

@@ -4,7 +4,7 @@ OUT=${1##*/}
 OUT=${OUT%%.*}
 OUTPUT_FORMAT=$2
 OUT_DIR=$3
-FFMPEG=~/dev/3rdparty/ffmpeg/ffmpeg
+FFMPEG=ffmpeg
 
 # ffmpeg configuration:
 # ./configure --prefix=/usr/local --enable-gpl --enable-nonfree \
