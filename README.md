@@ -1,20 +1,12 @@
 # personal-linux-config
 
-after pulling the repo do the followings
+after pulling the repo do the followings as root:
 
-git submodule update --init --recursive
+su
+groupadd -f sudo
+groupadd -f users
+usermod -a -G users,sudo faham
+sed  -i "s/^# %sudo   ALL=(ALL) ALL$/%sudo   ALL=(ALL) ALL/" /etc/sudoers
 
-install the required packages:
-
-sudo pacman -S fluxbox xosd terminator zsh pcmanfm vlc \
-unclutter conky xscreensaver goldendict yaourt xdotool xterm bashrun git vim \
-xorg-server xorg-apps xorg-server-utils xf86-video-intel mesa-libgl \
-xorg-xinit ttf-dejavu htop openssh wget pulseaudio cmake python2 \
-evince ctags gpicview zip unzip
-
-then:
+then run the following as faham:
 ~/bin/config-machine
-
-yaourt -S google-chrome subl-text-dev viber acroread acroread-fonts
-
-then go to .vim/bundle/YouCompleteMe and run ./install.py
