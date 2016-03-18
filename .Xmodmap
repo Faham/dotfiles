@@ -1,1 +1,3 @@
-keycode 107 = F13
+!             Key          Shift+Key            mode_switch+Key          mode_switch+Shift+Key          AltGr+Key          AltGr+Shift+Key
+
+keycode 107 = F13          F13                  F13                      F13                            F13                F13

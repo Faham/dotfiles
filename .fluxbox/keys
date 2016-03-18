@@ -187,12 +187,12 @@ OnRightGrip Move1         :StartResizing bottomright
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-Mod4 t                    :ExecCommand goldendict
-Mod4 r                    :ExecCommand bashrun
-Mod4 c                    :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Shift Mod4 e              :ExecCommand env | sort | xmessage -file -
-Mod4 n                    :ExecCommand $EDITOR $HOME/.notes
-Shift Mod4 x              :ExecCommand xkill
+Mod4 t                     :ExecCommand goldendict
+Mod4 r                     :ExecCommand bashrun -nearmouse -font Matto -w 500 -h 50
+Mod4 c                     :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Shift Mod4 e               :ExecCommand env | sort | xmessage -file -
+Mod4 n                     :ExecCommand $EDITOR $HOME/.notes
+Shift Mod4 x               :ExecCommand xkill
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
 !Control Mod4 m            :ExecCommand quax
@@ -206,16 +206,22 @@ Shift Mod4 x              :ExecCommand xkill
 !Mod4 x                    :ExecCommand xmag
 !Mod1 Mod4 x               :ExecCommand wmagnify
 
-None 231                  :ExecCommand ~/bin/yoga-auto-rotate
+None 231                   :ExecCommand ~/bin/yoga-auto-rotate
 
 ! volume control
-None XF86AudioMute        :ExecCommand ~/bin/volume toggle
-None XF86AudioLowerVolume :ExecCommand ~/bin/volume down
-None XF86AudioRaiseVolume :ExecCommand ~/bin/volume up
+None XF86AudioMute         :ExecCommand ~/bin/volume toggle
+None XF86AudioLowerVolume  :ExecCommand ~/bin/volume down
+None XF86AudioRaiseVolume  :ExecCommand ~/bin/volume up
+Mod4 F1                    :ExecCommand ~/bin/volume toggle
+Mod4 F2                    :ExecCommand ~/bin/volume down
+Mod4 F3                    :ExecCommand ~/bin/volume up
 
 ! brightness control
-None 232 :Exec xbacklight -dec 10
-None 233 :Exec xbacklight -inc 10
+None XF86MonBrightnessDown :Exec xbacklight -dec 10
+None XF86MonBrightnessUp   :Exec xbacklight -inc 10
+Mod4 F11                   :Exec xbacklight -dec 10
+Mod4 F12                   :Exec xbacklight -inc 10
+
 
 ! HDMI output dual screen
 None 133:Exec ~/bin/setup-screen
