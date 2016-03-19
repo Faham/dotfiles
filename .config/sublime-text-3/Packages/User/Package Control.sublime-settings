@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"ANTLR syntax highlight",
 		"ApacheConf.tmLanguage",
 		"C Improved",
 		"C99",
