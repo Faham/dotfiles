@@ -1,22 +1,16 @@
 #!/bin/sh
 
-device=/sys/class/backlight/intel_backlight
-cur=`cat $device/brightness`
-max=`cat $device/max_brightness`
-diff=$1
-val=$(($cur+$diff))
+case $1 in
+up)
+    xbacklight -inc 10;;
+down)
+    xbacklight -dec 10;;
+*)
+    exit 1;;
+esac
 
-if [[ "$val" -gt "$max" ]]; then
-    val=$max
-elif [[ "$val" -lt "0" ]]; then
-    val=0
-fi
 
-echo $val | sudo tee $device/brightness
-# xbacklight -dec 10
-# xbacklight -inc 10
-
-percent=$(($val * 100 / $max))
+percent=$(xbacklight -get)
 
 osd_pid='/tmp/osd-brightness.pid'
 osd_cmd="osd_cat \

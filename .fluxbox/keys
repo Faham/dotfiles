@@ -40,18 +40,14 @@ Control Mod1 Delete       :Exit
 Mod4 l                    :ExecCommand xscreensaver-command -lock
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-!  menus
-!
+! menus
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Mod4 w                    :RootMenu # when logo key is pressed!
 Control Menu              :WorkspaceMenu
 Mod1 space                :WindowMenu
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-!  frame - handling
-!
+! frame - handling
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !Mod4 Left                 :PrevTab
 !Mod4 Right                :NextTab
@@ -60,9 +56,7 @@ Mod1 space                :WindowMenu
 !Shift Mod4 Right          :MoveTabRight
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-!  window - handling
-!
+! window - handling
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Mod4 s                    :Stick
 Mod4 m                    :Minimize
@@ -89,9 +83,7 @@ OnToolbar Mouse4          :PrevWindow {static groups} (iconhidden=no)
 OnToolbar Mouse5          :NextWindow {static groups} (iconhidden=no)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
 ! accessibility + screen rotation
-!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Mod1 Control Up              :ExecCommand xrandr -o normal; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
 Mod1 Control Down            :ExecCommand xrandr -o inverted; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
@@ -99,28 +91,7 @@ Mod1 Control Left            :ExecCommand xrandr -o left; xinput enable 'SynPS/2
 Mod1 Control Right           :ExecCommand xrandr -o right; xinput enable 'SynPS/2 Synaptics TouchPad'; xinput set-prop 'ELAN Touchscreen' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-! accessibility + mousehandling
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-!Control Mod1 a            :ExecCommand accessx
-!Control Mod1 Mod4 m       :ExecCommand ax +mousekeys
-!Control Mod1 m            :ExecCommand ax -mousekeys
-
-!Control Mod4 KP_Home      :ExecCommand xwit -rwarp  -50 -50
-!Control Mod4 KP_Up        :ExecCommand xwit -rwarp    0 -50
-!Control Mod4 KP_Prior     :ExecCommand xwit -rwarp   50 -50
-!Control Mod4 KP_Left      :ExecCommand xwit -rwarp  -50   0
-!Control Mod4 KP_Right     :ExecCommand xwit -rwarp   50   0
-!Control Mod4 KP_End       :ExecCommand xwit -rwarp  -50  50
-!Control Mod4 KP_Down      :ExecCommand xwit -rwarp    0  50
-!Control Mod4 KP_Next      :ExecCommand xwit -rwarp   50  50
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-!  workspace - handling
-!
+! workspace - handling
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !Control Mod4 Right        :RightWorkspace
 !Control Mod4 Left         :LeftWorkspace
@@ -141,9 +112,7 @@ Mod4 KP_Next              :Workspace 9
 Mod4 KP_0                 :ExecCommand fbcmd_osd.sh print ws_name
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
 ! resize / movement of window
-!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Shift Mod4 Up             :MoveUp 50
 Shift Mod4 Left           :MoveLeft 50
@@ -182,14 +151,13 @@ OnLeftGrip Move1          :StartResizing bottomleft
 OnRightGrip Move1         :StartResizing bottomright
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
 ! execute commands
-!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Mod4 t                     :ExecCommand goldendict
 Mod4 r                     :ExecCommand bashrun
 Mod4 c                     :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Shift Mod4 c               :ToggleCmd {Exec conky} {pkill conky}
 Shift Mod4 e               :ExecCommand env | sort | xmessage -file -
 Mod4 n                     :ExecCommand $EDITOR $HOME/.notes
 Shift Mod4 x               :ExecCommand xkill
@@ -217,26 +185,19 @@ Mod4 F2                    :ExecCommand ~/bin/volume down
 Mod4 F3                    :ExecCommand ~/bin/volume up
 
 ! brightness control
-None XF86MonBrightnessDown :Exec xbacklight -dec 10
-None XF86MonBrightnessUp   :Exec xbacklight -inc 10
-Mod4 F11                   :Exec xbacklight -dec 10
-Mod4 F12                   :Exec xbacklight -inc 10
-
+None XF86MonBrightnessDown :Exec ~/bin/brightness down
+None XF86MonBrightnessUp   :Exec ~/bin/brightness up
+Mod4 F11                   :Exec ~/bin/brightness down
+Mod4 F12                   :Exec ~/bin/brightness up
 
 ! HDMI output dual screen
-None 133:Exec ~/bin/setup-screen
+None 133                   :Exec ~/bin/display
 
 ! screenshots
-! xmodmap -pke | grep -i print => xmodmap -e "keycode 107 = F13"
-! => i press "Print" and it dumps the screen :)
-None F13                  :ExecCommand sleep 1 && scrot -s -q 75 ~/pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
+None F13                   :ExecCommand sleep 1 && scrot -s -q 75 ~/Pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
 ! below this line only experimental stuff is listed. its not supposed to WORK
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 !
@@ -246,24 +207,6 @@ Control Mod4 Tab          :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc prev
 Mod4 1                    :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc toggle &> /dev/null
 Mod1 Shift a              :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc volume +10 &> /dev/null
 Mod1 Shift y              :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc volume -10 &> /dev/null
-
-!
-! dvd / cdcontrol stuff
-!
-
-Mod4 plus                 :ExecCommand cdctrl speed 32 /dev/dvd
-Mod4 minus                :ExecCommand cdctrl speed 4 /dev/dvd
-Control Mod4 plus         :ExecCommand cdctrl close /dev/dvd
-Control Mod4 minus        :ExecCommand cdctrl open /dev/dvd
-
-Shift Mod4 plus           :ExecCommand cdctrl speed 32 /dev/cdrom
-Shift Mod4 minus          :ExecCommand cdctrl speed 4 /dev/cdrom
-Control Shift Mod4 plus   :ExecCommand cdctrl close /dev/cdrom
-Control Shift Mod4 minus  :ExecCommand cdctrl open /dev/cdrom
-
-!
-!Shift Mod4 p :FocusTo (xterm)
-!Shift Mod4 o :DumpTheme
 
 !Mod4 p m                  :Place max_space allow_smaller
 !Mod4 p v                  :Place expand_vertical allow_smaller

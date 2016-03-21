@@ -23,11 +23,12 @@ Server = http://repo.archlinux.fr/x86_64
 sudo pacman -Syy
 
 sudo pacman -S fluxbox xosd terminator zsh pcmanfm vlc \
-unclutter conky xscreensaver goldendict yaourt xdotool xterm bashrun git vim \
-xorg-server xorg-apps xorg-server-utils xf86-video-intel xf86-input-synaptics \
-mesa-libgl xorg-xinit ttf-dejavu htop openssh wget pulseaudio cmake python2 \
-evince ctags gpicview zip unzip tk gvfs linux-headers virtualbox-guest-utils exfat-utils \
-gimp convert
+unclutter conky xscreensaver goldendict yaourt xdotool \ 
+xterm bashrun git vim xorg-server xorg-apps xorg-server-utils \
+xf86-video-intel xf86-input-synaptics mesa-libgl xorg-xinit \
+ttf-dejavu htop openssh wget pulseaudio cmake python2 evince \
+ctags gpicview zip unzip tk gvfs linux-headers virtualbox-guest-utils \
+exfat-utils scrot gimp convert sshfs samba
 
 yaourt -S google-chrome sublime-text-dev viber acroread
 
