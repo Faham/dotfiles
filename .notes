@@ -161,6 +161,7 @@ replace in stdin           sed -e 's///g'
 untar with target dir      tar -xvf tarfile -C target_dir
 grep directory for text    grep -Irli "string" /path
 find binary files          find -type f -executable
+ffmpeg -f concat -i mylist.txt -c copy output
 
 debugging/monitoring commands:
 top -Hid1
