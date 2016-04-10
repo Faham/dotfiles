@@ -13,8 +13,9 @@ unclutter conky xscreensaver goldendict yaourt xdotool \
 xterm bashrun git vim xorg-server xorg-apps xorg-server-utils \
 xf86-video-intel xf86-input-synaptics mesa-libgl xorg-xinit \
 ttf-dejavu htop openssh wget pulseaudio cmake python2 evince \
-ctags gpicview zip unzip tk gvfs linux-headers virtualbox-guest-utils \
-exfat-utils scrot gimp imagemagick sshfs samba ntfs-3g pm-utils gparted
+ctags gpicview zip unzip tk gvfs linux-headers virtualbox \
+virtualbox-guest-utils exfat-utils scrot gimp imagemagick \
+sshfs samba ntfs-3g pm-utils gparted 
 
 sudo rm /bin/python /bin/python-config
 sudo ln -s /bin/python2 /bin/python

@@ -1,21 +1,21 @@
 # ignore general directories
 notes.txt
-desktop/
+Desktop/
+Documents/
+Downloads/
+Mail/
+Music/
+Pictures/
+Public/
+Templates/
+Videos/
+projfiles/
+tmp/
+vms/
 dev/
 doc/
-Documents/
-downloads/
-Downloads/
-goto/
-gst/
-mail/
-music/
-pictures/
-projfiles/
-public/
-templates/
-videos/
-tmp/
+src/
+talks/
 
 # ignore general files
 Vecima.ics
