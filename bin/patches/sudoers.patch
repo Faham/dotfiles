@@ -1,0 +1,12 @@
+79a80
+> faham ALL=(ALL) ALL
+88c89
+< # %sudo	ALL=(ALL) ALL
+---
+> %sudo	ALL=(ALL) ALL
+92c93
+< # Defaults targetpw  # Ask for the password of the target user
+---
+> Defaults targetpw  # Ask for the password of the target user
+97a99
+> %users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot

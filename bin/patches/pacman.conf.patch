@@ -1,0 +1,11 @@
+93,94c93,94
+< #[multilib]
+< #Include = /etc/pacman.d/mirrorlist
+---
+> [multilib]
+> Include = /etc/pacman.d/mirrorlist
+100a101,104
+> 
+> [archlinuxfr]
+> SigLevel    = Never
+> Server = http://repo.archlinux.fr/x86_64
