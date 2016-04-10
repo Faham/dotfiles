@@ -2,28 +2,24 @@
 
 USER=faham
 
-su
+sudo [ -f /etc/gdm/custom.conf ] && sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
+sudo patch -r - /etc/sudoers patches/sudoers.patch
+sudo patch -r - /etc/pacman.conf patches/pacman.conf
 
-[ -f /etc/gdm/custom.conf ] && sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
-patch /etc/sudoers patches/sudoers.patch
-patch /etc/pacman.conf patches/pacman.conf
+sudo pacman -Syy
 
-pacman -Syy
-
-pacman -S fluxbox xosd terminator zsh pcmanfm vlc \
-unclutter conky xscreensaver goldendict yaourt xdotool \ 
+sudo pacman -S fluxbox xosd terminator zsh pcmanfm vlc \
+unclutter conky xscreensaver goldendict yaourt xdotool \
 xterm bashrun git vim xorg-server xorg-apps xorg-server-utils \
 xf86-video-intel xf86-input-synaptics mesa-libgl xorg-xinit \
 ttf-dejavu htop openssh wget pulseaudio cmake python2 evince \
 ctags gpicview zip unzip tk gvfs linux-headers virtualbox-guest-utils \
-exfat-utils scrot gimp convert sshfs samba ntfs-3g pm-utils
+exfat-utils scrot gimp imagemagick sshfs samba ntfs-3g pm-utils gparted
 
-rm /bin/python /bin/python-config
-ln -s /bin/python2 /bin/python
-ln -s /bin/python2-config /bin/python-config
-ln -s /usr/bin/subl3 /usr/bin/subl
-
-exit
+sudo rm /bin/python /bin/python-config
+sudo ln -s /bin/python2 /bin/python
+sudo ln -s /bin/python2-config /bin/python-config
+sudo ln -s /usr/bin/subl3 /usr/bin/subl
 
 yaourt -S google-chrome sublime-text-dev viber acroread
 git submodule update --init --recursive
