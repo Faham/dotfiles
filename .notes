@@ -1,35 +1,13 @@
-TEMP:
-=====
 
 ----------------------------------------------------
-searches:
+Search URLs:
 https://www.glassdoor.ca/Job/ontario-c-software-developer-graphics-jobs-SRCH_IL.0,7_IS4080_KO8,37.htm
 http://www.kijiji.ca/b-cars-trucks/saskatoon/suv/honda__hyundai__mazda__nissan__toyota-2007__/k0c174l1700197a54a68?price=6000__12000&kilometers=__130000
 http://www.kijiji.ca/b-saskatoon/sleeping-bag/k0l1700197
 http://www.kijiji.ca/b-fishing-camping-outdoor/saskatoon/tent/k0c656l1700197
 ----------------------------------------------------
-ssh mer521@bayes.usask.ca
-password: Mrf1050247
-
-use fan780@tuxworld.usask.ca to ssh to university machines.
-
-kevin (fan780@waffle.usask.ca - user: mycms pass: 7d9as0d8 database: mycms)
-mysql -u mycms -p7d9as0d8 -h localhost 'mycms' < database.sql
-mysql -u username -ppassword -h localhost 'database_name' < file.csv
-
-regan (faham@hci.usask.ca same password - -u mycms_hci -p al80skd8 -h hciweb.usask.ca database: mycms_hci)
-mysql -u mycms_hci -pal80skd8 -h hciweb.usask.ca 'mycms_hci' < database.sql
-old website db: user:webuser pass:B47FPNFZuqQTSm6Q dbname:webdb
-
-ian (fan780@graphics.usask.ca)
-mysql: user: mycms_graphics, pass: 1fd2s5fd, database: mycms_graphics
-mysql -u mycms_graphics -p1fd2s5fd -h localhost 'mycms_graphics' < database.sql
-
-mysqldump -h 127.0.0.1 --single-transaction -u webuser -pB47FPNFZuqQTSm6Q webdb > export_old_hci_db_6182014.sql
-----------------------------------------------------
 
 TODO:
-=====
 
 Global:
 - apply for visa
@@ -147,6 +125,7 @@ Linux
 =====
 
 command-line:
+[shell]
 copy:                      dd if=input.img of=/dev/output-device
 hex view:                  xxd
 enable debugging in vtune: echo "0"|sudo tee /proc/sys/kernel/yama/ptrace_scope
@@ -162,20 +141,23 @@ untar with target dir      tar -xvf tarfile -C target_dir
 grep directory for text    grep -Irli "string" /path
 find binary files          find -type f -executable
 ffmpeg -f concat -i mylist.txt -c copy output
+gs -dBATCH -sOutputFile="output.pdf" -dFirstPage=1 -dLastPage=3 -sDEVICE=pdfwrite input.pdf                        export page 1 to 3 of input.pdf to output.pdf
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=out.pdf in1.pdf in2.pdf            put in1.pdf and in2.pdf together into out.pdf
 
-debugging/monitoring commands:
+# debugging/monitoring commands:
 top -Hid1
 watch -n1 'cat /proc/interrupts | grep "CPU\|107:"'      interrupts per core stat
 procinfo -n1                                             interrupts stat
 watch -n1 'mpstat -I SUM -P ALL'                         multi-process statu
 perf stat ./appname                                      measure cache misses
-sshfs fahamne@feanor:/ /media/fahamne/feanor             mounting ssh as filesystem
+sshfs -o allow_other fahamne@feanor:/ /media/fahamne/feanor             mounting ssh as filesystem
 perf stat -a sleep 30
 perf stat -a -e cache-misses timeout 30
 perf record -a -F 97 --call-graph dwarf -o mmfd.data -- sleep 30
 perf report -g graph -i mmfd.data
 perf timechart record -a -o 1proc.data timeout 30
 for i in `seq 0 1`; do ./mmfd $i -config ./mmfd.cfg 2> /dev/null; done;
+[end]
 
 installing arch:
 http://jorisvandijk.com/2014/installing-arch-on-a-uefi-gpt-system

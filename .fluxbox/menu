@@ -9,7 +9,7 @@
   [exec] (Telegram)      {telegram}              <~/.fluxbox/pixmaps/skype.png>
   [exec] (Viber)         {/opt/viber/Viber}      <~/.fluxbox/pixmaps/viber.png>
   [exec] (Pidgin)        {pidgin}                <~/.fluxbox/pixmaps/pidgin.png>
-  [exec] (Hipchat)       {hipchat}               <~/.fluxbox/pixmaps/hipchat.png>
+  [exec] (Hipchat)       {HipChat4}              <~/.fluxbox/pixmaps/hipchat.png>
   [separator]
   [submenu] (Misc)
     [exec] (Gimp)          {gimp}                  <~/.fluxbox/pixmaps/gimp.png>

@@ -1,6 +1,6 @@
 <config>
  <paths>
-  <path recursive="0">/home/faham/Documents/dictionary</path>
+  <path recursive="0">/home/fahamne/Documents/dictionaries</path>
  </paths>
  <sounddirs/>
  <dictionaryOrder id="0" name="">
@@ -60,7 +60,7 @@
   <newTabsOpenInBackground>1</newTabsOpenInBackground>
   <hideSingleTab>0</hideSingleTab>
   <mruTabOrder>0</mruTabOrder>
-  <hideMenubar>0</hideMenubar>
+  <hideMenubar>1</hideMenubar>
   <enableTrayIcon>1</enableTrayIcon>
   <startToTray>1</startToTray>
   <closeToTray>1</closeToTray>
@@ -113,13 +113,13 @@
  <lastMainGroupId>0</lastMainGroupId>
  <lastPopupGroupId>0</lastPopupGroupId>
  <popupWindowState>AAAA/wAAAAH9AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywABAAAAAAAAAAAAAAAAAiwAAAGSAAAAAAAAAAAAAAIsAAABkgAAAAAAAA==</popupWindowGeometry>
+ <popupWindowGeometry>AdnQywABAAAAAAeAAAAAAAAACawAAAGSAAAHgAAAAAAAAAmsAAABkgAAAAAAAA==</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
- <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAAAAAAAAAPwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAAP////8AAAB2AP///wAAAAEAAADMAAAB5fwCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAADUAAADwAAAAVwD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABKwAAAO8AAABXAP///wAAAbsAAAHlAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgEAAAHd/////wAAAAAAAAAA</mainWindowState>
- <mainWindowGeometry>AdnQywABAAAAAAE5AAAAqwAAA8UAAALEAAABOQAAAKsAAAPFAAACxAAAAAAAAA==</mainWindowGeometry>
+ <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAAAAAAAAAPwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAAP////8AAAB2AP///wAAAAEAAADMAAAB+PwCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAgAACn8AAAIDAAAAzAAAAPP7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAAAIgAAAfgAAABXAP///wAAAbsAAAH4AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAIC/////wAAAAAAAAAA</mainWindowState>
+ <mainWindowGeometry>AdnQywABAAAAAAszAAACJgAADb8AAAQ/AAALMwAAAiYAAA2/AAAEPwAAAAAAAA==</mainWindowGeometry>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
- <timeForNewReleaseCheck>2016-04-12T17:07:37</timeForNewReleaseCheck>
+ <timeForNewReleaseCheck>2016-04-16T12:34:47</timeForNewReleaseCheck>
  <skippedRelease></skippedRelease>
  <showingDictBarNames>0</showingDictBarNames>
  <usingSmallIconsInToolbars>0</usingSmallIconsInToolbars>
