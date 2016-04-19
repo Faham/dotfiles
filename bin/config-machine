@@ -16,7 +16,7 @@ ttf-dejavu htop openssh wget pulseaudio cmake python2 evince  \
 ctags gpicview zip unzip tk gvfs linux-headers virtualbox     \
 virtualbox-guest-utils virtualbox-host-dkms exfat-utils scrot \
 gimp imagemagick sshfs samba ntfs-3g pm-utils gparted         \
-libva-intel-driver libvdpau-va-gl
+libva-intel-driver libvdpau-va-gl cups ghostscript gsfonts
 
 sudo rm /bin/python /bin/python-config
 sudo ln -s /bin/python2 /bin/python
