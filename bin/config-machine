@@ -2,7 +2,7 @@
 
 USER=faham
 
-sudo [ -f /etc/gdm/custom.conf ] && sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
+[ -f /etc/gdm/custom.conf ] && sudo sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 sudo patch -r - /etc/sudoers patches/sudoers.patch
 sudo patch -r - /etc/pacman.conf patches/pacman.conf
 
@@ -16,7 +16,8 @@ ttf-dejavu htop openssh wget pulseaudio cmake python2 evince  \
 ctags gpicview zip unzip tk gvfs linux-headers virtualbox     \
 virtualbox-guest-utils virtualbox-host-dkms exfat-utils scrot \
 gimp imagemagick sshfs samba ntfs-3g pm-utils gparted         \
-libva-intel-driver libvdpau-va-gl cups ghostscript gsfonts
+libva-intel-driver libvdpau-va-gl cups ghostscript gsfonts    \
+libimobiledevice
 
 sudo rm /bin/python /bin/python-config
 sudo ln -s /bin/python2 /bin/python
@@ -27,5 +28,5 @@ yaourt -S google-chrome sublime-text-dev viber acroread
 git submodule update --init --recursive
 cd ~/.vim/bundle/YouCompleteMe && ./install.py
 
-sudo [ -f /usr/bin/subl ] || ln -s /usr/bin/subl3 /usr/bin/subl
-sudo [ -f /etc/ssh/sshd_config ] && patch -r - /etc/ssh/sshd_config patches/sshd_config.patch
+[ -f /usr/bin/subl ] || sudo ln -s /usr/bin/subl3 /usr/bin/subl
+[ -f /etc/ssh/sshd_config ] && sudo patch -r - /etc/ssh/sshd_config patches/sshd_config.patch

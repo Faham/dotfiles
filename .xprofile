@@ -1,4 +1,5 @@
 
+xmodmap ~/.Xmodmap
 xset r rate 200 40
 xset +fp ~/.fonts
 xsetroot -solid "#110011"
@@ -7,8 +8,6 @@ unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
 conky &
 xscreensaver &
 goldendict &
-$TERM &
-$BROWSER &
 
 [ `cat /etc/hostname` = "PC2164" ] && \
   xrandr --output VGA1 --auto --left-of DP2; \
