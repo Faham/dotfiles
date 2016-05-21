@@ -5,6 +5,7 @@ USER=faham
 [ -f /etc/gdm/custom.conf ] && sudo sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 sudo patch -r - /etc/sudoers patches/sudoers.patch
 sudo patch -r - /etc/pacman.conf patches/pacman.conf
+sudo cp patches/motd /etc/motd
 
 sudo pacman -Syy
 
@@ -22,6 +23,10 @@ libimobiledevice
 sudo rm /bin/python /bin/python-config
 sudo ln -s /bin/python2 /bin/python
 sudo ln -s /bin/python2-config /bin/python-config
+
+# required groups membership for cups administration at http://http://127.0.0.1:631/
+sudo gpasswd -a fahamne lp
+sudo gpasswd -a fahamne sys
 
 yaourt -S google-chrome sublime-text-dev viber acroread
 
