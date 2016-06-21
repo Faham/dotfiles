@@ -1,0 +1,7 @@
+#!/bin/sh
+
+VER=$1
+
+rm -f /usr/bin/python /usr/bin/python-config
+ln -s "/usr/bin/python$VER" /usr/bin/python
+ln -s "/usr/bin/python$VER-config" /usr/bin/python-config
