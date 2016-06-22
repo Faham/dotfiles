@@ -40,4 +40,6 @@
         "keys": ["ctrl+shift+g"]
     },
     { "keys": ["ctrl+shift+f11"], "command": "toggle_distraction_free" },
+    { "keys": ["ctrl+shift+c"], "command": "copy_path" },
+    { "keys": ["ctrl+shift+v"], "command": "insert_file_path" },
 ]
