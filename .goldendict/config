@@ -1,6 +1,7 @@
 <config>
  <paths>
-  <path recursive="0">/home/fahamne/Documents/dictionaries</path>
+  <path recursive="1">/home/fahamne/Documents/dictionaries</path>
+  <path recursive="1">/home/faham/Documents/dictionaries</path>
  </paths>
  <sounddirs/>
  <dictionaryOrder id="0" name="">
@@ -55,26 +56,26 @@
  <popupMutedDictionaries/>
  <preferences>
   <interfaceLanguage></interfaceLanguage>
-  <displayStyle></displayStyle>
+  <displayStyle>modern</displayStyle>
   <newTabsOpenAfterCurrentOne>0</newTabsOpenAfterCurrentOne>
   <newTabsOpenInBackground>1</newTabsOpenInBackground>
-  <hideSingleTab>0</hideSingleTab>
+  <hideSingleTab>1</hideSingleTab>
   <mruTabOrder>0</mruTabOrder>
   <hideMenubar>1</hideMenubar>
   <enableTrayIcon>1</enableTrayIcon>
   <startToTray>1</startToTray>
   <closeToTray>1</closeToTray>
-  <autoStart>0</autoStart>
-  <doubleClickTranslates>1</doubleClickTranslates>
+  <autoStart>1</autoStart>
+  <doubleClickTranslates>0</doubleClickTranslates>
   <selectWordBySingleClick>0</selectWordBySingleClick>
-  <escKeyHidesMainWindow>0</escKeyHidesMainWindow>
+  <escKeyHidesMainWindow>1</escKeyHidesMainWindow>
   <zoomFactor>1</zoomFactor>
   <wordsZoomLevel>0</wordsZoomLevel>
   <enableMainWindowHotkey>1</enableMainWindowHotkey>
   <mainWindowHotkey>Ctrl+Q</mainWindowHotkey>
   <enableClipboardHotkey>1</enableClipboardHotkey>
   <clipboardHotkey>Ctrl+Shift+C, Ctrl+Shift+C</clipboardHotkey>
-  <enableScanPopup>1</enableScanPopup>
+  <enableScanPopup>0</enableScanPopup>
   <startWithScanPopupOn>0</startWithScanPopupOn>
   <enableScanPopupModifiers>0</enableScanPopupModifiers>
   <scanPopupModifiers>0</scanPopupModifiers>
@@ -103,7 +104,7 @@
   <disallowContentFromOtherSites>0</disallowContentFromOtherSites>
   <enableWebPlugins>0</enableWebPlugins>
   <hideGoldenDictHeader>0</hideGoldenDictHeader>
-  <maxStringsInHistory>500</maxStringsInHistory>
+  <maxStringsInHistory>1000</maxStringsInHistory>
   <storeHistory>1</storeHistory>
   <alwaysExpandOptionalParts>1</alwaysExpandOptionalParts>
   <addonStyle></addonStyle>
@@ -113,13 +114,13 @@
  <lastMainGroupId>0</lastMainGroupId>
  <lastPopupGroupId>0</lastPopupGroupId>
  <popupWindowState>AAAA/wAAAAH9AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywABAAAAAAeAAAAAAAAACawAAAGSAAAHgAAAAAAAAAmsAAABkgAAAAAAAA==</popupWindowGeometry>
+ <popupWindowGeometry>AdnQywABAAAAAAMpAAAAAAAABVUAAAGSAAADKQAAAAAAAAVVAAABkgAAAAAAAA==</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
- <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAAAAAAAAAPwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAAP////8AAAB2AP///wAAAAEAAADMAAAB+PwCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAgAACn8AAAIDAAAAzAAAAPP7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAAAIgAAAfgAAABXAP///wAAAbsAAAH4AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAIC/////wAAAAAAAAAA</mainWindowState>
- <mainWindowGeometry>AdnQywABAAAAAAszAAACJgAADb8AAAQ/AAALMwAAAiYAAA2/AAAEPwAAAAAAAA==</mainWindowGeometry>
+ <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAAAAAAAAAPwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAAP////8AAAB2AP///wAAAAEAAADMAAAB+PwCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAgAABIoAAAIDAAAAzAAAAPP7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAAAIgAAAfgAAABXAP///wAAAbsAAAH4AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAIC/////wAAAAAAAAAA</mainWindowState>
+ <mainWindowGeometry>AdnQywABAAAAAAF5AAAAMgAABAUAAAJLAAABeQAAADIAAAQFAAACSwAAAAAAAA==</mainWindowGeometry>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
- <timeForNewReleaseCheck>2016-04-16T12:34:47</timeForNewReleaseCheck>
+ <timeForNewReleaseCheck>2016-06-23T01:17:56</timeForNewReleaseCheck>
  <skippedRelease></skippedRelease>
  <showingDictBarNames>0</showingDictBarNames>
  <usingSmallIconsInToolbars>0</usingSmallIconsInToolbars>
