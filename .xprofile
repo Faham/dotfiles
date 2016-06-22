@@ -2,12 +2,14 @@
 xmodmap ~/.Xmodmap
 xset r rate 200 40
 xset +fp ~/.fonts
+xset -b
 xsetroot -solid "#110011"
 setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
 unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
 conky &
 xscreensaver &
 goldendict &
+
 
 [ `cat /etc/hostname` = "PC2164" ] && \
   xrandr --output VGA1 --auto --left-of DP2; \
