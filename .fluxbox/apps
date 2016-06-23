@@ -17,8 +17,8 @@
   [Layer]	{6}
 [end]
 [app] (name=crx_nckgahadagoaajjgafhacjanaoiihapd) (class=google-chrome) (role=pop-up)
-  [Dimensions]	{16% 29%}
-  [Position]	(LOWERRIGHT)	{25% 0%}
+  [Dimensions]	{24% 39%}
+  [Position]	(UPPERLEFT)	{59% 61%}
   [Layer]	{6}
 [end]
 [app] (name=subl) (class=Subl)
