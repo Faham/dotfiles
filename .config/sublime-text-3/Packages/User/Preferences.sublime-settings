@@ -20,5 +20,5 @@
 	"trim_trailing_white_space_on_save": false,
 	"update_check": false,
 	"word_wrap": "auto",
-	"wrap_width": 0
+	"wrap_width": 100
 }

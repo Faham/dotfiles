@@ -18,11 +18,15 @@ ctags gpicview zip unzip tk gvfs linux-headers virtualbox     \
 virtualbox-guest-utils virtualbox-host-dkms exfat-utils scrot \
 gimp imagemagick sshfs samba ntfs-3g pm-utils gparted         \
 libva-intel-driver libvdpau-va-gl cups ghostscript gsfonts    \
-libimobiledevice
+libimobiledevice qalculate-gtk xorg-xmessage                  \
+ttf-bitstream-vera ttf-inconsolata ttf-ubuntu-font-family     \
+ttf-dejavu ttf-freefont ttf-linux-libertine ttf-liberation    \
+--noconfirm
 
 sudo rm /bin/python /bin/python-config
 sudo ln -s /bin/python2 /bin/python
 sudo ln -s /bin/python2-config /bin/python-config
+sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
 
 # required groups membership for cups administration at http://http://127.0.0.1:631/
 sudo gpasswd -a fahamne lp

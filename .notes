@@ -42,6 +42,7 @@ hci website
     https://soundcloud.com/pirbadian3
 
 My own professional interests:
+- create an online text editor like sublime for google text files
 - for image recognition, different layers of algorithms should engage based on an LOD (level of details) approach to detect/filter out unwanted parts quickly
 - computer vision: work on descriptive vision, meaning developing algorithms to transform 2D/3D visuals into machine understandable coded descriptions (like how human describe shapes), and use this method for matching and identifying objects
 - a real Inteligent software which can ask questions (look at Thought Vector, Richard Socher NaSent)
@@ -143,6 +144,18 @@ find binary files          find -type f -executable
 ffmpeg -f concat -i mylist.txt -c copy output
 gs -dBATCH -sOutputFile="output.pdf" -dFirstPage=1 -dLastPage=3 -sDEVICE=pdfwrite input.pdf                        export page 1 to 3 of input.pdf to output.pdf
 gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=out.pdf in1.pdf in2.pdf            put in1.pdf and in2.pdf together into out.pdf
+  ${string:position:length} Extracts substring from $string at $position.
+stringZ=abcABC123ABCabc
+echo ${stringZ:0}                            # abcABC123ABCabc
+echo ${stringZ:1}                            # bcABC123ABCabc
+echo ${stringZ:7}                            # 23ABCabc
+echo ${stringZ:7:3}                          # 23A
+echo ${stringZ: -4}                          # Cabc
+  ${string#substring}      Deletes shortest match of $substring from front of $string.
+echo ${stringZ#a*C}      # 123ABCabc
+  ${string##substring}     Deletes longest match of $substring from front of $string.
+echo ${stringZ##a*C}     # abc
+
 
 # debugging/monitoring commands:
 top -Hid1
@@ -207,6 +220,14 @@ GDB
 =========
 
 use colout and .gdbinit to colorize gdb outputs
+
+------------------------------------------------------------------------------
+
+Sublime
+=========
+
+to see commands gettings executed while working, open the console and run:
+sublime.log_commands(True)
 
 ------------------------------------------------------------------------------
 

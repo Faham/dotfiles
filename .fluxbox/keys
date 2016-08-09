@@ -154,13 +154,16 @@ OnRightGrip Move1         :StartResizing bottomright
 ! execute commands
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-Mod4 t                     :ExecCommand goldendict
+Mod4 x                     :ExecCommand xterm
+Mod4 t                     :ExecCommand terminator
+Mod4 g                     :ExecCommand goldendict
 Mod4 r                     :ExecCommand bashrun
+Mod4 q                     :ExecCommand qalculate-gtk
 Mod4 c                     :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 Mod4 Shift c               :ToggleCmd {Exec conky} {pkill conky}
 Mod4 Shift e               :ExecCommand env | sort | xmessage -file -
 Mod4 n                     :ExecCommand $EDITOR $HOME/.notes
-Shift Mod4 x               :ExecCommand xkill
+Mod4 Shift x               :ExecCommand xkill
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
 !Control Mod4 m            :ExecCommand quax
