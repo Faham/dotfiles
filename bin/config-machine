@@ -2,6 +2,8 @@
 
 USER=faham
 
+sudo usermod -G disk --append $USER
+
 [ -f /etc/gdm/custom.conf ] && sudo sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 sudo patch -r - /etc/sudoers patches/sudoers.patch
 sudo patch -r - /etc/pacman.conf patches/pacman.conf
