@@ -23,6 +23,7 @@ libva-intel-driver libvdpau-va-gl cups ghostscript gsfonts    \
 libimobiledevice qalculate-gtk xorg-xmessage                  \
 ttf-bitstream-vera ttf-inconsolata ttf-ubuntu-font-family     \
 ttf-dejavu ttf-freefont ttf-linux-libertine ttf-liberation    \
+festival-us \
 --noconfirm
 
 sudo rm /bin/python /bin/python-config

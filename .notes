@@ -42,9 +42,10 @@ hci website
     https://soundcloud.com/pirbadian3
 
 My own professional interests:
+- create a better azan program for android
 - create an online text editor like sublime for google text files
 - for image recognition, different layers of algorithms should engage based on an LOD (level of details) approach to detect/filter out unwanted parts quickly
-- computer vision: work on descriptive vision, meaning developing algorithms to transform 2D/3D visuals into machine understandable coded descriptions (like how human describe shapes), and use this method for matching and identifying objects
+- computer vision: work on descriptive vision, meaning developing algorithms to transform 2D/3D visuals into machine understandable coded descriptions or thoughts (like how human describe shapes), and use this method for matching and identifying objects
 - a real Inteligent software which can ask questions (look at Thought Vector, Richard Socher NaSent)
 - create a new menuing system for fluxbox which extens items when clicked instead of cascading menus, and supports complex ordering of items
 - create the collaborative web application "brainstorm" in which people can develop ideas collaboratively! it is a source for ideas, discovering possibilities.
@@ -59,7 +60,7 @@ My own professional interests:
     http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/CC_CODES.HTML
     http://www.theneitherworld.com/mcpoodle/SCC_TOOLS/DOCS/SCC_TOOLS.HTML
     http://www.theneitherworld.com/mcpoodle/links.html
-    https://dvcs.w3.org/hg/text-tracks/raw-file/default/608toVTT/608toVTT.html
+    http://dvcs.w3.org/hg/text-tracks/raw-file/default/608toVTT/608toVTT.html
     http://www.pixeltools.com/tech-tip-closed-captioning-existing.html
 - learn about haskell (http://book.realworldhaskell.org/read/types-and-functions.html)
 - work on gimp interface
@@ -71,8 +72,6 @@ odesk job
   https://www.youtube.com/watch?v=dT9s33X9D4I#t=92
   http://www.greenoptimistic.com/2008/12/21/screws-magnetic-motor-build/
 - create a database out of quran relating things as much as you can
-- create a lite and fast dictionary for android
-- create a better azan program for android
 - create an app to store all membership and store cards, instead of your wallet
 - read these:
     The Hidden Face of God: Science Reveals the Ultimate Truth

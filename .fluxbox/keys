@@ -43,7 +43,7 @@ Mod4 l                    :ExecCommand xscreensaver-command -lock
 ! menus
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Mod4 w                    :RootMenu # when logo key is pressed!
-Control Menu              :WorkspaceMenu
+Mod4 Menu                 :WorkspaceMenu
 Mod1 space                :WindowMenu
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -77,7 +77,7 @@ Mod1 Mod4 Right           :FocusRight
 
 OnTitlebar Mouse1         :MacroCmd {Raise} {Focus} {ActivateTab}
 OnTitlebar Move1          :StartMoving
-OnTitlebar Mouse2         :Lower
+OnTitlebar Mouse2         :StartTabbing
 OnTitlebar Mouse3         :WindowMenu
 OnToolbar Mouse4          :PrevWindow {static groups} (iconhidden=no)
 OnToolbar Mouse5          :NextWindow {static groups} (iconhidden=no)
@@ -207,7 +207,7 @@ XF86Suspend                :Exec sudo pm-suspend
 None 133                   :Exec ~/bin/display
 
 ! screenshots
-None F13                   :ExecCommand sleep 1 && scrot -s -q 75 ~/Pictures/shot-%Y-%m-%d-%H%M%S-$w-$h.jpg
+None 107                   :ExecCommand scrot -s -q 75 -e 'mv $f ~/Pictures/shot-%Y-%m-%d-%H%M%S.jpg'
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! below this line only experimental stuff is listed. its not supposed to WORK
