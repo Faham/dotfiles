@@ -46,9 +46,9 @@
   [end]
   [submenu] (System)
      [exec] (Logout) {Exit}
-     [exec] (Suspend) {sudo pm-suspend}
-     [exec] (Hibernate) {sudo pm-hibernate}
-     [exec] (Shutdown) {sudo poweroff}
-     [exec] (Restart) {sudo reboot}
+     [exec] (Suspend) {sudo systemctl suspend}
+     [exec] (Hibernate) {sudo systemctl hibernate}
+     [exec] (Shutdown) {sudo systemctl poweroff}
+     [exec] (Restart) {sudo systemctl reboot}
   [end]
 [end]

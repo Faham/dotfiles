@@ -53,3 +53,7 @@ image/x-tiff=gpicview.desktop;
 image/x-windows-bmp=gpicview.desktop;
 image/x-xpixmap=gpicview.desktop;
 image/xpm=gpicview.desktop;
+x-scheme-handler/magnet=userapp-transmission-gtk-TXU0MY.desktop;
+
+[Default Applications]
+x-scheme-handler/magnet=userapp-transmission-gtk-TXU0MY.desktop

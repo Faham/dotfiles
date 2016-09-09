@@ -154,7 +154,8 @@ echo ${stringZ: -4}                          # Cabc
 echo ${stringZ#a*C}      # 123ABCabc
   ${string##substring}     Deletes longest match of $substring from front of $string.
 echo ${stringZ##a*C}     # abc
-
+~.                       # disconnect unresponsive ssh session
+~?                       # display list of escape characters in a ssh session
 
 # debugging/monitoring commands:
 top -Hid1
