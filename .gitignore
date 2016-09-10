@@ -20,6 +20,7 @@
 !/.config/terminator/**
 !/.local/share/applications/mimeapps.list
 
+!/.encrypted/**
 !/.fonts/*
 !/.fluxbox/**
 !/.irssi/**
@@ -51,9 +52,12 @@
 !/.festivalrc
 !/.gdbinit
 !/.gdbinit2
+!/.oh-my-zsh/
+!/.oh-my-zsh-custom-themes/**
+
 !/.gitconfig
 !/.gitignore
 !/.gitmessage
 !/.gitmodules
-!/.oh-my-zsh/
-!/.oh-my-zsh-custom-themes/**
+!/.gitattributes
+!/.gitencrypt/**
