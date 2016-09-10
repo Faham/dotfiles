@@ -27,6 +27,7 @@
 !/.goldendict/config
 !/.vim/**
 !/.w3m/**
+!/.mplayer/**
 
 !/.tmux.conf
 !/.tmux/**
@@ -44,6 +45,7 @@
 !/.xscreensaver
 !/.xsession
 !/.bashrc
+!/.bash_profile
 !/.vimrc
 !/.conkyrc
 !/.festivalrc
