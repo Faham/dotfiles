@@ -14,58 +14,22 @@
 [layouts]
   [[default]]
     [[[child0]]]
-      order = 0
-      parent = window0
-      position = 532
-      type = VPaned
-    [[[terminal2]]]
-      order = 0
-      parent = child0
-      profile = default
-      type = Terminal
-    [[[terminal3]]]
-      order = 1
-      parent = child0
-      profile = default
-      type = Terminal
-    [[[window0]]]
+      fullscreen = False
+      last_active_term = 40ffb9da-a418-430c-b54d-17a523e310b2
+      last_active_window = True
+      maximised = True
       order = 0
       parent = ""
-      position = 0:24
-      size = 1920, 1056
+      position = 0:0
+      size = 1366, 768
+      title = faham@g570: ~
       type = Window
-  [[three-vert]]
-    [[[child0]]]
-      order = 0
-      parent = ""
-      position = 0:24
-      size = 1914, 1056
-      type = Window
-    [[[child1]]]
+    [[[terminal1]]]
       order = 0
       parent = child0
-      position = 581
-      type = HPaned
-    [[[child3]]]
-      order = 1
-      parent = child1
-      position = 703
-      type = HPaned
-    [[[terminal2]]]
-      order = 0
-      parent = child1
       profile = default
       type = Terminal
-    [[[terminal4]]]
-      order = 0
-      parent = child3
-      profile = default
-      type = Terminal
-    [[[terminal5]]]
-      order = 1
-      parent = child3
-      profile = default
-      type = Terminal
+      uuid = 40ffb9da-a418-430c-b54d-17a523e310b2
 [plugins]
 [profiles]
   [[default]]
