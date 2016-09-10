@@ -24,11 +24,13 @@ libimobiledevice qalculate-gtk xorg-xmessage                  \
 ttf-bitstream-vera ttf-inconsolata ttf-ubuntu-font-family     \
 ttf-dejavu ttf-freefont ttf-linux-libertine ttf-liberation    \
 festival-us remmina freerdp nmap downgrade tmux               \
+python2-pip python-pip                                        \
 --noconfirm
 
-sudo rm /bin/python /bin/python-config
-sudo ln -s /bin/python2 /bin/python
-sudo ln -s /bin/python2-config /bin/python-config
+~/bin/set-python 2.7
+sudo pip install twisted argparse
+~/bin/set-python 3.5
+
 sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
 
 # required groups membership for cups administration at http://http://127.0.0.1:631/

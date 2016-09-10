@@ -16,3 +16,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".vim/bundle/covim"]
+	path = .vim/bundle/covim
+	url = https://github.com/FredKSchott/CoVim.git
