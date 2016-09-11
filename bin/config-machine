@@ -24,7 +24,7 @@ libimobiledevice qalculate-gtk xorg-xmessage                  \
 ttf-bitstream-vera ttf-inconsolata ttf-ubuntu-font-family     \
 ttf-dejavu ttf-freefont ttf-linux-libertine ttf-liberation    \
 festival-us remmina freerdp nmap downgrade tmux               \
-python2-pip python-pip                                        \
+python2-pip python-pip xloadimage xclip                       \
 --noconfirm
 
 ~/bin/set-python 2.7
