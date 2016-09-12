@@ -12,6 +12,7 @@
 !/.config/google-chrome/Default/IndexedDB/chrome-extension_**/*.log
 !/.config/sublime-text-3/Packages/**/*.sublime-settings
 !/.config/sublime-text-3/Packages/**/*.tmTheme
+/.config/sublime-text-3/Packages/**/Color\ Highlighter/themes/*.tmTheme
 !/.config/Synergy/**
 !/.config/bashrun/**
 !/.config/htop/**
@@ -26,12 +27,14 @@
 !/.irssi/**
 !/.i3/**
 !/.goldendict/config
-!/.vim/**
-!/.w3m/**
+!/.w3m/config
 !/.mplayer/**
+!/.vim/**
+/.vim/.netrwhist
 
 !/.tmux.conf
 !/.tmux/**
+/.tmux/resurrect/*
 /.tmux/plugins/*
 !/.tmux/plugins/tpm
 
@@ -60,4 +63,3 @@
 !/.gitmessage
 !/.gitmodules
 !/.gitattributes
-!/.gitencrypt/**
