@@ -17,6 +17,7 @@
 !/.config/bashrun/**
 !/.config/htop/**
 !/.config/mimeapps.list
+!/.config/vlc/vlcrc
 !/.config/pcmanfm/**
 !/.config/terminator/**
 !/.local/share/applications/mimeapps.list

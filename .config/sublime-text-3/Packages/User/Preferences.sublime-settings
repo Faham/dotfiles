@@ -17,7 +17,7 @@
 	"show_line_endings": true,
 	"show_tab_close_buttons": false,
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": false,
+	"trim_trailing_white_space_on_save": true,
 	"update_check": false,
 	"word_wrap": "auto",
 	"wrap_width": 100
