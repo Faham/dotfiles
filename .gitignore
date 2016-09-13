@@ -63,3 +63,5 @@
 !/.gitmessage
 !/.gitmodules
 !/.gitattributes
+!/.gitencrypt/**
+/.gitencrypt/salt

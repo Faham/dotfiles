@@ -89,3 +89,11 @@ source $ZSH/oh-my-zsh.sh
 
 export CVS_RSH=ssh
 
+function _jit() {
+  echo "enter password: " >/dev/tty
+  read GITPASS </dev/tty
+  export GITPASS
+  git "$@"
+}
+
+alias jit=_jit
