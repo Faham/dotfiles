@@ -9,23 +9,40 @@ sudo patch -r - /etc/sudoers patches/sudoers.patch
 sudo patch -r - /etc/pacman.conf patches/pacman.conf
 sudo cp patches/motd /etc/motd
 
-sudo pacman -Syy
+PACKAGES="
+bashrun            p7zip                   vlc
+cmake              pcmanfm                 wget
+conky              pm-utils                xclip
+ctags              pulseaudio              xdotool
+cups               python-pip              xf86-input-synaptics
+downgrade          python2                 xf86-video-intel
+evince             python2-pip             xloadimage
+exfat-utils        qalculate-gtk           xorg-apps
+festival-us        remmina                 xorg-server
+fluxbox            samba                   xorg-server-utils
+freerdp            scrot                   xorg-xinit
+ghostscript        sshfs                   xorg-xmessage
+gimp               terminator              xosd
+git                tk                      xscreensaver
+goldendict         tmux                    xterm
+gparted            ttf-bitstream-vera      yaourt
+gpicview           ttf-dejavu              youtube-dl
+gsfonts            ttf-freefont            zip
+gvfs               ttf-inconsolata         zsh
+htop               ttf-liberation
+imagemagick        ttf-linux-libertine
+libimobiledevice   ttf-ubuntu-font-family
+libva-intel-driver unclutter
+libvdpau-va-gl     unzip
+linux-headers      vim
+mesa-libgl         vim-spell-en
+nmap               virtualbox
+ntfs-3g            virtualbox-guest-utils
+openssh            virtualbox-host-dkms
+"
 
-sudo pacman -S fluxbox xosd terminator zsh pcmanfm vlc        \
-unclutter conky xscreensaver goldendict yaourt xdotool        \
-xterm bashrun git vim xorg-server xorg-apps xorg-server-utils \
-xf86-video-intel xf86-input-synaptics mesa-libgl xorg-xinit   \
-ttf-dejavu htop openssh wget pulseaudio cmake python2 evince  \
-ctags gpicview zip unzip tk gvfs linux-headers virtualbox     \
-virtualbox-guest-utils virtualbox-host-dkms exfat-utils scrot \
-gimp imagemagick sshfs samba ntfs-3g pm-utils gparted         \
-libva-intel-driver libvdpau-va-gl cups ghostscript gsfonts    \
-libimobiledevice qalculate-gtk xorg-xmessage                  \
-ttf-bitstream-vera ttf-inconsolata ttf-ubuntu-font-family     \
-ttf-dejavu ttf-freefont ttf-linux-libertine ttf-liberation    \
-festival-us remmina freerdp nmap downgrade tmux               \
-python2-pip python-pip xloadimage xclip youtube-dl            \
---noconfirm
+sudo pacman -Syy
+sudo pacman -S $PACKAGES --noconfirm
 
 ~/bin/set-python 2.7
 sudo pip install twisted argparse
