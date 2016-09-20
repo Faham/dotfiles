@@ -46,6 +46,9 @@ if has('mouse')
   set mouse=a
 endif
 
+" line numbering
+set number
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -97,10 +100,17 @@ endif
 
 execute pathogen#infect()
 
-set colorcolumn=80
-highlight ColorColumn ctermbg=darkgray
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=darkgray
 
-set nowrap
+set wrap
+set linebreak
+set nolist  " list disables linebreak
+set textwidth=0
+set wrapmargin=0
+set formatoptions-=t
+set formatoptions+=l
+
 set tags=./tags,$GST_HOME/tags
 set tabstop=4
 set softtabstop=4
@@ -146,3 +156,24 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " clear search highlightings when done
 nnoremap <Leader>c :let @/ = ""<Cr>
 
+" make table
+nnoremap <Leader>t :%!column -t<Cr>
+vnoremap <Leader>t :'<,'>%!column -t<Cr>
+
+nnoremap <Leader>r :so $MYVIMRC<Cr>
+
+" moving lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" moving accross wrapped lines
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
+noremap  <buffer> <silent> 0 g0
+noremap  <buffer> <silent> $ g$
+
+:nnoremap <F5> :buffers<CR>:buffer<Space>

@@ -13,24 +13,24 @@ PACKAGES="
 bashrun            p7zip                   vlc
 cmake              pcmanfm                 wget
 conky              pm-utils                xclip
-ctags              pulseaudio              xdotool
-cups               python-pip              xf86-input-synaptics
-downgrade          python2                 xf86-video-intel
-evince             python2-pip             xloadimage
-exfat-utils        qalculate-gtk           xorg-apps
-festival-us        remmina                 xorg-server
-fluxbox            samba                   xorg-server-utils
-freerdp            scrot                   xorg-xinit
-ghostscript        sshfs                   xorg-xmessage
-gimp               terminator              xosd
-git                tk                      xscreensaver
-goldendict         tmux                    xterm
-gparted            ttf-bitstream-vera      yaourt
-gpicview           ttf-dejavu              youtube-dl
-gsfonts            ttf-freefont            zip
-gvfs               ttf-inconsolata         zsh
-htop               ttf-liberation
-imagemagick        ttf-linux-libertine
+ctags              pulseaudio              xdot
+cups               python-pip              xdotool
+downgrade          python2                 xf86-input-synaptics
+evince             python2-pip             xf86-video-intel
+exfat-utils        qalculate-gtk           xloadimage
+festival-us        remmina                 xorg-apps
+fluxbox            samba                   xorg-server
+freerdp            scrot                   xorg-server-utils
+ghostscript        sshfs                   xorg-xinit
+gimp               terminator              xorg-xmessage
+git                tk                      xosd
+goldendict         tmux                    xscreensaver
+gparted            ttf-bitstream-vera      xterm
+gpicview           ttf-dejavu              yaourt
+gsfonts            ttf-freefont            youtube-dl
+gvfs               ttf-inconsolata         zip
+htop               ttf-liberation          zsh
+imagemagick        ttf-linux-libertine     xclip
 libimobiledevice   ttf-ubuntu-font-family
 libva-intel-driver unclutter
 libvdpau-va-gl     unzip

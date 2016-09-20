@@ -4075,9 +4075,6 @@ random=1
 #play-and-stop=0
 
 # Play and pause (boolean)
-global-play-and-pause=Ctrl+Shift+7
-
-# Play and pause (boolean)
 #play-and-pause=0
 
 # Auto start (boolean)
@@ -4159,7 +4156,7 @@ metadata-network-access=1
 #key-leave-fullscreen=Esc
 
 # Play/Pause (string)
-global-key-play-pause=Ctrl+F5
+global-key-play-pause=Ctrl+Shift+F5
 
 # Play/Pause (string)
 #key-play-pause=Space	Media Play Pause
@@ -4207,19 +4204,19 @@ global-key-play-pause=Ctrl+F5
 #key-rate-slower-fine=[
 
 # Next (string)
-global-key-next=Ctrl+Shift+0
+global-key-next=Ctrl+Shift+F8
 
 # Next (string)
 #key-next=n	Media Next Track
 
 # Previous (string)
-global-key-prev=Ctrl+Shift+9
+global-key-prev=Ctrl+Shift+F7
 
 # Previous (string)
 #key-prev=p	Media Prev Track
 
 # Stop (string)
-global-key-stop=Ctrl+Shift+8
+global-key-stop=Ctrl+Shift+F6
 
 # Stop (string)
 #key-stop=s	Media Stop
