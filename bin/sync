@@ -1,0 +1,17 @@
+#!/bin/sh
+
+HOME=/home/faham
+NEXUS=/run/user/1000/gvfs/mtp:host=%5Busb%3A002%2C008%5D/Internal\ storage
+FahamEx1T=/run/media/faham/Faham-Ex1T
+SYNC="rsync -aP"
+
+if [ -d "$FahamEx1T" ]; then
+  echo "Syncing to FahamEx1T($FahamEx1T)"
+  $SYNC "$HOME/Music/"    "$FahamEx1T/Music"
+  $SYNC "$HOME/memories/" "$FahamEx1T/memories"
+fi
+
+if [ -d "$NEXUS" ]; then
+  echo "Syncing to NEXUS($NEXUS)"
+  $SYNC "$HOME/Music/"    "$NEXUS/Music"
+fi

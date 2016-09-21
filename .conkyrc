@@ -1,50 +1,53 @@
+conky.config = {
 
-# ----------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 
-# for more inforamtion on variables go to:
-# http://conky.sourceforge.net/config_settings.html
-# http://conky.sourceforge.net/docs.html
+-- for more inforamtion on variables go to:
+-- http://conky.sourceforge.net/config_settings.html
+-- http://conky.sourceforge.net/docs.html
 
-# --- Window Layout & Options --- #
-background yes
-own_window no
-own_window_colour brown
-own_window_transparent yes
-own_window_type normal
-# own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-double_buffer yes
-use_spacer right
-use_xft yes
-alignment top_right
-gap_x 100
-gap_y 100
+-- --- Window Layout & Options --- #
+	background = true,
+	own_window = false,
+	own_window_colour = 'brown',
+	own_window_transparent = true,
+	own_window_type = 'normal',
+-- own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+	double_buffer = true,
+	use_spacer = 'right',
+	use_xft = true,
+	alignment = 'top_right',
+	gap_x = 100,
+	gap_y = 100,
 
-# # --- Colours, Sizes, Fonts & Margins --- #
-update_interval 3.0
-maximum_width 800
-stippled_borders 3
-border_margin 9
-border_width 10
-default_color white
-default_shade_color black
-default_outline_color black
+-- # --- Colours, Sizes, Fonts & Margins --- #
+	update_interval = 3.0,
+	maximum_width = 800,
+	stippled_borders = 3,
+	border_margin = '9',
+	border_width = 10,
+	default_color = 'white',
+	default_shade_color = 'black',
+	default_outline_color = 'black',
 
-# # --- Text --- #
-format_human_readable yes
-out_to_console no
-draw_outline no
-draw_borders no
-xftfont MaiandraGD:size=10
-uppercase no
-draw_shades no
-override_utf8_locale yes
-cpu_avg_samples 2
-net_avg_samples 2
+-- # --- Text --- #
+	format_human_readable = true,
+	out_to_console = false,
+	draw_outline = false,
+	draw_borders = false,
+	font = 'MaiandraGD:size=10',
+	uppercase = false,
+	draw_shades = false,
+	override_utf8_locale = true,
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
 
-# ----------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 
-# stuff after 'TEXT' will be formatted on screen
-TEXT
+-- stuff after 'TEXT' will be formatted on screen
+};
+
+conky.text = [[
 # ----------------------------------------------------------------------------
 ${color #7f8ed3}${time %d %b, %a} ${time %k:%M:%S}
 ${color #5b6dad}System: ${color #7f8ed3}$nodename
@@ -100,3 +103,4 @@ ${color #7f8ed3}${top_mem name 3}$alignr${top_mem pid 3} ${top_mem cpu 3} ${top_
 # 
 # ${color #5b6dad}Fox News Latest Headlines:
 # ${color #7f8ed3}${execi 300 /home/hellfire/scripts/conky-rss.sh http://www.foxnews.com/xmlfeed/rss/0,4313,0,00.rss 5 2}
+]];
