@@ -33,7 +33,7 @@ htop               ttf-liberation          zsh
 imagemagick        ttf-linux-libertine     xclip
 libimobiledevice   ttf-ubuntu-font-family  rsync
 libva-intel-driver unclutter               gvfs-mtp
-libvdpau-va-gl     unzip
+libvdpau-va-gl     unzip                   
 linux-headers      vim
 mesa-libgl         vim-spell-en
 nmap               virtualbox

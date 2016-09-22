@@ -80,14 +80,21 @@ URxvt*colorUL        : _colorUL
 URxvt*foreground     : _foreground
 URxvt*background     : _background
 URxvt*cursorColor    : _cursorColor
+URxvt*loginShell:    true
+URxvt*geometry:      80x50
+URxvt*saveLines:     16384
+URxvt*cutchars:      "`\"'&()*,:;<=>?[\\]^{|}$"
+URxvt*scrollBar:     false
+URxvt*visualBell:    true
+URxvt*fading:        15
 
 ! xterm ----------------------------------------------------------------------
 
 *vt100*translations: #override Shift <Btn1Up>: exec-formatted("$BROWSER '%t'", PRIMARY)
 xterm*vt100.translations: #override Ctrl ~Meta Shift <Key>a: string(0x1b) string("[65;5u")
-xterm*loginShell: true
+xterm*loginShell:         true
 xterm*termName:           xterm-256color
-xterm*eightBitInput: false
+xterm*eightBitInput:      false
 xterm*VT100.geometry:     80x25
 !xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
 xterm*faceName:           Terminus:style=Regular:size=10
@@ -107,8 +114,8 @@ xterm*locale:             true
 xterm*pointerColor:       white
 xterm*pointerColorBackground: black
 xterm*cursorBlink:        true
-xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-xterm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+xterm*charClass:          33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+xterm*on3Clicks:          regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 xterm*color0         : _color0
 xterm*color1         : _color1
 xterm*color2         : _color2
@@ -116,7 +123,6 @@ xterm*color3         : _color3
 xterm*color4         : _color4
 xterm*color5         : _color5
 xterm*color6         : _color6
-xterm*color7         : _color7
 xterm*color7         : _color7
 xterm*color8         : _color8
 xterm*color9         : _color9
