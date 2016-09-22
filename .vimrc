@@ -104,6 +104,7 @@ execute pathogen#infect()
 " highlight ColorColumn ctermbg=darkgray
 
 set wrap
+set paste
 set linebreak
 set nolist  " list disables linebreak
 set textwidth=0
@@ -163,12 +164,12 @@ vnoremap <Leader>t :'<,'>%!column -t<Cr>
 nnoremap <Leader>r :so $MYVIMRC<Cr>
 
 " moving lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <C-S-j> :m .+1<CR>==
+nnoremap <C-S-k> :m .-2<CR>==
+inoremap <C-S-j> <Esc>:m .+1<CR>==gi
+inoremap <C-S-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-S-j> :m '>+1<CR>gv=gv
+vnoremap <C-S-k> :m '<-2<CR>gv=gv
 
 " moving accross wrapped lines
 noremap  <buffer> <silent> k gk
@@ -176,4 +177,20 @@ noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
+
 :nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" A function to clear the undo history
+function! <SID>ForgetUndo()
+    let old_undolevels = &undolevels
+    set undolevels=-1
+    exe "normal a \<BS>\<Esc>"
+    let &undolevels = old_undolevels
+    unlet old_undolevels
+endfunction
+command -nargs=0 ClearUndo call <SID>ForgetUndo()
+
+

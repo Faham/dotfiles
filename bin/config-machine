@@ -45,7 +45,7 @@ sudo pacman -Syy
 sudo pacman -S $PACKAGES --noconfirm
 
 ~/bin/set-python 2.7
-sudo pip install twisted argparse
+sudo pip install twisted argparse mutagen
 ~/bin/set-python 3.5
 
 sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d

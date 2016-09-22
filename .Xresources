@@ -83,6 +83,8 @@ URxvt*cursorColor    : _cursorColor
 
 ! xterm ----------------------------------------------------------------------
 
+*vt100*translations: #override Shift <Btn1Up>: exec-formatted("$BROWSER '%t'", PRIMARY)
+xterm*vt100.translations: #override Ctrl ~Meta Shift <Key>a: string(0x1b) string("[65;5u")
 xterm*loginShell: true
 xterm*termName:           xterm-256color
 xterm*eightBitInput: false
@@ -102,35 +104,35 @@ xterm*toolBar:            false
 xterm*selectToClipboard:  true
 xterm*locale:             true
 ! xterm*metaSendsEscape:    true
-XTerm*pointerColor:       white
-XTerm*pointerColorBackground: black
-XTerm*cursorBlink:        true
-XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
-*VT100*translations: #override Shift <Btn1Up>: exec-formatted("$BROWSER '%t'", PRIMARY)
-XTerm*color0         : _color0
-XTerm*color1         : _color1
-XTerm*color2         : _color2
-XTerm*color3         : _color3
-XTerm*color4         : _color4
-XTerm*color5         : _color5
-XTerm*color6         : _color6
-XTerm*color7         : _color7
-XTerm*color8         : _color8
-XTerm*color9         : _color9
-XTerm*color10        : _color10
-XTerm*color11        : _color11
-XTerm*color12        : _color12
-XTerm*color13        : _color13
-XTerm*color14        : _color14
-XTerm*color15        : _color15
-XTerm*colorBD        : _colorBD
-XTerm*colorIT        : _colorIT
-XTerm*colorUL        : _colorUL
-XTerm*foreground     : _foreground
-! XTerm*background     : _background
-XTerm*background     : #272822
-XTerm*cursorColor    : _cursorColor
+xterm*pointerColor:       white
+xterm*pointerColorBackground: black
+xterm*cursorBlink:        true
+xterm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+xterm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+xterm*color0         : _color0
+xterm*color1         : _color1
+xterm*color2         : _color2
+xterm*color3         : _color3
+xterm*color4         : _color4
+xterm*color5         : _color5
+xterm*color6         : _color6
+xterm*color7         : _color7
+xterm*color7         : _color7
+xterm*color8         : _color8
+xterm*color9         : _color9
+xterm*color10        : _color10
+xterm*color11        : _color11
+xterm*color12        : _color12
+xterm*color13        : _color13
+xterm*color14        : _color14
+xterm*color15        : _color15
+xterm*colorBD        : _colorBD
+xterm*colorIT        : _colorIT
+xterm*colorUL        : _colorUL
+xterm*foreground     : _foreground
+! xterm*background     : _background
+xterm*background     : #272822
+xterm*cursorColor    : _cursorColor
 
 !aterm settings---------------------------------------------------------------
 
