@@ -104,13 +104,14 @@ execute pathogen#infect()
 " highlight ColorColumn ctermbg=darkgray
 
 set wrap
-set paste
+set paste " no intelligent indenting when pasting from clipboard
 set linebreak
 set nolist  " list disables linebreak
 set textwidth=0
 set wrapmargin=0
 set formatoptions-=t
 set formatoptions+=l
+set autoread " auto reload unchanged files
 
 set tags=./tags,$GST_HOME/tags
 set tabstop=4
@@ -164,12 +165,12 @@ vnoremap <Leader>t :'<,'>%!column -t<Cr>
 nnoremap <Leader>r :so $MYVIMRC<Cr>
 
 " moving lines
-nnoremap <C-S-j> :m .+1<CR>==
-nnoremap <C-S-k> :m .-2<CR>==
-inoremap <C-S-j> <Esc>:m .+1<CR>==gi
-inoremap <C-S-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-S-j> :m '>+1<CR>gv=gv
-vnoremap <C-S-k> :m '<-2<CR>gv=gv
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " moving accross wrapped lines
 noremap  <buffer> <silent> k gk
@@ -177,9 +178,15 @@ noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-vnoremap <leader>p "_dP
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
+xnoremap p pgvy
 
 :nnoremap <F5> :buffers<CR>:buffer<Space>
 
@@ -191,6 +198,6 @@ function! <SID>ForgetUndo()
     let &undolevels = old_undolevels
     unlet old_undolevels
 endfunction
-command -nargs=0 ClearUndo call <SID>ForgetUndo()
+command! -nargs=0 ClearUndo call <SID>ForgetUndo()
 
 

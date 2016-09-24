@@ -54,6 +54,8 @@ image/x-windows-bmp=gpicview.desktop;
 image/x-xpixmap=gpicview.desktop;
 image/xpm=gpicview.desktop;
 x-scheme-handler/magnet=userapp-transmission-gtk-TXU0MY.desktop;
+audio/mpeg=vlc.desktop;
 
 [Default Applications]
 x-scheme-handler/magnet=userapp-transmission-gtk-TXU0MY.desktop
+audio/mpeg=vlc.desktop

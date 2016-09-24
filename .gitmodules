@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/covim"]
 	path = .vim/bundle/covim
 	url = https://github.com/FredKSchott/CoVim.git
+[submodule ".vim/bundle/tabular"]
+	path = .vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
