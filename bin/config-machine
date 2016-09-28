@@ -30,9 +30,9 @@ gpicview           ttf-dejavu              yaourt
 gsfonts            ttf-freefont            youtube-dl
 gvfs               ttf-inconsolata         zip
 htop               ttf-liberation          zsh
-imagemagick        ttf-linux-libertine     xclip
-libimobiledevice   ttf-ubuntu-font-family  rsync
-libva-intel-driver unclutter               gvfs-mtp
+imagemagick        ttf-linux-libertine     rsync
+libimobiledevice   ttf-ubuntu-font-family  gvfs-mtp
+libva-intel-driver unclutter               
 libvdpau-va-gl     unzip                   
 linux-headers      vim
 mesa-libgl         vim-spell-en

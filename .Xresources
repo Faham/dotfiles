@@ -42,8 +42,7 @@ bashrun*faceName:           Terminus:style=Regular:size=10
 
 ! Xcursor.theme: Hicolor
 Xcursor.theme: Vanilla-DMZ-AA
-# Xcursor.size:  32
-Xcursor.size:  64
+Xcursor.size:  32
 
 ! Xft settings ---------------------------------------------------------------
 
@@ -91,7 +90,8 @@ URxvt*fading:        15
 ! xterm ----------------------------------------------------------------------
 
 *vt100*translations: #override Shift <Btn1Up>: exec-formatted("$BROWSER '%t'", PRIMARY)
-xterm*vt100.translations: #override Ctrl ~Meta Shift <Key>a: string(0x1b) string("[65;5u")
+XTerm*vt100.translations: #override Ctrl ~Meta Shift <Key>j: string(0x1b) string("[74;5u") \n Ctrl ~Meta Shift <Key>b: string(0x1b) string("[66;5u") \n Ctrl ~Meta Shift <Key>f: 
+
 xterm*loginShell:         true
 xterm*termName:           xterm-256color
 xterm*eightBitInput:      false

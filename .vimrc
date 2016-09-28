@@ -98,6 +98,16 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+" A function to clear the undo history
+function! <SID>ForgetUndo()
+    let old_undolevels = &undolevels
+    set undolevels=-1
+    exe "normal a \<BS>\<Esc>"
+    let &undolevels = old_undolevels
+    unlet old_undolevels
+endfunction
+command! -nargs=0 ClearUndo call <SID>ForgetUndo()
+
 execute pathogen#infect()
 
 " set colorcolumn=80
@@ -118,6 +128,23 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab     " replace tab with space
+
+" Status line
+set laststatus=2
+set statusline=%t       "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%y      "filetype
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+hi StatusLine ctermbg=black ctermfg=white
+
+let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when escape
 
 " ctrlp setup
 let g:ctrlp_map = '<c-p>'
@@ -158,11 +185,35 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " clear search highlightings when done
 nnoremap <Leader>c :let @/ = ""<Cr>
 
+" clear undo history
+nnoremap <Leader>u :ClearUndo<Cr>
+
 " make table
 nnoremap <Leader>t :%!column -t<Cr>
 vnoremap <Leader>t :'<,'>%!column -t<Cr>
 
+" relaod vimrc
 nnoremap <Leader>r :so $MYVIMRC<Cr>
+
+nnoremap <Leader>x :Explore<CR>
+vnoremap <Leader>x :Explore<CR>
+
+nnoremap xx yydd<CR>
+vnoremap xx yydd<CR>
+nnoremap X y$d$<CR>
+vnoremap X y$d$<CR>
+
+" working with tabs
+nnoremap <F7> :bn<CR>==
+vnoremap <F7> :bn<CR>==
+nnoremap <F8> :bp<CR>==
+vnoremap <F8> :bp<CR>==
+
+" working with tabs
+nnoremap <S-F7> :tabn<CR>==
+vnoremap <S-F7> :tabn<CR>==
+nnoremap <S-F8> :tabp<CR>==
+vnoremap <S-F8> :tabp<CR>==
 
 " moving lines
 nnoremap <C-j> :m .+1<CR>==
@@ -186,18 +237,11 @@ nnoremap c "_c
 vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
+nnoremap s "_s
+vnoremap s "_s
+nnoremap S "_S
+vnoremap S "_S
 xnoremap p pgvy
 
 :nnoremap <F5> :buffers<CR>:buffer<Space>
-
-" A function to clear the undo history
-function! <SID>ForgetUndo()
-    let old_undolevels = &undolevels
-    set undolevels=-1
-    exe "normal a \<BS>\<Esc>"
-    let &undolevels = old_undolevels
-    unlet old_undolevels
-endfunction
-command! -nargs=0 ClearUndo call <SID>ForgetUndo()
-
 
