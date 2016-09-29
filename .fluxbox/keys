@@ -155,7 +155,7 @@ OnRightGrip Move1         :StartResizing bottomright
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Mod4 x                     :ExecCommand xterm
-Mod4 t                     :ExecCommand terminator
+Mod4 t                     :ExecCommand tomahawk
 Mod4 g                     :ExecCommand goldendict
 Mod4 r                     :ExecCommand bashrun
 Mod4 q                     :ExecCommand qalculate-gtk
@@ -183,25 +183,23 @@ None 231                   :ExecCommand ~/bin/yoga-auto-rotate
 None XF86AudioMute         :ExecCommand ~/bin/volume toggle
 None XF86AudioLowerVolume  :ExecCommand ~/bin/volume down
 None XF86AudioRaiseVolume  :ExecCommand ~/bin/volume up
-Mod4 F1                    :ExecCommand ~/bin/volume toggle
-Mod4 F2                    :ExecCommand ~/bin/volume down
-Mod4 F3                    :ExecCommand ~/bin/volume up
 
 ! brightness control
 None XF86MonBrightnessDown :Exec ~/bin/brightness down
 None XF86MonBrightnessUp   :Exec ~/bin/brightness up
-Mod4 F11                   :Exec ~/bin/brightness down
-Mod4 F12                   :Exec ~/bin/brightness up
+
+! media playback controls
+None XF86AudioStop         :Exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+None XF86AudioPlay         :Exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+None XF86AudioPrev         :Exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+None XF86AudioNext         :Exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.tomahawk /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
 XF86Sleep                  :Exec sudo pm-suspend
 XF86Suspend                :Exec sudo pm-suspend
+
 !XF86Display
 !XF86TouchpadOn
 !XF86TouchpadOff
-!XF86AudioPlay
-!XF86AudioStop
-!XF86AudioPrev
-!XF86AudioNext
 
 ! HDMI output dual screen
 None 133                   :Exec ~/bin/display

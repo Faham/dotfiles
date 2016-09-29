@@ -21,6 +21,7 @@
 !/.config/pcmanfm/**
 !/.config/terminator/**
 !/.local/share/applications/mimeapps.list
+!/.local/share/Tomahawk/tomahawk.db
 
 !/.encrypted/**
 !/.fonts/*
@@ -49,6 +50,7 @@
 !/.xinitrc
 !/.xscreensaver
 !/.xsession
+!/.xbindkeysrc
 !/.bashrc
 !/.bash_profile
 !/.vimrc

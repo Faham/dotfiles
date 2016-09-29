@@ -113,7 +113,7 @@ execute pathogen#infect()
 " set colorcolumn=80
 " highlight ColorColumn ctermbg=darkgray
 
-set wrap
+set nowrap
 set paste " no intelligent indenting when pasting from clipboard
 set linebreak
 set nolist  " list disables linebreak
@@ -128,6 +128,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab     " replace tab with space
+set hidden        " allow switching between unsaved buffers
 
 " Status line
 set laststatus=2
