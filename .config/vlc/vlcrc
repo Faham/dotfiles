@@ -1,5 +1,5 @@
 ﻿###
-###  vlc 2.2.2
+###  vlc 2.2.4
 ###
 
 ###
@@ -3448,7 +3448,7 @@ qt-privacy-ask=0
 #sout-avi-subject=
 
 # Encoder (string)
-#sout-avi-encoder=VLC Media Player - 2.2.2 Weatherwax
+#sout-avi-encoder=VLC Media Player - 2.2.4 Weatherwax
 
 # Keywords (string)
 #sout-avi-keywords=
@@ -4060,7 +4060,7 @@ qt-privacy-ask=0
 #inhibit=1
 
 # Play files randomly forever (boolean)
-random=1
+#random=0
 
 # Repeat all (boolean)
 #loop=0

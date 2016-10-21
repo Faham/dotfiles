@@ -139,3 +139,4 @@ _CLR="\\e["
 PS1="${_CLR}${C_Green}m\\u${_CLR}m@${_CLR}${C_Blue}m\\h${_CLR}m:${_CLR}${C_LBlack}m\\w${_CLR}m\\n>"
 
 export VISUAL="vim"
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

@@ -68,3 +68,6 @@
 !/.gitattributes
 !/.gitencrypt/**
 /.gitencrypt/salt
+
+*~
+*.swp

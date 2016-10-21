@@ -66,25 +66,25 @@
 #  Control + b:2 + Release
 
 "xdotool key --clearmodifiers XF86AudioMute"
-    Mod4 + F2 + Release
+   Alt+Mod4 + F2 + Release
 "xdotool key --clearmodifiers XF86AudioLowerVolume"
-    Mod4 + F3 + Release
+   Alt+Mod4 + F3 + Release
 "xdotool key --clearmodifiers XF86AudioRaiseVolume"
-    Mod4 + F4 + Release
+   Alt+Mod4 + F4 + Release
 
 "xdotool key --clearmodifiers XF86AudioStop"
-    Mod4 + F5 + Release
+   Alt+Mod4 + F5 + Release
 "xdotool key --clearmodifiers XF86AudioPlay"
-    Mod4 + F6 + Release
+   Alt+Mod4 + F6 + Release
 "xdotool key --clearmodifiers XF86AudioPrev"
-    Mod4 + F7 + Release
+   Alt+Mod4 + F7 + Release
 "xdotool key --clearmodifiers XF86AudioNext"
-    Mod4 + F8 + Release
+   Alt+Mod4 + F8 + Release
 
 "xdotool key --clearmodifiers XF86MonBrightnessDown"
-    Mod4 + F11 + Release
+   Alt+Mod4 + F11 + Release
 "xdotool key --clearmodifiers XF86MonBrightnessUp"
-    Mod4 + F12 + Release
+   Alt+Mod4 + F12 + Release
 
 ##################################
 # End of xbindkeys configuration #

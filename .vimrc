@@ -108,6 +108,16 @@ function! <SID>ForgetUndo()
 endfunction
 command! -nargs=0 ClearUndo call <SID>ForgetUndo()
 
+function! Incr()
+  let a = line('.') - line("'<")
+  let c = virtcol("'<")
+  if a > 0
+    execute 'normal! '.c.'|'.a."\<C-a>"
+  endif
+  normal `<
+endfunction
+vnoremap <Leader>a :call Incr()<CR>
+
 execute pathogen#infect()
 
 " set colorcolumn=80
@@ -152,6 +162,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_files=0
 let g:ctrlp_max_height=25
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
@@ -172,8 +183,8 @@ nnoremap <c-i> :CtrlPTag<cr>
 
 " for gstreamer
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.git$|collabora|\.deps|\.libs|autom4te\.cache|common|docs|m4|pkgconfig|plugins|po|scripts|tests|tools|win3',
-  \ 'file': '\v\.(la|png|sh|php|pc|0|S|vcproj|txt|mak|sample|gitignore|po|xml|m4|asm|am|in|Po|lo|d|o|Plo)$|Makefile|README',
+  \ 'dir':  '\v[\/]\.git$|\.deps|\.libs',
+  \ 'file': '\v\.(la|png|sh|php|pc|0|S|vcproj|txt|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
@@ -193,16 +204,16 @@ nnoremap <Leader>u :ClearUndo<Cr>
 nnoremap <Leader>t :%!column -t<Cr>
 vnoremap <Leader>t :'<,'>%!column -t<Cr>
 
-" relaod vimrc
+" sort
+nnoremap <Leader>s :%!sort -k1<Cr>
+vnoremap <Leader>s :'<,'>%!sort -k1<Cr>
+
+" reload vimrc
 nnoremap <Leader>r :so $MYVIMRC<Cr>
 
 nnoremap <Leader>x :Explore<CR>
 vnoremap <Leader>x :Explore<CR>
 
-nnoremap xx yydd<CR>
-vnoremap xx yydd<CR>
-nnoremap X y$d$<CR>
-vnoremap X y$d$<CR>
 
 " working with tabs
 nnoremap <F7> :bn<CR>==
@@ -230,6 +241,10 @@ noremap  <buffer> <silent> j gj
 noremap  <buffer> <silent> 0 g0
 noremap  <buffer> <silent> $ g$
 
+nnoremap xx yydd<CR>
+vnoremap xx yydd<CR>
+nnoremap X y$d$<CR>
+vnoremap X y$d$<CR>
 nnoremap d "_d
 vnoremap d "_d
 nnoremap D "_D
@@ -240,9 +255,8 @@ nnoremap C "_C
 vnoremap C "_C
 nnoremap s "_s
 vnoremap s "_s
+vnoremap i "_s
 nnoremap S "_S
 vnoremap S "_S
 xnoremap p pgvy
-
-:nnoremap <F5> :buffers<CR>:buffer<Space>
 

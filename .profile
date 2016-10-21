@@ -7,3 +7,4 @@ export PLAYER=vlc
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$HOME/bin"
 export VISUAL="vim"
 # export MANPATH="/usr/local/man:$MANPATH"
+
