@@ -99,3 +99,17 @@ function _jit() {
 alias jit=_jit
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+setopt AUTO_CD
+setopt MULTIOS
+setopt CORRECT
+setopt AUTO_PUSHD
+setopt AUTO_NAME_DIRS
+setopt GLOB_COMPLETE
+setopt PUSHD_MINUS
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+setopt NO_BEEP
+setopt NUMERIC_GLOB_SORT
+setopt EXTENDED_GLOB
+

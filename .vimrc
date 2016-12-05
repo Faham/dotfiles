@@ -123,6 +123,10 @@ execute pathogen#infect()
 " set colorcolumn=80
 " highlight ColorColumn ctermbg=darkgray
 
+" to disable the annoying beeps
+set visualbell
+set vb t_vb=
+
 set nowrap
 set paste " no intelligent indenting when pasting from clipboard
 set linebreak

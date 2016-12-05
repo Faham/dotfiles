@@ -12,7 +12,6 @@ xscreensaver &
 goldendict &
 
 
-[ `cat /etc/hostname` = "PC2164" ] && \
-  xrandr --output VGA1 --auto --left-of DP2; \
-  xrandr --output DP2 --primary; \
-  echo "this is a test\nthis is a test\nthis is a test\nthis is a test" > /tmp/aes.ecb
+[ `cat /etc/hostname` = "pc2489" ] && \
+  xrandr --output DP1 --auto --output HDMI2 --auto --primary --right-of DP1;
+

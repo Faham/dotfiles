@@ -1,13 +1,16 @@
 #!/bin/bash
 
-USER=faham
+set -e
+set -o pipefail
+
+USER=fahamne
 
 sudo usermod -G disk --append $USER
 
 [ -f /etc/gdm/custom.conf ] && sudo sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
-sudo patch -r - /etc/sudoers patches/sudoers.patch
-sudo patch -r - /etc/pacman.conf patches/pacman.conf
-sudo cp patches/motd /etc/motd
+sudo patch -r - /etc/sudoers files/sudoers.patch
+sudo patch -r - /etc/pacman.conf files/pacman.conf.patch
+sudo cp files/motd /etc/motd
 
 PACKAGES="
 bashrun            p7zip                   vlc
@@ -34,19 +37,22 @@ imagemagick        ttf-linux-libertine     rsync
 libimobiledevice   ttf-ubuntu-font-family  gvfs-mtp
 libva-intel-driver unclutter               xbindkeys
 libvdpau-va-gl     unzip                   mutagen 
-linux-headers      vim
-mesa-libgl         vim-spell-en
-nmap               virtualbox
-ntfs-3g            virtualbox-guest-utils
+linux-headers      vim                     sudo
+mesa-libgl         vim-spell-en            patch
+nmap               virtualbox              fakeroot
+ntfs-3g            virtualbox-guest-utils  cmus
 openssh            virtualbox-host-dkms
 "
 
 sudo pacman -Syy
 sudo pacman -S $PACKAGES --noconfirm
 
-~/bin/set-python 2.7
-sudo pip install twisted argparse mutagen
-~/bin/set-python 3.5
+sudo systemctl enable sshd.service
+sudo systemctl start sshd.service
+
+sudo ~/bin/set-python 2.7
+sudo pip install twisted argparse
+sudo ~/bin/set-python 3.5
 
 sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
 
@@ -54,10 +60,10 @@ sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
 sudo gpasswd -a fahamne lp
 sudo gpasswd -a fahamne sys
 
-yaourt -S google-chrome sublime-text-dev viber acroread
+yaourt -S google-chrome sublime-text-dev viber
 
 git submodule update --init --recursive
 cd ~/.vim/bundle/YouCompleteMe && ./install.py
 
 [ -f /usr/bin/subl ] || sudo ln -s /usr/bin/subl3 /usr/bin/subl
-[ -f /etc/ssh/sshd_config ] && sudo patch -r - /etc/ssh/sshd_config patches/sshd_config.patch
+[ -f /etc/ssh/sshd_config ] && sudo patch -r - /etc/ssh/sshd_config files/sshd_config.patch
