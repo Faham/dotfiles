@@ -11,8 +11,7 @@
 
 !/.config/google-chrome/Default/IndexedDB/chrome-extension_**/*.log
 !/.config/sublime-text-3/Packages/**/*.sublime-settings
-!/.config/sublime-text-3/Packages/**/*.tmTheme
-/.config/sublime-text-3/Packages/**/Color\ Highlighter/themes/*.tmTheme
+!/.config/sublime-text-3/Packages/**/faham*.tmTheme
 !/.config/Synergy/**
 !/.config/bashrun/**
 !/.config/htop/**
@@ -66,8 +65,7 @@
 !/.gitmessage
 !/.gitmodules
 !/.gitattributes
-!/.gitencrypt/**
-/.gitencrypt/salt
+!/.git-crypt/**
 
 *~
 *.swp
