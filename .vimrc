@@ -138,9 +138,9 @@ set formatoptions+=l
 set autoread " auto reload unchanged files
 
 set tags=./tags,$GST_HOME/tags
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=3
+set softtabstop=3
+set shiftwidth=3
 set expandtab     " replace tab with space
 set hidden        " allow switching between unsaved buffers
 

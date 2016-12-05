@@ -207,7 +207,7 @@ XF86Suspend                :Exec sudo pm-suspend
 None 133                   :Exec ~/bin/display
 
 ! screenshots
-None 107                   :ExecCommand scrot -s -q 75 -e 'mv $f ~/Pictures/shot-%Y-%m-%d-%H%M%S.jpg'
+None Print                 :ExecCommand scrot -q 75 -e 'mv $f ~/Pictures/shot-%Y-%m-%d-%H%M%S.jpg'
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! below this line only experimental stuff is listed. its not supposed to WORK

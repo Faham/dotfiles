@@ -1,5 +1,5 @@
 [Added Associations]
-application/octet-stream=sublime_text_3.desktop;
+application/octet-stream=gpicview.desktop;sublime_text_3.desktop;
 application/pdf=evince.desktop
 video/avi=vlc.desktop;
 video/mpeg=vlc.desktop;
