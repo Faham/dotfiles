@@ -3,14 +3,17 @@
 set -e
 set -o pipefail
 
-USER=fahamne
+USER=faham
+HOME=/home/$USER
 
-sudo usermod -G disk --append $USER
+pacman -S sudo patch --noconfirm
 
-[ -f /etc/gdm/custom.conf ] && sudo sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
-sudo patch -r - /etc/sudoers files/sudoers.patch
-sudo patch -r - /etc/pacman.conf files/pacman.conf.patch
-sudo cp files/motd /etc/motd
+usermod -G disk --append $USER
+
+[ -f /etc/gdm/custom.conf ] && sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
+patch -r - /etc/sudoers $HOME/bin/files/sudoers.patch
+patch -r - /etc/pacman.conf $HOME/bin/files/pacman.conf.patch
+cp $HOME/bin/files/motd /etc/motd
 
 PACKAGES="
 bashrun            p7zip                   vlc
@@ -25,7 +28,7 @@ festival-us        remmina                 xorg-apps
 fluxbox            samba                   xorg-server
 freerdp            scrot                   xorg-server-utils
 ghostscript        sshfs                   xorg-xinit
-gimp               terminator              xorg-xmessage
+gimp               cmus                    xorg-xmessage
 git                tk                      xosd
 goldendict         tmux                    xscreensaver
 gparted            ttf-bitstream-vera      xterm
@@ -37,33 +40,34 @@ imagemagick        ttf-linux-libertine     rsync
 libimobiledevice   ttf-ubuntu-font-family  gvfs-mtp
 libva-intel-driver unclutter               xbindkeys
 libvdpau-va-gl     unzip                   mutagen 
-linux-headers      vim                     sudo
-mesa-libgl         vim-spell-en            patch
-nmap               virtualbox              fakeroot
-ntfs-3g            virtualbox-guest-utils  cmus
-openssh            virtualbox-host-dkms
+linux-headers      vim                     fakeroot
+mesa-libgl         vim-spell-en            picard
+nmap               virtualbox              
+ntfs-3g            virtualbox-guest-utils  
+openssh            virtualbox-host-dkms    
 "
 
-sudo pacman -Syy
-sudo pacman -S $PACKAGES --noconfirm
+pacman -Syy
+pacman -S $PACKAGES --noconfirm
 
-sudo systemctl enable sshd.service
-sudo systemctl start sshd.service
+systemctl enable sshd.service
+systemctl start sshd.service
 
-sudo ~/bin/set-python 2.7
-sudo pip install twisted argparse
-sudo ~/bin/set-python 3.5
+$HOME/bin/set-python 2.7
+pip install twisted argparse
+$HOME/bin/set-python 3.5
 
-sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
 
 # required groups membership for cups administration at http://http://127.0.0.1:631/
-sudo gpasswd -a fahamne lp
-sudo gpasswd -a fahamne sys
+gpasswd -a $USER lp
+gpasswd -a $USER sys
 
-yaourt -S google-chrome sublime-text-dev viber
+[ -f /usr/bin/subl ] || ln -s /usr/bin/subl3 /usr/bin/subl
+[ -f /etc/ssh/sshd_config ] && patch -r - /etc/ssh/sshd_config $HOME/bin/files/sshd_config.patch
 
+su $USER
+yaourt -S google-chrome sublime-text-dev viber git-crypt
 git submodule update --init --recursive
-cd ~/.vim/bundle/YouCompleteMe && ./install.py
+cd $HOME/.vim/bundle/YouCompleteMe && ./install.py
 
-[ -f /usr/bin/subl ] || sudo ln -s /usr/bin/subl3 /usr/bin/subl
-[ -f /etc/ssh/sshd_config ] && sudo patch -r - /etc/ssh/sshd_config files/sshd_config.patch

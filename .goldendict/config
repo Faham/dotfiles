@@ -1,6 +1,6 @@
 <config>
  <paths>
-  <path recursive="0">/home/fahamne/Documents/dictionaries</path>
+  <path recursive="0">/home/faham/Documents/dictionaries</path>
  </paths>
  <sounddirs/>
  <dictionaryOrder id="0" name="">
@@ -31,22 +31,19 @@
   <languageCodes></languageCodes>
  </forvo>
  <mediawikis>
-  <mediawiki enabled="0" icon="" id="ae6f89aac7151829681b85f035d54e48" name="English Wikipedia" url="https://en.wikipedia.org/w"/>
-  <mediawiki enabled="0" icon="" id="affcf9678e7bfe701c9b071f97eccba3" name="English Wiktionary" url="https://en.wiktionary.org/w"/>
+  <mediawiki enabled="1" id="ae6f89aac7151829681b85f035d54e48" url="https://en.wikipedia.org/w" icon="" name="English Wikipedia"/>
  </mediawikis>
  <websites>
-  <website enabled="0" icon="" id="b88cb2898e634c6638df618528284c2d" name="Google En-En (Oxford)" url="https://www.google.com/dictionary?aq=f&amp;langpair=en|en&amp;q=%GDWORD%&amp;hl=en"/>
-  <website enabled="0" icon="" id="f376365a0de651fd7505e7e5e683aa45" name="Urban Dictionary" url="https://www.urbandictionary.com/define.php?term=%GDWORD%"/>
-  <website enabled="0" icon="" id="324ca0306187df7511b26d3847f4b07c" name="Multitran (En)" url="https://multitran.ru/c/m.exe?CL=1&amp;l1=1&amp;s=%GD1251%"/>
-  <website enabled="0" icon="" id="924db471b105299c82892067c0f10787" name="Lingvo (En-Ru)" url="http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%"/>
-  <website enabled="0" icon="" id="087a6d65615fb047f4c80eef0a9465db" name="Michaelis (Pt-En)" url="http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&amp;palavra=%GDISO1%"/>
+  <website enabled="0" id="b88cb2898e634c6638df618528284c2d" url="https://www.google.com/dictionary?aq=f&amp;langpair=en|en&amp;q=%GDWORD%&amp;hl=en" icon="" name="Google En-En (Oxford)"/>
+  <website enabled="0" id="f376365a0de651fd7505e7e5e683aa45" url="https://www.urbandictionary.com/define.php?term=%GDWORD%" icon="" name="Urban Dictionary"/>
+  <website enabled="0" id="324ca0306187df7511b26d3847f4b07c" url="https://multitran.ru/c/m.exe?CL=1&amp;l1=1&amp;s=%GD1251%" icon="" name="Multitran (En)"/>
+  <website enabled="0" id="924db471b105299c82892067c0f10787" url="http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%" icon="" name="Lingvo (En-Ru)"/>
+  <website enabled="0" id="087a6d65615fb047f4c80eef0a9465db" url="http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&amp;palavra=%GDISO1%" icon="" name="Michaelis (Pt-En)"/>
  </websites>
  <dictservers/>
  <programs/>
  <voiceEngines/>
- <mutedDictionaries>
-  <mutedDictionary>ae6f89aac7151829681b85f035d54e48</mutedDictionary>
- </mutedDictionaries>
+ <mutedDictionaries/>
  <popupMutedDictionaries/>
  <preferences>
   <interfaceLanguage></interfaceLanguage>
@@ -54,9 +51,9 @@
   <displayStyle></displayStyle>
   <newTabsOpenAfterCurrentOne>0</newTabsOpenAfterCurrentOne>
   <newTabsOpenInBackground>1</newTabsOpenInBackground>
-  <hideSingleTab>0</hideSingleTab>
+  <hideSingleTab>1</hideSingleTab>
   <mruTabOrder>0</mruTabOrder>
-  <hideMenubar>0</hideMenubar>
+  <hideMenubar>1</hideMenubar>
   <enableTrayIcon>1</enableTrayIcon>
   <startToTray>1</startToTray>
   <closeToTray>1</closeToTray>
@@ -67,11 +64,11 @@
   <zoomFactor>1</zoomFactor>
   <helpZoomFactor>1</helpZoomFactor>
   <wordsZoomLevel>0</wordsZoomLevel>
-  <enableMainWindowHotkey>0</enableMainWindowHotkey>
-  <mainWindowHotkey>Ctrl+F11, Ctrl+F11</mainWindowHotkey>
+  <enableMainWindowHotkey>1</enableMainWindowHotkey>
+  <mainWindowHotkey>Ctrl+G</mainWindowHotkey>
   <enableClipboardHotkey>0</enableClipboardHotkey>
   <clipboardHotkey>Ctrl+C, Ctrl+C</clipboardHotkey>
-  <enableScanPopup>0</enableScanPopup>
+  <enableScanPopup>1</enableScanPopup>
   <startWithScanPopupOn>0</startWithScanPopupOn>
   <enableScanPopupModifiers>0</enableScanPopupModifiers>
   <scanPopupModifiers>0</scanPopupModifiers>
@@ -86,8 +83,8 @@
   <useExternalPlayer>0</useExternalPlayer>
   <useInternalPlayer>1</useInternalPlayer>
   <audioPlaybackProgram>mplayer</audioPlaybackProgram>
-  <alwaysOnTop>0</alwaysOnTop>
-  <searchInDock>1</searchInDock>
+  <alwaysOnTop>1</alwaysOnTop>
+  <searchInDock>0</searchInDock>
   <historyStoreInterval>0</historyStoreInterval>
   <proxyserver enabled="0" useSystemProxy="0">
    <type>0</type>
@@ -125,16 +122,16 @@
  </preferences>
  <lastMainGroupId>0</lastMainGroupId>
  <lastPopupGroupId>0</lastPopupGroupId>
- <popupWindowState>AAAA/wAAAAH9AAAAAAAAAggAAAGTAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywACAAAAAAi0AAABXQAACuAAAALvAAAItAAAAV0AAArgAAAC7wAAAAEAAAAAB4A=</popupWindowGeometry>
+ <popupWindowState>AAAA/wAAAAH9AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
+ <popupWindowGeometry>AdnQywACAAAAAAAAAAAAAAAAAiwAAAGSAAAAAAAAAAAAAAIsAAABkgAAAAAAAAAABVY=</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
- <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAADMAAAB4PwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUBAAAAOgAAAeAAAAB7AP///wAAAAEAAACNAAAB4PwCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAADoAAADtAAAAYAD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABLQAAAO0AAABgAP///wAAAaAAAAHgAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgEAAAEm/////wAAAAAAAAAA</mainWindowState>
- <mainWindowGeometry>AdnQywACAAAAAAeAAAAAAAAACoQAAAIZAAAHgAAAAAAAAAqEAAACGQAAAAAAAAAAB4A=</mainWindowGeometry>
+ <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAADMAAAB4PwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAOgAAAeAAAACDAP///wAAAAEAAADMAAAB8/wCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAACcAAAD3AAAAYAD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABJAAAAPYAAABgAP///wAAAjMAAAHzAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAIH/////wAAAAAAAAAA</mainWindowState>
+ <mainWindowGeometry>AdnQywACAAAAAAJRAAAAdAAABVUAAAKNAAACUQAAAHQAAAVVAAACjQAAAAAAAAAABVY=</mainWindowGeometry>
  <helpWindowGeometry></helpWindowGeometry>
  <helpSplitterState></helpSplitterState>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
- <timeForNewReleaseCheck>2016-12-04T15:38:18</timeForNewReleaseCheck>
+ <timeForNewReleaseCheck>2016-12-07T21:56:31</timeForNewReleaseCheck>
  <skippedRelease></skippedRelease>
  <showingDictBarNames>0</showingDictBarNames>
  <usingSmallIconsInToolbars>0</usingSmallIconsInToolbars>

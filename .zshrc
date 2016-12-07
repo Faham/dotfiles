@@ -89,15 +89,6 @@ source $ZSH/oh-my-zsh.sh
 
 export CVS_RSH=ssh
 
-function _jit() {
-  echo "enter password: " >/dev/tty
-  read GITPASS </dev/tty
-  export GITPASS
-  git "$@"
-}
-
-alias jit=_jit
-
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 setopt AUTO_CD
@@ -113,3 +104,4 @@ setopt NO_BEEP
 setopt NUMERIC_GLOB_SORT
 setopt EXTENDED_GLOB
 
+/usr/local/rvm/scripts/rvm ] ] && source /usr/local/rvm/scripts/rvm

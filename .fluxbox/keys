@@ -183,8 +183,12 @@ None 231                   :ExecCommand ~/bin/yoga-auto-rotate
 Mod4 F2                    :ExecCommand ~/bin/volume toggle
 Mod4 F3                    :ExecCommand ~/bin/volume down
 Mod4 F4                    :ExecCommand ~/bin/volume up
+None XF86AudioLowerVolume  :ExecCommand ~/bin/volume down
+None XF86AudioRaiseVolume  :ExecCommand ~/bin/volume up
 
 ! brightness control
+Mod4 F11                   :Exec ~/bin/brightness down
+Mod4 F12                   :Exec ~/bin/brightness up
 None XF86MonBrightnessDown :Exec ~/bin/brightness down
 None XF86MonBrightnessUp   :Exec ~/bin/brightness up
 
@@ -207,19 +211,11 @@ XF86Suspend                :Exec sudo pm-suspend
 None 133                   :Exec ~/bin/display
 
 ! screenshots
-None Print                 :ExecCommand scrot -q 75 -e 'mv $f ~/Pictures/shot-%Y-%m-%d-%H%M%S.jpg'
+None Print                 :Exec scrot -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! below this line only experimental stuff is listed. its not supposed to WORK
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-!
-! skip bad songs quickly :)
-Mod4 Tab                  :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc next &> /dev/null
-Control Mod4 Tab          :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc prev &> /dev/null
-Mod4 1                    :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc toggle &> /dev/null
-Mod1 Shift a              :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc volume +10 &> /dev/null
-Mod1 Shift y              :ExecCommand MPD_HOST=localhost MPD_PORT=6600 mpc volume -10 &> /dev/null
 
 !Mod4 p m                  :Place max_space allow_smaller
 !Mod4 p v                  :Place expand_vertical allow_smaller
