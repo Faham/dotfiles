@@ -39,12 +39,13 @@ htop               ttf-liberation          zsh
 imagemagick        ttf-linux-libertine     rsync
 libimobiledevice   ttf-ubuntu-font-family  gvfs-mtp
 libva-intel-driver unclutter               xbindkeys
-libvdpau-va-gl     unzip                   mutagen 
+libvdpau-va-gl     unzip                   mutagen
 linux-headers      vim                     fakeroot
 mesa-libgl         vim-spell-en            picard
-nmap               virtualbox              
-ntfs-3g            virtualbox-guest-utils  
-openssh            virtualbox-host-dkms    
+nmap               virtualbox              autoconf
+ntfs-3g            virtualbox-guest-utils  gdb
+openssh            virtualbox-host-dkms    patch
+sudo               automake                pkg-config
 "
 
 pacman -Syy

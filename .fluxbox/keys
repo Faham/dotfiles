@@ -14,14 +14,14 @@
 !       <mod> [<mod> <mod>] key [key key] :command <commanoptions>
 !
 !    so, what is a <mod> ? its called "modifier" and you can use
-!    'xmodmap -pm' to see, what modifiers are available. if you 
+!    'xmodmap -pm' to see, what modifiers are available. if you
 !    dont want to press any "modifier" then use 'None'
 !
 !  o what are those $XTERM, $EDITOR entries?
 !
 !    if you set a variable like XTERM to a sane value like
 !    "xterm" before fluxbox comes up, fluxbox would use that
-!    variable in the :ExecCommand. one can use the :Export or 
+!    variable in the :ExecCommand. one can use the :Export or
 !    :Setenv command to change that variable on the fly... eg to
 !    "urxvt" or "aterm".
 !
@@ -95,8 +95,8 @@ Mod1 Control Shift Right  :ExecCommand xrandr -o right; xinput enable 'SynPS/2 S
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !Control Mod4 Right       :RightWorkspace
 !Control Mod4 Left        :LeftWorkspace
-!Control Mod4 Right       :NextWorkspace 
-!Control Mod4 Left        :PrevWorkspace 
+!Control Mod4 Right       :NextWorkspace
+!Control Mod4 Left        :PrevWorkspace
 !Control Mod4 Down        :RightWorkspace 3
 !Control Mod4 Up          :LeftWorkspace 3
 
@@ -162,7 +162,6 @@ Mod4 q                     :ExecCommand qalculate-gtk
 Mod4 c                     :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 Mod4 Shift c               :ToggleCmd {Exec conky} {pkill conky}
 Mod4 Shift e               :ExecCommand env | sort | xmessage -file -
-Mod4 n                     :ExecCommand $EDITOR $HOME/.notes
 Mod4 Shift x               :ExecCommand xkill
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
@@ -179,12 +178,13 @@ Mod4 Shift x               :ExecCommand xkill
 
 None 231                   :ExecCommand ~/bin/yoga-auto-rotate
 
-! volume control
-Mod4 F2                    :ExecCommand ~/bin/volume toggle
-Mod4 F3                    :ExecCommand ~/bin/volume down
-Mod4 F4                    :ExecCommand ~/bin/volume up
-None XF86AudioLowerVolume  :ExecCommand ~/bin/volume down
-None XF86AudioRaiseVolume  :ExecCommand ~/bin/volume up
+! volume control (Super + 0/-/=)
+Mod4 19                    :ExecCommand ~/bin/volume toggle
+Mod4 20                    :ExecCommand ~/bin/volume down
+Mod4 21                    :ExecCommand ~/bin/volume up
+XF86AudioMute               :ExecCommand ~/bin/volume toggle
+XF86AudioLowerVolume        :ExecCommand ~/bin/volume down
+XF86AudioRaiseVolume        :ExecCommand ~/bin/volume up
 
 ! brightness control
 Mod4 F11                   :Exec ~/bin/brightness down
@@ -193,12 +193,19 @@ None XF86MonBrightnessDown :Exec ~/bin/brightness down
 None XF86MonBrightnessUp   :Exec ~/bin/brightness up
 
 ! media playback controls
-Mod4 F7                    :Exec cmus-remote -C player-stop  && echo "Stop"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 F6                    :Exec cmus-remote -C player-pause && echo "Play/Pause"  | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 F5                    :Exec cmus-remote -C player-prev  && echo "Previous"    | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 F8                    :Exec cmus-remote -C player-next  && echo "Next"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 p                     :Exec cmus-remote -C 'seek +10'   && echo "Seek +10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 o                     :Exec cmus-remote -C 'seek -10'   && echo "Seek -10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+XF86AudioNext              :Exec cmus-remote -C player-stop  && echo "Stop"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+XF86AudioPrev              :Exec cmus-remote -C player-prev  && echo "Previous"    | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+XF86AudioPlay              :Exec cmus-remote -C player-pause && echo "Play/Pause"  | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+XF86AudioStop              :Exec cmus-remote -C player-next  && echo "Next"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 s                     :Exec cmus-remote -C player-stop  && echo "Stop"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 space                 :Exec cmus-remote -C player-pause && echo "Play/Pause"  | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 p                     :Exec cmus-remote -C player-prev  && echo "Previous"    | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 n                     :Exec cmus-remote -C player-next  && echo "Next"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 o                     :Exec POS=$(cmus-remote -Q | grep position | cut -d' ' -f2) && DUR=$(cmus-remote -Q | grep duration | cut -d' ' -f2) && echo "$POS / $DUR" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+
+! (Super + ,/.)
+Mod4 59                     :Exec cmus-remote -C 'seek -10'   && echo "Seek -10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 60                   :Exec cmus-remote -C 'seek +10'   && echo "Seek +10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 
 XF86Sleep                  :Exec sudo pm-suspend
 XF86Suspend                :Exec sudo pm-suspend

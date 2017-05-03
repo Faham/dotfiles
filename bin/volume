@@ -2,9 +2,9 @@
 
 case $1 in
 up)
-    mixer_option='+3%';;
+    mixer_option='+1%';;
 down)
-    mixer_option='-3%';;
+    mixer_option='-1%';;
 toggle)
     mixer_option='toggle';;
 *)
