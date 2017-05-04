@@ -104,4 +104,4 @@ setopt NO_BEEP
 setopt NUMERIC_GLOB_SORT
 setopt EXTENDED_GLOB
 
-/usr/local/rvm/scripts/rvm ] ] && source /usr/local/rvm/scripts/rvm
+# /usr/local/rvm/scripts/rvm ] ] && source /usr/local/rvm/scripts/rvm

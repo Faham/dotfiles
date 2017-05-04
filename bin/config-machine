@@ -53,6 +53,8 @@ pacman -S $PACKAGES --noconfirm
 
 systemctl enable sshd.service
 systemctl start sshd.service
+systemctl enable sshd.socket
+systemctl start sshd.socket
 
 $HOME/bin/set-python 2.7
 pip install twisted argparse
