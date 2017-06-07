@@ -24,7 +24,7 @@ cups               python-pip              xdotool
 downgrade          python2                 xf86-input-synaptics
 evince             python2-pip             xf86-video-intel
 exfat-utils        qalculate-gtk           xloadimage
-festival-us        remmina                 xorg-apps
+festival-us        rdesktop                xorg-apps
 fluxbox            samba                   xorg-server
 freerdp            scrot                   xorg-server-utils
 ghostscript        sshfs                   xorg-xinit

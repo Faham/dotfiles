@@ -39,7 +39,7 @@
 
 # Examples of commands:
 
-# "xbindkeys_show" 
+# "xbindkeys_show"
 #   control+shift + q
 
 # set directly keycode (here control + f with my keyboard)
@@ -65,26 +65,39 @@
 #"rxvt"
 #  Control + b:2 + Release
 
-"xdotool key --clearmodifiers XF86AudioMute"
-   Alt+Mod4 + F2 + Release
-"xdotool key --clearmodifiers XF86AudioLowerVolume"
-   Alt+Mod4 + F3 + Release
-"xdotool key --clearmodifiers XF86AudioRaiseVolume"
-   Alt+Mod4 + F4 + Release
+"~/bin/volume up"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
+"~/bin/volume down"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+"~/bin/volume toggle"
+    m:0x0 + c:121
+    XF86AudioMute
 
-"xdotool key --clearmodifiers XF86AudioStop"
-   Alt+Mod4 + F5 + Release
-"xdotool key --clearmodifiers XF86AudioPlay"
-   Alt+Mod4 + F6 + Release
-"xdotool key --clearmodifiers XF86AudioPrev"
-   Alt+Mod4 + F7 + Release
-"xdotool key --clearmodifiers XF86AudioNext"
-   Alt+Mod4 + F8 + Release
+"~/bin/brightness down"
+    m:0x0 + c:232
+    XF86MonBrightnessDown
+"~/bin/brightness up"
+    m:0x0 + c:233
+    XF86MonBrightnessUp
 
-"xdotool key --clearmodifiers XF86MonBrightnessDown"
-   Alt+Mod4 + F11 + Release
-"xdotool key --clearmodifiers XF86MonBrightnessUp"
-   Alt+Mod4 + F12 + Release
+
+# "cmus-remote -C player-stop ; echo Liked       | osd_cat --shadow=1 --shadowcolour=\#333333 --color=\#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font='-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*'"
+#     m:0x10 + c:164
+#     Mod2 + XF86Favorites
+# "cmus-remote -C player-stop ; echo Stop        | osd_cat --shadow=1 --shadowcolour=\#333333 --color=\#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font='-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*'"
+#     m:0x10 + c:174
+#     Mod2 + XF86AudioStop
+# "cmus-remote -C player-prev ; echo Previous    | osd_cat --shadow=1 --shadowcolour=\#333333 --color=\#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font='-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*'"
+#     m:0x10 + c:173
+#     Mod2 + XF86AudioPrev
+# "cmus-remote -C player-pause; echo Play/Pause  | osd_cat --shadow=1 --shadowcolour=\#333333 --color=\#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font='-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*'"
+#     m:0x10 + c:172
+#     Mod2 + XF86AudioPlay
+# "cmus-remote -C player-next ; echo Next        | osd_cat --shadow=1 --shadowcolour=\#333333 --color=\#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font='-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*'"
+#     m:0x10 + c:171
+#     Mod2 + XF86AudioNext
 
 ##################################
 # End of xbindkeys configuration #

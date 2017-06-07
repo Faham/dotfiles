@@ -5,6 +5,8 @@
 # fluxbox unclutter conky xscreensaver
 # 
 
+xbindkeys
+
 # i3 & wmpid=$!
 fluxbox & wmpid=$!
 

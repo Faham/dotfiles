@@ -58,7 +58,7 @@ Mod1 space                :WindowMenu
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! window - handling
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Mod4 s                    :Stick
+# Mod4 s                    :Stick
 Mod4 m                    :Minimize
 Shift Mod4 m              :Deiconify LastWorkspace
 Mod4 d                    :ShowDesktop
@@ -179,33 +179,25 @@ Mod4 Shift x               :ExecCommand xkill
 None 231                   :ExecCommand ~/bin/yoga-auto-rotate
 
 ! volume control (Super + 0/-/=)
-Mod4 19                    :ExecCommand ~/bin/volume toggle
-Mod4 20                    :ExecCommand ~/bin/volume down
-Mod4 21                    :ExecCommand ~/bin/volume up
-XF86AudioMute               :ExecCommand ~/bin/volume toggle
-XF86AudioLowerVolume        :ExecCommand ~/bin/volume down
-XF86AudioRaiseVolume        :ExecCommand ~/bin/volume up
+Mod4 19                    :ExecCommand xdotool key --clearmodifiers XF86AudioMute
+Mod4 20                    :ExecCommand xdotool key --clearmodifiers XF86AudioLowerVolume
+Mod4 21                    :ExecCommand xdotool key --clearmodifiers XF86AudioRaiseVolume
 
 ! brightness control
-Mod4 F11                   :Exec ~/bin/brightness down
-Mod4 F12                   :Exec ~/bin/brightness up
-None XF86MonBrightnessDown :Exec ~/bin/brightness down
-None XF86MonBrightnessUp   :Exec ~/bin/brightness up
+Mod4 F11                   :Exec xdotool key --clearmodifiers XF86MonBrightnessDown
+Mod4 F12                   :Exec xdotool key --clearmodifiers XF86MonBrightnessUp
 
 ! media playback controls
-XF86AudioNext              :Exec cmus-remote -C player-stop  && echo "Stop"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-XF86AudioPrev              :Exec cmus-remote -C player-prev  && echo "Previous"    | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-XF86AudioPlay              :Exec cmus-remote -C player-pause && echo "Play/Pause"  | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-XF86AudioStop              :Exec cmus-remote -C player-next  && echo "Next"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 s                     :Exec cmus-remote -C player-stop  && echo "Stop"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 space                 :Exec cmus-remote -C player-pause && echo "Play/Pause"  | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 p                     :Exec cmus-remote -C player-prev  && echo "Previous"    | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 n                     :Exec cmus-remote -C player-next  && echo "Next"        | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 s                     :Exec xdotool key --clearmodifiers XF86AudioStop
+Mod4 p                     :Exec xdotool key --clearmodifiers XF86AudioPrev
+Mod4 space                 :Exec xdotool key --clearmodifiers XF86AudioPlay
+Mod4 n                     :Exec xdotool key --clearmodifiers XF86AudioNext
+Mod4 8                     :Exec xdotool key --clearmodifiers XF86Favorites
 Mod4 o                     :Exec POS=$(cmus-remote -Q | grep position | cut -d' ' -f2) && DUR=$(cmus-remote -Q | grep duration | cut -d' ' -f2) && echo "$POS / $DUR" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 
 ! (Super + ,/.)
-Mod4 59                     :Exec cmus-remote -C 'seek -10'   && echo "Seek -10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
-Mod4 60                   :Exec cmus-remote -C 'seek +10'   && echo "Seek +10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 59                    :Exec cmus-remote -C 'seek -10'   && echo "Seek -10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
+Mod4 60                    :Exec cmus-remote -C 'seek +10'   && echo "Seek +10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 
 XF86Sleep                  :Exec sudo pm-suspend
 XF86Suspend                :Exec sudo pm-suspend
