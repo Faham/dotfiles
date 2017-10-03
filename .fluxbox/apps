@@ -1,0 +1,45 @@
+[app] (name=fbrun)
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{2}
+[end]
+[app] (name=terminator) (class=Terminator)
+  [Dimensions]	{64% 76%}
+  [Position]	(UPPERLEFT)	{18% 12%}
+  [Maximized]	{yes}
+[end]
+[app] (name=goldendict) (class=Goldendict) (role=pop-up)
+  [Dimensions]	{36% 40%}
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{6}
+[end]
+[app] (name=bashrun) (class=XTerm)
+  [Position]	(CENTER)	{0 0}
+  [Layer]	{6}
+[end]
+[app] (name=crx_nckgahadagoaajjgafhacjanaoiihapd) (class=google-chrome) (role=pop-up)
+  [Dimensions]	{34% 53%}
+  [Position]	(UPPERLEFT)	{59% 47%}
+  [Layer]	{6}
+[end]
+[app] (name=subl) (class=Subl)
+  [Dimensions]	{66% 69%}
+  [Position]	(UPPERLEFT)	{15% 11%}
+  [Maximized]	{yes}
+[end]
+[app] (name=goldendict) (class=Goldendict)
+  [Layer]	{6}
+[end]
+[app] (name=telegram) (class=TelegramDesktop)
+  [Dimensions]	{31% 34%}
+  [Position]	(UPPERLEFT)	{33% 66%}
+  [Close]	{yes}
+[end]
+[app] (name=yakyak) (class=yakyak) (role=browser-window)
+  [Dimensions]	{31% 34%}
+  [Close]	{yes}
+[end]
+[app] (name=crx_nckgahadagoaajjgafhacjanaoiihapd) (class=Google-chrome) (role=pop-up)
+  [Dimensions]	{30% 46%}
+  [Position]	(UPPERLEFT)	{33% 54%}
+  [Close]	{yes}
+[end]

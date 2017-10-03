@@ -55,7 +55,7 @@ ${color #5b6dad}Linux kernel: ${color #7f8ed3}$kernel
 
 # ----------------------------------------------------------------------------
 ${color #5b6dad}System:
-${color #5b6dad}Battery: ${color #7f8ed3} ${battery BAT1} ${battery_bar BAT1}
+${color #5b6dad}Battery: ${color #7f8ed3} ${battery BAT0} ${battery_bar BAT0}
 ${color #5b6dad}Uptime:${color #7f8ed3} $uptime ${color #5b6dad}- Load:${color #7f8ed3} $loadavg
 ${color #5b6dad}CPU Frequency:${color #7f8ed3} $freq_dyn_g ${color #5b6dad} Maximum:${color #7f8ed3} $freq_g
 ${color #5b6dad}CPU Temp: ${color #7f8ed3}${acpitemp}°C
@@ -67,9 +67,9 @@ ${color #5b6dad}Processes:${color #7f8ed3} $processes  ${color #5b6dad}Running:$
 
 # ----------------------------------------------------------------------------
 ${color #5b6dad}Networking:
-${color #5b6dad}Down:${color #7f8ed3} ${downspeed wlp1s0} k/s${color #5b6dad}${alignr}Up:${color #7f8ed3} ${upspeed wlp1s0} k/s
-${color #000000}${downspeedgraph wlp1s0 32,150 000000 7f8ed3}${color #000000}${alignr}${upspeedgraph wlp1s0 32,150 000000 7f8ed3}
-${color #5b6dad}Address: ${color #7f8ed3}${addr wlp1s0}${alignr}${color #5b6dad}${alignr}TCP Connections: ${color #7f8ed3}${tcp_portmon 1 65535 count}
+${color #5b6dad}Down:${color #7f8ed3} ${downspeed wlp4s0} k/s${color #5b6dad}${alignr}Up:${color #7f8ed3} ${upspeed wlp4s0} k/s
+${color #000000}${downspeedgraph wlp4s0 32,150 000000 7f8ed3}${color #000000}${alignr}${upspeedgraph wlp4s0 32,150 000000 7f8ed3}
+${color #5b6dad}Address: ${color #7f8ed3}${addr wlp4s0}${alignr}${color #5b6dad}${alignr}TCP Connections: ${color #7f8ed3}${tcp_portmon 1 65535 count}
 
 # ----------------------------------------------------------------------------
 ${color #5b6dad}File Systems:
@@ -79,7 +79,7 @@ ${color #5b6dad}/home ${color #7f8ed3}${fs_used /home/}/${fs_size /home/} ${colo
 # ${color #5b6dad}MPD: ${color #7f8ed3}${alignc}$mpd_artist - $mpd_title
 # ${color #7f8ed3}$mpd_bar
 # ${color #7f8ed3}${alignc}$mpd_status
-# 
+#
 ${color #5b6dad}Name                   PID          CPU%         MEM%
 ${color #7f8ed3}${top name 1}$alignr${top pid 1} ${top cpu 1} ${top mem 1}
 ${color #7f8ed3}${top name 2}$alignr${top pid 2} ${top cpu 2} ${top mem 2}
@@ -94,13 +94,13 @@ ${color #7f8ed3}${top_mem name 3}$alignr${top_mem pid 3} ${top_mem cpu 3} ${top_
 # ${color #5b6dad}Current Progress ${color #7f8ed3}${execibar 30 /home/hellfire/scripts/emerge-progress.sh}
 # ${color #5b6dad}Current Package  ${color #7f8ed3}${execi 30 /home/hellfire/scripts/emerge-current.sh}
 # ${color #5b6dad}Current Status   ${color #7f8ed3}${execi 30 /home/hellfire/scripts/emerge-status.sh}
-# 
+#
 # ${color #5b6dad}Local Weather:
 # ${color #7f8ed3}${execi 1800 /home/hellfire/scripts/weather/weather.sh}
-# 
+#
 # ${color #5b6dad}Gentoo Linux Security Advisories:
 # ${color #7f8ed3}${execi 300 /home/hellfire/scripts/conky-rss.sh http://www.gentoo.org/rdf/en/glsa-index.rdf 5 1}
-# 
+#
 # ${color #5b6dad}Fox News Latest Headlines:
 # ${color #7f8ed3}${execi 300 /home/hellfire/scripts/conky-rss.sh http://www.foxnews.com/xmlfeed/rss/0,4313,0,00.rss 5 2}
 ]];

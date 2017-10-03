@@ -75,7 +75,7 @@ Xcursor.size:  32
 
 ! Xft settings ---------------------------------------------------------------
 
-Xft.dpi:        96
+Xft.dpi:        157
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
