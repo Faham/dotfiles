@@ -18,7 +18,7 @@ cp $HOME/bin/files/motd /etc/motd
 PACKAGES="
 bashrun            p7zip                   vlc
 cmake              pcmanfm                 wget
-conky              pm-utils                xclip
+conky              xclip
 ctags              pulseaudio              xdot
 cups               python-pip              xdotool
 downgrade          python2                 xf86-input-synaptics
@@ -26,7 +26,7 @@ evince             python2-pip             xf86-video-intel
 exfat-utils        qalculate-gtk           xloadimage
 festival-us        rdesktop                xorg-apps
 fluxbox            samba                   xorg-server
-freerdp            scrot                   xorg-server-utils
+freerdp            scrot
 ghostscript        sshfs                   xorg-xinit
 gimp               cmus                    xorg-xmessage
 git                tk                      xosd
@@ -48,6 +48,8 @@ openssh            virtualbox-host-dkms    patch
 sudo               automake                pkg-config
 "
 
+#pm-utils xorg-server-utils
+
 pacman -Syy
 pacman -S $PACKAGES --noconfirm
 
@@ -56,21 +58,22 @@ systemctl start sshd.service
 systemctl enable sshd.socket
 systemctl start sshd.socket
 
-$HOME/bin/set-python 2.7
+$HOME/bin/set-python 2
 pip install twisted argparse
-$HOME/bin/set-python 3.5
+$HOME/bin/set-python 3
 
-ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
+ln -s /etc/fonts/conf.avail/ /etc/fonts/conf.d
 
 # required groups membership for cups administration at http://http://127.0.0.1:631/
 gpasswd -a $USER lp
 gpasswd -a $USER sys
 
-[ -f /usr/bin/subl ] || ln -s /usr/bin/subl3 /usr/bin/subl
-[ -f /etc/ssh/sshd_config ] && patch -r - /etc/ssh/sshd_config $HOME/bin/files/sshd_config.patch
-
 su $USER
-yaourt -S google-chrome sublime-text-dev viber git-crypt
+yaourt -S google-chrome sublime-text-dev git-crypt
 git submodule update --init --recursive
 cd $HOME/.vim/bundle/YouCompleteMe && ./install.py
+
+su root
+[ -f /usr/bin/subl ] || ln -s /usr/bin/subl3 /usr/bin/subl
+[ -f /etc/ssh/sshd_config ] && patch -r - /etc/ssh/sshd_config $HOME/bin/files/sshd_config.patch
 
