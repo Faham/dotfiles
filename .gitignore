@@ -5,10 +5,6 @@
 !/README.md
 !/.notes
 
-!/bin/**
-/bin/vcm
-/bin/[Tt]elegram
-
 !/.config/google-chrome/Default/IndexedDB/chrome-extension_**/*.log
 !/.config/sublime-text-3/Packages/**/*.sublime-settings
 !/.config/sublime-text-3/Packages/**/faham*.tmTheme
@@ -22,6 +18,7 @@
 !/.local/share/applications/mimeapps.list
 !/.local/share/Tomahawk/tomahawk.db
 
+!/.scripts/**
 !/.encrypted/**
 !/.fonts/*
 !/.fluxbox/**
@@ -32,6 +29,7 @@
 !/.mplayer/**
 !/.vim/**
 /.vim/.netrwhist
+/.vim/sessions
 
 !/.tmux.conf
 !/.tmux/**

@@ -1,17 +1,13 @@
+#!/bin/sh
 
 xmodmap ~/.Xmodmap
 xset r rate 200 40
 xset +fp ~/.fonts
 xset -b
 xsetroot -solid "#110011"
-xloadimage -onroot ~/.bg
+[ -f ~/.bg ] && xloadimage -onroot ~/.bg
 setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
 unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
-conky &
 xscreensaver &
-goldendict &
-bin/lights_on.sh 120 &
-
-[ `cat /etc/hostname` = "pc2489" ] && \
-  xrandr --output DP1 --auto --output HDMI2 --auto --primary --right-of DP1;
+detect-displays
 

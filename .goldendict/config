@@ -31,14 +31,14 @@
   <languageCodes></languageCodes>
  </forvo>
  <mediawikis>
-  <mediawiki enabled="1" id="ae6f89aac7151829681b85f035d54e48" url="https://en.wikipedia.org/w" icon="" name="English Wikipedia"/>
+  <mediawiki url="https://en.wikipedia.org/w" id="ae6f89aac7151829681b85f035d54e48" enabled="1" icon="" name="English Wikipedia"/>
  </mediawikis>
  <websites>
-  <website enabled="0" id="b88cb2898e634c6638df618528284c2d" url="https://www.google.com/dictionary?aq=f&amp;langpair=en|en&amp;q=%GDWORD%&amp;hl=en" icon="" name="Google En-En (Oxford)"/>
-  <website enabled="0" id="f376365a0de651fd7505e7e5e683aa45" url="https://www.urbandictionary.com/define.php?term=%GDWORD%" icon="" name="Urban Dictionary"/>
-  <website enabled="0" id="324ca0306187df7511b26d3847f4b07c" url="https://multitran.ru/c/m.exe?CL=1&amp;l1=1&amp;s=%GD1251%" icon="" name="Multitran (En)"/>
-  <website enabled="0" id="924db471b105299c82892067c0f10787" url="http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%" icon="" name="Lingvo (En-Ru)"/>
-  <website enabled="0" id="087a6d65615fb047f4c80eef0a9465db" url="http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&amp;palavra=%GDISO1%" icon="" name="Michaelis (Pt-En)"/>
+  <website url="https://www.google.com/dictionary?aq=f&amp;langpair=en|en&amp;q=%GDWORD%&amp;hl=en" id="b88cb2898e634c6638df618528284c2d" enabled="0" icon="" name="Google En-En (Oxford)"/>
+  <website url="https://www.urbandictionary.com/define.php?term=%GDWORD%" id="f376365a0de651fd7505e7e5e683aa45" enabled="0" icon="" name="Urban Dictionary"/>
+  <website url="https://multitran.ru/c/m.exe?CL=1&amp;l1=1&amp;s=%GD1251%" id="324ca0306187df7511b26d3847f4b07c" enabled="0" icon="" name="Multitran (En)"/>
+  <website url="http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%" id="924db471b105299c82892067c0f10787" enabled="0" icon="" name="Lingvo (En-Ru)"/>
+  <website url="http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&amp;palavra=%GDISO1%" id="087a6d65615fb047f4c80eef0a9465db" enabled="0" icon="" name="Michaelis (Pt-En)"/>
  </websites>
  <dictservers/>
  <programs/>
@@ -86,7 +86,7 @@
   <alwaysOnTop>1</alwaysOnTop>
   <searchInDock>0</searchInDock>
   <historyStoreInterval>0</historyStoreInterval>
-  <proxyserver enabled="0" useSystemProxy="0">
+  <proxyserver useSystemProxy="0" enabled="0">
    <type>0</type>
    <host></host>
    <port>3128</port>
@@ -123,15 +123,15 @@
  <lastMainGroupId>0</lastMainGroupId>
  <lastPopupGroupId>0</lastPopupGroupId>
  <popupWindowState>AAAA/wAAAAH9AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAQAAAAEAAAAaAGQAaQBjAHQAaQBvAG4AYQByAHkAQgBhAHIDAAAAAP////8AAAAAAAAAAA==</popupWindowState>
- <popupWindowGeometry>AdnQywACAAAAAAAAAAAAAAAAAiwAAAGSAAAAAAAAAAAAAAIsAAABkgAAAAAAAAAABVY=</popupWindowGeometry>
+ <popupWindowGeometry>AdnQywACAAAAAAAAAAAAAAAAAiwAAAGSAAAAAAAAAAAAAAIsAAABkgAAAAEAAAAACgA=</popupWindowGeometry>
  <pinPopupWindow>0</pinPopupWindow>
- <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAADMAAAB4PwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAOgAAAeAAAACDAP///wAAAAEAAADMAAAB8/wCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAACcAAAD3AAAAYAD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABJAAAAPYAAABgAP///wAAAjMAAAHzAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAIH/////wAAAAAAAAAA</mainWindowState>
- <mainWindowGeometry>AdnQywACAAAAAAJRAAAAdAAABVUAAAKNAAACUQAAAHQAAAVVAAACjQAAAAAAAAAABVY=</mainWindowGeometry>
+ <mainWindowState>AAAA/wAAAAH9AAAAAgAAAAAAAADMAAAB4PwCAAAAAfsAAAAUAHMAZQBhAHIAYwBoAFAAYQBuAGUAAAAAOgAAAeAAAADCAP///wAAAAEAAADlAAAB4PwCAAAAAvsAAAASAGQAaQBjAHQAcwBQAGEAbgBlAQAAADoAAADsAAAAkgD////7AAAAFgBoAGkAcwB0AG8AcgB5AFAAYQBuAGUBAAABLwAAAOsAAACSAP///wAAAocAAAHgAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAIAAAAUAG4AYQB2AFQAbwBvAGwAYgBhAHIBAAAAAP////8AAAAAAAAAAAAAABoAZABpAGMAdABpAG8AbgBhAHIAeQBCAGEAcgAAAAIH/////wAAAAAAAAAA</mainWindowState>
+ <mainWindowGeometry>AdnQywACAAAAABWLAAAGVgAAGP8AAAhvAAAViwAABlYAABj/AAAIbwAAAAAAAAAADwA=</mainWindowGeometry>
  <helpWindowGeometry></helpWindowGeometry>
  <helpSplitterState></helpSplitterState>
  <dictInfoGeometry></dictInfoGeometry>
  <inspectorGeometry></inspectorGeometry>
- <timeForNewReleaseCheck>2016-12-07T21:56:31</timeForNewReleaseCheck>
+ <timeForNewReleaseCheck>2017-10-12T12:28:37</timeForNewReleaseCheck>
  <skippedRelease></skippedRelease>
  <showingDictBarNames>0</showingDictBarNames>
  <usingSmallIconsInToolbars>0</usingSmallIconsInToolbars>

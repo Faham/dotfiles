@@ -155,14 +155,15 @@ OnRightGrip Move1         :StartResizing bottomright
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Mod4 x                     :ExecCommand xterm
-Mod4 t                     :ExecCommand tomahawk
-Mod4 g                     :ExecCommand goldendict
 Mod4 r                     :ExecCommand bashrun
 Mod4 q                     :ExecCommand qalculate-gtk
 Mod4 c                     :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 Mod4 Shift c               :ToggleCmd {Exec conky} {pkill conky}
 Mod4 Shift e               :ExecCommand env | sort | xmessage -file -
 Mod4 Shift x               :ExecCommand xkill
+Mod4 y                     :ExecCommand yakyak
+Mod4 t                     :ExecCommand telegram
+!Mod4 t                     :ExecCommand tomahaw
 !Control Mod1 1            :ExecCommand urxvt-rc
 !Control Mod4 e            :ExecCommand licqsh -o
 !Control Mod4 m            :ExecCommand quax
@@ -176,7 +177,7 @@ Mod4 Shift x               :ExecCommand xkill
 !Mod4 x                    :ExecCommand xmag
 !Mod1 Mod4 x               :ExecCommand wmagnify
 
-None 231                   :ExecCommand ~/bin/yoga-auto-rotate
+None 231                   :ExecCommand yoga-auto-rotate
 
 ! volume control (Super + 0/-/=)
 Mod4 19                    :ExecCommand xdotool key --clearmodifiers XF86AudioMute
@@ -207,7 +208,7 @@ XF86Suspend                :Exec sudo pm-suspend
 !XF86TouchpadOff
 
 ! HDMI output dual screen
-None 133                   :Exec ~/bin/display
+None 133                   :Exec detect-displays
 
 ! screenshots
 None Print                 :Exec scrot -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'

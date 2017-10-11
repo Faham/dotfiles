@@ -18,6 +18,12 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+"enable confirmation question for unsaved buffers on exit"
+set confirm
+
+"autosave current session on exit"
+au VimLeavePre * if v:this_session != '' | exec "mks! " . v:this_session | endif
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -232,12 +238,12 @@ nnoremap <S-F8> :tabp<CR>==
 vnoremap <S-F8> :tabp<CR>==
 
 " moving lines
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+" nnoremap <C-j> :m .+1<CR>==
+" nnoremap <C-k> :m .-2<CR>==
+" inoremap <C-j> <Esc>:m .+1<CR>==gi
+" inoremap <C-k> <Esc>:m .-2<CR>==gi
+" vnoremap <C-j> :m '>+1<CR>gv=gv
+" vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " moving accross wrapped lines
 noremap  <buffer> <silent> k gk

@@ -30,7 +30,7 @@ freerdp            scrot
 ghostscript        sshfs                   xorg-xinit
 gimp               cmus                    xorg-xmessage
 git                tk                      xosd
-goldendict         tmux                    xscreensaver
+tmux               xscreensaver
 gparted            ttf-bitstream-vera      xterm
 gpicview           ttf-dejavu              yaourt
 gsfonts            ttf-freefont            youtube-dl

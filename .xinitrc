@@ -1,10 +1,6 @@
 
 [ -f ~/.Xresources ] && xrdb -merge -I$HOME ~/.Xresources
 
-# required linux packages for my setup
-# fluxbox unclutter conky xscreensaver
-# 
-
 xbindkeys
 
 # i3 & wmpid=$!

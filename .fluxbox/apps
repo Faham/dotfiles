@@ -29,3 +29,18 @@
 [app] (name=goldendict) (class=Goldendict)
   [Layer]	{6}
 [end]
+[app] (name=telegram) (class=TelegramDesktop)
+  [Dimensions]	{26% 33%}
+  [Position]	(UPPERLEFT)	{36% 67%}
+  [Close]	{yes}
+[end]
+[app] (name=yakyak) (class=yakyak) (role=browser-window)
+  [Dimensions]	{26% 33%}
+  [Position]	(UPPERLEFT)	{36% 67%}
+  [Close]	{yes}
+[end]
+[app] (name=crx_nckgahadagoaajjgafhacjanaoiihapd) (class=Google-chrome) (role=pop-up)
+  [Dimensions]	{30% 46%}
+  [Position]	(UPPERLEFT)	{33% 54%}
+  [Close]	{yes}
+[end]
