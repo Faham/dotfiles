@@ -31,7 +31,8 @@
 #define _colorIT       #80d4aa
 !TXT Normal, Normal, Cursor
 #define _foreground    #dcdccc
-#define _background    #1f1f1f
+#define _background    #272822
+!#define _background    #1f1f1f
 #define _cursorColor   #8faf9f
 
 ! Bashrun --------------------------------------------------------------------
@@ -95,7 +96,7 @@ XTerm*vt100.translations: #override Ctrl ~Meta Shift <Key>j: string(0x1b) string
 xterm*loginShell:         true
 xterm*termName:           xterm-256color
 xterm*eightBitInput:      false
-xterm*VT100.geometry:     80x25
+xterm*VT100.geometry:     160x50
 !xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
 xterm*faceName:           Terminus:style=Regular:size=10
 xterm*dynamicColors:      true
@@ -136,8 +137,7 @@ xterm*colorBD        : _colorBD
 xterm*colorIT        : _colorIT
 xterm*colorUL        : _colorUL
 xterm*foreground     : _foreground
-! xterm*background     : _background
-xterm*background     : #272822
+xterm*background     : _background
 xterm*cursorColor    : _cursorColor
 
 !aterm settings---------------------------------------------------------------

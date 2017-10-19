@@ -9,6 +9,7 @@ HOME=/home/$USER
 pacman -S sudo patch --noconfirm
 
 usermod -G disk --append $USER
+usermod -G sys --append $USER
 
 [ -f /etc/gdm/custom.conf ] && sed  -i "s/^#WaylandEnable=false/WaylandEnable=false/" /etc/gdm/custom.conf
 patch -r - /etc/sudoers $HOME/bin/files/sudoers.patch

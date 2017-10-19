@@ -30,9 +30,8 @@
   [Layer]	{6}
 [end]
 [app] (name=telegram) (class=TelegramDesktop)
-  [Dimensions]	{26% 33%}
-  [Position]	(UPPERLEFT)	{36% 67%}
-  [Close]	{yes}
+  [Dimensions]	{31% 34%}
+  [Position]	(UPPERLEFT)	{34% 66%}
 [end]
 [app] (name=yakyak) (class=yakyak) (role=browser-window)
   [Dimensions]	{26% 33%}

@@ -32,6 +32,8 @@ if has("vms")
 else
   set backup		" keep a backup file
 endif
+set backupdir=~/.vim/tmp
+set directory^=~/.vim/tmp
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
@@ -149,6 +151,7 @@ set softtabstop=3
 set shiftwidth=3
 set expandtab     " replace tab with space
 set hidden        " allow switching between unsaved buffers
+set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
 
 " Status line
 set laststatus=2
@@ -168,7 +171,7 @@ hi StatusLine ctermbg=black ctermfg=white
 let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when escape
 
 " ctrlp setup
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<Leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_bottom=1
@@ -184,7 +187,6 @@ if executable('ag')
 endif
 nnoremap <c-i> :CtrlPTag<cr>
 
-" for mmfd
 " let g:ctrlp_custom_ignore = {
 "   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 "   \ 'file': '\v\.(exe|so|dll)$',
@@ -200,23 +202,29 @@ let g:ctrlp_custom_ignore = {
 
 let mapleader = ";"
 
-nnoremap <c-o> :CtrlPFunky<Cr>
+nnoremap <Leader>f :BufExplorer<Cr>
+" quick save
+nnoremap <Leader>s :update<Cr>
+" quick close current buffer
+nnoremap <Leader>d :bd<Cr>
+" switch to the alternative buffer
+nnoremap <Leader>t :b#<Cr>
+nnoremap <Leader>o :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " clear search highlightings when done
 nnoremap <Leader>c :let @/ = ""<Cr>
 
-" clear undo history
 nnoremap <Leader>u :ClearUndo<Cr>
 
 " make table
-nnoremap <Leader>t :%!column -t<Cr>
-vnoremap <Leader>t :'<,'>%!column -t<Cr>
+nnoremap <Leader>T :%!column -t<Cr>
+vnoremap <Leader>T :'<,'>%!column -t<Cr>
 
 " sort
-nnoremap <Leader>s :%!sort -k1<Cr>
-vnoremap <Leader>s :'<,'>%!sort -k1<Cr>
+nnoremap <Leader>S :%!sort -k1<Cr>
+vnoremap <Leader>S :'<,'>%!sort -k1<Cr>
 
 " reload vimrc
 nnoremap <Leader>r :so $MYVIMRC<Cr>
@@ -224,6 +232,8 @@ nnoremap <Leader>r :so $MYVIMRC<Cr>
 nnoremap <Leader>x :Explore<CR>
 vnoremap <Leader>x :Explore<CR>
 
+nnoremap <Leader>x :Explore<CR>
+vnoremap <Leader>x :Explore<CR>
 
 " working with tabs
 nnoremap <F7> :bn<CR>==
@@ -245,28 +255,57 @@ vnoremap <S-F8> :tabp<CR>==
 " vnoremap <C-j> :m '>+1<CR>gv=gv
 " vnoremap <C-k> :m '<-2<CR>gv=gv
 
-" moving accross wrapped lines
-noremap  <buffer> <silent> k gk
-noremap  <buffer> <silent> j gj
-noremap  <buffer> <silent> 0 g0
-noremap  <buffer> <silent> $ g$
+" for toggelWrap
+noremap <silent> <Leader>w :call ToggleWrap()<CR>
+function ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+    silent! iunmap <buffer> <Up>
+    silent! iunmap <buffer> <Down>
+    silent! iunmap <buffer> <Home>
+    silent! iunmap <buffer> <End>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal display+=lastline
+    noremap  <buffer> <silent> k   gk
+    noremap  <buffer> <silent> j   gj
+    noremap  <buffer> <silent> 0   g0
+    noremap  <buffer> <silent> $   g$
+    noremap  <buffer> <silent> <Up>   gk
+    noremap  <buffer> <silent> <Down> gj
+    noremap  <buffer> <silent> <Home> g<Home>
+    noremap  <buffer> <silent> <End>  g<End>
+    inoremap <buffer> <silent> <Up>   <C-o>gk
+    inoremap <buffer> <silent> <Down> <C-o>gj
+    inoremap <buffer> <silent> <Home> <C-o>g<Home>
+    inoremap <buffer> <silent> <End>  <C-o>g<End>
+  endif
+endfunction
 
-nnoremap xx yydd<CR>
-vnoremap xx yydd<CR>
-nnoremap X y$d$<CR>
-vnoremap X y$d$<CR>
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-nnoremap s "_s
-vnoremap s "_s
-vnoremap i "_s
-nnoremap S "_S
-vnoremap S "_S
-xnoremap p pgvy
+"nnoremap xx yydd<CR>
+"vnoremap xx yydd<CR>
+"nnoremap X y$d$<CR>
+"vnoremap X y$d$<CR>
+"nnoremap d "_d
+"vnoremap d "_d
+"nnoremap D "_D
+"vnoremap D "_D
+"nnoremap c "_c
+"vnoremap c "_c
+"nnoremap C "_C
+"vnoremap C "_C
+"nnoremap s "_s
+"vnoremap s "_s
+"vnoremap i "_s
+"nnoremap S "_S
+"vnoremap S "_S
+"xnoremap p pgvy
 
