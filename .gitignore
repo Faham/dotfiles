@@ -30,6 +30,7 @@
 !/.vim/**
 /.vim/.netrwhist
 /.vim/sessions
+/.vim/tmp
 
 !/.tmux.conf
 !/.tmux/**

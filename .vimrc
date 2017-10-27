@@ -144,6 +144,7 @@ set wrapmargin=0
 set formatoptions-=t
 set formatoptions+=l
 set autoread " auto reload unchanged files
+set autochdir
 
 set tags=./tags,$GST_HOME/tags
 set tabstop=3
@@ -173,7 +174,6 @@ let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when es
 " ctrlp setup
 let g:ctrlp_map = '<Leader>p'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_files=0
 let g:ctrlp_max_height=25
@@ -182,6 +182,8 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_clear_cache_on_exit=0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['.ctrlp']
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -217,6 +219,8 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 nnoremap <Leader>c :let @/ = ""<Cr>
 
 nnoremap <Leader>u :ClearUndo<Cr>
+
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " make table
 nnoremap <Leader>T :%!column -t<Cr>

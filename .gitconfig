@@ -2,7 +2,7 @@
  default = upstream
 [user]
  name = Faham Negini
- email = Faham.Negini@vecima.com
+ email = faham.negini@gmail.com
 [commit]
  template = .gitmessage
 [alias]

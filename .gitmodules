@@ -7,18 +7,12 @@
 [submodule ".vim/bundle/vim-multiple-cursors"]
 	path = .vim/bundle/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule ".vim/bundle/covim"]
-	path = .vim/bundle/covim
-	url = https://github.com/FredKSchott/CoVim.git
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
@@ -28,3 +22,12 @@
 [submodule ".vim/bundle/bufexplorer.vim"]
 	path = .vim/bundle/bufexplorer.vim
 	url = https://github.com/jlanzarotta/bufexplorer.git
+[submodule ".vim/bundle/easymotion"]
+	path = .vim/bundle/easymotion
+	url = git://github.com/Lokaltog/vim-easymotion.git
+[submodule ".vim/bundle/tcomment"]
+	path = .vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
