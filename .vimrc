@@ -1,24 +1,34 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"        for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"       for OpenVMS:  sys$login:.vimrc
+set nocompatible
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'kien/ctrlp.vim'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'terryma/vim-multiple-cursors'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
-"enable confirmation question for unsaved buffers on exit"
 set confirm
 
 "autosave current session on exit"
@@ -139,7 +149,7 @@ function! Incr()
 endfunction
 vnoremap <Leader>a :call Incr()<CR>
 
-execute pathogen#infect()
+" execute pathogen#infect()
 
 " to disable the annoying beeps
 set visualbell
