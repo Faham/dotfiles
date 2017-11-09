@@ -5,9 +5,9 @@
 "
 " To use it, copy it to
 "     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
+"        for Amiga:  s:.vimrc
 "  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+"       for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -28,16 +28,16 @@ au VimLeavePre * if v:this_session != '' | exec "mks! " . v:this_session | endif
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup      " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+  set backup        " keep a backup file
 endif
-set backupdir=~/.vim/tmp
-set directory^=~/.vim/tmp
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set backupdir=~/.vim/tmp//
+set directory^=~/.vim/tmp//
+set history=50      " keep 50 lines of command line history
+set ruler           " show the cursor position all the time
+set showcmd         " display incomplete commands
+set incsearch       " do incremental searching
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -63,6 +63,19 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
+
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=234
+
+highlight OverLength ctermbg=black ctermfg=NONE guibg=NONE
+match OverLength /\%80v.\+/
+
+highlight CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
+set cursorline
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -128,9 +141,6 @@ vnoremap <Leader>a :call Incr()<CR>
 
 execute pathogen#infect()
 
-" set colorcolumn=80
-" highlight ColorColumn ctermbg=darkgray
-
 " to disable the annoying beeps
 set visualbell
 set vb t_vb=
@@ -169,6 +179,7 @@ set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
 hi StatusLine ctermbg=black ctermfg=white
 
+let g:airline_theme = 'minimalist'
 let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when escape
 
 " ctrlp setup
@@ -261,7 +272,7 @@ vnoremap <S-F8> :tabp<CR>==
 
 " for toggelWrap
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
-function ToggleWrap()
+function! ToggleWrap()
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap

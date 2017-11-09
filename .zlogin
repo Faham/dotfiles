@@ -5,7 +5,7 @@
 export PATH="$PATH:$HOME/.scripts"
 # export MANPATH="/usr/local/man:$MANPATH"
 export BROWSER=google-chrome-stable
-export EDITOR=subl
+export EDITOR=vim
 export TERM_EMU=xterm
 export SHELL=/usr/bin/zsh
 export FILES=pcmanfm
