@@ -29,6 +29,7 @@
 !/.mplayer/**
 !/.vim/**
 /.vim/.netrwhist
+/.vim/bundle/**
 /.vim/sessions
 /.vim/tmp
 

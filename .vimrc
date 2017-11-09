@@ -149,8 +149,6 @@ function! Incr()
 endfunction
 vnoremap <Leader>a :call Incr()<CR>
 
-" execute pathogen#infect()
-
 " to disable the annoying beeps
 set visualbell
 set vb t_vb=
