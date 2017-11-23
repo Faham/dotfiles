@@ -31,6 +31,7 @@ filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
@@ -40,20 +41,15 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'kien/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'tpope/vim-sensible'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-sleuth'                " set tab size heuristaclly
+Plugin 'tpope/vim-surround'              " replace pairings ( { [ ' ...
 Plugin 'tomtom/tcomment_vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'tomasr/molokai'
-" Plugin 'easymotion/vim-easymotion'
-" Plugin 'justinmk/vim-sneak'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+call vundle#end()
 
 " -----------------------------------------------------------------------------
 
@@ -87,9 +83,9 @@ function! ToggleWrapFunc()
     setlocal wrap linebreak nolist
     set virtualedit=
     setlocal display+=lastline
+    noremap  <buffer> <silent> 0   g0
     noremap  <buffer> <silent> k   gk
     noremap  <buffer> <silent> j   gj
-    noremap  <buffer> <silent> 0   g0
     noremap  <buffer> <silent> $   g$
     noremap  <buffer> <silent> <Up>   gk
     noremap  <buffer> <silent> <Down> gj
@@ -102,6 +98,52 @@ function! ToggleWrapFunc()
   endif
 endfunction
 command! -nargs=0 ToggleWrap call ToggleWrapFunc()
+
+" -----------------------------------------------------------------------------
+
+" Theme setup
+
+" Switch syntax highlighting on when the terminal has colors or when using the
+" GUI (which always has colors).
+if &t_Co > 2 || has("gui_running")
+  syntax on
+
+  " I like highlighting strings inside C comments.
+  " Revert with ":unlet c_comment_strings".
+  let c_comment_strings=1
+  set hlsearch
+endif
+
+let g:airline_theme = 'minimalist'
+let g:molokai_original = 1
+let g:rehash256 = 1
+
+colorscheme molokai
+
+set laststatus=2
+set statusline=%t       "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%y      "filetype
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+set colorcolumn=80
+set cursorline
+
+" change cursor shape in different modes
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
+hi OverLength ctermbg=black ctermfg=NONE guibg=NONE
+match OverLength /\%80v.\+/
+
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
 " -----------------------------------------------------------------------------
 
@@ -123,6 +165,7 @@ set vb t_vb=
 set nowrap
 set paste                       " no intelligent indenting when pasting from clipboard
 set linebreak
+set number                      " line numbering
 set nolist                      " list disables linebreak
 set textwidth=0
 set wrapmargin=0
@@ -138,7 +181,6 @@ set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
 set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
-" set guifont=Monaco\ for\ Powerline:h13
 " set guifont=Monaco\ for\ Powerline:h13
 
 " Don't use Ex mode, use Q for formatting
@@ -168,17 +210,6 @@ endif
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
-endif
-
-" Switch syntax highlighting on when the terminal has colors or when using the
-" GUI (which always has colors).
-if &t_Co > 2 || has("gui_running")
-  syntax on
-
-  " I like highlighting strings inside C comments.
-  " Revert with ":unlet c_comment_strings".
-  let c_comment_strings=1
-  set hlsearch
 endif
 
 if has('langmap') && exists('+langremap')
@@ -216,40 +247,8 @@ if has("autocmd")
 
   augroup END
 else
-  set autoindent		" always set autoindenting on
+  set autoindent         " always set autoindenting on
 endif " has("autocmd")
-
-" -----------------------------------------------------------------------------
-
-" Theme setup
-set laststatus=2
-set statusline=%t       "tail of the filename
-set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=%{&ff}] "file format
-set statusline+=%h      "help file flag
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%y      "filetype
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-
-hi StatusLine ctermbg=black ctermfg=white
-hi CursorLine cterm=NONE ctermbg=234 ctermfg=NONE guibg=NONE guifg=NONE
-hi ColorColumn ctermbg=234
-hi OverLength ctermbg=black ctermfg=NONE guibg=NONE
-match OverLength /\%80v.\+/
-set colorcolumn=80
-set cursorline
-set number              " line numbering
-
-let g:airline_theme = 'minimalist'
-let g:molokai_original = 1
-" change cursor shape in different modes
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
 
 " -----------------------------------------------------------------------------
 
@@ -297,7 +296,7 @@ nnoremap <Leader>d :bd<Cr>
 nnoremap <Leader>t :b#<Cr>
 nnoremap <Leader>o :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+" nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " clear search highlightings when done
 nnoremap <Leader>c :let @/ = ""<Cr>
@@ -339,6 +338,14 @@ nnoremap <C-k> :m .-2<CR>==
 " inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" noremap! <C-Y> <Esc>klyWjpa
+
+" scrolling
+" nnoremap <silent> <C-Up> <C-y><CR>
+" nnoremap <silent> <C-Down> <C-e><CR>
+" vnoremap <silent> <C-Up> <C-y><CR>
+" vnoremap <silent> <C-Down> <C-e><CR>
 
 " -----------------------------------------------------------------------------
 

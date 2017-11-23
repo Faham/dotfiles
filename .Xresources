@@ -1,39 +1,64 @@
 
 ! Colors ----------------------------------------------------------------------
 
-!BLK Cursor
-#define _color0        #000d18
-#define _color8        #000d18
-!RED Tag
-#define _color1        #e89393
-#define _color9        #e89393
-!GRN SpecialKey
-#define _color2        #9ece9e
-#define _color10       #9ece9e
-!YEL Keyword
-#define _color3        #f0dfaf
-#define _color11       #f0dfaf
-!BLU Number
-#define _color4        #8cd0d3
-#define _color12       #8cd0d3
-!MAG Precondit
-#define _color5        #c0bed1
-#define _color13       #c0bed1
-!CYN Float
-#define _color6        #dfaf8f
-#define _color14       #dfaf8f
-!WHT Search
-#define _color7        #efefef
-#define _color15       #efefef
-!FMT Include, StatusLine, ErrorMsg
-#define _colorBD       #ffcfaf
-#define _colorUL       #ccdc90
-#define _colorIT       #80d4aa
-!TXT Normal, Normal, Cursor
-#define _foreground    #dcdccc
+! !BLK Cursor
+! #define _color0        #000d18
+! #define _color8        #000d18
+! !RED Tag
+! #define _color1        #e89393
+! #define _color9        #e89393
+! !GRN SpecialKey
+! #define _color2        #9ece9e
+! #define _color10       #9ece9e
+! !YEL Keyword
+! #define _color3        #f0dfaf
+! #define _color11       #f0dfaf
+! !BLU Number
+! #define _color4        #8cd0d3
+! #define _color12       #8cd0d3
+! !MAG Precondit
+! #define _color5        #c0bed1
+! #define _color13       #c0bed1
+! !CYN Float
+! #define _color6        #dfaf8f
+! #define _color14       #dfaf8f
+! !WHT Search
+! #define _color7        #efefef
+! #define _color15       #efefef
+! !FMT Include, StatusLine, ErrorMsg
+! #define _colorBD       #ffcfaf
+! #define _colorUL       #ccdc90
+! #define _colorIT       #80d4aa
+! !TXT Normal, Normal, Cursor
+! #define _foreground    #dcdccc
+! #define _background    #272822
+! !#define _background    #1f1f1f
+! #define _cursorColor   #8faf9f
+
+! Molokai Theme
 #define _background    #272822
-!#define _background    #1f1f1f
-#define _cursorColor   #8faf9f
+! #define _background    #101010
+#define _foreground    #d0d0d0
+#define _cursorColor   #d0d0d0
+#define _color0        #101010
+#define _color1        #960050
+#define _color2        #66aa11
+#define _color3        #c47f2c
+#define _color4        #30309b
+#define _color5        #7e40a5
+#define _color6        #3579a8
+#define _color7        #9999aa
+#define _color8        #303030
+#define _color9        #ff0090
+#define _color10       #80ff00
+#define _color11       #ffba68
+#define _color12       #5f5fee
+#define _color13       #bb88dd
+#define _color14       #4eb4fa
+#define _color15       #d0d0d0
+#define _colorBD       #ffcfaf
+#define _colorIT       #80d4aa
+#define _colorUL       #ccdc90
 
 ! Bashrun --------------------------------------------------------------------
 

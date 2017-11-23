@@ -27,7 +27,7 @@ evince             python2-pip             xf86-video-intel
 exfat-utils        qalculate-gtk           xloadimage
 festival-us        rdesktop                xorg-apps
 fluxbox            samba                   xorg-server
-freerdp            scrot
+freerdp            scrot                   wpa_actiond
 ghostscript        sshfs                   xorg-xinit
 gimp               cmus                    xorg-xmessage
 git                tk                      xosd
@@ -58,6 +58,8 @@ systemctl enable sshd.service
 systemctl start sshd.service
 systemctl enable sshd.socket
 systemctl start sshd.socket
+systemctl enable netctl-auto@.service
+systemctl start netctl-auto@.service
 
 $HOME/bin/set-python 2
 pip install twisted argparse
