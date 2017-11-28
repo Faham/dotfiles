@@ -48,6 +48,7 @@ Plugin 'tpope/vim-surround'              " replace pairings ( { [ ' ...
 Plugin 'tomtom/tcomment_vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'python-mode/python-mode'
 
 call vundle#end()
 
@@ -173,7 +174,7 @@ set formatoptions-=t
 set formatoptions+=l
 set autoread                    " auto reload unchanged files
 set autochdir
-set tags=./.tags,~/.tags
+set tags=./.tags;,~/.tags
 set tabstop=3
 set softtabstop=3
 set shiftwidth=3
@@ -252,6 +253,8 @@ endif " has("autocmd")
 
 " -----------------------------------------------------------------------------
 
+" Plugin setup
+
 " Ctrlp setup
 let g:ctrlp_map = '<Leader>p'
 let g:ctrlp_cmd = 'CtrlP'
@@ -266,6 +269,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.ctrlp']
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_funky_syntax_highlight = 1
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -274,6 +278,31 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|txt|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+" Python-mode
+let g:pymode = 1
+let g:pymode_lint = 1
+let g:pymode_lint_ignore = ['W', 'E111', 'E201', 'E202', 'E265', 'E114', 'E302', 'E203', 'E122', 'E124', 'E127', 'E128']
+" let g:pymode_warnings = 1
+let g:pymode_indent = 0
+let g:pymode_folding = 0
+let g:pymode_options_colorcolumn = 1
+let g:pymode_options_max_line_length = 85
+let g:pymode_quickfix_minheight = 3
+let g:pymode_quickfix_maxheight = 12
+let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_doc = 0
+let g:pymode_lint_checkers = ['pep8']
+let g:pymode_rope = 1
+let g:pymode_rope_rename_bind = '<leader>g'
+let g:pymode_rope_completion = 0
+let g:pymode_run = 0
+let g:pymode_run_bind = '<leader>R'
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace(); # XXX Breakpoint'
+" let g:pymode_breakpoint_cmd = 'import rpdb; __dbg = rpdb.Rpdb(port=12345); __dbg.set_trace(); # XXX Breakpoint'
+" let g:pymode_breakpoint_cmd = 'import pudb; pu.db; # XXX Breakpoint'
+let g:pymode_syntax = 0
 
 " -----------------------------------------------------------------------------
 
@@ -296,7 +325,7 @@ nnoremap <Leader>d :bd<Cr>
 nnoremap <Leader>t :b#<Cr>
 nnoremap <Leader>o :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-" nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " clear search highlightings when done
 nnoremap <Leader>c :let @/ = ""<Cr>
@@ -339,13 +368,17 @@ nnoremap <C-k> :m .-2<CR>==
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" jumping to lables
+nnoremap gL :lprev<Cr>
+vnoremap gL :lprev<Cr>
+nnoremap gl :lnext<Cr>
+vnoremap gl :lnext<Cr>
+
 " noremap! <C-Y> <Esc>klyWjpa
 
-" scrolling
-" nnoremap <silent> <C-Up> <C-y><CR>
-" nnoremap <silent> <C-Down> <C-e><CR>
-" vnoremap <silent> <C-Up> <C-y><CR>
-" vnoremap <silent> <C-Down> <C-e><CR>
+" scrolling with arrow keys as well
+map <C-Up> <C-Y>
+map <C-Down> <C-E>
 
 " -----------------------------------------------------------------------------
 
