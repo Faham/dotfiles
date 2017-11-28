@@ -201,7 +201,7 @@ set fillchars+=vert:\|
 " match OverLength /\%85v.\+/
 
 
-set colorcolumn=80
+set colorcolumn=85
 set cursorline
 
 set laststatus=2
@@ -225,7 +225,7 @@ if &term =~ "^xterm\\|rxvt"
   " 5 -> solid vertical bar
   " 6 -> blinking vertical bar
   let &t_SI = "\<Esc>[6 q"        " cursor in insert mode
-  let &t_SR = "\<Esc>[4 q"        " cursor in replace mode
+  " let &t_SR = "\<Esc>[4 q"        " cursor in replace mode
   let &t_EI = "\<Esc>[2 q"        " cursor in normal mode
 endif
 
@@ -266,7 +266,8 @@ set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
 set noswapfile                  " not a fan of swp files
 set ignorecase                  " case insensitive search by default
-set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
+" set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
+set list listchars=trail:.,extends:>,precedes:<,nbsp:-
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
 " set guifont=Monaco\ for\ Powerline:h13
 
@@ -316,8 +317,8 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
-  " For all text files set 'textwidth' to 80 characters.
-  autocmd FileType text setlocal textwidth=80
+  " For all text files set 'textwidth' to 85 characters.
+  autocmd FileType text setlocal textwidth=85
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -384,9 +385,9 @@ let g:pymode_rope_completion = 0
 let g:pymode_run = 0
 let g:pymode_run_bind = '<leader>R'
 let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace(); # XXX Breakpoint'
+" let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace(); # XXX Breakpoint'
 " let g:pymode_breakpoint_cmd = 'import rpdb; __dbg = rpdb.Rpdb(port=12345); __dbg.set_trace(); # XXX Breakpoint'
-" let g:pymode_breakpoint_cmd = 'import pudb; pu.db; # XXX Breakpoint'
+let g:pymode_breakpoint_cmd = 'import pudb; pu.db; # XXX Breakpoint'
 let g:pymode_syntax = 0
 
 " Airline
