@@ -266,10 +266,9 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_clear_cache_on_exit=0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'cr'
 let g:ctrlp_root_markers = ['.ctrlp']
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_funky_syntax_highlight = 1
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -278,6 +277,9 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|txt|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+" Ctrlp Funky
+let g:ctrlp_funky_syntax_highlight = 1
 
 " Python-mode
 let g:pymode = 1
@@ -360,25 +362,23 @@ vnoremap <S-F7> :tabn<CR>==
 nnoremap <S-F8> :tabp<CR>==
 vnoremap <S-F8> :tabp<CR>==
 
+" scrolling with arrow keys as well
+map <C-Up> <C-y>
+map <C-Down> <C-e>
+map <C-k> <C-y>k
+map <C-j> <C-e>j
+
 " moving lines
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-" inoremap <C-j> <Esc>:m .+1<CR>==gi
-" inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+" nnoremap <C-S-j> :m .+1<CR>==
+" nnoremap <C-S-k> :m .-2<CR>==
+" vnoremap <C-S-j> :m '>+1<CR>gv=gv
+" vnoremap <C-S-k> :m '<-2<CR>gv=gv
 
 " jumping to lables
 nnoremap gL :lprev<Cr>
 vnoremap gL :lprev<Cr>
 nnoremap gl :lnext<Cr>
 vnoremap gl :lnext<Cr>
-
-" noremap! <C-Y> <Esc>klyWjpa
-
-" scrolling with arrow keys as well
-map <C-Up> <C-Y>
-map <C-Down> <C-E>
 
 " -----------------------------------------------------------------------------
 

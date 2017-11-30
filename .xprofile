@@ -1,7 +1,6 @@
 #!/bin/sh
 
 xmodmap ~/.Xmodmap
-xset r rate 200 40
 xset +fp ~/.fonts
 xset -b
 xsetroot -solid "#110011"

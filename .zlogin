@@ -17,4 +17,4 @@ export FILES=pcmanfm
 export PLAYER=vlc
 export VISUAL="vim"
 
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx -- -ardelay 200 -arinterval 40
