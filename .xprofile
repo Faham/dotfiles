@@ -2,11 +2,12 @@
 
 xmodmap ~/.Xmodmap
 xset +fp ~/.fonts
+xset r rate 175 50
 xset -b
 xsetroot -solid "#110011"
 [ -f ~/.bg ] && xloadimage -onroot ~/.bg
 setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
-unclutter -idle 2 -jitter 10 -root & # hide cursor when idle
+unclutter -idle 2 -jitter 10 -root &
 xscreensaver &
 detect-displays
 

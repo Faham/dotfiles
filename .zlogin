@@ -1,3 +1,4 @@
+#!/bin/sh
 #
 # ~/.zlogin
 #
@@ -17,4 +18,5 @@ export FILES=pcmanfm
 export PLAYER=vlc
 export VISUAL="vim"
 
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx -- -ardelay 200 -arinterval 40
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx -- -ardelay 175 -arinterval 50
+

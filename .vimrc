@@ -295,7 +295,7 @@ let g:pymode_quickfix_maxheight = 12
 let g:pymode_breakpoint_bind = '<leader>b'
 let g:pymode_doc = 0
 let g:pymode_lint_checkers = ['pep8']
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 let g:pymode_rope_rename_bind = '<leader>g'
 let g:pymode_rope_completion = 0
 let g:pymode_run = 0
@@ -338,11 +338,7 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " make table
 nnoremap <Leader>T :%!column -t<Cr>
-vnoremap <Leader>T :'<,'>%!column -t<Cr>
-
-" sort
-nnoremap <Leader>S :%!sort -k1<Cr>
-vnoremap <Leader>S :'<,'>%!sort -k1<Cr>
+vnoremap <Leader>T :%!column -t<Cr>
 
 " reload vimrc
 nnoremap <Leader>r :so $MYVIMRC<Cr>
@@ -362,11 +358,14 @@ vnoremap <S-F7> :tabn<CR>==
 nnoremap <S-F8> :tabp<CR>==
 vnoremap <S-F8> :tabp<CR>==
 
+map <C-k> <Nop>
+map <C-j> :join<CR>==
+
 " scrolling with arrow keys as well
 map <C-Up> <C-y>
 map <C-Down> <C-e>
-map <C-k> <C-y>k
-map <C-j> <C-e>j
+map <S-k> <C-y>k
+map <S-j> <C-e>j
 
 " moving lines
 " nnoremap <C-S-j> :m .+1<CR>==
