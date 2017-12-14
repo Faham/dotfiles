@@ -56,11 +56,11 @@ call vundle#end()
 
 " A function to clear the undo history
 function! <SID>ForgetUndo()
-    let old_undolevels = &undolevels
-    set undolevels=-1
-    exe "normal a \<BS>\<Esc>"
-    let &undolevels = old_undolevels
-    unlet old_undolevels
+  let old_undolevels = &undolevels
+  set undolevels=-1
+  exe "normal a \<BS>\<Esc>"
+  let &undolevels = old_undolevels
+  unlet old_undolevels
 endfunction
 command! -nargs=0 ClearUndo call <SID>ForgetUndo()
 
@@ -99,6 +99,19 @@ function! ToggleWrapFunc()
   endif
 endfunction
 command! -nargs=0 ToggleWrap call ToggleWrapFunc()
+
+" -----------------------------------------------
+
+function! <SID>funcArgAlign()
+  let x = virtcol('.') - 1
+  let y = line('.') + 1
+  exe 'le' . x
+  exe 'norm gqq' . y . 'G'
+  exe 'le' . x
+  unlet x
+  unlet y
+endfunction
+command! -nargs=0 FuncArgAlign call <SID>funcArgAlign()
 
 " -----------------------------------------------------------------------------
 
@@ -233,8 +246,8 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+  " For all text files set 'textwidth' to 80 characters.
+  autocmd FileType text setlocal textwidth=80
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -289,7 +302,7 @@ let g:pymode_lint_ignore = ['W', 'E111', 'E201', 'E202', 'E265', 'E114', 'E302',
 let g:pymode_indent = 0
 let g:pymode_folding = 0
 let g:pymode_options_colorcolumn = 1
-let g:pymode_options_max_line_length = 85
+let g:pymode_options_max_line_length = 80
 let g:pymode_quickfix_minheight = 3
 let g:pymode_quickfix_maxheight = 12
 let g:pymode_breakpoint_bind = '<leader>b'
@@ -347,25 +360,26 @@ nnoremap <Leader>x :Explore<CR>
 vnoremap <Leader>x :Explore<CR>
 
 " working with tabs
-nnoremap <F7> :bn<CR>==
-vnoremap <F7> :bn<CR>==
-nnoremap <F8> :bp<CR>==
-vnoremap <F8> :bp<CR>==
+nnoremap <F7> :bn<CR>
+vnoremap <F7> :bn<CR>
+nnoremap <F8> :bp<CR>
+vnoremap <F8> :bp<CR>
 
 " working with tabs
-nnoremap <S-F7> :tabn<CR>==
-vnoremap <S-F7> :tabn<CR>==
-nnoremap <S-F8> :tabp<CR>==
-vnoremap <S-F8> :tabp<CR>==
+nnoremap <S-F7> :tabn<CR>
+vnoremap <S-F7> :tabn<CR>
+nnoremap <S-F8> :tabp<CR>
+vnoremap <S-F8> :tabp<CR>
 
-map <C-k> <Nop>
-map <C-j> :join<CR>==
+nnoremap <C-k> <Nop>
+nnoremap <C-j> :join<CR>
+vnoremap <C-j> :join<CR>
 
 " scrolling with arrow keys as well
-map <C-Up> <C-y>
-map <C-Down> <C-e>
-map <S-k> <C-y>k
-map <S-j> <C-e>j
+nnoremap <C-Up> <C-y>
+nnoremap <C-Down> <C-e>
+nnoremap <S-k> <C-y>k
+nnoremap <S-j> <C-e>j
 
 " moving lines
 " nnoremap <C-S-j> :m .+1<CR>==
@@ -378,6 +392,12 @@ nnoremap gL :lprev<Cr>
 vnoremap gL :lprev<Cr>
 nnoremap gl :lnext<Cr>
 vnoremap gl :lnext<Cr>
+
+nnoremap Y yg_
+nnoremap <C-p> yyp
+vnoremap <C-p> ygv<Esc>p
+
+nnoremap Q :FuncArgAlign<Cr>
 
 " -----------------------------------------------------------------------------
 
