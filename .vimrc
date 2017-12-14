@@ -100,19 +100,6 @@ function! ToggleWrapFunc()
 endfunction
 command! -nargs=0 ToggleWrap call ToggleWrapFunc()
 
-" -----------------------------------------------
-
-function! <SID>funcArgAlign()
-  let x = virtcol('.') - 1
-  let y = line('.') + 1
-  exe 'le' . x
-  exe 'norm gqq' . y . 'G'
-  exe 'le' . x
-  unlet x
-  unlet y
-endfunction
-command! -nargs=0 FuncArgAlign call <SID>funcArgAlign()
-
 " -----------------------------------------------------------------------------
 
 " Theme setup
@@ -177,7 +164,7 @@ set scrolloff=5                 " Show a few lines of context around the cursor.
 set visualbell                  " to disable the annoying beeps
 set vb t_vb=
 set nowrap
-set paste                       " no intelligent indenting when pasting from clipboard
+" set paste                       " no intelligent indenting when pasting from clipboard
 set linebreak
 set number                      " line numbering
 set nolist                      " list disables linebreak
@@ -196,9 +183,6 @@ set hidden                      " allow switching between unsaved buffers
 set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
 " set guifont=Monaco\ for\ Powerline:h13
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when escape
 
@@ -397,7 +381,8 @@ nnoremap Y yg_
 nnoremap <C-p> yyp
 vnoremap <C-p> ygv<Esc>p
 
-nnoremap Q :FuncArgAlign<Cr>
+" Don't use Ex mode, use Q for formatting
+noremap Q gq
 
 " -----------------------------------------------------------------------------
 
