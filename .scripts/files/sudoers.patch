@@ -9,4 +9,4 @@
 ---
 > Defaults targetpw  # Ask for the password of the target user
 97a99
-> %users ALL=(ALL) NOPASSWD:/usr/bin/pm-suspend, /usr/bin/pm-hibernate, /usr/bin/poweroff, /usr/bin/reboot
+> %users ALL=(ALL) NOPASSWD:/usr/bin/poweroff, /usr/bin/reboot

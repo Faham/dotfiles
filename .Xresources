@@ -81,6 +81,73 @@ Xft.autohint:   0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
 
+! xvkbd ----------------------------------------------------------------------
+
+xvkbd*Font:        -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*
+xvkbd.generalFont: -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*
+xvkbd.letterFont:  -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*
+xvkbd.specialFont: -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*
+xvkbd.keypadFont:  -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*
+xvkbd.banner.font: -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*
+xvkbd.input: false
+xvkbd.windowGeometry:1944x684+291+756
+xvkbd.noSync: false
+xvkbd.jumpPointer: true
+xvkbd.jumpPointerBack: true
+xvkbd.modalKeytop: false
+! xvkbd*Multi_key.width: 1
+! xvkbd*Shift_R.width: 75
+! xvkbd*Alt_R.width: 1
+! xvkbd*Meta_R.width: 1
+! xvkbd.NormalKeys
+! xvkbd.ShiftKeys
+! xvkbd.AltgrKeys
+! xvkbd.ShiftAltgrKeys
+! xvkbd.KeyLabels
+! xvkbd.NormalKeyLabels
+! xvkbd.ShiftKeyLabels
+! xvkbd.AltgrKeyLabels
+! xvkbd.ShiftAltgrKeyLabels
+xvkbd.resizable: true
+xvkbd.autoRepeat: true
+xvkbd.functionkey: false
+xvkbd.keypad: false
+xvkbd.compact: false
+xvkbd.keypadOnly: false
+! xvkbd.textDelay: value
+! xvkbd.dictFile: filename
+xvkbd.minimizable: true
+! xvkbd.secure: true
+! xvkbd.nonexitable: true
+! xvkbd.positiveModifiers: shift,control,meta,alt
+xvkbd*beNiceToColormap: false
+xvkbd*topShadowContrast: 40
+xvkbd*bottomShadowContrast: 80
+xvkbd*shadowWidth: 1
+xvkbd*Label.shadowWidth: 0
+xvkbd*MainMenu.shadowWidth: 0
+xvkbd*MainMenu.topShadowContrast: 0
+xvkbd*MainMenu.bottomShadowContrast: 0
+xvkbd*Background: _background
+xvkbd*Text*background: _foreground
+xvkbd*specialBackground: _background
+xvkbd*focusBackground: _background
+xvkbd*remoteFocusBackground: _background
+xvkbd*Foreground: _foreground
+xvkbd*highlightBackground: _background
+xvkbd*highlightForeground: #DDCCBB
+xvkbd*highlightThickness: 1
+xvkbd*Form.resizable: true
+xvkbd*defaultDistance: 0
+xvkbd*Form.borderWidth: 0
+xvkbd*Label.borderWidth: 0
+xvkbd*Command.internalWidth: 2
+xvkbd*Repeater.internalWidth: 2
+xvkbd*Command.resize: false
+xvkbd*Repeater.resize: false
+xvkbd*Command.justify: center
+xvkbd*Repeater.justify: center
+
 ! URxvt ----------------------------------------------------------------------
 
 URxvt*color0         : _color0
@@ -122,7 +189,7 @@ xterm*loginShell:         true
 xterm*termName:           xterm-256color
 xterm*eightBitInput:      false
 xterm*VT100.geometry:     160x50
-!xterm*font:              -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
+! xterm*font:              -*-terminus-medium-r-*-*-24-*-*-*-*-*-*-*
 xterm*faceName:           Terminus:style=Regular:size=10
 xterm*dynamicColors:      true
 xterm*utf8:               2
@@ -167,8 +234,8 @@ xterm*cursorColor    : _cursorColor
 
 !aterm settings---------------------------------------------------------------
 
-aterm*background:               black
-aterm*foreground:               white
+aterm*background:               _background
+aterm*foreground:               _foreground
 aterm*transparent:              true
 aterm*shading:                  30
 aterm*cursorColor:              gray
@@ -234,13 +301,13 @@ XCalc*ShapeStyle:             rectangle
 xscreensaver.splash: false
 
 !font settings
-xscreensaver.Dialog.headingFont:        -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:           -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:          -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:          -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:         -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:           -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:         -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.headingFont:        -*-helvetica-medium-r-*-*-12-*-*-*-*-*-iso8859-1
+xscreensaver.Dialog.bodyFont:           -*-helvetica-medium-r-*-*-12-*-*-*-*-*-iso8859-1
+xscreensaver.Dialog.labelFont:          -*-helvetica-medium-r-*-*-24-*-*-*-*-*-iso8859-1
+xscreensaver.Dialog.unameFont:          -*-helvetica-medium-r-*-*-24-*-*-*-*-*-iso8859-1
+xscreensaver.Dialog.buttonFont:         -*-helvetica-medium-r-*-*-24-*-*-*-*-*-iso8859-1
+xscreensaver.Dialog.dateFont:           -*-helvetica-medium-r-*-*-12-*-*-*-*-*-iso8859-1
+xscreensaver.passwd.passwdFont:         -*-helvetica-medium-r-*-*-24-*-*-*-*-*-iso8859-1
 
 !general dialog box (affects main hostname, username, password text)
 xscreensaver.Dialog.foreground:         #ffffff

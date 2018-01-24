@@ -47,6 +47,8 @@ nmap               virtualbox              autoconf
 ntfs-3g            virtualbox-guest-utils  gdb
 openssh            virtualbox-host-dkms    patch
 sudo               automake                pkg-config
+aria2              terminus-font           xorg-fonts-100dpi
+xorg-fonts-75dpi
 "
 
 #pm-utils xorg-server-utils
@@ -72,9 +74,9 @@ gpasswd -a $USER lp
 gpasswd -a $USER sys
 
 su $USER
-yaourt -S google-chrome sublime-text-dev git-crypt
+yaourt -S google-chrome sublime-text-dev \
+   git-crypt xvkbd laptop-mode-tools
 git submodule update --init --recursive
-cd $HOME/.vim/bundle/YouCompleteMe && ./install.py
 
 su root
 [ -f /usr/bin/subl ] || ln -s /usr/bin/subl3 /usr/bin/subl

@@ -12,9 +12,9 @@ esac
 
 percent=$(xbacklight -get | cut -d. -f1)
 
-osd_pid='/tmp/osd-brightness.pid'
+osd_pid='/tmp/osd.pid'
 osd_cmd="osd_cat \
-  --shadow=1 --shadowcolour=#333333 --color=#FFFFFF \
+   --shadow=1 --shadowcolour=#333333 --color=#FFFFFF \
   --pos=bottom --offset=30 --align=center \
   --lines=2 --delay=1 --barmode=percentage --percentage=$percent"
 

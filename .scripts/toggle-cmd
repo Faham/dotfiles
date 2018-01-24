@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PROCNAME=$1
+if pgrep -x $PROCNAME > /dev/null
+then
+    pkill $PROCNAME
+else
+    $PROCNAME &
+fi
+

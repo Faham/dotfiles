@@ -35,6 +35,7 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+" Plugins from Github, name as it appears in the URL
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -49,24 +50,26 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'python-mode/python-mode'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'jmcantrell/vim-diffchanges'
 
 call vundle#end()
 
 " -----------------------------------------------------------------------------
 
 " A function to clear the undo history
-function! <SID>ForgetUndo()
+function! <SID>clearUndo()
   let old_undolevels = &undolevels
   set undolevels=-1
   exe "normal a \<BS>\<Esc>"
   let &undolevels = old_undolevels
   unlet old_undolevels
 endfunction
-command! -nargs=0 ClearUndo call <SID>ForgetUndo()
+com! -nargs=0 ClearUndo call <SID>clearUndo()
 
 " -----------------------------------------------
 
-function! ToggleWrapFunc()
+function! <SID>wrapToggle()
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
@@ -98,7 +101,62 @@ function! ToggleWrapFunc()
     inoremap <buffer> <silent> <End>  <C-o>g<End>
   endif
 endfunction
-command! -nargs=0 ToggleWrap call ToggleWrapFunc()
+com! -nargs=0 WrapToggle call <SID>wrapToggle()
+
+" -----------------------------------------------
+
+" Save current view settings on a per-window, per-buffer basis.
+function! AutoSaveWinView()
+    if !exists("w:SavedBufView")
+        let w:SavedBufView = {}
+    endif
+    let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+    let buf = bufnr("%")
+    if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+        let v = winsaveview()
+        let atStartOfFile = v.lnum == 1 && v.col == 0
+        if atStartOfFile && !&diff
+            call winrestview(w:SavedBufView[buf])
+        endif
+        unlet w:SavedBufView[buf]
+    endif
+endfunction
+
+" When switching buffers, preserve window view.
+if v:version >= 700
+    autocmd BufLeave * call AutoSaveWinView()
+    autocmd BufEnter * call AutoRestoreWinView()
+endif
+
+" -----------------------------------------------
+
+let g:quickfix_is_open = 0
+
+function! <SID>quickfixToggle()
+  if g:quickfix_is_open
+    cclose
+    let g:quickfix_is_open = 0
+    execute g:quickfix_return_to_window . "wincmd w"
+  else
+    let g:quickfix_return_to_window = winnr()
+    copen
+    let g:quickfix_is_open = 1
+  endif
+endfunction
+
+" -----------------------------------------------
+
+function! <SID>foldColumnToggle()
+  if &foldcolumn
+     setlocal foldcolumn=0
+  else
+     setlocal foldcolumn=4
+  endif
+endfunction
 
 " -----------------------------------------------------------------------------
 
@@ -136,10 +194,17 @@ set statusline+=\ %P    "percent through file
 set colorcolumn=80
 set cursorline
 
-" change cursor shape in different modes
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
+if &term =~ "^xterm\\|rxvt"
+  " 1 or 0 -> solid block
+  " 2 -> blinking block
+  " 3 -> solid underscore
+  " 4 -> blinking underscore
+  " 5 -> solid vertical bar
+  " 6 -> blinking vertical bar
+  let &t_SI = "\<Esc>[6 q"        " cursor in insert mode
+  let &t_SR = "\<Esc>[4 q"        " cursor in replace mode
+  let &t_EI = "\<Esc>[2 q"        " cursor in normal mode
+endif
 
 hi OverLength ctermbg=black ctermfg=NONE guibg=NONE
 match OverLength /\%80v.\+/
@@ -164,7 +229,7 @@ set scrolloff=5                 " Show a few lines of context around the cursor.
 set visualbell                  " to disable the annoying beeps
 set vb t_vb=
 set nowrap
-" set paste                       " no intelligent indenting when pasting from clipboard
+" set paste                       " no intelligent indenting when pasting from clipboard, this breaks gq indenting
 set linebreak
 set number                      " line numbering
 set nolist                      " list disables linebreak
@@ -271,7 +336,7 @@ if executable('ag')
 endif
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|txt|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
+  \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
@@ -280,13 +345,13 @@ let g:ctrlp_funky_syntax_highlight = 1
 
 " Python-mode
 let g:pymode = 1
-let g:pymode_lint = 1
+let g:pymode_lint = 0
 let g:pymode_lint_ignore = ['W', 'E111', 'E201', 'E202', 'E265', 'E114', 'E302', 'E203', 'E122', 'E124', 'E127', 'E128']
 " let g:pymode_warnings = 1
 let g:pymode_indent = 0
 let g:pymode_folding = 0
 let g:pymode_options_colorcolumn = 1
-let g:pymode_options_max_line_length = 80
+let g:pymode_options_max_line_length = 79
 let g:pymode_quickfix_minheight = 3
 let g:pymode_quickfix_maxheight = 12
 let g:pymode_breakpoint_bind = '<leader>b'
@@ -314,8 +379,8 @@ let mapleader = ";"
 inoremap <C-U> <C-G>u<C-U>
 
 " ctag search with CtrlP
-nnoremap <leader>i :CtrlPTag<cr>
-nnoremap <Leader>f :BufExplorer<Cr>
+nnoremap <leader>i :CtrlPTag<Cr>
+nnoremap <leader>f :BufExplorer<Cr>
 " quick save
 nnoremap <Leader>s :update<Cr>
 " quick close current buffer
@@ -329,7 +394,7 @@ nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " clear search highlightings when done
 nnoremap <Leader>c :let @/ = ""<Cr>
 
-noremap  <Leader>w :ToggleWrap<CR>
+noremap  <Leader>w :WrapToggle<CR>
 nnoremap <Leader>u :ClearUndo<Cr>
 nnoremap <Leader>n :NERDTreeToggle<CR>
 
@@ -383,6 +448,13 @@ vnoremap <C-p> ygv<Esc>p
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
+
+nnoremap * *<C-o>:%s///gn<CR>``
+
+noremap <Leader>q :call <SID>quickfixToggle()<Cr>
+nnoremap <leader>F :call <SID>foldColumnToggle()<Cr>
+nnoremap <leader>D :DiffChangesDiffToggle<Cr>
+vnoremap // y/<C-r>"<Cr>
 
 " -----------------------------------------------------------------------------
 

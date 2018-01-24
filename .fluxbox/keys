@@ -157,11 +157,11 @@ OnRightGrip Move1         :StartResizing bottomright
 Mod4 x                     :ExecCommand xterm
 Mod4 r                     :ExecCommand bashrun
 Mod4 q                     :ExecCommand qalculate-gtk
-Mod4 c                     :ExecCommand date | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=center --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-64-*-*-*-*-*-*-*"
+Mod4 k                     :ExecCommand toggle-cmd xvkbd
+Mod4 c                     :ExecCommand osd
 Mod4 Shift c               :ToggleCmd {Exec conky} {pkill conky}
 Mod4 Shift e               :ExecCommand env | sort | xmessage -file -
 Mod4 Shift x               :ExecCommand xkill
-Mod4 y                     :ExecCommand yakyak
 Mod4 t                     :ExecCommand telegram
 !Mod4 t                     :ExecCommand tomahaw
 !Control Mod1 1            :ExecCommand urxvt-rc
@@ -200,8 +200,8 @@ Mod4 o                     :Exec POS=$(cmus-remote -Q | grep position | cut -d' 
 Mod4 59                    :Exec cmus-remote -C 'seek -10'   && echo "Seek -10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 Mod4 60                    :Exec cmus-remote -C 'seek +10'   && echo "Seek +10sec" | osd_cat --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*"
 
-XF86Sleep                  :Exec sudo pm-suspend
-XF86Suspend                :Exec sudo pm-suspend
+XF86Sleep                  :Exec sudo systemctl suspend
+XF86Suspend                :Exec sudo systemctl suspend
 
 !XF86Display
 !XF86TouchpadOn
