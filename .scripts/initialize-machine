@@ -48,7 +48,7 @@ ntfs-3g            virtualbox-guest-utils  gdb
 openssh            virtualbox-host-dkms    patch
 sudo               automake                pkg-config
 aria2              terminus-font           xorg-fonts-100dpi
-xorg-fonts-75dpi
+xorg-fonts-75dpi   lightdm-gtk-greeter     light-locker
 "
 
 #pm-utils xorg-server-utils
@@ -62,6 +62,8 @@ systemctl enable sshd.socket
 systemctl start sshd.socket
 systemctl enable netctl-auto@.service
 systemctl start netctl-auto@.service
+sudo systemctl enable lightdm.service
+sudo systemctl start lightdm.service
 
 $HOME/bin/set-python 2
 pip install twisted argparse

@@ -37,7 +37,7 @@
 Mod4 Shift c              :Reconfigure
 Mod4 Shift r              :Restart
 Control Mod1 Delete       :Exit
-Mod4 l                    :ExecCommand xscreensaver-command -lock
+Mod4 l                    :ExecCommand light-locker-command -l
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! menus
@@ -159,7 +159,7 @@ Mod4 r                     :ExecCommand bashrun
 Mod4 q                     :ExecCommand qalculate-gtk
 Mod4 k                     :ExecCommand toggle-cmd xvkbd
 Mod4 c                     :ExecCommand osd
-Mod4 Shift c               :ToggleCmd {Exec conky} {pkill conky}
+Mod4 Shift c               :ExecCommand toggle-cmd conky
 Mod4 Shift e               :ExecCommand env | sort | xmessage -file -
 Mod4 Shift x               :ExecCommand xkill
 Mod4 t                     :ExecCommand telegram

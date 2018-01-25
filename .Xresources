@@ -35,6 +35,9 @@
 ! !#define _background    #1f1f1f
 ! #define _cursorColor   #8faf9f
 
+#define _black    #000000
+#define _white    #ffffff
+
 ! Molokai Theme
 #define _background    #272822
 ! #define _background    #101010
@@ -147,6 +150,39 @@ xvkbd*Command.resize: false
 xvkbd*Repeater.resize: false
 xvkbd*Command.justify: center
 xvkbd*Repeater.justify: center
+
+! xmessage -------------------------------------------------------------------
+!
+xmessage*Font: -*-dejavu sans-medium-r-*-*-24-*-*-*-*-*-*-*
+xmessage*form.okay.shapeStyle: rectangle
+xmessage*form.okay.background: IndianRed
+xmessage*form.okay.foreground: _foreground
+xmessage*message*background: _background
+xmessage*background: _background
+xmessage*foreground: _foreground
+xmessage*Scrollbar.width: 10
+xmessage*Scrollbar.borderWidth: 1
+xmessage*Text.?.cursorColor: _foreground
+xmessage*Text.borderColor: _background
+xmessage*Text*background: _background
+xmessage*Command.highlightThickness: 1
+xmessage*Command.internalWidth: 5
+xmessage*Command.internalHeight: 3
+xmessage*Command.borderColor: _background
+xmessage*Command.shapeStyle: Rectangle
+xmessage*Command.background: _background
+xmessage*faceName: Terminus:style=Regular:size=12
+xmessage*message.scrollVertical: Always
+xmessage*message.scrollHorizontal: Never
+xmessage*center: true
+xmessage*minHeight: 200
+xmessage*minWidth: 500
+xmessage*maxWidth: 1000
+xmessage*maxHeight: 1000
+! add keyboard shortcuts to easily quit program
+! xmessage*baseTranslations:#augment\
+!         <Key>Return:exit()\n\
+!         <Key>space:exit()
 
 ! URxvt ----------------------------------------------------------------------
 
@@ -310,23 +346,23 @@ xscreensaver.Dialog.dateFont:           -*-helvetica-medium-r-*-*-12-*-*-*-*-*-i
 xscreensaver.passwd.passwdFont:         -*-helvetica-medium-r-*-*-24-*-*-*-*-*-iso8859-1
 
 !general dialog box (affects main hostname, username, password text)
-xscreensaver.Dialog.foreground:         #ffffff
-xscreensaver.Dialog.background:         #000000
-xscreensaver.Dialog.topShadowColor:     #000000
-xscreensaver.Dialog.bottomShadowColor:  #000000
-xscreensaver.Dialog.Button.foreground:  #666666
-xscreensaver.Dialog.Button.background:  #000000
+xscreensaver.Dialog.foreground:         _foreground
+xscreensaver.Dialog.background:         _black
+xscreensaver.Dialog.topShadowColor:     _black
+xscreensaver.Dialog.bottomShadowColor:  _black
+xscreensaver.Dialog.Button.foreground:  _foreground
+xscreensaver.Dialog.Button.background:  _black
 
 !username/password input box and date text colour
-xscreensaver.Dialog.text.foreground:    #666666
-xscreensaver.Dialog.text.background:    #000000
+xscreensaver.Dialog.text.foreground:    _foreground
+xscreensaver.Dialog.text.background:    _black
 xscreensaver.Dialog.internalBorderWidth:0
 xscreensaver.Dialog.borderWidth:        0
 xscreensaver.Dialog.shadowThickness:    2
 
 !timeout bar (background is actually determined by Dialog.text.background)
-xscreensaver.passwd.thermometer.foreground:  #111111
-xscreensaver.passwd.thermometer.background:  #000000
+xscreensaver.passwd.thermometer.foreground:  _foreground
+xscreensaver.passwd.thermometer.background:  _black
 xscreensaver.passwd.thermometer.width:       8
 
 !datestamp format--see the strftime(3) manual page for details

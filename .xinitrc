@@ -1,13 +1,52 @@
 #!/bin/sh
 
-[ -f ~/.Xresources ] && xrdb -merge -I$HOME ~/.Xresources
+echo "Running X session wrapper"
 
-xbindkeys
+for file in "/etc/profile" "$HOME/.profile" "/etc/xprofile" "$HOME/.xprofile"; do
+    if [ -f "$file" ]; then
+        echo "Loading profile from $file";
+        . "$file"
+    fi
+done
 
-# i3 & wmpid=$!
-fluxbox & wmpid=$!
+for file in "/etc/X11/Xresources" "$HOME/.Xresources"; do
+    if [ -f "$file" ]; then
+        echo "Loading resource: $file"
+        xrdb -merge "$file"
+    fi
+done
 
-[ -f /etc/xprofile ] && source /etc/xprofile
-[ -f ~/.xprofile ] && source ~/.xprofile
+# Load xmodmap if not using XKB
+if [ -z "$XKB_IN_USE" ]; then
+    for file in "/etc/X11/Xmodmap" "$HOME/.Xmodmap"; do
+        if [ -f "$file" ]; then
+           echo "Loading modmap: $file"
+           xmodmap "$file"
+        fi
+    done
+fi
+unset XKB_IN_USE
 
-wait $wmpid
+# Run all system xinitrc shell scripts
+xinitdir="/etc/X11/xinit/xinitrc.d"
+if [ -d "$xinitdir" ]; then
+    for script in $xinitdir/*; do
+        echo "Loading xinit script $script"
+        if [ -x "$script" -a ! -d "$script" ]; then
+            . "$script"
+        fi
+    done
+fi
+
+# Run user xsession shell script
+script="$HOME/.xsession"
+if [ -x "$script" -a ! -d "$script" ]; then
+    echo "Loading xsession script $script"
+    . "$script"
+fi
+
+echo "X session wrapper complete, running session $@"
+
+exec /usr/bin/fluxbox
+#exec /usr/bin/i3
+
