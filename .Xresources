@@ -84,6 +84,20 @@ Xft.autohint:   0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
 
+! xdm  -----------------------------------------------------------------------
+
+xlogin*frameWidth: 1
+xlogin*innerFramesWidth: 1
+xlogin*logoPadding: 0
+xlogin*geometry:    300x175-0-0
+! xlogin*logoFileName: /usr/share/xdm/pixmaps/xorg.xpm
+! xlogin*logoFileName: /usr/share/xdm/pixmaps/xorg-bw.xpm
+xlogingreetFont:  -adobe-helvetica-bold-o-normal--20------iso8859-1
+xloginfont:       -adobe-helvetica-medium-r-normal--14------iso8859-1
+xloginpromptFont: -adobe-helvetica-bold-r-normal--14------iso8859-1
+xloginfailFont:   -adobe-helvetica-bold-r-normal--14------iso8859-1
+! xlogin*allowNullPasswd: true
+
 ! xvkbd ----------------------------------------------------------------------
 
 xvkbd*Font:        -*-dejavu sans-medium-r-*-*-36-*-*-*-*-*-*-*

@@ -158,6 +158,14 @@ function! <SID>foldColumnToggle()
   endif
 endfunction
 
+" -----------------------------------------------
+
+" copy current files path to clipboard
+com! -nargs=0 CopyPath let @"=expand("%:p")
+
+" sort words in the current line
+com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' ')) 
+
 " -----------------------------------------------------------------------------
 
 " Theme setup
@@ -455,6 +463,8 @@ noremap <Leader>q :call <SID>quickfixToggle()<Cr>
 nnoremap <leader>F :call <SID>foldColumnToggle()<Cr>
 nnoremap <leader>D :DiffChangesDiffToggle<Cr>
 vnoremap // y/<C-r>"<Cr>
+
+nmap <Leader>cp :CopyPath<CR>
 
 " -----------------------------------------------------------------------------
 

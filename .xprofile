@@ -33,7 +33,7 @@ unclutter -idle 2 -jitter 10 -root &
 xsetroot -solid "#110011"
 [ -f ~/.bg ] && xloadimage -onroot ~/.bg
 
-light-locker &
 detect-displays
 # xflux -l 49.197168 -g -123.004449
+xautolock -detectsleep -time 6 -locker "lockscreen off" -nowlocker "lockscreen" &
 

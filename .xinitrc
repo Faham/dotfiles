@@ -47,6 +47,6 @@ fi
 
 echo "X session wrapper complete, running session $@"
 
-exec /usr/bin/fluxbox
-#exec /usr/bin/i3
+# exec /usr/bin/fluxbox
+exec /usr/bin/i3
 

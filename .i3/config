@@ -47,10 +47,10 @@ new_window 1pixel
 new_float 1pixel
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+h focus left
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -59,10 +59,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -71,10 +71,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+o split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+e split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -82,7 +82,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -107,6 +107,11 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
+
+bindsym $mod+m move workspace to output left
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -156,7 +161,18 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        colors {
+                background #272822
+                # statusline #00A5FF #that neon blue
+                separator #272822
+                focused_workspace  #4c7899 #285577 #ffffff
+                active_workspace   #333333 #5f676a #ffffff
+                inactive_workspace #333333 #222222 #888888
+                urgent_workspace   #2f343a #900000 #ffffff
+        }
         status_command i3status
+        font pango:Hack, FontAwesome 10
+        # status_command i3status -c ~/.i3status.conf
 }
 
 # sound stuff, basicly control the volume via amixer (alsa)
@@ -165,14 +181,12 @@ bindsym --release XF86AudioLowerVolume exec amixer -c 1 -q sset Master 5%-
 bindsym --release XF86AudioRaiseVolume exec amixer -c 1 -q sset Master 5%+
 
 # brightness
-bindcode 232 exec --no-startup-id /home/faham/script/brightness.sh -50
-bindcode 233 exec --no-startup-id /home/faham/script/brightness.sh 50
-# bindcode --release Shift+232 exec xbacklight -dec 1
-# bindcode --release Shift+233 exec xbacklight -inc 1
+bindcode 232 exec --no-startup-id brightness down
+bindcode 233 exec --no-startup-id brightness up
 
 # Handy apps keybindings
 bindsym --release $mod+Shift+x exec --no-startup-id xkill
-bindsym --release Ctrl+Shift+l exec --no-startup-id i3lock -c 272822 -n
+bindsym --release Ctrl+Shift+l exec --no-startup-id lockscreen off
 
 # for_window [title="(has no name)" ] floating enable
 # floating_minimum_size 640 x 480
