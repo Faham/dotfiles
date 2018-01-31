@@ -35,5 +35,4 @@ xsetroot -solid "#110011"
 
 detect-displays
 # xflux -l 49.197168 -g -123.004449
-xautolock -detectsleep -time 6 -locker "lockscreen off" -nowlocker "lockscreen" &
 

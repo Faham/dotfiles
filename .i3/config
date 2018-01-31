@@ -80,8 +80,8 @@ bindsym $mod+e split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+# bindsym $mod+s layout stacking
+# bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -140,10 +140,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -172,21 +172,51 @@ bar {
         }
         status_command i3status
         font pango:Hack, FontAwesome 10
-        # status_command i3status -c ~/.i3status.conf
+        mode hide
+        hidden_state hide
+        modifier $mod
 }
 
+# volume control (Super + 0/-/=)
+# bindsym --release $mod+19 exec xdotool key --clearmodifiers XF86AudioMute
+# bindsym --release $mod+20 exec xdotool key --clearmodifiers XF86AudioLowerVolume
+# bindsym --release $mod+21 exec xdotool key --clearmodifiers XF86AudioRaiseVolume
 # sound stuff, basicly control the volume via amixer (alsa)
-bindsym --release XF86AudioMute        exec amixer -c 1 -a sset Master,0 toggle 2&>1 > /dev/null
-bindsym --release XF86AudioLowerVolume exec amixer -c 1 -q sset Master 5%-
-bindsym --release XF86AudioRaiseVolume exec amixer -c 1 -q sset Master 5%+
+# bindsym --release XF86AudioMute        exec amixer -c 1 -a sset Master,0 toggle 2&>1 > /dev/null
+# bindsym --release XF86AudioLowerVolume exec amixer -c 1 -q sset Master 5%-
+# bindsym --release XF86AudioRaiseVolume exec amixer -c 1 -q sset Master 5%+
 
-# brightness
-bindcode 232 exec --no-startup-id brightness down
-bindcode 233 exec --no-startup-id brightness up
+# brightness control
+bindsym --release $mod+F11 exec xdotool key --clearmodifiers XF86MonBrightnessDown
+bindsym --release $mod+F12 exec xdotool key --clearmodifiers XF86MonBrightnessUp
+# bindcode 232 exec --no-startup-id brightness down
+# bindcode 233 exec --no-startup-id brightness up
+
+# media playback controls
+# bindsym --release $mod+Shift+s exec xdotool key --clearmodifiers XF86AudioStop
+bindsym --release $mod+Shift+p exec xdotool key --clearmodifiers XF86AudioPrev
+bindsym --release $mod+Shift+s exec xdotool key --clearmodifiers XF86AudioPlay
+bindsym --release $mod+Shift+n exec xdotool key --clearmodifiers XF86AudioNext
+# bindsym --release $mod+8     exec xdotool key --clearmodifiers XF86Favorites
+
+bindsym --release XF86Sleep   exec systemctl suspend
+bindsym --release XF86Suspend exec systemctl suspend
+
+# HDMI output dual screen
+bindsym --release 133 exec detect-displays
+
+# screenshots
+bindsym --release Print exec scrot -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
 
 # Handy apps keybindings
 bindsym --release $mod+Shift+x exec --no-startup-id xkill
 bindsym --release Ctrl+Shift+l exec --no-startup-id lockscreen off
+for_window [class="XVkbd"] floating enable
+# bindsym --release $mod+k exec --no-startup-id toggle-cmd xvkbd
+for_window [class="TelegramDesktop"] floating enable
+bindsym --release $mod+t exec --no-startup-id telegram
+bindsym --release $mod+c exec --no-startup-id osd
+# bindsym --release $mod+q exec --no-startup-id qalculate-gtk
 
 # for_window [title="(has no name)" ] floating enable
 # floating_minimum_size 640 x 480

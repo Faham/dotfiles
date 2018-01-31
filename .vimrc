@@ -164,7 +164,10 @@ endfunction
 com! -nargs=0 CopyPath let @"=expand("%:p")
 
 " sort words in the current line
-com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' ')) 
+com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' '))
+
+" clear last search buffer
+com! -nargs=0 ClearHighlights let @/ = ""
 
 " -----------------------------------------------------------------------------
 
@@ -400,7 +403,7 @@ nnoremap <Leader>o :CtrlPFunky<Cr>
 nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " clear search highlightings when done
-nnoremap <Leader>c :let @/ = ""<Cr>
+nnoremap <Leader>c :ClearHighlights<Cr>
 
 noremap  <Leader>w :WrapToggle<CR>
 nnoremap <Leader>u :ClearUndo<Cr>

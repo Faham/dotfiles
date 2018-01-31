@@ -15,12 +15,14 @@ usermod -G sys --append $USER
 patch -r - /etc/sudoers $HOME/bin/files/sudoers.patch
 patch -r - /etc/pacman.conf $HOME/bin/files/pacman.conf.patch
 cp $HOME/bin/files/motd /etc/motd
+cp ~/.scripts/files/screenlock-sleep.service /usr/lib/systemd/system/
+cp ~/.scripts/files/screenlock-idle.service /usr/lib/systemd/system/
 
 PACKAGES="
 aria2 autoconf automake cmake cmus ctags cups dmenu downgrade evince
 exfat-utils fakeroot festival-us fluxbox freerdp gdb ghostscript gimp git
 gparted gpicview gsfonts gvfs gvfs-mtp htop i3-wm i3lock i3status imagemagick
-libimobiledevice libva-intel-driver libvdpau-va-gl linux-headers mesa-libgl
+libva-intel-driver libvdpau-va-gl linux-headers mesa-libgl
 mutagen nmap ntfs-3g openssh p7zip patch pcmanfm picard pkg-config pulseaudio
 python-pip python2 python2-pip qalculate-gtk rdesktop rsync samba scrot sshfs
 sudo terminus-font tk tmux ttf-bitstream-vera ttf-dejavu ttf-font-awesome
@@ -31,15 +33,15 @@ xbindkeys xclip xdot xdotool xf86-input-synaptics xf86-video-intel xloadimage
 xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi xorg-server xorg-xinit
 xorg-xmessage xosd xterm yaourt youtube-dl zip zsh
 "
-
 #pm-utils xorg-server-utils
 
 pacman -Syy
 pacman -S $PACKAGES --noconfirm
 
-cp ~/.scripts/files/screenlock.service /usr/lib/systemd/system/
-systemctl enable screenlock.service
-systemctl start screenlock.service
+systemctl enable screenlock-sleep.service
+systemctl start screenlock-sleep.service
+systemctl enable screenlock-idle.service
+systemctl start screenlock-idle.service
 systemctl enable sshd.service
 systemctl start sshd.service
 systemctl enable sshd.socket
@@ -58,8 +60,7 @@ gpasswd -a $USER lp
 gpasswd -a $USER sys
 
 su $USER
-yaourt -S google-chrome sublime-text-dev \
-   git-crypt xvkbd laptop-mode-tools
+yaourt -S google-chrome git-crypt xvkbd laptop-mode-tools
 git submodule update --init --recursive
 
 su root
