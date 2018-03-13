@@ -1,9 +1,5 @@
 #!/bin/bash
 
-BAT="Battery: $( cat /sys/class/power_supply/BAT0/capacity )% $( cat /sys/class/power_supply/BAT0/status )"
-DATE=$( date )
-BKLIGHT="Brightness: $( xbacklight -get | cut -d. -f1 )%"
-
 osd_pid='/tmp/osd.pid'
 
 if [[ -f $osd_pid ]]; then
@@ -11,16 +7,21 @@ if [[ -f $osd_pid ]]; then
     rm $osd_pid
 fi
 
-echo "$BKLIGHT $BAT" | osd_cat \
-   --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=60 \
-   --align=center --indent=0 --lines=1 --delay=2 \
-   --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*" &
+if [[ -n "$1" ]]; then
+   echo "$1" | osd_cat \
+      --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=100 \
+      --align=center --indent=0 --lines=1 --delay=2 \
+      --font="-*-dejavu sans-bold-r-*-*-64-*-*-*-*-*-*-*" &
 
-echo $! >> $osd_pid
+   echo $! >> $osd_pid
+else
+   DATE=$( date +"%a %h %d, %I:%M:%S" )
 
-echo $DATE | osd_cat \
-   --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=100 \
-   --align=center --indent=0 --lines=1 --delay=2 \
-   --font="-*-dejavu sans-bold-r-*-*-64-*-*-*-*-*-*-*" &
+   echo $DATE | osd_cat \
+      --shadow=1 --shadowcolour=#333333 --color=#FFFFFF --pos=bottom --offset=100 \
+      --align=center --indent=0 --lines=1 --delay=2 \
+      --font="-*-dejavu sans-bold-r-*-*-64-*-*-*-*-*-*-*" &
 
-echo $! >> $osd_pid
+   echo $! >> $osd_pid
+fi
+

@@ -1,0 +1,13 @@
+[Unit]
+Description=Lock X session
+Before=hibernate.target
+
+[Service]
+User=faham
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/xautolock -locknow
+
+[Install]
+WantedBy=hibernate.target
+

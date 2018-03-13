@@ -161,9 +161,10 @@ arg_test $@
 file1=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 file2=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
 
-scrot -z -d0 -q20 "$file1"
+scrot -z -d0 -q100 "$file1"
 # convert "$file1" -blur 0x3 "$file2"
-convert "$file1" -filter Gaussian -resize 10% -define filter:sigma=2.5 -resize 1000% "$file2"
+# convert "$file1" -filter Gaussian -resize 10% -define filter:sigma=2.5 -resize 1000% "$file2"
+convert "$file1" -resize 10% -blur 0x6 -resize 1000% "$file2"
 rm "$file1" # Remove for security
 
 if [ $use_logo -eq 1 ]; then

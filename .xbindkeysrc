@@ -68,19 +68,37 @@
 "volume up"
     m:0x0 + c:123
     XF86AudioRaiseVolume
+"volume up"
+    m:0x15 + c:21
+    Control+Shift + equal
+
 "volume down"
     m:0x0 + c:122
     XF86AudioLowerVolume
+"volume down"
+    m:0x15 + c:20
+    Control+Shift + minus
+
 "volume toggle"
     m:0x0 + c:121
     XF86AudioMute
+"volume toggle"
+    m:0x15 + c:19
+    Control+Shift + 0
 
 "brightness down"
     m:0x0 + c:232
     XF86MonBrightnessDown
+"brightness down"
+    m:0x15 + c:95
+    Control+Shift + F11
+
 "brightness up"
     m:0x0 + c:233
     XF86MonBrightnessUp
+"brightness up"
+    m:0x15 + c:96
+    Control+Shift + F12
 
 
 # "cmus-remote -C player-stop ; echo Liked       | osd_cat --shadow=1 --shadowcolour=\#333333 --color=\#FFFFFF --pos=bottom --offset=30 --align=right --indent=30 --lines=1 --delay=1 --font='-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*'"

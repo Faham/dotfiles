@@ -1,8 +1,23 @@
 #!/bin/bash
 
+pntDevId=$( xinput list | grep "pointer" | grep -v "Virtual" | grep -o "id=[0-9]*" | cut -d= -f2 )
+
+# disable all pointing devices
+for f in $pntDevId
+do
+   xinput set-prop $f "Device Enabled" "0"
+done
+
 # if "off" is given as parameter, then spawn a new thread to turn off the screen
 [ "$1" = "off" ] && $(sleep 1 &&  xset dpms force off) &
 
 # this must be the last command, and it must be 'non forking', as expected by 'xautolock'
 # i3lock -c 272822 -n -e -f -t -i /tmp/temp.png
-i3lock-wrapper -l -n -e
+# i3lock-wrapper -l -n -e
+i3lock-wrapper -n -e
+
+# enable all pointing devices
+for f in $pntDevId
+do
+   xinput set-prop $f "Device Enabled" "1"
+done

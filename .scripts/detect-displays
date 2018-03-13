@@ -11,3 +11,6 @@ if [[ 'connected' == `xrandr --query | grep "^$DISPLAY_1" | cut -d' ' -f2` ]]; t
 else
     xrandr --auto --output $DISPLAY_0 --primary
 fi
+
+xset r rate 175 50
+

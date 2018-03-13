@@ -15,8 +15,8 @@ usermod -G sys --append $USER
 patch -r - /etc/sudoers $HOME/bin/files/sudoers.patch
 patch -r - /etc/pacman.conf $HOME/bin/files/pacman.conf.patch
 cp $HOME/bin/files/motd /etc/motd
-cp ~/.scripts/files/screenlock-sleep.service /usr/lib/systemd/system/
-cp ~/.scripts/files/screenlock-idle.service /usr/lib/systemd/system/
+cp ~/.scripts/files/screenlock-suspend.service /usr/lib/systemd/system/
+cp ~/.scripts/files/screenlock-hibernate.service /usr/lib/systemd/system/
 
 PACKAGES="
 aria2 autoconf automake cmake cmus ctags cups dmenu downgrade evince
@@ -31,17 +31,17 @@ ttf-ubuntu-font-family unclutter unzip vim vim-spell-en virtualbox
 virtualbox-guest-utils virtualbox-host-dkms vlc wget wpa_actiond xautolock
 xbindkeys xclip xdot xdotool xf86-input-synaptics xf86-video-intel xloadimage
 xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi xorg-server xorg-xinit
-xorg-xmessage xosd xterm yaourt youtube-dl zip zsh
+xorg-xmessage xosd xterm yaourt youtube-dl zip zsh netctl-vpnc mplayer mosh
 "
 #pm-utils xorg-server-utils
 
 pacman -Syy
 pacman -S $PACKAGES --noconfirm
 
-systemctl enable screenlock-sleep.service
-systemctl start screenlock-sleep.service
-systemctl enable screenlock-idle.service
-systemctl start screenlock-idle.service
+systemctl enable screenlock-suspend.service
+systemctl start screenlock-suspend.service
+systemctl enable screenlock-hibernate.service
+systemctl start screenlock-hibernate.service
 systemctl enable sshd.service
 systemctl start sshd.service
 systemctl enable sshd.socket

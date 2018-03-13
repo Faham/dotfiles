@@ -106,7 +106,7 @@ bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+# bindsym $mod+0 workspace 10  # Mod4+0 used to Mute through xbindkeys
 
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
@@ -123,7 +123,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+# bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -171,33 +171,27 @@ bar {
                 urgent_workspace   #2f343a #900000 #ffffff
         }
         status_command i3status
-        font pango:Hack, FontAwesome 10
+        font pango:Hack, FontAwesome 17
         mode hide
         hidden_state hide
         modifier $mod
 }
 
 # volume control (Super + 0/-/=)
-# bindsym --release $mod+19 exec xdotool key --clearmodifiers XF86AudioMute
-# bindsym --release $mod+20 exec xdotool key --clearmodifiers XF86AudioLowerVolume
-# bindsym --release $mod+21 exec xdotool key --clearmodifiers XF86AudioRaiseVolume
-# sound stuff, basicly control the volume via amixer (alsa)
-# bindsym --release XF86AudioMute        exec amixer -c 1 -a sset Master,0 toggle 2&>1 > /dev/null
-# bindsym --release XF86AudioLowerVolume exec amixer -c 1 -q sset Master 5%-
-# bindsym --release XF86AudioRaiseVolume exec amixer -c 1 -q sset Master 5%+
+# bindsym --release Ctrl+Shift+19 exec xdotool key --clearmodifiers XF86AudioMute
+# bindsym --release Ctrl+Shift+20 exec xdotool key --clearmodifiers XF86AudioLowerVolume
+# bindsym --release Ctrl+Shift+21 exec xdotool key --clearmodifiers XF86AudioRaiseVolume
 
 # brightness control
-bindsym --release $mod+F11 exec xdotool key --clearmodifiers XF86MonBrightnessDown
-bindsym --release $mod+F12 exec xdotool key --clearmodifiers XF86MonBrightnessUp
-# bindcode 232 exec --no-startup-id brightness down
-# bindcode 233 exec --no-startup-id brightness up
+# bindsym --release Ctrl+Shift+F11 exec xdotool key --clearmodifiers XF86MonBrightnessDown
+# bindsym --release Ctrl+Shift+F12 exec xdotool key --clearmodifiers XF86MonBrightnessUp
 
 # media playback controls
-# bindsym --release $mod+Shift+s exec xdotool key --clearmodifiers XF86AudioStop
-bindsym --release $mod+Shift+p exec xdotool key --clearmodifiers XF86AudioPrev
-bindsym --release $mod+Shift+s exec xdotool key --clearmodifiers XF86AudioPlay
-bindsym --release $mod+Shift+n exec xdotool key --clearmodifiers XF86AudioNext
-# bindsym --release $mod+8     exec xdotool key --clearmodifiers XF86Favorites
+bindsym --release Ctrl+Shift+s     exec xdotool key --clearmodifiers XF86AudioStop && osd "Audio playback: Stop"
+bindsym --release Ctrl+Shift+p     exec xdotool key --clearmodifiers XF86AudioPrev && osd "Audio playback: Previous"
+bindsym --release Ctrl+Shift+space exec xdotool key --clearmodifiers XF86AudioPlay && osd "Audio playback: Play/Pause"
+bindsym --release Ctrl+Shift+n     exec xdotool key --clearmodifiers XF86AudioNext && osd "Audio playback: Next"
+bindsym --release Ctrl+Shift+8     exec xdotool key --clearmodifiers XF86Favorites && osd "Audio playback: Favorites"
 
 bindsym --release XF86Sleep   exec systemctl suspend
 bindsym --release XF86Suspend exec systemctl suspend
@@ -221,3 +215,6 @@ bindsym --release $mod+c exec --no-startup-id osd
 # for_window [title="(has no name)" ] floating enable
 # floating_minimum_size 640 x 480
 # floating_maximum_size 640 x 480
+
+workspace_auto_back_and_forth yes
+

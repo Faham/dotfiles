@@ -39,6 +39,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'majutsushi/tagbar'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'kien/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
@@ -169,6 +170,8 @@ com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), 
 " clear last search buffer
 com! -nargs=0 ClearHighlights let @/ = ""
 
+com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
+
 " -----------------------------------------------------------------------------
 
 " Theme setup
@@ -184,7 +187,6 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-let g:airline_theme = 'minimalist'
 let g:molokai_original = 1
 let g:rehash256 = 1
 
@@ -241,6 +243,7 @@ set visualbell                  " to disable the annoying beeps
 set vb t_vb=
 set nowrap
 " set paste                       " no intelligent indenting when pasting from clipboard, this breaks gq indenting
+set nopaste
 set linebreak
 set number                      " line numbering
 set nolist                      " list disables linebreak
@@ -256,6 +259,7 @@ set softtabstop=3
 set shiftwidth=3
 set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
+set noswapfile                  " not a fan of swp files
 set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
 " set guifont=Monaco\ for\ Powerline:h13
@@ -339,8 +343,8 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_clear_cache_on_exit=0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_working_path_mode = 'cr'
-let g:ctrlp_root_markers = ['.ctrlp']
+let g:ctrlp_working_path_mode = 'ar'
+let g:ctrlp_root_markers = [ '.ctrlp' ]
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -355,7 +359,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_funky_syntax_highlight = 1
 
 " Python-mode
-let g:pymode = 1
+let g:pymode = 0                        " disable pymode as it slows down vim
 let g:pymode_lint = 0
 let g:pymode_lint_ignore = ['W', 'E111', 'E201', 'E202', 'E265', 'E114', 'E302', 'E203', 'E122', 'E124', 'E127', 'E128']
 " let g:pymode_warnings = 1
@@ -379,6 +383,10 @@ let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace(); # XXX Breakpoint'
 " let g:pymode_breakpoint_cmd = 'import pudb; pu.db; # XXX Breakpoint'
 let g:pymode_syntax = 0
 
+" Airline
+let g:airline_theme = 'minimalist'
+let g:airline#extensions#tagbar#flags = 'f'  " show full tag hierarchy
+
 " -----------------------------------------------------------------------------
 
 " Key combinations
@@ -388,6 +396,8 @@ let mapleader = ";"
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
+
+nnoremap <leader>b :Breakpoint<Cr>
 
 " ctag search with CtrlP
 nnoremap <leader>i :CtrlPTag<Cr>
@@ -419,11 +429,7 @@ nnoremap <Leader>r :so $MYVIMRC<Cr>
 nnoremap <Leader>x :Explore<CR>
 vnoremap <Leader>x :Explore<CR>
 
-" working with tabs
-nnoremap <F7> :bn<CR>
-vnoremap <F7> :bn<CR>
-nnoremap <F8> :bp<CR>
-vnoremap <F8> :bp<CR>
+nnoremap <F8> :TagbarToggle<CR>
 
 " working with tabs
 nnoremap <S-F7> :tabn<CR>
@@ -431,9 +437,13 @@ vnoremap <S-F7> :tabn<CR>
 nnoremap <S-F8> :tabp<CR>
 vnoremap <S-F8> :tabp<CR>
 
-nnoremap <C-k> <Nop>
-nnoremap <C-j> :join<CR>
-vnoremap <C-j> :join<CR>
+" nnoremap <C-j> :join<CR>
+" vnoremap <C-j> :join<CR>
+
+noremap <C-k> <C-w>k
+noremap <C-j> <C-w>j
+noremap     <C-w>h
+noremap <C-l> <C-w>l
 
 " scrolling with arrow keys as well
 nnoremap <C-Up> <C-y>
@@ -467,6 +477,7 @@ nnoremap <leader>F :call <SID>foldColumnToggle()<Cr>
 nnoremap <leader>D :DiffChangesDiffToggle<Cr>
 vnoremap // y/<C-r>"<Cr>
 
+" copy current files path to clipboard
 nmap <Leader>cp :CopyPath<CR>
 
 " -----------------------------------------------------------------------------
