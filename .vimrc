@@ -45,7 +45,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'tpope/vim-sensible'
 Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'              " replace pairings ( { [ ' ...
 Plugin 'tomtom/tcomment_vim'
 Plugin 'terryma/vim-multiple-cursors'
@@ -167,9 +166,6 @@ com! -nargs=0 CopyPath let @"=expand("%:p")
 " sort words in the current line
 com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' '))
 
-" clear last search buffer
-com! -nargs=0 ClearHighlights let @/ = ""
-
 com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
 
 " -----------------------------------------------------------------------------
@@ -189,8 +185,24 @@ endif
 
 let g:molokai_original = 1
 let g:rehash256 = 1
-
 colorscheme molokai
+" setting removing every specific default coloring to fall back to terminal default colors
+hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+" setting vertical split bar colors
+hi VertSplit ctermfg=240 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+" setting error message highlight color
+hi ErrorMsg ctermfg=199 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+" setting search highlight color
+hi Search ctermfg=7 ctermbg=88 cterm=NONE guifg=NONE guibg=NONE gui=NONE
+
+" set vertical split bar char to space
+set fillchars+=vert:\|
+" hi OverLength ctermbg=234 ctermfg=NONE guibg=NONE
+" match OverLength /\%85v.\+/
+
+
+set colorcolumn=80
+set cursorline
 
 set laststatus=2
 set statusline=%t       "tail of the filename
@@ -204,8 +216,6 @@ set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
-set colorcolumn=80
-set cursorline
 
 if &term =~ "^xterm\\|rxvt"
   " 1 or 0 -> solid block
@@ -218,11 +228,6 @@ if &term =~ "^xterm\\|rxvt"
   let &t_SR = "\<Esc>[4 q"        " cursor in replace mode
   let &t_EI = "\<Esc>[2 q"        " cursor in normal mode
 endif
-
-hi OverLength ctermbg=black ctermfg=NONE guibg=NONE
-match OverLength /\%80v.\+/
-
-hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
 " -----------------------------------------------------------------------------
 
@@ -260,6 +265,7 @@ set shiftwidth=3
 set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
 set noswapfile                  " not a fan of swp files
+set ignorecase                  " case insensitive search by default
 set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
 " set guifont=Monaco\ for\ Powerline:h13
@@ -387,6 +393,12 @@ let g:pymode_syntax = 0
 let g:airline_theme = 'minimalist'
 let g:airline#extensions#tagbar#flags = 'f'  " show full tag hierarchy
 
+" Netrw
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 25
+let g:netrw_altv = 1
+
 " -----------------------------------------------------------------------------
 
 " Key combinations
@@ -413,11 +425,10 @@ nnoremap <Leader>o :CtrlPFunky<Cr>
 nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " clear search highlightings when done
-nnoremap <Leader>c :ClearHighlights<Cr>
+nnoremap <Leader>c :nohlsearch<Cr>
 
 noremap  <Leader>w :WrapToggle<CR>
 nnoremap <Leader>u :ClearUndo<Cr>
-nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " make table
 nnoremap <Leader>T :%!column -t<Cr>
@@ -426,19 +437,11 @@ vnoremap <Leader>T :%!column -t<Cr>
 " reload vimrc
 nnoremap <Leader>r :so $MYVIMRC<Cr>
 
-nnoremap <Leader>x :Explore<CR>
-vnoremap <Leader>x :Explore<CR>
+noremap <Leader>x :Vexplore<CR>
 
-nnoremap <F8> :TagbarToggle<CR>
+noremap <F8> :TagbarToggle<CR>
 
-" working with tabs
-nnoremap <S-F7> :tabn<CR>
-vnoremap <S-F7> :tabn<CR>
-nnoremap <S-F8> :tabp<CR>
-vnoremap <S-F8> :tabp<CR>
-
-" nnoremap <C-j> :join<CR>
-" vnoremap <C-j> :join<CR>
+noremap <Leader>j :join<CR>
 
 noremap <C-k> <C-w>k
 noremap <C-j> <C-w>j

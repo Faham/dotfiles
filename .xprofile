@@ -23,7 +23,7 @@ xset fp+ /usr/share/fonts/75dpi
 xset fp+ /usr/share/fonts/TTF
 xset fp+ /usr/share/fonts/OTF
 xset fp+ /usr/share/fonts/gsfonts
-xset r rate 175 50
+xset r rate 150 50
 xset -b
 
 setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
