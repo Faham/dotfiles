@@ -23,4 +23,9 @@ if [[ -f $osd_pid ]]; then
 fi
 
 ($osd_cmd --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*" --text="Brightness: $percent") &
+
+# signalling brightness i3block
+pkill -RTMIN+1 i3blocks
+
 echo $! > $osd_pid
+

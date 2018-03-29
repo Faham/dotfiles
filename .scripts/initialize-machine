@@ -21,7 +21,7 @@ cp ~/.scripts/files/screenlock-hibernate.service /usr/lib/systemd/system/
 PACKAGES="
 aria2 autoconf automake cmake cmus ctags cups dmenu downgrade evince
 exfat-utils fakeroot festival-us fluxbox freerdp gdb ghostscript gimp git
-gparted gpicview gsfonts gvfs gvfs-mtp htop i3-wm i3lock i3status imagemagick
+gparted gpicview gsfonts gvfs gvfs-mtp htop i3-wm i3lock i3blocks imagemagick
 libva-intel-driver libvdpau-va-gl linux-headers mesa-libgl
 mutagen nmap ntfs-3g openssh p7zip patch pcmanfm picard pkg-config pulseaudio
 python-pip python2 python2-pip qalculate-gtk rdesktop rsync samba scrot sshfs
@@ -32,6 +32,7 @@ virtualbox-guest-utils virtualbox-host-dkms vlc wget wpa_actiond xautolock
 xbindkeys xclip xdot xdotool xf86-input-synaptics xf86-video-intel xloadimage
 xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi xorg-server xorg-xinit
 xorg-xmessage xosd xterm yaourt youtube-dl zip zsh netctl-vpnc mplayer mosh
+rofi sysstat acpi
 "
 #pm-utils xorg-server-utils
 

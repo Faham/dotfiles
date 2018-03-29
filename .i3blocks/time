@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#----------------------------------------------
+
+full_text=''
+short_text=''
+color='#FFFFFF'
+urgent=false
+
+#----------------------------------------------
+
+YYMonDD=$(date '+%Y%b%d')
+HHMM=$(date '+%H:%M')
+SS=$(date '+%S')
+
+full_text=$(printf "%s%s%s" \
+   "<span font='8'>$YYMonDD</span>" \
+   "<span>$HHMM</span>" \
+   "<span font='8' rise='14000'>$SS</span>" \
+)
+short_text=$full_text
+color= '#FFFFFF'
+
+#----------------------------------------------
+
+echo $full_text
+echo $short_text
+echo $color
+
+if [ "$urgent" = true ]; then
+   exit 33
+else
+   exit 0
+fi

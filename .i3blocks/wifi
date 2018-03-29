@@ -1,0 +1,76 @@
+#!/bin/bash
+# Copyright (C) 2014 Alexander Keller <github@nycroth.com>
+# Copyright (C) 2018 Faham Negini <faham.negini@gmail.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#----------------------------------------------
+
+full_text=''
+short_text=''
+color='#FFFFFF'
+urgent=false
+
+#----------------------------------------------
+
+interface="${BLOCK_INSTANCE:-wlan0}"
+down=false
+up_color='#FFFFFF'
+down_color='#333333'
+quality=0
+icon=''
+internet_icon=''
+internet_color=$down_color
+internet=false
+
+# As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
+# connection (think desktop), the corresponding block should not be displayed.
+! [[ -d /sys/class/net/${interface}/wireless ]] ||
+    ! [[ "$(cat /sys/class/net/$interface/operstate)" = 'up' ]] && down=true
+
+if [ "$down" = true ]; then
+   color=$down_color
+   internet_color=$down_color
+   internet=false
+else
+   color=$up_color
+   quality=$(grep $interface /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+   internet=$(ping -q -w 1 -c 1 `ip r | grep default | grep " $interface " | cut -d ' ' -f 3` > /dev/null && echo true || echo false)
+
+   if [ "$internet" = true ]; then
+      internet_color=$color
+   else
+      internet_color=$down_color
+   fi
+fi
+
+full_text=$(printf "%s" \
+   "<span font='8' foreground='$internet_color'>$internet_icon</span>" \
+   "<span foreground='$color'>$icon</span>" \
+   "<span font='8' rise='14000'>${quality}%</span>" \
+)
+short_text=$full_text
+
+#----------------------------------------------
+
+echo $full_text
+echo $short_text
+echo $color
+
+if [ "$urgent" = true ]; then
+   exit 33
+else
+   exit 0
+fi
+

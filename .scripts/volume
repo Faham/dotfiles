@@ -38,5 +38,8 @@ if [[ -f $osd_pid ]]; then
     kill $(cat $osd_pid) 2> /dev/null;
 fi
 
+# signalling brightness i3block
+pkill -RTMIN+9 i3blocks
+
 ($osd_cmd --font="-*-dejavu sans-bold-r-*-*-32-*-*-*-*-*-*-*" --text="Master Volume: $volume_percent $volume_mute") &
 echo $! > $osd_pid

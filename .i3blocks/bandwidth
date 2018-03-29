@@ -1,0 +1,139 @@
+#!/bin/bash
+# Copyright (C) 2012 Stefan Breunig <stefan+measure-net-speed@mathphys.fsk.uni-heidelberg.de>
+# Copyright (C) 2014 kaueraal
+# Copyright (C) 2015 Thiago Perrotta <perrotta dot thiago at poli dot ufrj dot br>
+# Copyright (C) 2018 Faham Negini <faham.negini@gmail.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#----------------------------------------------
+
+full_text=''
+short_text=''
+color='#FFFFFF'
+urgent=false
+
+#----------------------------------------------
+
+interface="${BLOCK_INSTANCE:-eth0}"
+# interface="$a"
+in_icon=''
+out_icon=''
+down=false
+up_color='#FFFFFF'
+down_color='#333333'
+unknown_color='#FFAE00'
+icon=''
+incoming='0K'
+outgoing='0K'
+internet_icon=''
+internet_color=$down_color
+internet=false
+state='down'
+
+if [ ! -f "/sys/class/net/${interface}/operstate" ]; then
+   state='unknown'
+else
+   state=$(cat /sys/class/net/${interface}/operstate)
+fi
+
+if [ "$state" == "down" ]; then
+   color=$down_color
+   internet_color=$down_color
+   internet=false
+else
+   color=$unknown_color
+   if [ "$state" == "up" ]; then
+      color=$up_color
+   fi
+
+   internet=$(ping -q -w 1 -c 1 `ip r | grep default | grep " $interface " | cut -d ' ' -f 3` > /dev/null && echo true || echo false)
+
+   if [ "$internet" = true ]; then
+      internet_color=$color
+   else
+      internet_color=$down_color
+   fi
+fi
+
+# path to store the old results in
+path="/dev/shm/$(basename $0)-${interface}"
+
+# grabbing data for each adapter.
+read rx < "/sys/class/net/${interface}/statistics/rx_bytes"
+read tx < "/sys/class/net/${interface}/statistics/tx_bytes"
+
+# get time
+time=$(date +%s)
+
+# write current data if file does not exist. Do not exit, this will cause
+# problems if this file is sourced instead of executed as another process.
+if ! [[ -f "${path}" ]]; then
+  echo "${time} ${rx} ${tx}" > "${path}"
+  chmod 0666 "${path}"
+fi
+
+# read previous state and update data storage
+read old < "${path}"
+echo "${time} ${rx} ${tx}" > "${path}"
+
+# parse old data and calc time passed
+old=(${old//;/ })
+time_diff=$(( $time - ${old[0]} ))
+
+# sanity check: has a positive amount of time passed
+[[ "${time_diff}" -gt 0 ]] || exit
+
+# calc bytes transferred, and their rate in byte/s
+rx_diff=$(( $rx - ${old[1]} ))
+tx_diff=$(( $tx - ${old[2]} ))
+rx_rate=$(( $rx_diff / $time_diff ))
+tx_rate=$(( $tx_diff / $time_diff ))
+
+# shift by 10 bytes to get KiB/s. If the value is larger than
+# 1024^2 = 1048576, then display MiB/s instead
+
+rx_kib=$(( $rx_rate >> 10 ))
+if hash bc 2>/dev/null && [[ "$rx_rate" -gt 1048576 ]]; then
+  incoming="`echo "scale=1; $rx_kib / 1024" | bc`M"
+else
+  incoming="${rx_kib}K"
+fi
+
+tx_kib=$(( $tx_rate >> 10 ))
+if hash bc 2>/dev/null && [[ "$tx_rate" -gt 1048576 ]]; then
+  outgoing="`echo "scale=1; $tx_kib / 1024" | bc`M"
+else
+  outgoing="${tx_kib}K"
+fi
+
+full_text=$(printf "%s" \
+   "<span font='8' rise='14000' foreground='$internet_color'>$internet_icon</span>" \
+   "<span foreground='$color'>$icon</span>" \
+   "<span font='8' rise='14000'>${in_icon}${incoming} ${out_icon}${outgoing}</span>" \
+)
+short_text=$full_text
+
+#----------------------------------------------
+
+echo $full_text
+echo $short_text
+echo $color
+
+if [ "$urgent" = true ]; then
+   exit 33
+else
+   exit 0
+fi
+

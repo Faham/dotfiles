@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#----------------------------------------------
+
+full_text=''
+short_text=''
+color='#FFFFFF'
+urgent=false
+
+#----------------------------------------------
+
+percent=$(xbacklight -get | cut -d. -f1)
+icon=''
+
+full_text=$(printf "%s%s" \
+   "<span foreground='$color'>$icon</span>" \
+   "<span font='8' rise='14000'>${percent}%</span>" \
+)
+short_text=$full_text
+
+#----------------------------------------------
+
+echo $full_text
+echo $short_text
+echo $color
+
+if [ "$urgent" = true ]; then
+   exit 33
+else
+   exit 0
+fi
+
+

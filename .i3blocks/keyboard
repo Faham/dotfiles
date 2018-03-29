@@ -1,0 +1,4 @@
+#!/bin/bash
+
+exec toggle xvkbd &> /dev/null &
+

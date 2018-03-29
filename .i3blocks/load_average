@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#----------------------------------------------
+
+full_text=''
+short_text=''
+color='#FFFFFF'
+urgent=false
+
+#----------------------------------------------
+
+load="$(cut -d ' ' -f1 /proc/loadavg)"
+cpus="$(nproc)"
+icon=''
+
+full_text=$(printf "%s%s" \
+   "<span foreground='$color'>$icon</span>" \
+   "<span font='8' rise='14000'>$load</span>" \
+)
+short_text=$full_text
+
+if [ $(echo "$cpus <= $load" | bc) -ne 0 ]; then
+   urgent=true;
+fi
+
+#----------------------------------------------
+
+echo $full_text
+echo $short_text
+echo $color
+
+if [ "$urgent" = true ]; then
+   exit 33
+else
+   exit 0
+fi

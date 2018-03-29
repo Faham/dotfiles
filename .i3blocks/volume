@@ -1,0 +1,67 @@
+#!/bin/bash
+# Copyright (C) 2018 Faham Negini <faham.negini@gmail.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#----------------------------------------------
+
+full_text=''
+short_text=''
+color='#FFFFFF'
+urgent=false
+icon_lt1q=''
+icon_gt1q_lt2q=''
+icon_gt2q_lt3q=''
+icon_gt3q=''
+icon=''
+sink=$(pacmd dump | grep "default-sink" | cut -d' ' -f2)
+
+#----------------------------------------------
+
+# case $BLOCK_BUTTON in
+#   3) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;  # right click, mute/unmute
+#   4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
+#   5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
+# esac
+
+percent=$(pactl list sinks | sed -n -E -e "/$sink/,$ p" | grep '^\s*Volume:' | head -1 | grep -Eo '^[^%]+' | rev | cut -d' ' -f 1 | rev)
+
+if [ "$percent" -ge 75 ]; then
+   icon=$icon_gt3q
+elif [ "$percent" -ge 50 ]; then
+   icon=$icon_gt2q_lt3q
+elif [ "$percent" -ge 25 ]; then
+   icon=$icon_gt1q_lt2q
+elif [ "$percent" -lt 25 ]; then
+   icon=$icon_lt1q
+fi
+
+full_text=$(printf "%s" \
+   "<span foreground='${color}'>${icon}</span>" \
+   "<span font='8' rise='14000' foreground='${color}'>${percent}%</span>" \
+)
+short_text=$full_text
+
+#----------------------------------------------
+
+echo $full_text
+echo $short_text
+echo $color
+
+if [ "$urgent" = true ]; then
+   exit 33
+else
+   exit 0
+fi
+

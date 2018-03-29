@@ -162,15 +162,17 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         colors {
-                background #272822
+                background #000000
                 # statusline #00A5FF #that neon blue
-                separator #272822
+                separator #000000
                 focused_workspace  #4c7899 #285577 #ffffff
                 active_workspace   #333333 #5f676a #ffffff
                 inactive_workspace #333333 #222222 #888888
                 urgent_workspace   #2f343a #900000 #ffffff
         }
-        status_command i3status
+        i3bar_command /usr/bin/i3bar
+        # status_command i3status
+        status_command i3blocks
         font pango:Hack, FontAwesome 17
         mode hide
         hidden_state hide
@@ -206,7 +208,7 @@ bindsym --release Print exec scrot -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jp
 bindsym --release $mod+Shift+x exec --no-startup-id xkill
 bindsym --release Ctrl+Shift+l exec --no-startup-id lockscreen off
 for_window [class="XVkbd"] floating enable
-# bindsym --release $mod+k exec --no-startup-id toggle-cmd xvkbd
+for_window [class="Qalculate-gtk"] floating enable
 for_window [class="TelegramDesktop"] floating enable
 bindsym --release $mod+t exec --no-startup-id telegram
 bindsym --release $mod+c exec --no-startup-id osd
