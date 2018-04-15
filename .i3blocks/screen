@@ -20,20 +20,20 @@ full_text=''
 short_text=''
 color='#FFFFFF'
 urgent=false
-icon=''
+icon=''
 
 #----------------------------------------------
 
-layout=$(setxkbmap -query | grep layout | awk '{print $2}')
+displays=$(xrandr -q | grep -w "connected" | awk '{print $1}' | sed 'N;s/\n/\,/')
 
 case $BLOCK_BUTTON in
-    1) i3-msg exec toggle xvkbd &> /dev/null ;;  # left click
+    1) exec osd "$(detect_displays)" &> /dev/null & ;;  # left click
     *) ;;
 esac
 
 full_text=$(printf "%s" \
    "<span foreground='${color}'>${icon}</span>" \
-   "<span font='8' rise='14000' foreground='${color}'>${layout}</span>" \
+   "<span font='8' rise='14000' foreground='${color}'>${displays}</span>" \
 )
 short_text=$full_text
 

@@ -13,7 +13,6 @@
 !/.config/htop/**
 !/.config/mimeapps.list
 !/.config/vlc/vlcrc
-!/.config/pcmanfm/**
 !/.config/terminator/**
 !/.local/share/applications/mimeapps.list
 !/.local/share/Tomahawk/tomahawk.db
@@ -28,10 +27,11 @@
 !/.w3m/config
 !/.mplayer/**
 !/.vim/**
-/.vim/.netrwhist
 /.vim/bundle/**
+/.vim/.netrwhist
 /.vim/sessions
 /.vim/tmp
+!/.vim/bundle/Vundle.vim
 
 !/.tmux.conf
 !/.tmux/**
@@ -60,6 +60,7 @@
 !/.oh-my-zsh/
 !/.oh-my-zsh-custom-themes/**
 
+!/.git/**
 !/.gitconfig
 !/.gitignore
 !/.gitmessage

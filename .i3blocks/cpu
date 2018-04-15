@@ -20,20 +20,30 @@ full_text=''
 short_text=''
 color='#FFFFFF'
 urgent=false
-icon=''
+icon=''
+t_warn=50;
+t_crit=80;
+cpu_usage=0
 
 #----------------------------------------------
 
-layout=$(setxkbmap -query | grep layout | awk '{print $2}')
+cpu_usage=$(mpstat 1 1 | grep -A 5 "%idle" | tail -n 1 | awk -F " " '{print 100 -  $ 12}'a) # 100% - %idle
+
+if [ "$cpu_usage" -ge "$t_crit" ]; then
+   color='#FF0000'
+   urget=true
+elif [ "$cpu_usage" -ge "$t_warn" ]; then
+   color='#FFFC00'
+fi
 
 case $BLOCK_BUTTON in
-    1) i3-msg exec toggle xvkbd &> /dev/null ;;  # left click
+    1) i3-msg -q -- exec xterm -title "htop" -e htop &> /dev/null ;;  # left click
     *) ;;
 esac
 
 full_text=$(printf "%s" \
    "<span foreground='${color}'>${icon}</span>" \
-   "<span font='8' rise='14000' foreground='${color}'>${layout}</span>" \
+   "<span font='8' rise='14000' foreground='${color}'>${cpu_usage}%</span>" \
 )
 short_text=$full_text
 

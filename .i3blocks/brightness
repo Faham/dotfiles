@@ -9,6 +9,11 @@ urgent=false
 
 #----------------------------------------------
 
+case $BLOCK_BUTTON in
+  4) brightness up ;; # scroll up, increase
+  5) brightness down ;; # scroll down, decrease
+esac
+
 percent=$(xbacklight -get | cut -d. -f1)
 icon=''
 

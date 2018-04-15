@@ -5,12 +5,16 @@ DISPLAY_1=DP1
 
 if [[ 'connected' == `xrandr --query | grep "^$DISPLAY_1" | cut -d' ' -f2` ]]; then
     xrandr --auto --output $DISPLAY_1 --right-of $DISPLAY_0 --primary
-    echo "extended to two screens"
+    echo "Two screens, Extended ($DISPLAY_1 right of $DISPLAY_0 primary)"
     [ `cat /etc/hostname` = "x1-faham" ] && \
       xrandr --output $DISPLAY_1 --mode 3840x2160 --primary --output $DISPLAY_0 --auto  --left-of $DISPLAY_1;
 else
+    echo "One screen ($DISPLAY_0 primary)"
     xrandr --auto --output $DISPLAY_0 --primary
 fi
 
-xset r rate 175 50
+# signalling screen i3block
+pkill -RTMIN+8 i3blocks
+
+xset r rate 170 50
 

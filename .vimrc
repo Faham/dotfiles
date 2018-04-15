@@ -233,6 +233,7 @@ endif
 
 " General
 
+set shell=/bin/zsh
 set confirm                     " Ask to save before exit if needed
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set backupdir=~/.vim/tmp//
@@ -398,6 +399,9 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 25
 let g:netrw_altv = 1
+
+" bufExplorer
+let g:bufExplorerShowNoName = 1
 
 " -----------------------------------------------------------------------------
 

@@ -9,7 +9,7 @@ urgent=false
 
 #----------------------------------------------
 
-YYMonDD=$(date '+%Y%b%d')
+YYMonDD=$(date '+%b%d%a')
 HHMM=$(date '+%H:%M')
 SS=$(date '+%S')
 

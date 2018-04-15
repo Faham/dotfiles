@@ -43,7 +43,7 @@ internet=false
 state='down'
 
 if [ ! -f "/sys/class/net/${interface}/operstate" ]; then
-   state='unknown'
+   state='down'
 else
    state=$(cat /sys/class/net/${interface}/operstate)
 fi
@@ -58,7 +58,7 @@ else
       color=$up_color
    fi
 
-   internet=$(ping -q -w 1 -c 1 `ip r | grep default | grep " $interface " | cut -d ' ' -f 3` > /dev/null && echo true || echo false)
+   internet=$(ping -I $interface -c 1 google.com &> /dev/null && echo true || echo false)
 
    if [ "$internet" = true ]; then
       internet_color=$color
