@@ -223,6 +223,7 @@ for_window [class="Gpicview"] floating enable
 for_window [class="Evince"] floating enable
 bindsym --release $mod+t exec --no-startup-id telegram
 bindsym --release $mod+c exec --no-startup-id osd
+bindsym --release $mod+Shift+p exec --no-startup-id shutdown_menu -c -p rofi
 # bindsym --release $mod+q exec --no-startup-id qalculate-gtk
 
 # for_window [title="(has no name)" ] floating enable
