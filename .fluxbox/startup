@@ -25,4 +25,4 @@ fi
 
 exec fluxbox
 # or if you want to keep a log:
-# exec fluxbox -log "/home/faham/.fluxbox/log"
+# exec fluxbox -log "$HOME/.fluxbox/log"

@@ -4,7 +4,6 @@ set -e
 set -o pipefail
 
 USER=faham
-HOME=/home/$USER
 FILES=$HOME/.scripts/files
 
 pacman -S sudo patch --noconfirm
@@ -49,9 +48,9 @@ systemctl start sshd.socket
 systemctl enable netctl-auto@.service
 systemctl start netctl-auto@.service
 
-$HOME/bin/set-python 2
+$HOME/.scripts/set-python 2
 pip install twisted argparse
-$HOME/bin/set-python 3
+$HOME/.scripts/set-python 3
 
 ln -s /etc/fonts/conf.avail/ /etc/fonts/conf.d
 

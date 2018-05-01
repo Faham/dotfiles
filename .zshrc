@@ -3,10 +3,10 @@ HISTSIZE=2000
 SAVEHIST=5000
 bindkey -v
 
-# . /home/$USER/.local/lib/python2.7/site-packages/powerline/bindings/rc/powerline.rc
+# . $HOME/.local/lib/python2.7/site-packages/powerline/bindings/rc/powerline.rc
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/$USER/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
