@@ -74,7 +74,7 @@ function steeef_preexec {
             ;;
     esac
 }
-add-zsh-hook preexec steeef_preexec
+# add-zsh-hook preexec steeef_preexec
 
 function steeef_chpwd {
     PR_GIT_UPDATE=1
