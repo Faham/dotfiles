@@ -30,7 +30,7 @@ ttf-linux-libertine ttf-ubuntu-font-family unclutter unzip vim vim-spell-en vlc
 wget wpa_actiond xautolock xbindkeys xclip xdot xdotool xf86-input-synaptics
 xf86-video-intel xloadimage xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi
 xorg-server xorg-xinit xorg-xmessage xosd xterm yaourt youtube-dl zip zsh
-mplayer mosh rofi sysstat acpi w3m
+mplayer mosh rofi sysstat acpi w3m alsa-utils
 "
 #pm-utils xorg-server-utils
 

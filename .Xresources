@@ -125,9 +125,9 @@ rofi.hlfg:                           #34405a
 rofi.hlbg:                           #34405a
 rofi.bc:                             #789ee1
 ! State:           'bg',     'fg',     'bgalt',  'hlbg',   'hlfg'
-rofi.color-normal: #000000,  #FFFFFF,  #000000,  #5294E2,  #FFFFFF
+rofi.color-normal: #272822,  #d0d0d0,  #272822,  #5294E2,  #d0d0d0
 !                  'background', 'border'
-rofi.color-window: #000000,      #000000
+rofi.color-window: #272822,      #272822
 rofi.bw:                             10
 rofi.location:                       0
 rofi.padding:                        20
@@ -187,14 +187,14 @@ xvkbd*Label.shadowWidth: 0
 xvkbd*MainMenu.shadowWidth: 0
 xvkbd*MainMenu.topShadowContrast: 0
 xvkbd*MainMenu.bottomShadowContrast: 0
-xvkbd*Background: _background
-xvkbd*Text*background: _foreground
-xvkbd*specialBackground: _background
-xvkbd*focusBackground: _background
-xvkbd*remoteFocusBackground: _background
-xvkbd*Foreground: _foreground
-xvkbd*highlightBackground: _background
-xvkbd*highlightForeground: #DDCCBB
+xvkbd*Background:            #272822
+xvkbd*Text*background:       #d0d0d0
+xvkbd*specialBackground:     #272822
+xvkbd*focusBackground:       #272822
+xvkbd*remoteFocusBackground: #272822
+xvkbd*Foreground:            #d0d0d0
+xvkbd*highlightBackground:   #272822
+xvkbd*highlightForeground:   #DDCCBB
 xvkbd*highlightThickness: 1
 xvkbd*Form.resizable: true
 xvkbd*defaultDistance: 0
@@ -212,21 +212,21 @@ xvkbd*Repeater.justify: center
 xmessage*Font: -*-dejavu sans-medium-r-*-*-24-*-*-*-*-*-*-*
 xmessage*form.okay.shapeStyle: rectangle
 xmessage*form.okay.background: IndianRed
-xmessage*form.okay.foreground: _foreground
-xmessage*message*background: _background
-xmessage*background: _background
-xmessage*foreground: _foreground
+xmessage*form.okay.foreground: #d0d0d0
+xmessage*message*background:   #272822
+xmessage*background:           #272822
+xmessage*foreground:           #d0d0d0
 xmessage*Scrollbar.width: 10
 xmessage*Scrollbar.borderWidth: 1
-xmessage*Text.?.cursorColor: _foreground
-xmessage*Text.borderColor: _background
-xmessage*Text*background: _background
+xmessage*Text.?.cursorColor: #d0d0d0
+xmessage*Text.borderColor:   #272822
+xmessage*Text*background:    #272822
 xmessage*Command.highlightThickness: 1
 xmessage*Command.internalWidth: 5
 xmessage*Command.internalHeight: 3
-xmessage*Command.borderColor: _background
+xmessage*Command.borderColor: #272822
 xmessage*Command.shapeStyle: Rectangle
-xmessage*Command.background: _background
+xmessage*Command.background: #272822
 xmessage*faceName: Terminus:style=Regular:size=12
 xmessage*message.scrollVertical: Always
 xmessage*message.scrollHorizontal: Never
@@ -242,28 +242,28 @@ xmessage*maxHeight: 1000
 
 ! URxvt ----------------------------------------------------------------------
 
-URxvt*color0         : _color0
-URxvt*color1         : _color1
-URxvt*color2         : _color2
-URxvt*color3         : _color3
-URxvt*color4         : _color4
-URxvt*color5         : _color5
-URxvt*color6         : _color6
-URxvt*color7         : _color7
-URxvt*color8         : _color8
-URxvt*color9         : _color9
-URxvt*color10        : _color10
-URxvt*color11        : _color11
-URxvt*color12        : _color12
-URxvt*color13        : _color13
-URxvt*color14        : _color14
-URxvt*color15        : _color15
-URxvt*colorBD        : _colorBD
-URxvt*colorIT        : _colorIT
-URxvt*colorUL        : _colorUL
-URxvt*foreground     : _foreground
-URxvt*background     : _background
-URxvt*cursorColor    : _cursorColor
+URxvt*color0         : #101010
+URxvt*color1         : #960050
+URxvt*color2         : #66aa11
+URxvt*color3         : #c47f2c
+URxvt*color4         : #30309b
+URxvt*color5         : #7e40a5
+URxvt*color6         : #3579a8
+URxvt*color7         : #9999aa
+URxvt*color8         : #303030
+URxvt*color9         : #ff0090
+URxvt*color10        : #80ff00
+URxvt*color11        : #ffba68
+URxvt*color12        : #5f5fee
+URxvt*color13        : #bb88dd
+URxvt*color14        : #4eb4fa
+URxvt*color15        : #d0d0d0
+URxvt*colorBD        : #ffcfaf
+URxvt*colorIT        : #80d4aa
+URxvt*colorUL        : #ccdc90
+URxvt*foreground     : #d0d0d0
+URxvt*background     : #272822
+URxvt*cursorColor    : #d0d0d0
 URxvt*loginShell:    true
 URxvt*geometry:      80x50
 URxvt*saveLines:     16384
@@ -301,33 +301,33 @@ xterm*pointerColorBackground: black
 xterm*cursorBlink:        true
 xterm*charClass:          33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 xterm*on3Clicks:          regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
-xterm*color0         : _color0
-xterm*color1         : _color1
-xterm*color2         : _color2
-xterm*color3         : _color3
-xterm*color4         : _color4
-xterm*color5         : _color5
-xterm*color6         : _color6
-xterm*color7         : _color7
-xterm*color8         : _color8
-xterm*color9         : _color9
-xterm*color10        : _color10
-xterm*color11        : _color11
-xterm*color12        : _color12
-xterm*color13        : _color13
-xterm*color14        : _color14
-xterm*color15        : _color15
-xterm*colorBD        : _colorBD
-xterm*colorIT        : _colorIT
-xterm*colorUL        : _colorUL
-xterm*foreground     : _foreground
-xterm*background     : _background
-xterm*cursorColor    : _cursorColor
+xterm*color0         : #101010
+xterm*color1         : #960050
+xterm*color2         : #66aa11
+xterm*color3         : #c47f2c
+xterm*color4         : #30309b
+xterm*color5         : #7e40a5
+xterm*color6         : #3579a8
+xterm*color7         : #9999aa
+xterm*color8         : #303030
+xterm*color9         : #ff0090
+xterm*color10        : #80ff00
+xterm*color11        : #ffba68
+xterm*color12        : #5f5fee
+xterm*color13        : #bb88dd
+xterm*color14        : #4eb4fa
+xterm*color15        : #d0d0d0
+xterm*colorBD        : #ffcfaf
+xterm*colorIT        : #80d4aa
+xterm*colorUL        : #ccdc90
+xterm*foreground     : #d0d0d0
+xterm*background     : #272822
+xterm*cursorColor    : #d0d0d0
 
 !aterm settings---------------------------------------------------------------
 
-aterm*background:               _background
-aterm*foreground:               _foreground
+aterm*background:               #272822
+aterm*foreground:               #d0d0d0
 aterm*transparent:              true
 aterm*shading:                  30
 aterm*cursorColor:              gray
