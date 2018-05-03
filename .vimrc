@@ -350,7 +350,7 @@ if &term =~ "^xterm\\|rxvt"
   " 5 -> solid vertical bar
   " 6 -> blinking vertical bar
   let &t_SI = "\<Esc>[6 q"        " cursor in insert mode
-  let &t_SR = "\<Esc>[4 q"        " cursor in replace mode
+  " let &t_SR = "\<Esc>[4 q"        " cursor in replace mode
   let &t_EI = "\<Esc>[2 q"        " cursor in normal mode
 endif
 
