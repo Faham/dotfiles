@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# pdfmerge output.pdf input01.pdf input02.pdf [...] 
+#
+# Example: pdfmerge big_file.pdf pg10.pdf pg20.pdf
+
+if [ $# -lt 3 ]; then
+   echo "Usage: pdfmerge output.pdf input01.pdf input02.pdf [...]"
+   exit 1
+fi
+
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="$1" "${@:(2)}" >& /dev/null

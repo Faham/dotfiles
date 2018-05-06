@@ -420,8 +420,9 @@ nnoremap <leader>i :CtrlPTag<Cr>
 nnoremap <leader>f :BufExplorer<Cr>
 " quick save
 nnoremap <Leader>s :update<Cr>
-" quick close current buffer
-nnoremap <Leader>d :bd<Cr>
+" quick close current buffer without closing window
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
 " switch to the alternative buffer
 nnoremap <Leader>t :b#<Cr>
 nnoremap <Leader>o :CtrlPFunky<Cr>
