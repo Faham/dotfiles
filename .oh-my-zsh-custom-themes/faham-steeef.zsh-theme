@@ -10,31 +10,28 @@
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo '('$fg[blue]`basename $VIRTUAL_ENV`%{$reset_color%}') '
+    [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
 }
 PR_GIT_UPDATE=1
 
 setopt prompt_subst
-setopt no_share_history
-unsetopt share_history
 
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
-#use extended color pallete if available
-if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+#use extended color palette if available
+if [[ $terminfo[colors] -ge 256 ]]; then
     turquoise="%F{81}"
     orange="%F{166}"
     purple="%F{135}"
     hotpink="%F{161}"
     limegreen="%F{118}"
 else
-    blue="$fg[blue]"
-    turquoise="$fg[cyan]"
-    orange="$fg[yellow]"
-    purple="$fg[magenta]"
-    hotpink="$fg[red]"
-    limegreen="$fg[green]"
+    turquoise="%F{cyan}"
+    orange="%F{yellow}"
+    purple="%F{magenta}"
+    hotpink="%F{red}"
+    limegreen="%F{green}"
 fi
 
 # enable VCS systems you use
@@ -51,22 +48,25 @@ zstyle ':vcs_info:*:prompt:*' check-for-changes true
 # %a - action (e.g. rebase-i)
 # %R - repository path
 # %S - path in the repository
-PR_RST="%{${reset_color}%}"
+PR_RST="%f"
 FMT_BRANCH="(%{$turquoise%}%b%u%c${PR_RST})"
 FMT_ACTION="(%{$limegreen%}%a${PR_RST})"
 FMT_UNSTAGED="%{$orange%}●"
 FMT_STAGED="%{$limegreen%}●"
 
-zstyle ':vcs_info:*:prompt:*' unstagedstr   " ${FMT_UNSTAGED}"
-zstyle ':vcs_info:*:prompt:*' stagedstr     " ${FMT_STAGED}"
+zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
+zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
 zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
 zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
 zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
 
 function steeef_preexec {
-    case "$(history $HISTCMD)" in
+    case "$2" in
         *git*)
+            PR_GIT_UPDATE=1
+            ;;
+        *hub*)
             PR_GIT_UPDATE=1
             ;;
         *svn*)
@@ -74,7 +74,7 @@ function steeef_preexec {
             ;;
     esac
 }
-# add-zsh-hook preexec steeef_preexec
+add-zsh-hook preexec steeef_preexec
 
 function steeef_chpwd {
     PR_GIT_UPDATE=1
@@ -84,12 +84,12 @@ add-zsh-hook chpwd steeef_chpwd
 function steeef_precmd {
     if [[ -n "$PR_GIT_UPDATE" ]] ; then
         # check for untracked files or updated submodules, since vcs_info doesn't
-        # if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
-        #     PR_GIT_UPDATE=1
-        #     FMT_BRANCH="%{$turquoise%}%b%u%c %{$hotpink%}●${PR_RST}"
-        # else
-            FMT_BRANCH="%{$turquoise%}%b%u%c${PR_RST}"
-        # fi
+        if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
+            PR_GIT_UPDATE=1
+            FMT_BRANCH="(%{$turquoise%}%b%u%c%{$hotpink%}●${PR_RST})"
+        else
+            FMT_BRANCH="(%{$turquoise%}%b%u%c${PR_RST})"
+        fi
         zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH} "
 
         vcs_info 'prompt'
