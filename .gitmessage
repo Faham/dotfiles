@@ -1,8 +1,5 @@
-# Subject Line - should be 60 characters or less.
-# This is what shows up when using --oneline with log
-
-
-# One blank line after the subject line is required.
-# Detailed information on what happend. This shows up in normal git log.
-
+# 50-character subject line (what the patch changes and why)
+#
+# BUG: xxxxxxxxxxxxxxx
+# 72-character wrapped longer description.
 

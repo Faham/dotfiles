@@ -260,9 +260,9 @@ set formatoptions+=l
 set autoread                    " auto reload unchanged files
 set autochdir
 set tags=./.tags;,~/.tags
-set tabstop=3
-set softtabstop=3
-set shiftwidth=3
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
 set noswapfile                  " not a fan of swp files
@@ -319,6 +319,9 @@ if has("autocmd")
 
   " For all text files set 'textwidth' to 80 characters.
   autocmd FileType text setlocal textwidth=80
+
+  " Remove trailing whitespaces on write
+  autocmd BufWritePre * %s/\s\+$//e
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -483,10 +486,29 @@ nnoremap * *<C-o>:%s///gn<CR>``
 noremap <Leader>q :call <SID>quickfixToggle()<Cr>
 nnoremap <leader>F :call <SID>foldColumnToggle()<Cr>
 nnoremap <leader>D :DiffChangesDiffToggle<Cr>
-vnoremap // y/<C-r>"<Cr>
 
 " copy current files path to clipboard
 nmap <Leader>cp :CopyPath<CR>
+
+" toggle line number
+nnoremap <leader>n :setlocal number!<cr>
+
+" to avoid vim cleaning up indentations on escape
+inoremap <CR> <CR>x<BS>
+nnoremap o ox<BS>
+nnoremap O Ox<BS>
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 " -----------------------------------------------------------------------------
 

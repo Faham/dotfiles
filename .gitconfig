@@ -4,7 +4,7 @@
  name = Faham Negini
  email = faham.negini@gmail.com
 [commit]
- template = .gitmessage
+ template = ~/.gitmessage
 [alias]
  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
  br = branch -vv
