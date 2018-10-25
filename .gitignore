@@ -1,11 +1,10 @@
 
 *
-!*/
+*/
 
 !/README.md
 !/.notes
 
-!/.config/google-chrome/Default/IndexedDB/chrome-extension_**/*.log
 !/.config/sublime-text-3/Packages/**/*.sublime-settings
 !/.config/sublime-text-3/Packages/**/faham*.tmTheme
 !/.config/Synergy/**
@@ -29,8 +28,6 @@
 !/.vim/**
 /.vim/bundle/**
 /.vim/.netrwhist
-/.vim/sessions
-/.vim/tmp
 !/.vim/bundle/Vundle.vim
 
 !/.tmux.conf

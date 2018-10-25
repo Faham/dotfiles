@@ -1,0 +1,9 @@
+#!/bin/sh
+# set the battery charging thresholds to extend battery lifespan
+
+# echo ${2:-40} > /sys/devices/platform/smapi/BAT${1:-0}/start_charge_thresh
+# echo ${3:-80} > /sys/devices/platform/smapi/BAT${1:-0}/stop_charge_thresh
+
+sudo tpacpi-bat -v -s startThreshold ${1:-0} ${2:-40}
+sudo tpacpi-bat -v -s stopThreshold ${1:-0} ${3:-80}
+

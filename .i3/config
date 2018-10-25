@@ -74,15 +74,15 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+o split h
 
 # split in vertical orientation
-bindsym $mod+e split v
+bindsym $mod+i split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s layout stacking
-# bindsym $mod+w layout tabbed
-# bindsym $mod+e layout toggle split
+bindsym $mod+q layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -207,7 +207,7 @@ bindsym --release XF86Suspend exec systemctl suspend
 bindsym --release 133 exec detect-displays
 
 # screenshots
-bindsym --release Print exec scrot -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
+bindsym --release $mod+Print exec scrot -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
 
 # Handy apps keybindings
 bindsym --release $mod+Shift+x exec --no-startup-id xkill
@@ -215,16 +215,25 @@ bindsym --release Ctrl+Shift+l exec --no-startup-id lockscreen off
 for_window [class="XVkbd"] floating enable
 for_window [class="Qalculate-gtk"] floating enable
 for_window [class="TelegramDesktop"] floating enable
-for_window [title="htop"] floating enable
 for_window [title="Google Hangouts - faham.negini@gmail.com"] floating enable
+for_window [class="zoom"] floating enable
 for_window [title="Floating for YouTube™"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Gpicview"] floating enable
 for_window [class="Evince"] floating enable
+for_window [class="Skype"] floating enable
+for_window [class="Slack"] floating enable
 bindsym --release $mod+t exec --no-startup-id telegram
+bindsym --release $mod+Shift+t exec --no-startup-id slack
+bindsym --release $mod+Shift+f exec --no-startup-id pcmanfm
 bindsym --release $mod+c exec --no-startup-id osd
 bindsym --release $mod+Shift+p exec --no-startup-id shutdown_menu -c -p rofi
 # bindsym --release $mod+q exec --no-startup-id qalculate-gtk
+
+workspace 1 output eDP1
+workspace 2 output eDP1
+workspace 3 output HDMI1
+workspace 4 output HDMI1
 
 # for_window [title="(has no name)" ] floating enable
 # floating_minimum_size 640 x 480

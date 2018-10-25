@@ -56,6 +56,7 @@ image/x-xpixmap=gpicview.desktop;
 image/xpm=gpicview.desktop;
 x-scheme-handler/magnet=userapp-transmission-gtk-TXU0MY.desktop;
 audio/mpeg=vlc.desktop;
+application/json=google-chrome.desktop;
 
 [Default Applications]
 application/pdf=evince.desktop

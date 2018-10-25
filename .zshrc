@@ -56,7 +56,7 @@ ZSH_THEME="../../.oh-my-zsh-custom-themes/faham-steeef"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 # User configuration
 
@@ -103,5 +103,9 @@ setopt PUSHD_TO_HOME
 setopt NO_BEEP
 setopt NUMERIC_GLOB_SORT
 setopt EXTENDED_GLOB
+
+autoload -U zmv
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 
 # /usr/local/rvm/scripts/rvm ] ] && source /usr/local/rvm/scripts/rvm

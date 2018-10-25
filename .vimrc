@@ -50,8 +50,16 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'python-mode/python-mode'
-Plugin 'dkprice/vim-easygrep'
 Plugin 'jmcantrell/vim-diffchanges'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'w0rp/ale'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'mattn/emmet-vim'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'rking/ag.vim'
+" Plugin 'Yggdroot/indentLine'
+" Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 
@@ -135,7 +143,6 @@ endif
 " -----------------------------------------------
 
 let g:quickfix_is_open = 0
-
 function! <SID>quickfixToggle()
   if g:quickfix_is_open
     cclose
@@ -160,13 +167,21 @@ endfunction
 
 " -----------------------------------------------
 
+function! <SID>agFind()
+  let g:quickfix_is_open = 1
+  execute 'Ag ' . expand('<cword>')
+endfunction
+
+" -----------------------------------------------
+
 " copy current files path to clipboard
 com! -nargs=0 CopyPath let @"=expand("%:p")
 
 " sort words in the current line
 com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' '))
 
-com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
+" com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
+com! -nargs=0 Breakpoint normal Odebugger; // XXX Breakpoint
 
 " -----------------------------------------------------------------------------
 
@@ -200,10 +215,10 @@ set fillchars+=vert:\|
 " hi OverLength ctermbg=234 ctermfg=NONE guibg=NONE
 " match OverLength /\%85v.\+/
 
-
+set undofile
+set undodir=~/.vim/undo
 set colorcolumn=80
 set cursorline
-
 set laststatus=2
 set statusline=%t       "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -333,6 +348,9 @@ if has("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 
+  " run prettier on js files on write
+  autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+
   augroup END
 else
   set autoindent         " always set autoindenting on
@@ -358,6 +376,7 @@ let g:ctrlp_root_markers = [ '.ctrlp' ]
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
 endif
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -406,6 +425,34 @@ let g:netrw_altv = 1
 " bufExplorer
 let g:bufExplorerShowNoName = 1
 
+"indentLine
+let g:indentLine_color_term = 239
+let g:indentLine_char = '¦'
+
+let g:ale_sign_error = '>>' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let errorformat =
+        \ '%f:%l:%c: %trror: %m,' .
+        \ '%f:%l:%c: %tarning: %m,' .
+        \ '%f:%l:%c: %tote: %m'
+
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+" The Silver Searcher
+let g:ag_working_path_mode="r"
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --column\ --smart-case\ --nocolor\ --follow
+  set grepformat=%f:%l:%C:%m
+endif
+
 " -----------------------------------------------------------------------------
 
 " Key combinations
@@ -451,10 +498,21 @@ noremap <F8> :TagbarToggle<CR>
 
 noremap <Leader>j :join<CR>
 
+" moving between windows
 noremap <C-k> <C-w>k
 noremap <C-j> <C-w>j
 noremap     <C-w>h
 noremap <C-l> <C-w>l
+
+" split
+nnoremap <C-w>o :split<Cr>
+nnoremap <C-w>e :vsplit<Cr>
+
+" resize window
+" nnoremap     :vertical resize -1<CR>
+" nnoremap <C-j> :resize +1<CR>
+" nnoremap <C-k> :resize -1<CR>
+" nnoremap <C-l> :vertical resize +1<CR>
 
 " scrolling with arrow keys as well
 nnoremap <C-Up> <C-y>
@@ -498,6 +556,8 @@ inoremap <CR> <CR>x<BS>
 nnoremap o ox<BS>
 nnoremap O Ox<BS>
 
+noremap <Leader>vv :call <SID>agFind()<Cr>
+
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -509,6 +569,12 @@ vnoremap <silent> # :<C-U>
   \gvy?<C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
+
+command! PrettyPrintJSON %!python -m json.tool
+command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
+command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
+
+map <leader>a :ALELint<CR>
 
 " -----------------------------------------------------------------------------
 
