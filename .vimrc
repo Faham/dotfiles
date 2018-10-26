@@ -113,6 +113,19 @@ com! -nargs=0 WrapToggle call <SID>wrapToggle()
 
 " -----------------------------------------------
 
+function! <SID>pasteToggle()
+  if &paste
+    echo "Paste OFF"
+    setlocal nopaste
+  else
+    echo "Paste ON"
+    setlocal paste
+  endif
+endfunction
+com! -nargs=0 PasteToggle call <SID>pasteToggle()
+
+" -----------------------------------------------
+
 " Save current view settings on a per-window, per-buffer basis.
 function! AutoSaveWinView()
     if !exists("w:SavedBufView")
@@ -249,6 +262,7 @@ endif
 " General
 
 set shell=/bin/zsh
+set magic
 set confirm                     " Ask to save before exit if needed
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set backupdir=~/.vim/tmp//
@@ -282,11 +296,11 @@ set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
 set noswapfile                  " not a fan of swp files
 set ignorecase                  " case insensitive search by default
-set list listchars=tab:\❘\ ,trail:·,extends:»,precedes:«,nbsp:×
+set list listchars=trail:·,extends:»,precedes:«,nbsp:×
+" set list listchars=tab:\|_,trail:·,extends:»,precedes:«,nbsp:×
+
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
 " set guifont=Monaco\ for\ Powerline:h13
-
-let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when escape
 
 "autosave current session on exit"
 au VimLeavePre * if v:this_session != '' | exec "mks! " . v:this_session | endif
@@ -371,7 +385,7 @@ let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 let g:ctrlp_clear_cache_on_exit=0
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_working_path_mode = 'ar'
+let g:ctrlp_working_path_mode = 'wr'
 let g:ctrlp_root_markers = [ '.ctrlp' ]
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 if executable('ag')
@@ -431,6 +445,22 @@ let g:indentLine_char = '¦'
 
 let g:ale_sign_error = '>>' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
+
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" set completeopt-=preview
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_confirm_extra_conf = 0
+
+let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when escape
+" slow multiple_cursors &amp; YCM
+" function! Multiple_cursors_before()
+"   call youcompleteme#DisableCursorMovedAutocommands()
+" endfunction
+" function! Multiple_cursors_after()
+"   call youcompleteme#EnableCursorMovedAutocommands()
+" endfunction
+
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let errorformat =
@@ -483,7 +513,11 @@ nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 nnoremap <Leader>c :nohlsearch<Cr>
 
 noremap  <Leader>w :WrapToggle<CR>
+vnoremap  <Leader>w :WrapToggle<CR>
 nnoremap <Leader>u :ClearUndo<Cr>
+
+noremap  <Leader>e :PasteToggle<CR>
+vnoremap  <Leader>e :PasteToggle<CR>
 
 " make table
 nnoremap <Leader>T :%!column -t<Cr>
@@ -547,6 +581,12 @@ nnoremap <leader>D :DiffChangesDiffToggle<Cr>
 
 " copy current files path to clipboard
 nmap <Leader>cp :CopyPath<CR>
+
+
+nnoremap H 0
+nnoremap L $
+vnoremap H 0
+vnoremap L $
 
 " toggle line number
 nnoremap <leader>n :setlocal number!<cr>
