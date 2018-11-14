@@ -567,8 +567,13 @@ nnoremap gl :lnext<Cr>
 vnoremap gl :lnext<Cr>
 
 nnoremap Y yg_
-nnoremap <C-p> yyp
-vnoremap <C-p> ygv<Esc>p
+nnoremap <C-p> '>"pyy"pp
+vnoremap <C-p> "pygv'><Esc>"pp
+
+vnoremap ( c()<Esc>P
+vnoremap [ c[]<Esc>P
+vnoremap { c{}<Esc>P
+vnoremap ' c''<Esc>P
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
