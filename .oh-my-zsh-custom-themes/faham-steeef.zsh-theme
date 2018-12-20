@@ -79,7 +79,7 @@ add-zsh-hook preexec steeef_preexec
 function steeef_chpwd {
     PR_GIT_UPDATE=1
 }
-add-zsh-hook chpwd steeef_chpwd
+# add-zsh-hook chpwd steeef_chpwd
 
 function steeef_precmd {
     if [[ -n "$PR_GIT_UPDATE" ]] ; then

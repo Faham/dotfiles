@@ -276,7 +276,7 @@ set fillchars+=vert:\|
 set undofile
 set undodir=~/.vim/undo
 set colorcolumn=80
-" set cursorline        "makes scrolling noticeably slow
+" set cursorline        "leads to noticeably slower scrolling
 set lazyredraw          "faster redraw
 set synmaxcol=150        "faster redraw
 syntax sync minlines=200

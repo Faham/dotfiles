@@ -86,6 +86,7 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias weather="curl -s wttr.in/kitchener"
 
 export CVS_RSH=ssh
 

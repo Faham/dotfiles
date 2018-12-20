@@ -154,8 +154,8 @@ OnRightGrip Move1         :StartResizing bottomright
 ! execute commands
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-Mod4 x                     :ExecCommand xterm
-Mod4 r                     :ExecCommand bashrun
+Mod4 x                     :ExecCommand xter
+Mod4 r                     :ExecCommand rofi -show run
 Mod4 q                     :ExecCommand qalculate-gtk
 Mod4 k                     :ExecCommand toggle-cmd xvkbd
 Mod4 c                     :ExecCommand osd
