@@ -49,17 +49,17 @@ Plugin 'tpope/vim-surround'              " replace pairings ( { [ ' ...
 Plugin 'tomtom/tcomment_vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'python-mode/python-mode'
 Plugin 'jmcantrell/vim-diffchanges'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'w0rp/ale'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'mattn/emmet-vim'
+" Plugin 'mattn/emmet-vim'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'rking/ag.vim'
-" Plugin 'Yggdroot/indentLine'
 " Plugin 'Valloric/YouCompleteMe'
+Plugin 'wgwoods/vim-systemd-syntax'
+" Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()
 
@@ -156,11 +156,12 @@ endif
 " -----------------------------------------------
 
 let g:quickfix_is_open = 0
+let g:quickfix_return_to_window = 0
 function! <SID>quickfixToggle()
   if g:quickfix_is_open
     cclose
     let g:quickfix_is_open = 0
-    execute g:quickfix_return_to_window . "wincmd w"
+    " execute g:quickfix_return_to_window . "wincmd w"
   else
     let g:quickfix_return_to_window = winnr()
     copen
@@ -180,10 +181,49 @@ endfunction
 
 " -----------------------------------------------
 
+function! <SID>leftMarginToggle()
+  if &foldcolumn
+     setlocal foldcolumn=0
+  else
+     setlocal foldcolumn=4
+  endif
+endfunction
+
+" -----------------------------------------------
+
 function! <SID>agFind()
   let g:quickfix_is_open = 1
   execute 'Ag ' . expand('<cword>')
 endfunction
+
+" -----------------------------------------------
+
+function! <SID>updateTags()
+python << EOF
+import os
+import time
+home='/home/faham/faham.ethicadata.com'
+tags = os.path.join(home, '.tags')
+if os.path.isfile(tags):
+    listfile = os.path.join(home, '.list~')
+    ignoreDirs = '.git|.log|media'
+    os.system('find {home} -type d -name {ignoreDirs} -prune -o -mmin -{minutes} -type f -print > {out}'.format(
+              home=home,
+              ignoreDirs=ignoreDirs,
+              minutes=1 + ((time.time() - os.stat(tags).st_mtime) // 60),
+              out=listfile))
+    os.system('ctags --recurse --append --extra=+q -f {tags} --exclude=@{ignore} --languages=Python -L {listfile}'.format(
+              tags=tags,
+              ignore=os.path.join(home, '.ctagsignore'),
+              listfile=listfile))
+    os.remove(listfile)
+else:
+    os.system('ctags --recurse --append --extra=+q -f {tags} --exclude=@{ignore} --languages=Python'.format(
+              tags=tags,
+              ignore=os.path.join(home, '.ctagsignore')))
+EOF
+endfunction
+com! -nargs=0 UpdateTags call <SID>updateTags()
 
 " -----------------------------------------------
 
@@ -193,8 +233,12 @@ com! -nargs=0 CopyPath let @"=expand("%:p")
 " sort words in the current line
 com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' '))
 
-" com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
-com! -nargs=0 Breakpoint normal Odebugger; // XXX Breakpoint
+com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
+" com! -nargs=0 Breakpoint normal Odebugger; // XXX Breakpoint
+
+com! -nargs=0 PrettyPrintJSON %!python -m json.tool
+com! -nargs=0 PrettyPrintHTML !tidy -mi -html -wrap 0 %
+com! -nargs=0 PrettyPrintXML !tidy -mi -xml -wrap 0 %
 
 " -----------------------------------------------------------------------------
 
@@ -228,10 +272,14 @@ set fillchars+=vert:\|
 " hi OverLength ctermbg=234 ctermfg=NONE guibg=NONE
 " match OverLength /\%85v.\+/
 
+" set iskeyword-=_        "make e accept only alphanumeric chars for words
 set undofile
 set undodir=~/.vim/undo
 set colorcolumn=80
-set cursorline
+" set cursorline        "makes scrolling noticeably slow
+set lazyredraw          "faster redraw
+set synmaxcol=150        "faster redraw
+syntax sync minlines=200
 set laststatus=2
 set statusline=%t       "tail of the filename
 set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -244,6 +292,7 @@ set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
+" set statusline+=%{gutentags#statusline()}  "gutentags status
 
 if &term =~ "^xterm\\|rxvt"
   " 1 or 0 -> solid block
@@ -365,6 +414,8 @@ if has("autocmd")
   " run prettier on js files on write
   autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
+  autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+
   augroup END
 else
   set autoindent         " always set autoindenting on
@@ -401,31 +452,6 @@ let g:ctrlp_custom_ignore = {
 " Ctrlp Funky
 let g:ctrlp_funky_syntax_highlight = 1
 
-" Python-mode
-let g:pymode = 0                        " disable pymode as it slows down vim
-let g:pymode_lint = 0
-let g:pymode_lint_ignore = ['W', 'E111', 'E201', 'E202', 'E265', 'E114', 'E302', 'E203', 'E122', 'E124', 'E127', 'E128']
-" let g:pymode_warnings = 1
-let g:pymode_indent = 0
-let g:pymode_folding = 0
-let g:pymode_options_colorcolumn = 1
-let g:pymode_options_max_line_length = 79
-let g:pymode_quickfix_minheight = 3
-let g:pymode_quickfix_maxheight = 12
-let g:pymode_breakpoint_bind = '<leader>b'
-let g:pymode_doc = 0
-let g:pymode_lint_checkers = ['pep8']
-let g:pymode_rope = 0
-let g:pymode_rope_rename_bind = '<leader>g'
-let g:pymode_rope_completion = 0
-let g:pymode_run = 0
-let g:pymode_run_bind = '<leader>R'
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace(); # XXX Breakpoint'
-" let g:pymode_breakpoint_cmd = 'import rpdb; __dbg = rpdb.Rpdb(port=12345); __dbg.set_trace(); # XXX Breakpoint'
-" let g:pymode_breakpoint_cmd = 'import pudb; pu.db; # XXX Breakpoint'
-let g:pymode_syntax = 0
-
 " Airline
 let g:airline_theme = 'minimalist'
 let g:airline#extensions#tagbar#flags = 'f'  " show full tag hierarchy
@@ -438,13 +464,6 @@ let g:netrw_altv = 1
 
 " bufExplorer
 let g:bufExplorerShowNoName = 1
-
-"indentLine
-let g:indentLine_color_term = 239
-let g:indentLine_char = '¦'
-
-let g:ale_sign_error = '>>' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
 
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -463,6 +482,25 @@ let g:multi_cursor_exit_from_insert_mode = 0 " don't clear multi-cursors when es
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 0
+let g:ale_keep_list_window_open = 1
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:airline#extensions#ale#enabled = 1
+" let g:ale_sign_error = '✘'
+" let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = 'E' " Less aggressive than the default '>>'
+let g:ale_sign_warning = 'W'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_linters_explicit = 1
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {
+  \  'jsx': ['stylelint', 'eslint'],
+  \  'python': ['pylint']
+  \}
+
 let errorformat =
         \ '%f:%l:%c: %trror: %m,' .
         \ '%f:%l:%c: %tarning: %m,' .
@@ -567,13 +605,25 @@ nnoremap gl :lnext<Cr>
 vnoremap gl :lnext<Cr>
 
 nnoremap Y yg_
-nnoremap <C-p> '>"pyy"pp
+nnoremap <C-p> "pyy"pp
 vnoremap <C-p> "pygv'><Esc>"pp
 
-vnoremap ( c()<Esc>P
-vnoremap [ c[]<Esc>P
-vnoremap { c{}<Esc>P
-vnoremap ' c''<Esc>P
+" select all
+map <leader>a <Esc>ggVG<CR>
+
+"TODO Yank to + (system clipboard) register by default as well as default
+" register, unless another register selected
+" nnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
+" nnoremap <expr> yy (v:register ==# '"' ? '"+' : '') . 'yy'
+" nnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+" xnoremap <expr> y (v:register ==# '"' ? '"+' : '') . 'y'
+" xnoremap <expr> Y (v:register ==# '"' ? '"+' : '') . 'Y'
+
+vnoremap ( "pc()<Esc>"pP
+vnoremap [ "pc[]<Esc>"pP
+vnoremap { "pc{}<Esc>"pP
+vnoremap ' "pc''<Esc>"pP
+vnoremap _ "pc__<Esc>"pP
 
 " Don't use Ex mode, use Q for formatting
 noremap Q gq
@@ -601,6 +651,8 @@ inoremap <CR> <CR>x<BS>
 nnoremap o ox<BS>
 nnoremap O Ox<BS>
 
+nmap <F7> :UpdateTags<CR>
+
 noremap <Leader>vv :call <SID>agFind()<Cr>
 
 " Search for selected text, forwards or backwards.
@@ -615,11 +667,7 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-command! PrettyPrintJSON %!python -m json.tool
-command! PrettyPrintHTML !tidy -mi -html -wrap 0 %
-command! PrettyPrintXML !tidy -mi -xml -wrap 0 %
-
-map <leader>a :ALELint<CR>
+map <leader>l :ALELint<CR>
 
 " -----------------------------------------------------------------------------
 
