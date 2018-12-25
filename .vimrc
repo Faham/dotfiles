@@ -32,9 +32,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " Plugins from Github, name as it appears in the URL
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
@@ -57,9 +54,9 @@ Plugin 'mxw/vim-jsx'
 " Plugin 'mattn/emmet-vim'
 Plugin 'skywind3000/asyncrun.vim'
 Plugin 'rking/ag.vim'
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'wgwoods/vim-systemd-syntax'
-" Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'lilydjwg/colorizer'
+Plugin 'inside/vim-search-pulse'
 
 call vundle#end()
 
@@ -488,10 +485,10 @@ let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:airline#extensions#ale#enabled = 1
-" let g:ale_sign_error = '✘'
-" let g:ale_sign_warning = '⚠'
-let g:ale_sign_error = 'E' " Less aggressive than the default '>>'
-let g:ale_sign_warning = 'W'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+" let g:ale_sign_error = 'E' " Less aggressive than the default '>>'
+" let g:ale_sign_warning = 'W'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:ale_linters_explicit = 1
@@ -520,6 +517,8 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --column\ --smart-case\ --nocolor\ --follow
   set grepformat=%f:%l:%C:%m
 endif
+
+let g:vim_search_pulse_duration = 100
 
 " -----------------------------------------------------------------------------
 

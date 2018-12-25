@@ -1,7 +1,7 @@
 #!/bin/sh
 
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-   export TERM='xterm-256color'
+if [ -e /usr/share/terminfo/r/rxvt-unicode-256color ]; then
+   export TERM='rxvt-unicode-256color'
 else
-   export TERM='xterm-color'
+   export TERM='rxvt-color'
 fi

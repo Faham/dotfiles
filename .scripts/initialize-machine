@@ -31,7 +31,7 @@ wget wpa_actiond xautolock xbindkeys xclip xdot xdotool xf86-input-synaptics
 xf86-video-intel xloadimage xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi
 xorg-server xorg-xinit xorg-xmessage xosd xterm yaourt youtube-dl zip zsh
 mplayer mosh rofi sysstat acpi w3m alsa-utils the_silver_searcher
-highlight mediainfo tig neofetch eog
+highlight mediainfo tig neofetch eog rxvt-unicode perl
 "
 #pm-utils xorg-server-utils
 

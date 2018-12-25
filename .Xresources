@@ -261,16 +261,25 @@ URxvt*color15        : #d0d0d0
 URxvt*colorBD        : #ffcfaf
 URxvt*colorIT        : #80d4aa
 URxvt*colorUL        : #ccdc90
-URxvt*foreground     : #d0d0d0
 URxvt*background     : #272822
+URxvt*foreground     : #d0d0d0
+! URxvt*fading:        15
+URxvt*font           : xft:DejaVu Sans Mono:style=g:pixelsize=22
+URxvt*boldFont       : xft:DejaVu Sans Mono:style=g:bold:pixelsize=22
 URxvt*cursorColor    : #d0d0d0
-URxvt*loginShell:    true
-URxvt*geometry:      80x50
-URxvt*saveLines:     16384
-URxvt*cutchars:      "`\"'&()*,:;<=>?[\\]^{|}$"
-URxvt*scrollBar:     false
-URxvt*visualBell:    true
-URxvt*fading:        15
+URxvt*geometry       : 160x50
+URxvt*cutchars       : "`\"'&()*,:;<=>?[\\]^{|}$"
+URxvt*loginShell     : true
+URxvt*saveLines      : 30000
+URxvt*scrollBar      : false
+URxvt*scrollBar_right: false
+URxvt*scrollstyle    : rxvt
+URxvt*transparent    : false
+URxvt*visualBell     : false
+URxvt.depth          : 32
+URxvt.internalBorder : 3
+URxvt*letterSpace    : -1
+URxvt.lineSpace      : 0
 
 ! xterm ----------------------------------------------------------------------
 
@@ -281,7 +290,7 @@ xterm*loginShell:         true
 xterm*termName:           xterm-256color
 xterm*eightBitInput:      false
 xterm*VT100.geometry:     160x50
-! xterm*font:              -*-terminus-medium-r-*-*-24-*-*-*-*-*-*-*
+! XTerm*font: -*-terminus-medium-r-normal--10-*-*-*-*-*-iso10646-1
 xterm*faceName:           Terminus:style=Regular:size=10
 xterm*dynamicColors:      true
 xterm*utf8:               2
