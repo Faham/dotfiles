@@ -485,10 +485,8 @@ let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-" let g:ale_sign_error = 'E' " Less aggressive than the default '>>'
-" let g:ale_sign_warning = 'W'
+let g:ale_sign_error = 'X'
+let g:ale_sign_warning = '!'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:ale_linters_explicit = 1
@@ -497,6 +495,7 @@ let g:ale_linters = {
   \  'jsx': ['stylelint', 'eslint'],
   \  'python': ['pylint']
   \}
+let g:ale_python_pylint_options = '--load-plugins pylint_django --msg-template="{msg_id}:{line:3d},{column}: {obj}: {msg}" --disable "C0111"'
 
 let errorformat =
         \ '%f:%l:%c: %trror: %m,' .
@@ -666,7 +665,7 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-map <leader>l :ALELint<CR>
+map <leader>l :ALEToggle<CR>
 
 " -----------------------------------------------------------------------------
 
