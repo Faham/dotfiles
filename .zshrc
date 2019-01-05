@@ -1,59 +1,35 @@
-source /usr/share/zsh/share/antigen.zsh
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+# ZPlug
+source "$HOME/.zplug/init.zsh"
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-# antigen bundle heroku
-# antigen bundle pip
-# antigen bundle lein
-# antigen bundle command-not-found
-antigen bundle zsh-users/zsh-syntax-highlighting
+zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/z", from:oh-my-zsh
+zplug "plugins/zsh-autosuggestions", from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+zplug "junegunn/fzf", use:"shell/{key-bindings,completion}.zsh"
+zplug "peco/peco", as:command, from:gh-r
+zplug "~/.zsh", from:local, use:"faham-steeef.zsh-theme"
 
-# antigen theme robbyrussell
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 
-antigen apply
+zplug load --verbose
 
 # -----------------------------------------------------------------------------
 
-# Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
-export ZSH=$HOME/.antigen/bundles/robbyrussell/oh-my-zsh
-
-ZSH_CUSTOM="$HOME/.my-zsh"
-ZSH_THEME="faham-steeef"
-
-DISABLE_UPDATE_PROMPT=true
-DISABLE_AUTO_UPDATE=true
-
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
+# Zsh
 HISTFILE=~/.histfile
 HISTSIZE=2000
 SAVEHIST=5000
+
 bindkey -v
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
-
-plugins=(git zsh-autosuggestions z)
-
-source $ZSH/oh-my-zsh.sh
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-export CVS_RSH=ssh
-
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# bindkey -s '\eu' '^Ucd ..; ls^M'
 
 setopt AUTO_CD
 setopt MULTIOS
@@ -68,15 +44,27 @@ setopt NO_BEEP
 setopt NUMERIC_GLOB_SORT
 setopt EXTENDED_GLOB
 
-autoload -U zmv
+# -----------------------------------------------------------------------------
 
+# Oh-My-Zsh!
+export ZSH=$HOME/.zplug/repos/robbyrussell/oh-my-zsh
+
+ZSH_CUSTOM="$HOME/.zsh"
+ZSH_THEME="faham-steeef"
+DISABLE_UPDATE_PROMPT=true
+DISABLE_AUTO_UPDATE=true
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+
+source $ZSH/oh-my-zsh.sh
+
+autoload -U zmv
 
 # -----------------------------------------------------------------------------
 
-# FZF setup
-source "/usr/share/fzf/key-bindings.zsh"
-source "/usr/share/fzf/completion.zsh"
+# FZF
+source ".zplug/repos/junegunn/fzf/shell/key-bindings.zsh"
+source ".zplug/repos/junegunn/fzf/shell/completion.zsh"
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
@@ -86,11 +74,24 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 
 # -----------------------------------------------------------------------------
 
+# Aliases
 alias weather="curl -s wttr.in/kitchener"
 alias ls=exa
+alias la="exa -la"
 
 # -----------------------------------------------------------------------------
 
+# Other environment variables
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/id_rsa"
+
+export EDITOR='vim'
+export CVS_RSH=ssh
+
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export ANDROID_HOME=$HOME/Android/Sdk
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 
