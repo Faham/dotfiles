@@ -30,8 +30,8 @@ ttf-linux-libertine ttf-ubuntu-font-family unclutter unzip vim vim-spell-en vlc
 wget wpa_actiond xautolock xbindkeys xclip xdot xdotool xf86-input-synaptics
 xf86-video-intel xloadimage xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi
 xorg-server xorg-xinit xorg-xmessage xosd xterm yaourt youtube-dl zip zsh
-mplayer mosh rofi sysstat acpi w3m alsa-utils ruby rigpreg
-highlight mediainfo tig neofetch eog rxvt-unicode perl nnn bat exa fd
+mplayer mosh rofi sysstat acpi w3m alsa-utils ruby ripgrep rxvt-unicode
+highlight mediainfo tig neofetch eog perl nnn bat exa fd tldr ranger
 "
 #pm-utils xorg-server-utils
 
@@ -63,7 +63,8 @@ gpasswd -a $USER sys
 
 su $USER
 YAOURT_PKGS="
-google-chrome git-crypt xvkbd laptop-mode-tools tpacpi-bat antigen-git
+google-chrome git-crypt xvkbd laptop-mode-tools tpacpi-bat rxvt-unicode-pixbuf
+polybar persian-fonts
 "
 yaourt -S "${YAOURT_PKGS}"
 git submodule update --init --recursive

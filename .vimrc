@@ -53,10 +53,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 " Plugin 'mattn/emmet-vim'
 Plugin 'skywind3000/asyncrun.vim'
-Plugin 'rking/ag.vim'
 Plugin 'wgwoods/vim-systemd-syntax'
-Plugin 'lilydjwg/colorizer'
+" Plugin 'lilydjwg/colorizer'            " Slows switching between buffers
 Plugin 'inside/vim-search-pulse'
+Plugin 'prettier/vim-prettier'
+Plugin 'jremmen/vim-ripgrep'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 
@@ -188,9 +190,9 @@ endfunction
 
 " -----------------------------------------------
 
-function! <SID>agFind()
+function! <SID>rgFind()
   let g:quickfix_is_open = 1
-  execute 'Ag ' . expand('<cword>')
+  execute 'Rg ' . expand('<cword>')
 endfunction
 
 " -----------------------------------------------
@@ -231,6 +233,8 @@ com! -nargs=0 CopyPath let @"=expand("%:p")
 com! -nargs=0 SortInLine call setline(line('.'),join(sort(split(getline('.'))), ' '))
 
 com! -nargs=0 Breakpoint normal Oimport pudb; pu.db; # XXX Breakpoint
+" com! -nargs=0 Breakpoint normal Ofrom IPython.core.debugger import Tracer; Tracer()(); # XXX Breakpoint
+" com! -nargs=0 Breakpoint normal Ofrom IPython.core.debugger import set_trace; set_trace(); # XXX Breakpoint
 " com! -nargs=0 Breakpoint normal Odebugger; // XXX Breakpoint
 
 com! -nargs=0 PrettyPrintJSON %!python -m json.tool
@@ -342,8 +346,7 @@ set expandtab                   " replace tab with space
 set hidden                      " allow switching between unsaved buffers
 set noswapfile                  " not a fan of swp files
 set ignorecase                  " case insensitive search by default
-set list listchars=trail:·,extends:»,precedes:«,nbsp:×
-" set list listchars=tab:\|_,trail:·,extends:»,precedes:«,nbsp:×
+set list listchars=tab:\|_,trail:·,extends:»,precedes:«,nbsp:×
 
 " set omnifunc=syntaxcomplete#Complete " Enable omnicompletion
 " set guifont=Monaco\ for\ Powerline:h13
@@ -436,10 +439,11 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_working_path_mode = 'wr'
 let g:ctrlp_root_markers = [ '.ctrlp' ]
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('rg')
+"   set grepprg=rg\ --color=never
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"   let g:ctrlp_use_caching = 0
+" endif
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
@@ -509,12 +513,10 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-" The Silver Searcher
-let g:ag_working_path_mode="r"
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --column\ --smart-case\ --nocolor\ --follow
-  set grepformat=%f:%l:%C:%m
+if executable('rg')
+  " Use ripgrep over grep
+  set grepprg=rg\ --color=never\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat=%f:%l:%c:%m
 endif
 
 let g:vim_search_pulse_duration = 100
@@ -540,7 +542,7 @@ nnoremap <Leader>s :update<Cr>
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " switch to the alternative buffer
-nnoremap <Leader>t :b#<Cr>
+nnoremap <Leader>m :b#<Cr>
 nnoremap <Leader>o :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
@@ -651,7 +653,7 @@ nnoremap O Ox<BS>
 
 nmap <F7> :UpdateTags<CR>
 
-noremap <Leader>vv :call <SID>agFind()<Cr>
+noremap <Leader>g :call <SID>rgFind()<Cr>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>

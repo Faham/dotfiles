@@ -19,7 +19,7 @@ if ! zplug check --verbose; then
     fi
 fi
 
-zplug load --verbose
+zplug load
 
 # -----------------------------------------------------------------------------
 
@@ -63,14 +63,11 @@ autoload -U zmv
 # -----------------------------------------------------------------------------
 
 # FZF
-source ".zplug/repos/junegunn/fzf/shell/key-bindings.zsh"
-source ".zplug/repos/junegunn/fzf/shell/completion.zsh"
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source "$HOME/.zplug/repos/junegunn/fzf/shell/key-bindings.zsh"
+source "$HOME/.zplug/repos/junegunn/fzf/shell/completion.zsh"
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-# bindkey '^T' fzf-completion
-# bindkey '^I' $fzf_default_completion
 
 # -----------------------------------------------------------------------------
 

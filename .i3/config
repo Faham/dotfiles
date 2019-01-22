@@ -204,11 +204,11 @@ bar {
 # bindsym --release Ctrl+Shift+F12 exec xdotool key --clearmodifiers XF86MonBrightnessUp
 
 # media playback controls
-bindsym --release Ctrl+Shift+s     exec xdotool key --clearmodifiers XF86AudioStop && osd "Audio playback: Stop"
-bindsym --release Ctrl+Shift+p     exec xdotool key --clearmodifiers XF86AudioPrev && osd "Audio playback: Previous"
-bindsym --release Ctrl+Shift+space exec xdotool key --clearmodifiers XF86AudioPlay && osd "Audio playback: Play/Pause"
-bindsym --release Ctrl+Shift+n     exec xdotool key --clearmodifiers XF86AudioNext && osd "Audio playback: Next"
-bindsym --release Ctrl+Shift+8     exec xdotool key --clearmodifiers XF86Favorites && osd "Audio playback: Favorites"
+bindsym --release $mod+Ctrl+s     exec xdotool key --clearmodifiers XF86AudioStop && osd "Audio playback: Stop"
+bindsym --release $mod+Ctrl+p     exec xdotool key --clearmodifiers XF86AudioPrev && osd "Audio playback: Previous"
+bindsym --release $mod+Ctrl+space exec xdotool key --clearmodifiers XF86AudioPlay && osd "Audio playback: Play/Pause"
+bindsym --release $mod+Ctrl+n     exec xdotool key --clearmodifiers XF86AudioNext && osd "Audio playback: Next"
+bindsym --release $mod+Ctrl+8     exec xdotool key --clearmodifiers XF86Favorites && osd "Audio playback: Favorites"
 
 bindsym --release XF86Sleep   exec systemctl suspend
 bindsym --release XF86Suspend exec systemctl suspend
