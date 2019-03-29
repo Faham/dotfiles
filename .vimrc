@@ -1,4 +1,10 @@
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " -----------------------------------------------------------------------------
 
 if v:progname =~? "evim"
@@ -24,43 +30,47 @@ silent! while 0
   set nocompatible
 silent! endwhile
 
-filetype off
-
 " -----------------------------------------------------------------------------
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
+call plug#begin('~/.vim/plugged')
 " Plugins from Github, name as it appears in the URL
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'majutsushi/tagbar'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'kien/ctrlp.vim'
-Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'tpope/vim-sensible'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'tpope/vim-surround'              " replace pairings ( { [ ' ...
-Plugin 'tomtom/tcomment_vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'jmcantrell/vim-diffchanges'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'w0rp/ale'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-" Plugin 'mattn/emmet-vim'
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'wgwoods/vim-systemd-syntax'
-" Plugin 'lilydjwg/colorizer'            " Slows switching between buffers
-Plugin 'inside/vim-search-pulse'
-Plugin 'prettier/vim-prettier'
-Plugin 'jremmen/vim-ripgrep'
-Plugin 'tpope/vim-fugitive'
-
-call vundle#end()
+Plug 'VundleVim/Vundle.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'kien/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'tpope/vim-sensible'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'tpope/vim-surround'              " replace pairings ( { [ ' ...
+Plug 'tomtom/tcomment_vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'flazz/vim-colorschemes'
+Plug 'jmcantrell/vim-diffchanges'
+Plug 'tpope/vim-unimpaired'
+Plug 'w0rp/ale'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+" Plug 'mattn/emmet-vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'wgwoods/vim-systemd-syntax'
+" Plug 'lilydjwg/colorizer'            " Slows switching between buffers
+Plug 'inside/vim-search-pulse'
+Plug 'prettier/vim-prettier'
+Plug 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-fugitive'
+Plug 'dylon/vim-antlr'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+if has('nvim')
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+call plug#end()
 
 " -----------------------------------------------------------------------------
 
@@ -193,6 +203,46 @@ endfunction
 function! <SID>rgFind()
   let g:quickfix_is_open = 1
   execute 'Rg ' . expand('<cword>')
+endfunction
+
+" -----------------------------------------------
+
+command! -nargs=? -range Dec2hex call s:Dec2hex(<line1>, <line2>, '<args>')
+function! s:Dec2hex(line1, line2, arg) range
+  if empty(a:arg)
+    if histget(':', -1) =~# "^'<,'>" && visualmode() !=# 'V'
+      let cmd = 's/\%V\<\d\+\>/\=printf("0x%x",submatch(0)+0)/g'
+    else
+      let cmd = 's/\<\d\+\>/\=printf("0x%x",submatch(0)+0)/g'
+    endif
+    try
+      execute a:line1 . ',' . a:line2 . cmd
+    catch
+      echo 'Error: No decimal number found'
+    endtry
+  else
+    echo printf('%x', a:arg + 0)
+  endif
+endfunction
+
+" -----------------------------------------------
+
+command! -nargs=? -range Hex2dec call s:Hex2dec(<line1>, <line2>, '<args>')
+function! s:Hex2dec(line1, line2, arg) range
+  if empty(a:arg)
+    if histget(':', -1) =~# "^'<,'>" && visualmode() !=# 'V'
+      let cmd = 's/\%V0x\x\+/\=submatch(0)+0/g'
+    else
+      let cmd = 's/0x\x\+/\=submatch(0)+0/g'
+    endif
+    try
+      execute a:line1 . ',' . a:line2 . cmd
+    catch
+      echo 'Error: No hex number starting "0x" found'
+    endtry
+  else
+    echo (a:arg =~? '^0x') ? a:arg + 0 : ('0x'.a:arg) + 0
+  endif
 endfunction
 
 " -----------------------------------------------
@@ -388,8 +438,6 @@ if has("autocmd")
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
@@ -414,12 +462,31 @@ if has("autocmd")
   " run prettier on js files on write
   autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
-  autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+  autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=2
+  autocmd FileType html setlocal softtabstop=2 shiftwidth=2 tabstop=2
+  autocmd FileType json setlocal softtabstop=2 shiftwidth=2 tabstop=2
+  autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4
 
   augroup END
 else
   set autoindent         " always set autoindenting on
 endif " has("autocmd")
+
+" Enable Caps using language mappings
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+
+" Disable Caps mapping on InsertLeave
+autocmd InsertLeave * set iminsert=0
+" Change Color when entering Insert Mode
+autocmd InsertEnter * highlight  Cursor guifg=NONE guibg=Green
+" Revert Color to default when leaving Insert Mode
+autocmd InsertLeave * highlight  Cursor guifg=NONE guibg=White
+
+highlight Cursor guifg=NONE guibg=White
+highlight lCursor guifg=NONE guibg=Cyan
 
 " -----------------------------------------------------------------------------
 
@@ -520,6 +587,14 @@ if executable('rg')
 endif
 
 let g:vim_search_pulse_duration = 100
+
+" ultisnips
+let g:UltiSnipsExpandTrigger       = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
+let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 
 " -----------------------------------------------------------------------------
 
@@ -637,6 +712,8 @@ nnoremap <leader>D :DiffChangesDiffToggle<Cr>
 " copy current files path to clipboard
 nmap <Leader>cp :CopyPath<CR>
 
+nnoremap <Leader>h :Hex2dec<CR>
+vnoremap <Leader>h :Hex2dec<CR>
 
 nnoremap H 0
 nnoremap L $
@@ -650,6 +727,14 @@ nnoremap <leader>n :setlocal number!<cr>
 inoremap <CR> <CR>x<BS>
 nnoremap o ox<BS>
 nnoremap O Ox<BS>
+
+" Enable Caps using F5
+noremap  <F5> :let &l:imi = !&l:imi<CR>
+inoremap <F5> <C-O>:let &l:imi = !&l:imi<CR>
+cnoremap <F5> <C-^>
+
+" Avoid the first jump while search-n-highlight
+nnoremap * :keepjumps normal! mi*`i<cr>
 
 nmap <F7> :UpdateTags<CR>
 

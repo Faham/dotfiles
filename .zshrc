@@ -85,6 +85,10 @@ alias la="exa -la"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+# go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 export EDITOR='vim'
 export CVS_RSH=ssh
 
