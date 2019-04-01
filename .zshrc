@@ -1,4 +1,10 @@
 
+# Check if zplug is installed
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+
 # ZPlug
 source "$HOME/.zplug/init.zsh"
 
