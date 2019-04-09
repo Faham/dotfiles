@@ -65,6 +65,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'dylon/vim-antlr'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'henrik/vim-indexed-search'
 if has('nvim')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
