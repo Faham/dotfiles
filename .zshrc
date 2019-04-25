@@ -31,8 +31,8 @@ zplug load
 
 # Zsh
 HISTFILE=~/.histfile
-HISTSIZE=2000
-SAVEHIST=5000
+HISTSIZE=20000
+SAVEHIST=50000
 
 bindkey -v
 # bindkey -s '\eu' '^Ucd ..; ls^M'

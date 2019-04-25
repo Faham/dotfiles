@@ -330,7 +330,7 @@ set fillchars+=vert:\|
 set undofile
 set undodir=~/.vim/undo
 set colorcolumn=80
-" set cursorline        "leads to noticeably slower scrolling
+set cursorline        "leads to noticeably slower scrolling
 set lazyredraw          "faster redraw
 set synmaxcol=150        "faster redraw
 syntax sync minlines=200
@@ -424,9 +424,9 @@ if has('win32')
 endif
 
 " In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
+" if has('mouse')
+"   set mouse=a
+" endif
 
 if has('langmap') && exists('+langremap')
   " Prevent that the langmap option applies to characters that result from a
@@ -647,6 +647,8 @@ noremap <Leader>x :Vexplore<CR>
 noremap <F8> :TagbarToggle<CR>
 
 noremap <Leader>j :join<CR>
+
+vnoremap <C-r> "hy:%s#<C-r>h##gc<left><left><left>
 
 " moving between windows
 noremap <C-k> <C-w>k
