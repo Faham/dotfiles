@@ -5,7 +5,7 @@ ao=alsa #audio out
 # srate=48000
 # aid="1" #audio channel
 
-vo="xv" #video out
+vo=xv,x11,gl,gl2,sdl # video out
 # zoom="1" #Allow sofware scaling if I use x11 for vo
 double="yes" #double buffering(recommended for subtitles)
 monitoraspect="16:9" #I'm on a widescreen laptop so keeps 4:3 content from stretching
@@ -14,7 +14,7 @@ hardframedrop="0" #Make sure hard frame drop is off but can turn on easily now
 #This sets the postprocessing into overdrive using all possible spare cpu
 #cycles to make the movie look better
 autoq=100
-vf=pp=de,hqdn3d
+# vf=pp=de,hqdn3d #leads to slow playback on higher resolutions
 
 sid="0" #subtitle set
 font=/usr/share/fonts/TTF/DejaVuSans.ttf #subtitle code

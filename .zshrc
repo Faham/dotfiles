@@ -78,9 +78,18 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 # -----------------------------------------------------------------------------
 
 # Aliases
+alias ssh="TERM=xterm-256color ssh"
 alias weather="curl -s wttr.in/kitchener"
 alias ls=exa
 alias la="exa -la"
+alias gdrive="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=apdfllckaahabafndbhieahigkjlhalf"
+alias gmail="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=pjkljhegncpnkpknbcohdijeoejaedia"
+alias gmaps="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=lneaknkopdijkpnocmklfnjbeapigfbh"
+alias vysor="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=gidgenkbbabolejbgbpnhbimgjbffefm"
+alias youtube="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=blpcfgokakmgnkcojhhkbfbldkacnbeo"
+alias contacts="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=pmcngklofgngifnoceehmchjlildnhkj"
+alias calendar="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep"
+alias google="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=okkolgldfknecfjnhhglfopimelbaceh"
 
 # -----------------------------------------------------------------------------
 

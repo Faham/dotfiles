@@ -312,7 +312,8 @@ endif
 let g:molokai_original = 1
 let g:rehash256 = 1
 colorscheme molokai
-" setting removing every specific default coloring to fall back to terminal default colors
+
+" removing every specific default coloring to fall back to terminal default colors
 hi Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 " setting vertical split bar colors
 hi VertSplit ctermfg=240 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
@@ -326,13 +327,13 @@ set fillchars+=vert:\|
 " hi OverLength ctermbg=234 ctermfg=NONE guibg=NONE
 " match OverLength /\%85v.\+/
 
-" set iskeyword-=_        "make e accept only alphanumeric chars for words
+set iskeyword-=_        "make e accept only alphanumeric chars for words
 set undofile
 set undodir=~/.vim/undo
 set colorcolumn=80
-set cursorline        "leads to noticeably slower scrolling
+" set cursorline          "leads to noticeably slower scrolling
 set lazyredraw          "faster redraw
-set synmaxcol=150        "faster redraw
+set synmaxcol=100       "faster redraw
 syntax sync minlines=200
 set laststatus=2
 set statusline=%t       "tail of the filename
