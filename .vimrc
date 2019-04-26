@@ -327,7 +327,7 @@ set fillchars+=vert:\|
 " hi OverLength ctermbg=234 ctermfg=NONE guibg=NONE
 " match OverLength /\%85v.\+/
 
-set iskeyword-=_        "make e accept only alphanumeric chars for words
+" set iskeyword-=_        "make e accept only alphanumeric chars for words
 set undofile
 set undodir=~/.vim/undo
 set colorcolumn=80
