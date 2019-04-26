@@ -424,10 +424,10 @@ if has('win32')
   set guioptions-=t
 endif
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-" if has('mouse')
-"   set mouse=a
-" endif
+" don't need mouse.
+if has('mouse')
+  set mouse-=a
+endif
 
 if has('langmap') && exists('+langremap')
   " Prevent that the langmap option applies to characters that result from a
