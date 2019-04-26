@@ -32,7 +32,7 @@ xf86-video-intel xloadimage xorg-apps xorg-fonts-100dpi xorg-fonts-75dpi
 xorg-server xorg-xinit xorg-xmessage xosd xterm yaourt youtube-dl zip zsh
 mplayer mosh rofi sysstat acpi w3m alsa-utils ruby ripgrep rxvt-unicode
 highlight mediainfo tig neofetch eog perl nnn bat exa fd tldr ranger neovim
-pacman-contrib ncdu
+pacman-contrib ncdu multitail
 "
 #pm-utils xorg-server-utils
 
