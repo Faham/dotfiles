@@ -65,7 +65,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'dylon/vim-antlr'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'henrik/vim-indexed-search'
+" Plug 'henrik/vim-indexed-search'
 if has('nvim')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -73,6 +73,8 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -496,6 +498,8 @@ highlight lCursor guifg=NONE guibg=Cyan
 
 " Plugin setup
 
+" FZF setup
+
 " Ctrlp setup
 let g:ctrlp_map = '<Leader>p'
 let g:ctrlp_cmd = 'CtrlP'
@@ -510,16 +514,15 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_working_path_mode = 'wr'
 let g:ctrlp_root_markers = [ '.ctrlp' ]
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" if executable('rg')
-"   set grepprg=rg\ --color=never
-"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-"   let g:ctrlp_use_caching = 0
-" endif
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/]node_modules|\v[\/]bower_components$',
   \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+if executable('rg')
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
 
 " Ctrlp Funky
 let g:ctrlp_funky_syntax_highlight = 1
@@ -652,10 +655,10 @@ noremap <Leader>j :join<CR>
 vnoremap <C-r> "hy:%s#<C-r>h##gc<left><left><left>
 
 " moving between windows
-noremap <C-k> <C-w>k
-noremap <C-j> <C-w>j
-noremap     <C-w>h
-noremap <C-l> <C-w>l
+" noremap <C-k> <C-w>k
+" noremap <C-j> <C-w>j
+" noremap     <C-w>h
+" noremap <C-l> <C-w>l
 
 " split
 nnoremap <C-w>o :split<Cr>
