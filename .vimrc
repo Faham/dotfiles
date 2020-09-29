@@ -39,10 +39,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'majutsushi/tagbar'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'kien/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'tpope/vim-sensible'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'tpope/vim-surround'              " replace pairings ( { [ ' ...
 Plug 'tomtom/tcomment_vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -63,9 +60,9 @@ Plug 'prettier/vim-prettier', {
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'dylon/vim-antlr'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'henrik/vim-indexed-search'
+Plug 'sloria/vim-ped'
+" Plug 'henrik/vim-indexed-search'     " has issues with my config
 if has('nvim')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -75,6 +72,7 @@ else
 endif
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " -----------------------------------------------------------------------------
@@ -205,13 +203,6 @@ endfunction
 
 " -----------------------------------------------
 
-function! <SID>rgFind()
-  let g:quickfix_is_open = 1
-  execute 'Rg ' . expand('<cword>')
-endfunction
-
-" -----------------------------------------------
-
 command! -nargs=? -range Dec2hex call s:Dec2hex(<line1>, <line2>, '<args>')
 function! s:Dec2hex(line1, line2, arg) range
   if empty(a:arg)
@@ -335,7 +326,7 @@ set undodir=~/.vim/undo
 set colorcolumn=80
 " set cursorline          "leads to noticeably slower scrolling
 set lazyredraw          "faster redraw
-set synmaxcol=100       "faster redraw
+" set synmaxcol=100       "faster redraw
 syntax sync minlines=200
 set laststatus=2
 set statusline=%t       "tail of the filename
@@ -449,8 +440,8 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
-  " For all text files set 'textwidth' to 80 characters.
-  autocmd FileType text setlocal textwidth=80
+  " For all text files set 'textwidth' to 79 characters.
+  autocmd FileType text setlocal textwidth=79
 
   " Remove trailing whitespaces on write
   autocmd BufWritePre * %s/\s\+$//e
@@ -500,32 +491,6 @@ highlight lCursor guifg=NONE guibg=Cyan
 
 " FZF setup
 
-" Ctrlp setup
-let g:ctrlp_map = '<Leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=25
-let g:ctrlp_max_files=0
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_clear_cache_on_exit=0
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_working_path_mode = 'wr'
-let g:ctrlp_root_markers = [ '.ctrlp' ]
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/]node_modules|\v[\/]bower_components$',
-  \ 'file': '\v\.(pyc|pyo|exe|so|dll|la|png|sh|php|pc|0|S|vcproj|mak|sample|po|m4|asm|am|in|Po|lo|d|o|Plo)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-endif
-
-" Ctrlp Funky
-let g:ctrlp_funky_syntax_highlight = 1
 
 " Airline
 let g:airline_theme = 'minimalist'
@@ -615,8 +580,6 @@ inoremap <C-U> <C-G>u<C-U>
 
 nnoremap <leader>b :Breakpoint<Cr>
 
-" ctag search with CtrlP
-nnoremap <leader>i :CtrlPTag<Cr>
 nnoremap <leader>f :BufExplorer<Cr>
 " quick save
 nnoremap <Leader>s :update<Cr>
@@ -625,9 +588,6 @@ nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " switch to the alternative buffer
 nnoremap <Leader>m :b#<Cr>
-nnoremap <Leader>o :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>O :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " clear search highlightings when done
 nnoremap <Leader>c :nohlsearch<Cr>
@@ -718,12 +678,6 @@ noremap <Leader>q :call <SID>quickfixToggle()<Cr>
 nnoremap <leader>F :call <SID>foldColumnToggle()<Cr>
 nnoremap <leader>D :DiffChangesDiffToggle<Cr>
 
-" copy current files path to clipboard
-nmap <Leader>cp :CopyPath<CR>
-
-nnoremap <Leader>h :Hex2dec<CR>
-vnoremap <Leader>h :Hex2dec<CR>
-
 nnoremap H 0
 nnoremap L $
 vnoremap H 0
@@ -747,8 +701,6 @@ nnoremap * :keepjumps normal! mi*`i<cr>
 
 nmap <F7> :UpdateTags<CR>
 
-noremap <Leader>g :call <SID>rgFind()<Cr>
-
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -762,6 +714,16 @@ vnoremap <silent> # :<C-U>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 map <leader>l :ALEToggle<CR>
+
+map <Leader>g :execute 'Rg ' . expand('<cword>') . ' %'<Cr>
+map <Leader>G :execute 'Rg ' . expand('<cword>')<Cr>
+map <leader>p :GFiles<CR>
+map <leader>o :BTags<CR>
+map <leader>i :Tags<CR>
+map <leader>u :Commands<CR>
+map <leader>h :History<CR>
+
+noremap <silent> <C-S> <C-a>
 
 " -----------------------------------------------------------------------------
 
