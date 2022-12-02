@@ -2,7 +2,7 @@
  default = upstream
 [user]
  name = Faham Negini
- email = faham.negini@gmail.com
+ email = faham@ethicadata.com
 [commit]
  template = ~/.gitmessage
 [alias]

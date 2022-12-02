@@ -1,4 +1,6 @@
 
+export TERM='xterm-256color'
+
 # Check if zplug is installed
 if [[ ! -d ~/.zplug ]]; then
   git clone https://github.com/zplug/zplug ~/.zplug
@@ -33,9 +35,6 @@ zplug load
 HISTFILE=~/.histfile
 HISTSIZE=20000
 SAVEHIST=50000
-
-bindkey -v
-# bindkey -s '\eu' '^Ucd ..; ls^M'
 
 setopt AUTO_CD
 setopt MULTIOS
@@ -82,14 +81,9 @@ alias ssh="TERM=xterm-256color ssh"
 alias weather="curl -s wttr.in/kitchener"
 alias ls=exa
 alias la="exa -la"
-alias gdrive="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=apdfllckaahabafndbhieahigkjlhalf"
-alias gmail="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=pjkljhegncpnkpknbcohdijeoejaedia"
-alias gmaps="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=lneaknkopdijkpnocmklfnjbeapigfbh"
-alias vysor="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=gidgenkbbabolejbgbpnhbimgjbffefm"
-alias youtube="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=blpcfgokakmgnkcojhhkbfbldkacnbeo"
-alias contacts="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=pmcngklofgngifnoceehmchjlildnhkj"
-alias calendar="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=kjbdgfilnfhdoflbpgamdcdgpehopbep"
-alias google="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=okkolgldfknecfjnhhglfopimelbaceh"
+alias youtube="chromium --app=https://youtube.com/"
+alias meet-mohammad="chromium --app='https://meet.google.com/yog-euts-hmg?authuser=1'"
+alias meet-faham="chromium --app='https://meet.google.com/xib-tsfm-wkz?authuser=1'"
 
 # -----------------------------------------------------------------------------
 
@@ -111,6 +105,17 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export ANDROID_HOME=$HOME/Android/Sdk
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
 # -----------------------------------------------------------------------------
 
+stty -ixon
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# -----------------------------------------------------------------------------
+
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
+# bindkey -s '\eu' '^Ucd ..; ls^M'
+# bindkey -v

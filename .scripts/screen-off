@@ -1,0 +1,12 @@
+#!/bin/bash
+screenOffLockFile=/tmp/screen-off-lock
+
+if [ -f $screenOffLockFile ];
+then
+  rm $screenOffLockFile
+  xset dpms force on
+else
+  touch $screenOffLockFile
+  sleep .5
+  xset dpms force off
+fi

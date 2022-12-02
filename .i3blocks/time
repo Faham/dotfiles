@@ -12,13 +12,17 @@ urgent=false
 YYMonDD=$(date '+%b%d%a')
 HHMM=$(date '+%H:%M')
 SS=$(date '+%S')
-TehranHHMM=$(TZ=Asia/Tehran date '+%H:%M')
+
+# Secondary clock
+tz=Asia/Tehran
+# tz=America/New_York
+SecondHHMM=$(TZ=$tz date '+%H:%M')
 
 full_text=$(printf "%s%s%s" \
    "<span font='8'>$YYMonDD</span>" \
    "<span>$HHMM</span>" \
    "<span font='8' rise='14000'>$SS</span>" \
-   "<span font='8' rise='0'>$TehranHHMM</span>" \
+   "<span font='8' rise='0'>$SecondHHMM</span>" \
 )
 short_text=$full_text
 color= '#FFFFFF'

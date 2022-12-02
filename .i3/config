@@ -121,7 +121,7 @@ bindsym $mod+9 workspace 9
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
 
-bindsym $mod+m move workspace to output left
+bindsym $mod+Shift+m move workspace to output left
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -140,6 +140,9 @@ bindsym $mod+s move scratchpad
 # Show the first scratchpad window
 bindsym $mod+Shift+s scratchpad show
 
+# toggle display off/on
+bindsym $mod+Shift+d exec ~/.scripts/screen-off
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -155,16 +158,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 40 px or 10 ppt
+        bindsym j resize grow height 40 px or 10 ppt
+        bindsym k resize shrink height 40 px or 10 ppt
+        bindsym l resize grow width 40 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 40 px or 10 ppt
+        bindsym Down resize grow height 40 px or 10 ppt
+        bindsym Up resize shrink height 40 px or 10 ppt
+        bindsym Right resize grow width 40 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -213,28 +216,26 @@ bindsym --release $mod+Ctrl+8     exec xdotool key --clearmodifiers XF86Favorite
 bindsym --release XF86Sleep   exec systemctl suspend
 bindsym --release XF86Suspend exec systemctl suspend
 
+# Toggle touchpad
+bindsym $mod+m exec synclient TouchpadOff=$(synclient -l | grep TouchpadOff | awk '{print $3}' | tr 01 10)
+
 # HDMI output dual screen
 bindsym --release 133 exec detect-displays
 
 # screenshots
-bindsym --release $mod+Print exec scrot -u -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
+# bindsym --release $mod+Print exec scrot -u -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
+bindsym --release $mod+Print exec flameshot gui
 
 # Handy apps keybindings
 bindsym --release $mod+Shift+x exec --no-startup-id xkill
-bindsym --release Ctrl+Shift+l exec --no-startup-id lockscreen off
+bindsym --release Ctrl+Shift+l exec --no-startup-id lockscreen
 for_window [class="XVkbd"] floating enable
 for_window [class="Qalculate-gtk"] floating enable
 for_window [class="TelegramDesktop"] floating enable
 for_window [title="Google Hangouts - faham.negini@gmail.com"] floating enable
 for_window [class="zoom"] floating enable
 for_window [title="Floating for YouTube™"] floating enable
-for_window [class="Pcmanfm"] floating enable
-for_window [class="Gpicview"] floating enable
-for_window [class="Evince"] floating enable
-for_window [class="Skype"] floating enable
-for_window [class="Slack"] floating enable
 bindsym --release $mod+t exec --no-startup-id telegram
-bindsym --release $mod+Shift+t exec --no-startup-id slack
 bindsym --release $mod+Shift+f exec --no-startup-id pcmanfm
 bindsym --release $mod+c exec --no-startup-id osd
 bindsym --release $mod+Shift+p exec --no-startup-id shutdown_menu -c -p rofi

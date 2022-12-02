@@ -26,7 +26,8 @@ xset fp+ /usr/share/fonts/gsfonts
 xset r rate 170 50
 xset -b
 
-setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
+setxkbmap -model pc105 -layout us,ir -option grp:switch,grp:shifts_toggle,grp_led:scroll
+
 unclutter -idle 2 -jitter 10 -root &
 
 # background settings

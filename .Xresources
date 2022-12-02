@@ -264,8 +264,8 @@ URxvt*colorUL        : #ccdc90
 URxvt*background     : #272822
 URxvt*foreground     : #d0d0d0
 ! URxvt*fading:        15
-URxvt*font           : xft:DejaVu Sans Mono:style=g:pixelsize=22
-URxvt*boldFont       : xft:DejaVu Sans Mono:style=g:bold:pixelsize=22
+URxvt*font           : xft:DejaVu Sans Mono:style=g:pixelsize=20
+URxvt*boldFont       : xft:DejaVu Sans Mono:style=g:bold:pixelsize=20
 URxvt*cursorColor    : #d0d0d0
 URxvt*geometry       : 160x50
 URxvt*cutchars       : "`\"'&()*,:;<=>?[\\]^{|}$"
@@ -282,6 +282,9 @@ URxvt*letterSpace    : -1
 URxvt.lineSpace      : 0
 URxvt.iso14755       : true
 URxvt.iso14755_52    : false
+urxvt.perl-ext-common: default,resize-font
+URxvt.resize-font.smaller: C-j
+URxvt.resize-font.bigger:  C-k
 
 ! xterm ----------------------------------------------------------------------
 

@@ -717,7 +717,7 @@ map <leader>l :ALEToggle<CR>
 
 map <Leader>g :execute 'Rg ' . expand('<cword>') . ' %'<Cr>
 map <Leader>G :execute 'Rg ' . expand('<cword>')<Cr>
-map <leader>p :GFiles<CR>
+map <leader>p :FZF<CR>
 map <leader>o :BTags<CR>
 map <leader>i :Tags<CR>
 map <leader>u :Commands<CR>

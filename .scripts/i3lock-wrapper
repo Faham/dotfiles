@@ -29,7 +29,7 @@ fi
 
 usage () {
     cat <<EOF
-A wrapper around i3lock that sets a blurred screenshot 
+A wrapper around i3lock that sets a blurred screenshot
 as a background image for the screen saver.
 
 Usage: $script_name [options]
@@ -39,23 +39,23 @@ Usage: $script_name [options]
     -b, --beep                  enable beeping.
     -d, --dpms                  enable turning off the screen with DPMS.
     -I sec,
-    --inactivity-timeout=sec    specifies  the  number of seconds i3lock will 
+    --inactivity-timeout=sec    specifies  the  number of seconds i3lock will
                                 wait for another password before turning
                                 off the monitors.
     -u, --no-unlock-indicator   disable the unlock indicator.
-    -p win|default, 
+    -p win|default,
     --pointer=win|default       do not hide the mouse pointer on default
                                 or the current position of the mouse pointer.
     -e, --ignore-empty-password when an empty password is provided by the user,
                                 do  not  validate  it.
     -l, --logo                  superimpose the padlock logo
 
-    Please note, that all the options except "-l" or "--logo" are being passed 
+    Please note, that all the options except "-l" or "--logo" are being passed
     directly to i3lock.  See "man i3lock" for more details.
 EOF
 }
 
-arg_test () { 
+arg_test () {
     # Filter out arguments that are invalid
     while true; do
        case "$1" in
@@ -63,11 +63,11 @@ arg_test () {
                i3lock -v
                exit
                ;;
-           -n|--nofork)                
+           -n|--nofork)
                shift;;
-           -b|--beep)              
+           -b|--beep)
                shift;;
-           -d|--dpms)                  
+           -d|--dpms)
                shift;;
            -I|--inactivity-timeout)
                shift
@@ -81,9 +81,9 @@ arg_test () {
                        ;;
                esac
                ;;
-           -u|--no-unlock-indicator)   
+           -u|--no-unlock-indicator)
                shift;;
-           -p|--pointer) 
+           -p|--pointer)
                shift
                case "$1" in
                    win|default)
@@ -106,9 +106,8 @@ arg_test () {
                exit
                ;;
            --)
-               shift 
+               shift
                break ;;
-
            *)
                echo "$script_name: invalid argument \"$1\"" >&2
                exit 1
@@ -148,29 +147,31 @@ superimpose_padlock() {
     scale=.8
     lockimage=$(mktemp --tmpdir i3lock-logo-XXXXXXXXXX)
     img_pdf_gz | base64 -d | gunzip > "${lockimage}.pdf"
-    height=$(identify -format "($scale * %H + .5)/1\n" "$file2" | bc)
+    height=$(identify -format "($scale * %H + .5)/1\n" "$img_file" | bc)
     width=$(identify -format "scale=4; t=%W/%H; scale=0; (t * $height + .5)/1\n" "${lockimage}.pdf" | bc)
     convert -density 600 -background none -resize ${height}x${width} "${lockimage}.pdf" "${lockimage}.png"
-    convert -compose Exclusion -composite -gravity center "$file2" "${lockimage}.png" "$file2"
+    convert -compose Exclusion -composite -gravity center "$img_file" "${lockimage}.png" "$img_file"
     rm "${lockimage}" "${lockimage}.png" "${lockimage}.pdf"
 }
 
 use_logo=0
 arg_test $@
 
-file1=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
-file2=$(mktemp --tmpdir i3lock-wrapper-XXXXXXXXXX.png)
+# img_file=/tmp/i3lock-wrapper-tmp.jpg
 
-scrot -z -d0 -q100 "$file1"
-# convert "$file1" -blur 0x3 "$file2"
-# convert "$file1" -filter Gaussian -resize 10% -define filter:sigma=2.5 -resize 1000% "$file2"
-convert "$file1" -resize 10% -blur 0x6 -resize 1000% "$file2"
-rm "$file1" # Remove for security
+# [ -e "$img_file" ] && rm "$img_file"
 
-if [ $use_logo -eq 1 ]; then
-    superimpose_padlock
-fi
-
+# scrot -z -d0 -q1 "$img_file"
+# convert "$img_file" -blur 0x3 "$img_file"
+# convert "$img_file" -filter Gaussian -resize 10% -define filter:sigma=2.5 -resize 1000% "$img_file"
+# convert "$img_file" -resize 10% "$img_file"
+# convert "$img_file" -resize 10% -blur 0x6 -resize 1000% "$img_file"
+# # rm "$img_file" # Remove for security
+#
+# if [ $use_logo -eq 1 ]; then
+#     superimpose_padlock
+# fi
+#
 cmd=()
 for i in $@; do
     if [[ $i != '-l'  &&  $i != '--logo' && $i != '--' ]]; then
@@ -178,8 +179,12 @@ for i in $@; do
     fi
 done
 
-# drop the last "--" introduced by getopt
-i3lock -i "$file2" ${cmd}
+# TODO: turn screen off on an input argument
+xset dpms force off
 
-trap "rm '$file2'" EXIT
+# drop the last "--" introduced by getopt
+# i3lock -i "$img_file" ${cmd}
+i3lock ${cmd}
+
+# trap "rm '$img_file'" EXIT
 
