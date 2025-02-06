@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Define the directories
+photos_dir="$HOME/photos"
+pictures_dir="$HOME/Pictures"
+
+# Check if the Pictures directory exists
+if [ -d "$pictures_dir" ]; then
+    save_dir="$pictures_dir"
+else
+    # If Pictures doesn't exist, use the photos directory
+    save_dir="$photos_dir"
+    # Create the photos directory if it doesn't exist
+    if [ ! -d "$photos_dir" ]; then
+        mkdir -p "$photos_dir"
+        echo "Created directory: $photos_dir"
+    fi
+fi
+
+# Generate a unique filename using a timestamp
+filename="screenshot_$(date +%Y%m%d_%H%M%S).png"
+full_path="$save_dir/$filename"
+
+# Take the screenshot using scrot
+scrot -u -q 75 -e 'mv $f '$full_path
+
+# Notify the user where the screenshot was saved
+echo "Screenshot saved to: $full_path"

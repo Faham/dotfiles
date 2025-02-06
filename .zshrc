@@ -13,9 +13,7 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 zplug "plugins/zsh-autosuggestions", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
 zplug "junegunn/fzf", use:"shell/{key-bindings,completion}.zsh"
-zplug "peco/peco", as:command, from:gh-r
 zplug "~/.zsh", from:local, use:"faham-steeef.zsh-theme"
 
 if ! zplug check --verbose; then
@@ -80,8 +78,6 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 # Aliases
 alias ssh="TERM=xterm-256color ssh"
 alias weather="curl -s wttr.in/kitchener"
-alias ls=exa
-alias la="exa -la"
 alias gdrive="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=apdfllckaahabafndbhieahigkjlhalf"
 alias gmail="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=pjkljhegncpnkpknbcohdijeoejaedia"
 alias gmaps="/opt/google/chrome/google-chrome --profile-directory=Default --app-id=lneaknkopdijkpnocmklfnjbeapigfbh"
@@ -102,14 +98,17 @@ alias google="/opt/google/chrome/google-chrome --profile-directory=Default --app
 
 # go
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$GOPATH/bin:$PATH
 
 export EDITOR='vim'
 export CVS_RSH=ssh
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export ANDROID_HOME=$HOME/Android/Sdk
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$JAVA_HOME/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
 
 # -----------------------------------------------------------------------------
 

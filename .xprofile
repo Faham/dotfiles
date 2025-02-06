@@ -26,14 +26,14 @@ xset fp+ /usr/share/fonts/gsfonts
 xset r rate 170 50
 xset -b
 
-setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:shift_toggle,grp_led:scroll
+setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:alt_shift_toggle,grp_led:scroll
 unclutter -idle 2 -jitter 10 -root &
 
 # background settings
 xsetroot -solid "#110011"
 [ -f ~/.bg ] && xloadimage -onroot ~/.bg
 
-detect_displays
+# detect_displays
 # xflux -l 49.197168 -g -123.004449
-xautolock -detectsleep -time 6 -locker "lockscreen off" -nowlocker "lockscreen" &
+# xautolock -detectsleep -time 6 -locker "lockscreen off" -nowlocker "lockscreen" &
 

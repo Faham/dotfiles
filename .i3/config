@@ -217,7 +217,7 @@ bindsym --release XF86Suspend exec systemctl suspend
 bindsym --release 133 exec detect-displays
 
 # screenshots
-bindsym --release $mod+Print exec scrot -u -q 75 -e 'mv $f ~/Pictures/%Y-%m-%d-%H%M%S.jpg'
+bindsym --release $mod+F9 exec screenshot
 
 # Handy apps keybindings
 bindsym --release $mod+Shift+x exec --no-startup-id xkill

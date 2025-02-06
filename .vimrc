@@ -54,9 +54,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'wgwoods/vim-systemd-syntax'
 " Plug 'lilydjwg/colorizer'            " Slows switching between buffers
 Plug 'inside/vim-search-pulse'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'dylon/vim-antlr'
