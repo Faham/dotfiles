@@ -17,10 +17,8 @@ else
     pactl set-sink-volume @DEFAULT_SINK@ $mixer_option
 fi
 
-DEFAULT_SINK=$(pacmd dump | grep "default-sink" | cut -d' ' -f2)
-
-volume_percent=$(pactl list sinks | sed -n -E -e "/$DEFAULT_SINK/,$ p" | grep '^\s*Volume:' | head -1 | grep -Eo '^[^%]+' | rev | cut -d' ' -f 1 | rev)
-volume_mute=$(pactl list sinks | sed -n -E -e "/$DEFAULT_SINK/,$ p" | grep '^\s*Mute:' | head -1 | cut -d' ' -f 2)
+volume_percent=$(echo "scale=2; $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')" | bc)
+volume_mute=$(pactl get-sink-mute @DEFAULT_SINK@ | grep '^\s*Mute:' | head -1 | cut -d' ' -f 2)
 
 if [[ $volume_mute == 'yes' ]]; then
     volume_mute='[Mute]'
