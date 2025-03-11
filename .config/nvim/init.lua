@@ -43,8 +43,9 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "typescript" },
-        highlight = { enable = true }
+        ensure_installed = { "typescript", "python" },
+        highlight = { enable = true },
+        indent = { enable = true }
       }
     end
   },
@@ -102,9 +103,6 @@ require('lazy').setup({
   -- Themes and Colors
   { "flazz/vim-colorschemes" },
 
-  -- Neovim-Specific Plugins
-  { "Shougo/deoplete.nvim", build = ":UpdateRemotePlugins" },
-
   -- Tmux Navigation
   { "christoomey/vim-tmux-navigator" },
 
@@ -115,20 +113,6 @@ require('lazy').setup({
 
   -- LSP Configuration and Plugins
   { "neovim/nvim-lspconfig" },
-  {
-    'neoclide/coc.nvim',
-    branch = 'release',
-    run = function()
-      local coc_dir = vim.fn.stdpath('data') .. '/site/pack/lazy/start/coc.nvim'
-      if vim.fn.isdirectory(coc_dir) == 1 then
-        vim.fn.system({'npm', 'ci'}, coc_dir)
-        vim.fn.system({'npm', 'run', 'build'}, coc_dir)
-        vim.fn.system({'npm', 'install', '-g', 'coc-tsserver'}, coc_dir)
-        vim.fn.system({'npm', 'install', '-g', 'coc-eslint'}, coc_dir)
-        print('coc.nvim, coc-tsserver, and coc-eslint dependencies installed successfully!')
-      end
-    end
-  },
 
   -- Autocompletion Plugin
   { "hrsh7th/nvim-cmp" },
@@ -140,9 +124,10 @@ vim.g.mapleader = ";"
 
 -- Keybindings for Plugins ----------------------------------------------------
 vim.api.nvim_set_keymap('n', '<leader>b', ':BufExplorer<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>ff', ':Files<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fr', ':History<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fb', ':Buffers<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', ':Files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>h', ':History<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>o', ':BTags<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>i', ':Tags<CR>', { noremap = true, silent = true })
 
 -- Debugging Keybindings
 vim.api.nvim_set_keymap('n', '<F5>', ":lua require('dap').continue()<CR>", { noremap = true, silent = true })
@@ -153,7 +138,6 @@ vim.api.nvim_set_keymap('n', '<S-F11>', ":lua require('dap').step_out()<CR>", { 
 vim.api.nvim_set_keymap('n', '<F12>', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
 
 -- LSP Configuration ----------------------------------------------------------
-require('lspconfig').pyright.setup{}
 
 local cmp = require('cmp')
 cmp.setup({
@@ -183,6 +167,18 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('lspconfig').pyright.setup({
   capabilities = capabilities,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace", -- Can be "openFilesOnly" for smaller projects
+      },
+    },
+  },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false -- Let Neovim handle indent
+  end,
 })
 
 -- LSP Keybindings
@@ -190,7 +186,7 @@ vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { norema
 vim.api.nvim_set_keymap('n', 'gt', ':lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>e', ':lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>e', ':lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', { noremap = true, silent = true })
 
 -- Functions ------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -238,6 +234,20 @@ local function wrap_toggle()
 end
 
 vim.api.nvim_create_user_command('WrapToggle', wrap_toggle, {})
+
+-- Define the paste toggle function
+local function paste_toggle()
+  if vim.opt.paste:get() then
+    print("Paste OFF")              -- Or use vim.notify("Paste OFF")
+    vim.opt.paste = false           -- Disable paste mode
+  else
+    print("Paste ON")               -- Or use vim.notify("Paste ON")
+    vim.opt.paste = true            -- Enable paste mode
+  end
+end
+
+vim.api.nvim_create_user_command('PasteToggle', paste_toggle, { nargs = 0 })
+vim.api.nvim_set_keymap('n', '<leader>e', ':PasteToggle<CR>', { noremap = true, silent = true })
 
 -- General Settings -----------------------------------------------------------
 vim.opt.mouse = "a"
@@ -293,6 +303,18 @@ vim.opt.hidden = true
 vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.listchars = { tab = "|_", trail = "·", extends = "»", precedes = "«", nbsp = "×" }
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = true
+    vim.opt_local.autoindent = true
+    vim.opt_local.smartindent = false
+    vim.opt_local.cindent = false
+  end,
+})
 
 -- Theme Settings -------------------------------------------------------------
 vim.g.molokai_original = 1
