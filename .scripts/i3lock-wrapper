@@ -183,6 +183,17 @@ main() {
         superimpose_padlock
     fi
 
+    # Save current keyboard layout settings
+    CURRENT_LAYOUT=$(setxkbmap -query | awk '/layout:/{print $2}')
+    CURRENT_VARIANT=$(setxkbmap -query | awk '/variant:/{print $2}')
+    CURRENT_OPTIONS=$(setxkbmap -query | awk '/options:/{print $2}')
+
+    # Set keyboard layout to US
+    setxkbmap us
+
+    # Restore layout on exit
+    trap 'setxkbmap -layout "$CURRENT_LAYOUT" -variant "$CURRENT_VARIANT" -option "$CURRENT_OPTIONS"' EXIT
+
     # Launch i3lock with the blurred image
     if ! i3lock -i "$BLURRED_FILE" "${i3lock_args[@]}"; then
         echo "Error: Failed to run i3lock." >&2
@@ -191,7 +202,7 @@ main() {
 }
 
 # Dependency check
-for cmd in scrot magick i3lock identify convert bc; do
+for cmd in scrot magick i3lock identify convert bc setxkbmap; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
         echo "Error: Required command '$cmd' is not installed." >&2
         exit 1

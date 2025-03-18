@@ -130,12 +130,12 @@ vim.api.nvim_set_keymap('n', '<leader>h', ':History<CR>', { noremap = true, sile
 -- vim.api.nvim_set_keymap('n', '<leader>i', ':Tags<CR>', { noremap = true, silent = true })
 
 -- Debugging Keybindings
-vim.api.nvim_set_keymap('n', '<F5>', ":lua require('dap').continue()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F9>', ":lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F10>', ":lua require('dap').step_over()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F11>', ":lua require('dap').step_into()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-F11>', ":lua require('dap').step_out()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F12>', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F9>', ":lua require('dap').continue()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-F8>', ":lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F8>', ":lua require('dap').step_over()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<F7>', ":lua require('dap').step_into()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-F8>', ":lua require('dap').step_out()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-F2>', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
 
 -- LSP Configuration ----------------------------------------------------------
 
@@ -406,6 +406,7 @@ end
 dap.listeners.before.event_exited['dapui_config'] = function()
   require('dapui').close()
 end
+
 -- ----------------------------------------------------------------------------
 
 -- -- Custom quickfix and folding mappings
