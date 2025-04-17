@@ -1,4 +1,3 @@
-
 -- Automatically install lazy.nvim if not already installed
 local install_path = vim.fn.stdpath('data') .. '/site/pack/lazy/start/lazy.nvim'
 if not vim.loop.fs_stat(install_path) then
@@ -126,16 +125,16 @@ vim.g.mapleader = ";"
 vim.api.nvim_set_keymap('n', '<leader>b', ':BufExplorer<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>f', ':Files<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>h', ':History<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>o', ':BTags<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>i', ':Tags<CR>', { noremap = true, silent = true })
 
 -- Debugging Keybindings
+vim.api.nvim_set_keymap('n', '<leader>dn', ":lua require('dap').new()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dd', ":lua require('dap').disconnect()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<F9>', ":lua require('dap').continue()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-F8>', ":lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<F8>', ":lua require('dap').step_over()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<F7>', ":lua require('dap').step_into()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-F8>', ":lua require('dap').step_out()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-F2>', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
 
 -- LSP Configuration ----------------------------------------------------------
 
@@ -172,12 +171,12 @@ require('lspconfig').pyright.setup({
       analysis = {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
-        diagnosticMode = "workspace", -- Can be "openFilesOnly" for smaller projects
+        diagnosticMode = "workspace",
       },
     },
   },
   on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false -- Let Neovim handle indent
+    client.server_capabilities.documentFormattingProvider = false
   end,
 })
 
@@ -186,7 +185,6 @@ vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { norema
 vim.api.nvim_set_keymap('n', 'gt', ':lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>e', ':lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', { noremap = true, silent = true })
 
 -- Functions ------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -235,14 +233,13 @@ end
 
 vim.api.nvim_create_user_command('WrapToggle', wrap_toggle, {})
 
--- Define the paste toggle function
 local function paste_toggle()
   if vim.opt.paste:get() then
-    print("Paste OFF")              -- Or use vim.notify("Paste OFF")
-    vim.opt.paste = false           -- Disable paste mode
+    print("Paste OFF")
+    vim.opt.paste = false
   else
-    print("Paste ON")               -- Or use vim.notify("Paste ON")
-    vim.opt.paste = true            -- Enable paste mode
+    print("Paste ON")
+    vim.opt.paste = true
   end
 end
 
@@ -250,6 +247,12 @@ vim.api.nvim_create_user_command('PasteToggle', paste_toggle, { nargs = 0 })
 vim.api.nvim_set_keymap('n', '<leader>e', ':PasteToggle<CR>', { noremap = true, silent = true })
 
 -- General Settings -----------------------------------------------------------
+-- Ensure ~/.nvim/tmp exists for temporary files with proper expansion
+local tmp_dir = vim.fn.expand("~/.nvim/tmp")
+if not vim.fn.isdirectory(tmp_dir) then
+  vim.fn.mkdir(tmp_dir, "p")
+end
+
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.encoding = "utf-8"
@@ -271,8 +274,8 @@ vim.opt.shell = "/bin/zsh"
 vim.opt.magic = true
 vim.opt.confirm = true
 vim.opt.backspace = { "indent", "eol", "start" }
-vim.opt.backupdir = "~/.nvim/tmp//"
-vim.opt.directory:prepend("~/.nvim/tmp//")
+vim.opt.backupdir = tmp_dir .. "//" -- Use expanded path
+vim.opt.directory:prepend(tmp_dir .. "//") -- Use expanded path
 vim.opt.history = 200
 vim.opt.ruler = true
 vim.opt.showcmd = true
@@ -293,7 +296,7 @@ vim.opt.wrapmargin = 0
 vim.opt.formatoptions = vim.opt.formatoptions - { "t" } + { "l" }
 vim.opt.autoread = true
 vim.opt.autochdir = true
-vim.opt.tags = { "./.tags", "~/.tags" }
+vim.opt.tags = { "./.tags", vim.fn.expand("~/.tags") } -- Use expanded path
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -366,22 +369,8 @@ vim.keymap.set('n', '<S-L>', '$', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>n', ':setlocal number!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>j', ':join<CR>', { noremap = true, silent = true })
 
--- ----------------------------------------------------------------------------
-
+-- DAP Configuration ----------------------------------------------------------
 local dap = require('dap')
--- dap.adapters.python = {
---   type = 'executable',
---   command = '/home/faham/dev/psychon/webserver/.venv/bin/python',  -- Ensure this points to the correct Python executable
---   args = { '-m', 'debugpy.adapter' },
--- }
--- dap.configurations.python = {
---   {
---     type = 'python',
---     request = 'launch',  -- This should be 'launch' for running test.py directly
---     name = 'Launch file',
---     program = '${file}',  -- Automatically uses the current file
---   },
--- }
 dap.adapters.python = {
   type = 'server',
   host = '127.0.0.1',
@@ -392,9 +381,22 @@ dap.configurations.python = {
     type = 'python',
     request = 'attach',
     name = 'Attach to FastAPI',
-    justMyCode = false,  -- Set to true to debug only your code, excluding libraries
+    justMyCode = false,
   },
 }
+--- dap.adapters.python = {
+---   type = 'executable',
+---   command = '/home/faham/dev/psychon/webserver/.venv/bin/python',  -- Ensure this points to the correct Python executable
+---   args = { '-m', 'debugpy.adapter' },
+--- }
+--- dap.configurations.python = {
+---   {
+---     type = 'python',
+---     request = 'launch',  -- This should be 'launch' for running test.py directly
+---     name = 'Launch file',
+---     program = '${file}',  -- Automatically uses the current file
+---   },
+--- }
 
 
 dap.listeners.after.event_initialized['dapui_config'] = function()
@@ -406,53 +408,3 @@ end
 dap.listeners.before.event_exited['dapui_config'] = function()
   require('dapui').close()
 end
-
--- ----------------------------------------------------------------------------
-
--- -- Custom quickfix and folding mappings
--- vim.api.nvim_set_keymap('n', '<leader>q', ':call quickfixToggle()<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>F', ':call foldColumnToggle()<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>D', ':DiffChangesDiffToggle<CR>', { noremap = true, silent = true })
---
--- -- Move to beginning and end of the line
--- vim.api.nvim_set_keymap('n', 'H', '0', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', 'L', '$', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('v', 'H', '0', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('v', 'L', '$', { noremap = true, silent = true })
---
---
--- -- Prevent vim from cleaning up indentations on escape
--- vim.api.nvim_set_keymap('i', '<CR>', '<CR>x<BS>', { noremap = true, silent = true })
---
--- -- Enable Caps using F5
--- vim.api.nvim_set_keymap('n', '<F5>', ':let &l:imi = !&l:imi<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('i', '<F5>', '<C-O>:let &l:imi = !&l:imi<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('c', '<F5>', '<C-^>', { noremap = true, silent = true })
---
--- -- Avoid the first jump while search-n-highlight
--- vim.api.nvim_set_keymap('n', '*', ':keepjumps normal! mi*`i<CR>', { noremap = true, silent = true })
---
--- -- Update tags
--- vim.api.nvim_set_keymap('n', '<F7>', ':UpdateTags<CR>', { noremap = true, silent = true })
---
--- -- Search for selected text, forwards or backwards
--- vim.api.nvim_set_keymap('v', '*', ':<C-U>let old_reg=getreg(\'"\')<Bar>let old_regtype=getregtype(\'"\')<CR>gvy/<C-R><C-R>=substitute(escape(@", \'/\\.*$^~[\'), \'\\_s\\+\', \'\\\\_s\\\\+\', \'g\')<CR><CR>gV:call setreg(\'"\', old_reg, old_regtype)<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('v', '#', ':<C-U>let old_reg=getreg(\'"\')<Bar>let old_regtype=getregtype(\'"\')<CR>gvy?<C-R><C-R>=substitute(escape(@", \'?\\.*$^~[\'), \'\\_s\\+\', \'\\\\_s\\\\+\', \'g\')<CR><CR>gV:call setreg(\'"\', old_reg, old_regtype)<CR>', { noremap = true, silent = true })
---
--- -- Toggle ALE (Asynchronous Lint Engine)
--- vim.api.nvim_set_keymap('n', '<leader>l', ':ALEToggle<CR>', { noremap = true, silent = true })
---
--- -- Rg (ripgrep) search mappings
--- vim.api.nvim_set_keymap('n', '<leader>g', ':execute \'Rg \' . expand(\'<cword>\') . \' %\'<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>G', ':execute \'Rg \' . expand(\'<cword>\')<CR>', { noremap = true, silent = true })
---
--- -- Git files and tags mappings
--- vim.api.nvim_set_keymap('n', '<leader>p', ':GFiles<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>o', ':BTags<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>i', ':Tags<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>u', ':Commands<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>h', ':History<CR>', { noremap = true, silent = true })
---
--- -- Save with Ctrl+S
--- -- vim.api.nvim_set_keymap('n', '<C-S>', '<C-a>', { noremap = true, silent = true })
-
