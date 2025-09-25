@@ -92,4 +92,4 @@ x-scheme-handler/magnet=transmission-gtk.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 x-scheme-handler/tg=telegramdesktop.desktop
 x-scheme-handler/unknown=google-chrome.desktop
-x-scheme-handler/webcal=google-chrome.desktop
+x-scheme-handler/webcal=vivaldi-stable.desktop

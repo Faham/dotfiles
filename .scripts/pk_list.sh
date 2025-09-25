@@ -234,4 +234,10 @@ PACKAGES+=" zoom"
 # zsh - Z shell, an extended Bourne shell with many improvements
 PACKAGES+=" zsh"
 
+# Calculator
+PACKAGES+=" qalculate-gtk"
+
+# Nerd Fonts
+PACKAGES+=" ttf-nerd-fonts-symbols"
+
 echo "$PACKAGES"
