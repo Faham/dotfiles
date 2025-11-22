@@ -60,10 +60,19 @@ require('lazy').setup({
       require('telescope').setup()
     end
   },
+  { 'nvim-neotest/nvim-nio', },
   {
-    'mfussenegger/nvim-dap',
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",  -- UI for breakpoints, watches, etc.
+      "mfussenegger/nvim-dap-python",  -- Python adapter using debugpy
+      "theHamsta/nvim-dap-virtual-text",  -- Optional: Inline variable values
+    },
     config = function()
-      local dap = require('dap')
+      -- Basic DAP setup
+      local dap = require("dap")
+      local dapui = require("dapui")
+
       dap.adapters.python = {
         type = 'executable',
         command = 'python',
@@ -77,26 +86,34 @@ require('lazy').setup({
           program = '${file}',
         },
       }
-    end
+
+      dapui.setup()  -- UI config
+
+      -- Auto-open/close UI on debug events
+      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+
+      -- Python setup (installs/uses debugpy automatically via mason if configured)
+      require("dap-python").setup("python")  -- Assumes debugpy in PATH; see Step 2 for install
+
+      -- Keymaps (customize as needed)
+      -- TODO: I don't know why these binding won't work, the ones defined outside of the function works, would be better to get these work instead
+      vim.keymap.set("n", "<leader>dd", dap.disconnect, { desc = "Disconnect from session" })
+      vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "Terminate session" })
+      vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+      vim.keymap.set("n", "<F9>", dap.continue, { desc = "Continue/Start Debug" })
+      vim.keymap.set("n", "<F8>", dap.step_over, { desc = "Step Over" })
+      vim.keymap.set("n", "<F7>", dap.step_into, { desc = "Step Into" })
+      vim.keymap.set("n", "<S-F8>", dap.step_out, { desc = "Step Out" })
+      vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Open REPL" })
+    end,
   },
-  { 'nvim-neotest/nvim-nio', },
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { 'nvim-neotest/nvim-nio' },
+    "williamboman/mason.nvim",  -- Optional but recommended: Auto-installs debugpy
     config = function()
-      local dapui = require('dapui')
-      dapui.setup()
-      local dap = require('dap')
-      dap.listeners.after.event_initialized['dapui_config'] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated['dapui_config'] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited['dapui_config'] = function()
-        dapui.close()
-      end
-    end
+      require("mason").setup()
+    end,
   },
 
   -- Themes and Colors
@@ -127,7 +144,6 @@ vim.api.nvim_set_keymap('n', '<leader>f', ':Files<CR>', { noremap = true, silent
 vim.api.nvim_set_keymap('n', '<leader>h', ':History<CR>', { noremap = true, silent = true })
 
 -- Debugging Keybindings
-vim.api.nvim_set_keymap('n', '<leader>dn', ":lua require('dap').new()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>dd', ":lua require('dap').disconnect()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
@@ -164,7 +180,9 @@ cmp.setup({
 })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig').pyright.setup({
+
+-- Customize pyright config
+vim.lsp.config('pyright', {
   capabilities = capabilities,
   settings = {
     python = {
@@ -179,6 +197,9 @@ require('lspconfig').pyright.setup({
     client.server_capabilities.documentFormattingProvider = false
   end,
 })
+
+-- Enable the pyright server (it will auto-attach on relevant filetypes)
+vim.lsp.enable('pyright')
 
 -- LSP Keybindings
 vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
@@ -405,14 +426,3 @@ dap.configurations.python = {
 ---     program = '${file}',  -- Automatically uses the current file
 ---   },
 --- }
-
-
-dap.listeners.after.event_initialized['dapui_config'] = function()
-  require('dapui').open()
-end
-dap.listeners.before.event_terminated['dapui_config'] = function()
-  require('dapui').close()
-end
-dap.listeners.before.event_exited['dapui_config'] = function()
-  require('dapui').close()
-end
