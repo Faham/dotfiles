@@ -246,6 +246,14 @@ end
 vim.api.nvim_create_user_command('PasteToggle', paste_toggle, { nargs = 0 })
 vim.api.nvim_set_keymap('n', '<leader>e', ':PasteToggle<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    if vim.v.this_session ~= "" then
+      vim.cmd("mksession! " .. vim.v.this_session)
+    end
+  end,
+})
+
 -- General Settings -----------------------------------------------------------
 -- Ensure ~/.nvim/tmp exists for temporary files with proper expansion
 local tmp_dir = vim.fn.expand("~/.nvim/tmp")
