@@ -15,13 +15,6 @@ require('lazy').setup({
   { "vim-airline/vim-airline" },
   { "vim-airline/vim-airline-themes" },
 
-  -- Code Navigation and Management
-  { "majutsushi/tagbar" },
-  { "jlanzarotta/bufexplorer" },
-  { "jremmen/vim-ripgrep" },
-  { "junegunn/fzf" },
-  { "junegunn/fzf.vim" },
-
   -- Essential Utilities
   { "tpope/vim-sensible" },
   { "tpope/vim-surround" },
@@ -32,8 +25,6 @@ require('lazy').setup({
   -- Syntax and Code Quality
   { "pangloss/vim-javascript" },
   { "mxw/vim-jsx" },
-  { "w0rp/ale" },
-  { "wgwoods/vim-systemd-syntax" },
   { "honza/vim-snippets" },
   { "dylon/vim-antlr" },
   { "leafgarland/typescript-vim" },
@@ -56,9 +47,44 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope.nvim',
+    tag = '0.1.8',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+    },
     config = function()
-      require('telescope').setup()
-    end
+      require('telescope').setup {
+        defaults = {
+          mappings = {
+            i = { ['<esc>'] = require('telescope.actions').close },
+            i = { ["<C-d>"] = require("telescope.actions").delete_buffer },
+            n = { ["<C-d>"] = require("telescope.actions").delete_buffer },
+          },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case',
+          },
+        },
+        pickers = {
+          buffers = {
+            sort_mru = true,
+            previewer = false,
+            sorting_strategy = 'ascending',
+          },
+        },
+      }
+      pcall(require('telescope').load_extension, 'fzf')
+    end,
   },
   { 'nvim-neotest/nvim-nio', },
   {
@@ -66,12 +92,89 @@ require('lazy').setup({
     dependencies = {
       "rcarriga/nvim-dap-ui",  -- UI for breakpoints, watches, etc.
       "mfussenegger/nvim-dap-python",  -- Python adapter using debugpy
-      "theHamsta/nvim-dap-virtual-text",  -- Optional: Inline variable values
+      "theHamsta/nvim-dap-virtual-text",  -- Inline variable values (add this line)
     },
     config = function()
-      -- Basic DAP setup
       local dap = require("dap")
       local dapui = require("dapui")
+
+      -- Virtual text setup for inline previews (appealing and non-intrusive)
+      require("nvim-dap-virtual-text").setup({
+        enabled = true,  -- Enable on debug start
+        highlight_changed_variables = true,  -- Color changes
+        virt_text_pos = "eol",  -- End of line
+      })
+
+      -- UI setup with custom layouts for appeal and ease
+      dapui.setup({
+        icons = { expanded = "▾", collapsed = "▸", current_frame = "→" },  -- Visual icons (requires font support)
+        controls = {
+          enabled = true,  -- Show control icons in UI
+          element = "repl",  -- Attach controls to REPL
+        },
+        floating = {
+          max_height = 0.9,  -- Limit float size for eval windows
+          max_width = 0.9,
+          border = "single",  -- Appealing border style
+        },
+        layouts = {
+          {
+            elements = {
+              { id = "scopes", size = 0.4 },  -- Larger portion for scopes to handle long values
+              { id = "stacks", size = 0.2 },
+              { id = "watches", size = 0.2 },
+              { id = "breakpoints", size = 0.2 },
+            },
+            position = "left",  -- Sidebar for structured info
+            size = 40,  -- Width in columns (adjust based on your screen)
+          },
+          {
+            elements = {
+              { id = "repl", size = 0.5 },
+              { id = "console", size = 0.5 },
+            },
+            position = "bottom",  -- Tray for interactive output
+            size = 15,  -- Height in lines
+          },
+        },
+        render = {
+          expand_lines = false,  -- Key fix: Prevent auto-expansion of long values to avoid overlaps
+          max_value_lines = 50,  -- Cap displayed lines per value when expanded
+        },
+      })
+
+      -- Auto-open/close UI on debug events
+      dap.listeners.before.attach["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.launch["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+
+      -- Your existing Python adapter and configs
+      dap.adapters.python = {
+        type = 'executable',
+        command = 'python',
+        args = { '-m', 'debugpy.adapter' },
+      }
+      dap.configurations.python = {
+        {
+          type = 'python',
+          request = 'launch',
+          name = 'Launch file',
+          program = '${file}',
+        },
+      }
+      require("dap-python").setup("python")  -- Assumes debugpy via mason/PATH
+
+      -- Additional keymaps for ease (add to your existing ones)
+      vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle DAP UI" })
+      vim.keymap.set("n", "<leader>de", dapui.eval, { desc = "Evaluate Expression" })  -- Floats at cursor
+      vim.keymap.set("n", "<leader>df", function() dapui.float_element() end, { desc = "Float Element" })  -- Pick and float any element
+
+      -- Auto-open/close UI on debug events
+      dap.listeners.before.attach["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.launch["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
       dap.adapters.python = {
         type = 'executable',
@@ -87,13 +190,6 @@ require('lazy').setup({
         },
       }
 
-      dapui.setup()  -- UI config
-
-      -- Auto-open/close UI on debug events
-      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
-
       -- Python setup (installs/uses debugpy automatically via mason if configured)
       require("dap-python").setup("python")  -- Assumes debugpy in PATH; see Step 2 for install
 
@@ -107,6 +203,9 @@ require('lazy').setup({
       vim.keymap.set("n", "<F7>", dap.step_into, { desc = "Step Into" })
       vim.keymap.set("n", "<S-F8>", dap.step_out, { desc = "Step Out" })
       vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Open REPL" })
+      vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle DAP UI" })
+      vim.keymap.set("n", "<leader>de", dapui.eval, { desc = "Evaluate Expression" })  -- Floats at cursor
+      vim.keymap.set("n", "<leader>df", function() dapui.float_element() end, { desc = "Float Element" })  -- Pick and float any element
     end,
   },
   {
@@ -138,11 +237,6 @@ require('lazy').setup({
 -- Keybindings Leader ---------------------------------------------------------
 vim.g.mapleader = ";"
 
--- Keybindings for Plugins ----------------------------------------------------
-vim.api.nvim_set_keymap('n', '<leader>b', ':BufExplorer<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>f', ':Files<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>h', ':History<CR>', { noremap = true, silent = true })
-
 -- Debugging Keybindings
 vim.api.nvim_set_keymap('n', '<leader>dd', ":lua require('dap').disconnect()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
@@ -151,6 +245,26 @@ vim.api.nvim_set_keymap('n', '<F9>', ":lua require('dap').continue()<CR>", { nor
 vim.api.nvim_set_keymap('n', '<F8>', ":lua require('dap').step_over()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<F7>', ":lua require('dap').step_into()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-F8>', ":lua require('dap').step_out()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require('dap').repl.open()<CR>", { desc = "Open REPL" })
+vim.api.nvim_set_keymap("n", "<leader>du", ":lua require('dapui').toggle()<CR>", { desc = "Toggle DAP UI" })
+vim.api.nvim_set_keymap("n", "<leader>de", ":lua require('dapui').eval()<CR>", { desc = "Evaluate Expression" })  -- Floats at cursor
+vim.api.nvim_set_keymap("n", "<leader>df", ":lua require('dapui').float_element()<CR>", { desc = "Float Element" })  -- Pick and float any element
+
+-- Telescope keymaps
+vim.keymap.set('n', '<leader>ff',
+  function()
+    -- Get the Git root; falls back to current cwd if not in a Git repo
+    local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+    if vim.v.shell_error ~= 0 then
+      git_root = vim.fn.getcwd()  -- Use current working dir as fallback
+    end
+    require('telescope.builtin').find_files({ cwd = git_root })
+  end, { desc = '[F]ind [F]iles in Git Repo' }
+)
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [F]unctions/Symbols' })
 
 -- LSP Configuration ----------------------------------------------------------
 
@@ -274,6 +388,20 @@ vim.api.nvim_create_autocmd("VimLeave", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function()
+    vim.api.nvim_buf_create_user_command(0, 'Breakpoint',
+      function()
+        local line = vim.fn.line('.')
+        vim.api.nvim_buf_set_lines(0, line, line, false, {'import pudb; pu.db; # XXX Breakpoint'})
+      end, { desc = 'Insert pudb breakpoint' }
+    )
+    vim.keymap.set('n', '<leader>B', ':Breakpoint<CR>', { buffer = true, noremap = true, silent = true, desc = 'Insert pudb breakpoint' })
+  end,
+})
+
 
 -- General Settings -----------------------------------------------------------
 -- Ensure ~/.nvim/tmp exists for temporary files with proper expansion
