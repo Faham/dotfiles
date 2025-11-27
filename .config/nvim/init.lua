@@ -23,17 +23,13 @@ require('lazy').setup({
   { "terryma/vim-multiple-cursors" },
 
   -- Syntax and Code Quality
-  { "pangloss/vim-javascript" },
-  { "mxw/vim-jsx" },
   { "honza/vim-snippets" },
-  { "dylon/vim-antlr" },
-  { "leafgarland/typescript-vim" },
 
   {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "typescript", "python" },
+        ensure_installed = { "javascript", "tsx", "typescript", "python" },
         highlight = { enable = true },
         indent = { enable = true }
       }
