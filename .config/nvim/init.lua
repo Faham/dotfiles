@@ -12,13 +12,42 @@ end
 -- Plugins Setup --------------------------------------------------------------
 require('lazy').setup({
   -- UI Enhancements
-  { "nvim-lualine/lualine.nvim", config = function() require("lualine").setup({ options = { theme = "molokai" } }) end },
-
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "molokai",
+          globalstatus = true  -- Force global statusline to avoid per-window inactive states
+        }
+      })
+    end
+  },
   -- Essential Utilities
   { "tpope/vim-surround" },
   { "tpope/vim-unimpaired" },
   { "tomtom/tcomment_vim" },
-  { "terryma/vim-multiple-cursors" },
+  { "mg979/vim-visual-multi", branch = "master" },
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup({
+        window = {
+          width = 120,
+          options = {
+            number = true,
+            relativenumber = false,
+          }
+        },
+        plugins = {
+          options = {
+            enabled = true,
+            laststatus = 3,  -- Override to keep statusline visible
+          },
+        },
+      })
+    end
+  },
 
   -- Syntax and Code Quality
   { "honza/vim-snippets" },
@@ -86,6 +115,9 @@ require('lazy').setup({
             sort_mru = true,
             previewer = false,
             sorting_strategy = 'ascending',
+          },
+          lsp_document_symbols = {
+            previewer = false,
           },
         },
       }
@@ -250,10 +282,10 @@ require('lazy').setup({
   { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 })
 
--- Keybindings Leader ---------------------------------------------------------
+-- Keymaps --------------------------------------------------------------------
 vim.g.mapleader = ";"
 
--- Debugging Keybindings
+-- DAP Keymaps
 vim.api.nvim_set_keymap('n', '<leader>dd', ":lua require('dap').disconnect()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>dt', ":lua require('dap').terminate()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", { noremap = true, silent = true })
@@ -266,7 +298,7 @@ vim.api.nvim_set_keymap("n", "<leader>du", ":lua require('dapui').toggle()<CR>",
 vim.api.nvim_set_keymap("n", "<leader>de", ":lua require('dapui').eval()<CR>", { desc = "Evaluate Expression" })  -- Floats at cursor
 vim.api.nvim_set_keymap("n", "<leader>df", ":lua require('dapui').float_element()<CR>", { desc = "Float Element" })  -- Pick and float any element
 
--- Telescope keymaps
+-- Telescope Keymaps
 vim.keymap.set('n', '<leader>ff',
   function()
     -- Get the Git root; falls back to current cwd if not in a Git repo
@@ -277,15 +309,17 @@ vim.keymap.set('n', '<leader>ff',
     require('telescope.builtin').find_files({ cwd = git_root })
   end, { desc = '[F]ind [F]iles in Git Repo' }
 )
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
-vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [F]unctions/Symbols' })
+vim.keymap.set('n', '<leader>g', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
+vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
+vim.keymap.set('n', '<leader>h', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
+vim.keymap.set('n', '<leader>s', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [F]unctions/Symbols' })
+vim.keymap.set('n', '<leader>gd', require('telescope.builtin').lsp_definitions, { desc = '[G]o to [D]efinition' })
 
--- Added Keymaps
+-- Other Keymaps
 vim.keymap.set("n", "<leader>=", function() require("conform").format({ async = true }) end, { desc = "Format buffer" })
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble (Diagnostics)" })
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
+vim.keymap.set("n", "<leader>zz", "<cmd>ZenMode<cr>", { desc = "Toggle Zen Mode (Centered Buffer)" })
 
 -- LSP Configuration ----------------------------------------------------------
 
