@@ -228,6 +228,15 @@ require('lazy').setup({
   -- Autocompletion Plugin
   { "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-nvim-lsp" },
+
+  -- Added Plugins
+  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  { "stevearc/conform.nvim", config = function() require("conform").setup({ formatters_by_ft = { python = { "black" }, javascript = { "prettier" } } }) end },
+  { "mfussenegger/nvim-lint", config = function() require("lint").linters_by_ft = { python = { "pylint" } } vim.api.nvim_create_autocmd({ "BufWritePost" }, { callback = function() require("lint").try_lint() end }) end },
+  { "folke/trouble.nvim", config = function() require("trouble").setup() end },
+  { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = function() require("copilot").setup({ suggestion = { enabled = true, auto_trigger = true } }) end },
+  { "akinsho/toggleterm.nvim", config = true },
 })
 
 -- Keybindings Leader ---------------------------------------------------------
@@ -261,6 +270,11 @@ vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [F]unctions/Symbols' })
+
+-- Added Keymaps
+vim.keymap.set("n", "<leader>=", function() require("conform").format({ async = true }) end, { desc = "Format buffer" })
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble (Diagnostics)" })
+vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 
 -- LSP Configuration ----------------------------------------------------------
 
