@@ -12,11 +12,9 @@ end
 -- Plugins Setup --------------------------------------------------------------
 require('lazy').setup({
   -- UI Enhancements
-  { "vim-airline/vim-airline" },
-  { "vim-airline/vim-airline-themes" },
+  { "nvim-lualine/lualine.nvim", config = function() require("lualine").setup({ options = { theme = "molokai" } }) end },
 
   -- Essential Utilities
-  { "tpope/vim-sensible" },
   { "tpope/vim-surround" },
   { "tpope/vim-unimpaired" },
   { "tomtom/tcomment_vim" },
@@ -31,7 +29,19 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup {
         ensure_installed = { "javascript", "tsx", "typescript", "python" },
         highlight = { enable = true },
-        indent = { enable = true }
+        indent = { enable = true },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+        },
       }
     end
   },
@@ -237,6 +247,7 @@ require('lazy').setup({
   { "folke/trouble.nvim", config = function() require("trouble").setup() end },
   { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = function() require("copilot").setup({ suggestion = { enabled = true, auto_trigger = true } }) end },
   { "akinsho/toggleterm.nvim", config = true },
+  { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 })
 
 -- Keybindings Leader ---------------------------------------------------------
@@ -490,7 +501,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.g.molokai_original = 1
 vim.g.rehash256 = 1
 vim.cmd('colorscheme molokai')
-vim.g.airline_theme = 'molokai'
 vim.opt.colorcolumn = "80"
 vim.cmd("highlight ColorColumn ctermbg=235 guibg=#5e5e5e")
 vim.cmd("highlight MolokaiColorColumn guibg=#5e5e5e ctermbg=235")
