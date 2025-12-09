@@ -9,6 +9,41 @@ if not vim.loop.fs_stat(install_path) then
   vim.cmd('packadd lazy.nvim')
 end
 
+-- local funcitons ------------------------------------------------------------
+local function normalize_path(path)
+  return path:gsub("\\", "/")
+end
+
+local function normalize_cwd()
+  return normalize_path(vim.loop.cwd()) .. "/"
+end
+
+local function is_subdirectory(cwd, path)
+  return string.lower(path:sub(1, #cwd)) == string.lower(cwd)
+end
+
+local function split_filepath(path)
+  local normalized_path = normalize_path(path)
+  local normalized_cwd = normalize_cwd()
+  local filename = normalized_path:match("[^/]+$")
+
+  if is_subdirectory(normalized_cwd, normalized_path) then
+    local stripped_path = normalized_path:sub(#normalized_cwd + 1, -(#filename + 1))
+    return stripped_path, filename
+  else
+    local stripped_path = normalized_path:sub(1, -(#filename + 1))
+    return stripped_path, filename
+  end
+end
+
+local function path_display(_, path)
+  local stripped_path, filename = split_filepath(path)
+  if filename == stripped_path or stripped_path == "" then
+    return filename
+  end
+  return string.format("%s ~ %s", filename, stripped_path)
+end
+
 -- Plugins Setup --------------------------------------------------------------
 require('lazy').setup({
   -- UI Enhancements
@@ -59,6 +94,15 @@ require('lazy').setup({
         ensure_installed = { "javascript", "tsx", "typescript", "python" },
         highlight = { enable = true },
         indent = { enable = true },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = "gnn",  -- Start selection
+            node_incremental = "grn",  -- Expand
+            scope_incremental = "grc",  -- Jump to next scope
+            node_decremental = "grm",  -- Shrink
+          },
+        },
         textobjects = {
           select = {
             enable = true,
@@ -100,6 +144,10 @@ require('lazy').setup({
             i = { ['<esc>'] = require('telescope.actions').close },
             i = { ["<C-d>"] = require("telescope.actions").delete_buffer },
             n = { ["<C-d>"] = require("telescope.actions").delete_buffer },
+            i = {
+              ["<C-j>"] = require("telescope.actions").move_selection_next,
+              ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            },
           },
         },
         extensions = {
@@ -115,6 +163,7 @@ require('lazy').setup({
             sort_mru = true,
             previewer = false,
             sorting_strategy = 'ascending',
+            path_display = path_display,
           },
           lsp_document_symbols = {
             previewer = false,
@@ -278,7 +327,6 @@ require('lazy').setup({
   { "mfussenegger/nvim-lint", config = function() require("lint").linters_by_ft = { python = { "pylint" } } vim.api.nvim_create_autocmd({ "BufWritePost" }, { callback = function() require("lint").try_lint() end }) end },
   { "folke/trouble.nvim", config = function() require("trouble").setup() end },
   { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = function() require("copilot").setup({ suggestion = { enabled = true, auto_trigger = true } }) end },
-  { "akinsho/toggleterm.nvim", config = true },
   { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 })
 
@@ -318,7 +366,6 @@ vim.keymap.set('n', '<leader>gd', require('telescope.builtin').lsp_definitions, 
 -- Other Keymaps
 vim.keymap.set("n", "<leader>=", function() require("conform").format({ async = true }) end, { desc = "Format buffer" })
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble (Diagnostics)" })
-vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 vim.keymap.set("n", "<leader>zz", "<cmd>ZenMode<cr>", { desc = "Toggle Zen Mode (Centered Buffer)" })
 
 -- LSP Configuration ----------------------------------------------------------
@@ -534,15 +581,27 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Theme Settings -------------------------------------------------------------
 vim.g.molokai_original = 1
 vim.g.rehash256 = 1
-vim.cmd('colorscheme molokai')
 vim.opt.colorcolumn = "80"
-vim.cmd("highlight ColorColumn ctermbg=235 guibg=#5e5e5e")
-vim.cmd("highlight MolokaiColorColumn guibg=#5e5e5e ctermbg=235")
-vim.cmd([[highlight Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
-vim.cmd([[highlight VertSplit ctermfg=240 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
-vim.cmd([[highlight ErrorMsg ctermfg=199 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
-vim.cmd([[highlight Search ctermfg=7 ctermbg=88 cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
+vim.cmd("highlight ColorColumn guibg=#373832 ctermbg=235")
+-- vim.cmd("highlight MolokaiColorColumn guibg=#5e5e5e ctermbg=235")
+-- vim.cmd([[highlight Normal ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
+-- vim.cmd([[highlight VertSplit ctermfg=240 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
+-- vim.cmd([[highlight ErrorMsg ctermfg=199 ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
+-- vim.cmd([[highlight Search ctermfg=7 ctermbg=88 cterm=NONE guifg=NONE guibg=NONE gui=NONE]])
 vim.opt.fillchars:append({ vert = "|" })
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "molokai",
+  callback = function()
+    local bg_color = "#272822"  -- Molokai original bg
+    local fg_color = "#373832"  -- Molokai original bg
+    local cterm_bg = 235        -- Equivalent 256-color index for terminals
+    vim.api.nvim_set_hl(0, "LineNr", { fg = fg_color, bg = bg_color, ctermfg = cterm_bg, ctermbg = cterm_bg })
+    vim.api.nvim_set_hl(0, "LineNrAbove", { fg = fg_color, bg = bg_color, ctermfg = cterm_bg, ctermbg = cterm_bg })
+    vim.api.nvim_set_hl(0, "LineNrBelow", { fg = fg_color, bg = bg_color, ctermfg = cterm_bg, ctermbg = cterm_bg })
+  end,
+})
+vim.cmd('colorscheme molokai')
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "#272822", ctermbg = 235 })
 
 -- Visual Mode Mappings
 vim.api.nvim_set_keymap('v', '(', '"pc()<Esc>"pP', { noremap = true, silent = true })
