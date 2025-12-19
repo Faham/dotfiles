@@ -240,4 +240,6 @@ PACKAGES+=" qalculate-gtk"
 # Nerd Fonts
 PACKAGES+=" ttf-nerd-fonts-symbols"
 
+PACKAGES+=" unclutter"
+
 echo "$PACKAGES"

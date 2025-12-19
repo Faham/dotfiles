@@ -1,39 +1,44 @@
 #!/bin/sh
 
+# Set TERM with 256-color support if available
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-   export TERM='xterm-256color'
+    export TERM='xterm-256color'
 else
-   export TERM='xterm-color'
+    export TERM='xterm-color'
 fi
 
+# Environment variables
 export PATH="$PATH:$HOME/.scripts"
-export BROWSER=google-chrome-stable
-export EDITOR=vim
-export TERM_EMU=xterm
+export BROWSER=vivaldi-stable
+export EDITOR=nvim
 export SHELL=/usr/bin/zsh
 export FILES=pcmanfm
 export PLAYER=vlc
-export VISUAL="vim"
+export VISUAL="nvim"
 
-xbindkeys
+# Run xbindkeys if installed
+if command -v xbindkeys >/dev/null 2>&1; then
+    xbindkeys
+fi
 
-xset +fp ~/.fonts
-xset fp+ /usr/share/fonts/100dpi
-xset fp+ /usr/share/fonts/75dpi
-xset fp+ /usr/share/fonts/TTF
-xset fp+ /usr/share/fonts/OTF
-xset fp+ /usr/share/fonts/gsfonts
+# Keyboard settings
 xset r rate 170 50
 xset -b
-
 setxkbmap -model pc104 -layout us,ir -option grp:switch,grp:alt_shift_toggle,grp_led:scroll
-unclutter -idle 2 -jitter 10 -root &
 
-# background settings
+# Hide cursor after idle (use unclutter-xfixes for better performance; install with sudo pacman -S unclutter-xfixes)
+if command -v unclutter >/dev/null 2>&1; then
+    unclutter -idle 2 -jitter 10 -root &
+fi
+
+# Background settings (use feh for modern image handling; install with sudo pacman -S feh)
 xsetroot -solid "#110011"
-[ -f ~/.bg ] && xloadimage -onroot ~/.bg
+if [ -f ~/.bg ] && command -v feh >/dev/null 2>&1; then
+    feh --bg-fill ~/.bg
+fi
 
-# detect_displays
-# xflux -l 49.197168 -g -123.004449
+# Optional: Screen locker (ensure 'lockscreen' script exists or use i3lock)
 # xautolock -detectsleep -time 6 -locker "lockscreen off" -nowlocker "lockscreen" &
 
+# Custom script if needed
+# detect_displays

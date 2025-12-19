@@ -593,11 +593,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "molokai",
   callback = function()
     local bg_color = "#272822"  -- Molokai original bg
-    local fg_color = "#373832"  -- Molokai original bg
+    local fg_color = "#474842"  -- Molokai original bg
+    local cterm_fg = 225        -- Equivalent 256-color index for terminals
     local cterm_bg = 235        -- Equivalent 256-color index for terminals
-    vim.api.nvim_set_hl(0, "LineNr", { fg = fg_color, bg = bg_color, ctermfg = cterm_bg, ctermbg = cterm_bg })
-    vim.api.nvim_set_hl(0, "LineNrAbove", { fg = fg_color, bg = bg_color, ctermfg = cterm_bg, ctermbg = cterm_bg })
-    vim.api.nvim_set_hl(0, "LineNrBelow", { fg = fg_color, bg = bg_color, ctermfg = cterm_bg, ctermbg = cterm_bg })
+    vim.api.nvim_set_hl(0, "LineNr", { fg = fg_color, bg = bg_color, ctermfg = cterm_fg, ctermbg = cterm_bg })
+    vim.api.nvim_set_hl(0, "LineNrAbove", { fg = fg_color, bg = bg_color, ctermfg = cterm_fg, ctermbg = cterm_bg })
+    vim.api.nvim_set_hl(0, "LineNrBelow", { fg = fg_color, bg = bg_color, ctermfg = cterm_fg, ctermbg = cterm_bg })
   end,
 })
 vim.cmd('colorscheme molokai')
