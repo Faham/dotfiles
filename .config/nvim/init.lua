@@ -296,9 +296,12 @@ require('lazy').setup({
     end,
   },
   {
-    "williamboman/mason.nvim",  -- Optional but recommended: Auto-installs debugpy
+    "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "pyright", "ts_ls" },  -- Auto-install pyright (existing) and ts_ls
+      })
     end,
   },
 
@@ -333,8 +336,8 @@ require('lazy').setup({
       })
     end,
   },
-  { "stevearc/conform.nvim", config = function() require("conform").setup({ formatters_by_ft = { python = { "black" }, javascript = { "prettier" } } }) end },
-  { "mfussenegger/nvim-lint", config = function() require("lint").linters_by_ft = { python = { "pylint" } } vim.api.nvim_create_autocmd({ "BufWritePost" }, { callback = function() require("lint").try_lint() end }) end },
+  { "stevearc/conform.nvim", config = function() require("conform").setup({ formatters_by_ft = { python = { "black" }, javascript = { "prettier" }, typescript = { "prettier" }, typescriptreact = { "prettier" } } }) end },
+  { "mfussenegger/nvim-lint", config = function() require("lint").linters_by_ft = { python = { "pylint" }, typescript = { "eslint_d" }, typescriptreact = { "eslint_d" }, javascript = { "eslint_d" } } vim.api.nvim_create_autocmd({ "BufWritePost" }, { callback = function() require("lint").try_lint() end }) end },
   { "folke/trouble.nvim", config = function() require("trouble").setup() end },
   { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = function() require("copilot").setup({ suggestion = { enabled = true, auto_trigger = true } }) end },
   { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
@@ -361,6 +364,19 @@ require('lazy').setup({
       vim.g.vim_markdown_json_frontmatter = 1  -- Highlight JSON frontmatter
       vim.g.vim_markdown_conceal = 0           -- Disable concealing (for better readability if preferred)
       vim.g.vim_markdown_conceal_code_blocks = 0
+    end,
+  },
+  -- Auto-install LSP servers via Mason
+  { "williamboman/mason-lspconfig.nvim" },
+  -- Optional: Auto-install linters/formatters (like eslint_d, prettier)
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = { "typescript-language-server", "eslint_d", "prettier" },  -- Auto-install these
+        auto_update = true,
+        run_on_start = true,
+      })
     end,
   },
 })
@@ -432,7 +448,29 @@ cmp.setup({
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- Customize pyright config
+-- Common on_attach function for LSP servers (attaches keymaps and settings)
+local function lsp_on_attach(client, bufnr)
+  -- Your existing keymaps (moved here for auto-attach)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+
+  -- Disable formatting for pyright (as in your original config)
+  if client.name == "pyright" then
+    client.server_capabilities.documentFormattingProvider = false
+  end
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    lsp_on_attach(client, bufnr)
+  end,
+})
+
+-- Setup pyright (your existing server)
 vim.lsp.config('pyright', {
   capabilities = capabilities,
   settings = {
@@ -444,19 +482,29 @@ vim.lsp.config('pyright', {
       },
     },
   },
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
 })
 
--- Enable the pyright server (it will auto-attach on relevant filetypes)
-vim.lsp.enable('pyright')
+-- Setup tsserver for TypeScript/JavaScript/TSX/JSX
+vim.lsp.config('ts_ls', {
+  capabilities = capabilities,
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },  -- Covers JS/TS
+  settings = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+  },
+})
 
--- LSP Keybindings
-vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gt', ':lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+-- Enable the servers
+vim.lsp.enable({ 'pyright', 'ts_ls' })
 
 -- Functions ------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufWritePre", {
