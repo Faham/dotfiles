@@ -91,7 +91,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "javascript", "tsx", "typescript", "python" },
+        ensure_installed = { "javascript", "tsx", "typescript", "python", "markdown", "markdown_inline" },
         highlight = { enable = true },
         indent = { enable = true },
         incremental_selection = {
@@ -322,12 +322,47 @@ require('lazy').setup({
 
   -- Added Plugins
   { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function()
+      require("ibl").setup({
+        exclude = {
+          filetypes = { "markdown" },
+        },
+      })
+    end,
+  },
   { "stevearc/conform.nvim", config = function() require("conform").setup({ formatters_by_ft = { python = { "black" }, javascript = { "prettier" } } }) end },
   { "mfussenegger/nvim-lint", config = function() require("lint").linters_by_ft = { python = { "pylint" } } vim.api.nvim_create_autocmd({ "BufWritePost" }, { callback = function() require("lint").try_lint() end }) end },
   { "folke/trouble.nvim", config = function() require("trouble").setup() end },
   { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = function() require("copilot").setup({ suggestion = { enabled = true, auto_trigger = true } }) end },
   { "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+
+  -- Markdown Plugins
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = "cd app && yarn install",
+  },
+  {
+    "preservim/vim-markdown",
+    branch = "master",
+    ft = { "markdown" },
+    config = function()
+      -- Recommended setup options (customize as needed)
+      vim.g.vim_markdown_folding_disabled = 1  -- Disable folding (default)
+      vim.g.vim_markdown_folding_level = 6     -- Set max folding level
+      vim.g.vim_markdown_math = 1              -- Enable LaTeX math
+      vim.g.vim_markdown_strikethrough = 1     -- Enable ~~strikethrough~~
+      vim.g.vim_markdown_frontmatter = 1       -- Highlight YAML frontmatter
+      vim.g.vim_markdown_toml_frontmatter = 1  -- Highlight TOML frontmatter
+      vim.g.vim_markdown_json_frontmatter = 1  -- Highlight JSON frontmatter
+      vim.g.vim_markdown_conceal = 0           -- Disable concealing (for better readability if preferred)
+      vim.g.vim_markdown_conceal_code_blocks = 0
+    end,
+  },
 })
 
 -- Keymaps --------------------------------------------------------------------
@@ -668,3 +703,21 @@ dap.configurations.python = {
 ---     program = '${file}',  -- Automatically uses the current file
 ---   },
 --- }
+-- Conform.nvim Setup ---------------------------------------------------------
+require("conform").setup({
+  formatters_by_ft = {
+    python = { "black" },
+  },
+  formatters = {
+    black = {
+      extra_args = { "--line-length", "80" },
+    },
+  },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+})
+
+-- Keymap for manual formatting
+vim.api.nvim_set_keymap("n", "<leader>F", "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>", { noremap = true, silent = true })
