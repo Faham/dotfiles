@@ -61,7 +61,6 @@ require('lazy').setup({
   -- Essential Utilities
   { "tpope/vim-surround" },
   { "tpope/vim-unimpaired" },
-  { "tomtom/tcomment_vim" },
   { "mg979/vim-visual-multi", branch = "master" },
   {
     "folke/zen-mode.nvim",
@@ -119,6 +118,47 @@ require('lazy').setup({
     end
   },
   {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('ts_context_commentstring').setup {
+        enable_autocmd = false,  -- Disable autocmd to avoid conflicts; Comment.nvim will handle it
+      }
+    end,
+  },
+  {
+    'numToStr/Comment.nvim',
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    config = function()
+      require('Comment').setup {
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        -- Optional: Customize mappings if you don't want defaults (gcc for line, gc for motion/visual)
+        -- mappings = {
+        --   basic = true,     -- Enables gcc, gc, etc.
+        --   extra = true,     -- Enables gbc (block comment), etc.
+        -- },
+      }
+    end,
+  },
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    dependencies = { "stevearc/dressing.nvim" },  -- Add dependency
+    config = function()
+      require("inc_rename").setup({
+        cmd_name = "IncRename",
+        hl_group = "Search",  -- More visible in Molokai (yellow bg)
+        preview_empty_name = true,
+        show_message = true,
+        save_in_cmdline_history = false,
+        input_buffer_type = "dressing",  -- Use floating input window
+      })
+    end,
+  },
+  {
     'prettier/vim-prettier',
     config = function()
       vim.g.prettier_exec_cmd_async = 1
@@ -126,7 +166,6 @@ require('lazy').setup({
   },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
@@ -367,7 +406,21 @@ require('lazy').setup({
     end,
   },
   -- Auto-install LSP servers via Mason
-  { "williamboman/mason-lspconfig.nvim" },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "pyright", "ts_ls" },
+        automatic_installation = true,  -- Auto-setup servers on first use
+        handlers = {
+          function(server_name)  -- Default handler for all servers
+            require("lspconfig")[server_name].setup({})
+          end,
+        },
+      })
+    end,
+  },
   -- Optional: Auto-install linters/formatters (like eslint_d, prettier)
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -454,7 +507,6 @@ local function lsp_on_attach(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 
   -- Disable formatting for pyright (as in your original config)
   if client.name == "pyright" then
@@ -462,17 +514,10 @@ local function lsp_on_attach(client, bufnr)
   end
 end
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    lsp_on_attach(client, bufnr)
-  end,
-})
-
 -- Setup pyright (your existing server)
 vim.lsp.config('pyright', {
   capabilities = capabilities,
+  on_attach = lsp_on_attach,
   settings = {
     python = {
       analysis = {
@@ -487,6 +532,7 @@ vim.lsp.config('pyright', {
 -- Setup tsserver for TypeScript/JavaScript/TSX/JSX
 vim.lsp.config('ts_ls', {
   capabilities = capabilities,
+  on_attach = lsp_on_attach,
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },  -- Covers JS/TS
   settings = {
     typescript = {
@@ -504,7 +550,8 @@ vim.lsp.config('ts_ls', {
 })
 
 -- Enable the servers
-vim.lsp.enable({ 'pyright', 'ts_ls' })
+vim.lsp.enable('pyright')
+vim.lsp.enable('ts_ls')
 
 -- Functions ------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -587,6 +634,35 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typescript", "typescriptreact" },
+  callback = function()
+    vim.opt_local.tabstop = 2        -- Number of spaces a <Tab> counts for
+    vim.opt_local.softtabstop = 2    -- Number of spaces for <Tab> in insert mode
+    vim.opt_local.shiftwidth = 2     -- Number of spaces for each indentation level
+    vim.opt_local.expandtab = true   -- Convert tabs to spaces (recommended for consistency)
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+  callback = function()
+    vim.api.nvim_buf_create_user_command(0, 'Breakpoint',
+      function()
+        local line = vim.fn.line('.')
+        vim.api.nvim_buf_set_lines(0, line, line, false, {'debugger; // XXX Breakpoint'})
+      end, { desc = 'Insert debugger breakpoint' }
+    )
+    vim.keymap.set('n', '<leader>B', ':Breakpoint<CR>', { buffer = true, noremap = true, silent = true, desc = 'Insert debugger breakpoint' })
+  end,
+})
+
+
+vim.keymap.set("n", "<leader>rn", function()
+    return ":IncRename " .. vim.fn.expand("<cword>")
+  end, { expr = true, desc = "Rename symbol (with preview)"
+})
+vim.opt.inccommand = "split"  -- Shows a split with all changes as you type
 
 -- General Settings -----------------------------------------------------------
 -- Ensure ~/.nvim/tmp exists for temporary files with proper expansion
