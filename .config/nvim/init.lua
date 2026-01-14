@@ -375,7 +375,28 @@ require('lazy').setup({
       })
     end,
   },
-  { "stevearc/conform.nvim", config = function() require("conform").setup({ formatters_by_ft = { python = { "black" }, javascript = { "prettier" }, typescript = { "prettier" }, typescriptreact = { "prettier" } } }) end },
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          python = { "black" },
+          javascript = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" }
+        },
+        formatters = {
+          black = {
+            extra_args = { "--line-length", "80" },
+          },
+        },
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        },
+      })
+    end
+  },
   { "mfussenegger/nvim-lint", config = function() require("lint").linters_by_ft = { python = { "pylint" }, typescript = { "eslint_d" }, typescriptreact = { "eslint_d" }, javascript = { "eslint_d" } } vim.api.nvim_create_autocmd({ "BufWritePost" }, { callback = function() require("lint").try_lint() end }) end },
   { "folke/trouble.nvim", config = function() require("trouble").setup() end },
   { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", config = function() require("copilot").setup({ suggestion = { enabled = true, auto_trigger = true } }) end },
@@ -421,12 +442,11 @@ require('lazy').setup({
       })
     end,
   },
-  -- Optional: Auto-install linters/formatters (like eslint_d, prettier)
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     config = function()
       require("mason-tool-installer").setup({
-        ensure_installed = { "typescript-language-server", "eslint_d", "prettier" },  -- Auto-install these
+        ensure_installed = { "typescript-language-server", "eslint_d", "prettier", "black" },
         auto_update = true,
         run_on_start = true,
       })
@@ -468,7 +488,7 @@ vim.keymap.set('n', '<leader>s', require('telescope.builtin').lsp_document_symbo
 vim.keymap.set('n', '<leader>gd', require('telescope.builtin').lsp_definitions, { desc = '[G]o to [D]efinition' })
 
 -- Other Keymaps
-vim.keymap.set("n", "<leader>=", function() require("conform").format({ async = true }) end, { desc = "Format buffer" })
+vim.keymap.set("n", "<leader>=", function() require("conform").format({ async = true, lsp_fallback = true }) end, { noremap = true, silent = true, desc = "Format buffer" })
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble (Diagnostics)" })
 vim.keymap.set("n", "<leader>zz", "<cmd>ZenMode<cr>", { desc = "Toggle Zen Mode (Centered Buffer)" })
 
@@ -681,6 +701,7 @@ vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.opt.lazyredraw = true
 vim.cmd([[syntax sync minlines=200]])
+vim.opt.jumpoptions = 'view' -- To preserve scroll position when switching buffers
 
 if vim.env.TERM and (vim.env.TERM:match("^xterm") or vim.env.TERM:match("rxvt")) then
   vim.cmd([[let &t_SI = "\<Esc>[6 q"]])
@@ -828,20 +849,5 @@ dap.configurations.python = {
 ---   },
 --- }
 -- Conform.nvim Setup ---------------------------------------------------------
-require("conform").setup({
-  formatters_by_ft = {
-    python = { "black" },
-  },
-  formatters = {
-    black = {
-      extra_args = { "--line-length", "80" },
-    },
-  },
-  format_on_save = {
-    timeout_ms = 500,
-    lsp_format = "fallback",
-  },
-})
 
 -- Keymap for manual formatting
-vim.api.nvim_set_keymap("n", "<leader>F", "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>", { noremap = true, silent = true })
