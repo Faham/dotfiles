@@ -242,4 +242,10 @@ PACKAGES+=" ttf-nerd-fonts-symbols"
 
 PACKAGES+=" unclutter"
 
+# Alternative to grep with fuzzy search support
+PACKAGES+=" ugrep"
+
+# Alternative to find
+PACKAGES+=" fd"
+
 echo "$PACKAGES"

@@ -44,6 +44,27 @@ local function path_display(_, path)
   return string.format("%s ~ %s", filename, stripped_path)
 end
 
+local function get_git_root()
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if vim.v.shell_error ~= 0 then
+    return vim.fn.getcwd()  -- Fallback to cwd
+  end
+  return git_root
+end
+
+local function get_visual_selection()
+  vim.cmd('noau normal! "vy"')
+  local text = vim.fn.getreg('v')
+  vim.fn.setreg('v', {})
+
+  text = string.gsub(text, "\n", "")
+  if #text > 0 then
+    return text
+  else
+    return ''
+  end
+end
+
 -- Plugins Setup --------------------------------------------------------------
 require('lazy').setup({
   -- UI Enhancements
@@ -54,7 +75,44 @@ require('lazy').setup({
         options = {
           theme = "molokai",
           globalstatus = true  -- Force global statusline to avoid per-window inactive states
-        }
+        },
+        sections = {
+          lualine_c = {  -- Customize the center section
+            function()  -- Custom component: Returns formatted path string
+              local buf_path = vim.api.nvim_buf_get_name(0)  -- Full path of current buffer
+              if buf_path == "" then
+                return "[No Name]"  -- Handle unnamed buffers
+              end
+
+              local root = get_git_root()
+              local relative_path = buf_path:sub(#root + 2)  -- +2 to skip the '/' after root
+              if relative_path == "" then
+                relative_path = vim.fn.fnamemodify(buf_path, ":t")  -- Just filename if at root
+              end
+
+              -- If not in Git, make relative to home (~)
+              if vim.v.shell_error ~= 0 then
+                relative_path = vim.fn.fnamemodify(buf_path, ":~:.")
+              end
+
+              -- Add file status indicators (modified, readonly, etc.)
+              local symbols = ""
+              if vim.bo.modified then symbols = symbols .. "[+]" end
+              if vim.bo.readonly then symbols = symbols .. "[-]" end
+              if not vim.bo.modifiable then symbols = symbols .. "[x]" end  -- Unmodifiable
+
+              local display_path = relative_path .. symbols
+
+              -- Truncate from left if too long
+              local max_length = 50  -- Adjust to your preference (e.g., 40-60 chars)
+              if #display_path > max_length then
+                return "..." .. display_path:sub(#display_path - max_length + 4)
+              end
+              return display_path
+            end,
+          },
+          -- Keep other sections as defaults
+        },
       })
     end
   },
@@ -164,6 +222,7 @@ require('lazy').setup({
       vim.g.prettier_exec_cmd_async = 1
     end
   },
+  { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -208,7 +267,31 @@ require('lazy').setup({
             previewer = false,
           },
         },
+        -- vimgrep_arguments = {
+        --   'rg',
+        --   '--color=never',
+        --   '--no-heading',
+        --   '--with-filename',
+        --   '--line-number',
+        --   '--column',
+        --   '--smart-case',  -- Enhances initial search
+        --   '--glob=!.git/', -- Optional: Ignore .git
+        -- },
+        vimgrep_arguments = {
+          "ugrep",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column-number",
+          "--smart-case",
+          "--ignore-binary",  -- Skip binary files
+          "--hidden",         -- Search hidden files (optional; remove if unwanted)
+          "--glob=!.git/",    -- Ignore .git (respects .gitignore via ugrep's logic)
+          "--recursive",      -- Recursive search
+        },
       }
+      require("telescope").load_extension("live_grep_args")
       pcall(require('telescope').load_extension, 'fzf')
     end,
   },
@@ -481,7 +564,65 @@ vim.keymap.set('n', '<leader>ff',
     require('telescope.builtin').find_files({ cwd = git_root })
   end, { desc = '[F]ind [F]iles in Git Repo' }
 )
-vim.keymap.set('n', '<leader>g', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
+
+-- Workspace symbols (repo-wide), prefilled with word under cursor
+vim.keymap.set('n', '<leader>ws', function()
+  require('telescope.builtin').lsp_workspace_symbols({
+    query = vim.fn.expand('<cword>'),  -- Prefills the prompt with symbol under cursor
+  })
+end, { desc = '[W]orkspace [S]ymbols (prefilled with <cword>)' })
+
+
+-- Live grep (repo-wide)
+vim.keymap.set('n', '<leader>g',
+  function()
+    local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+    if vim.v.shell_error ~= 0 then
+      git_root = vim.fn.getcwd()
+    end
+    require('telescope.builtin').live_grep({ cwd = git_root })
+  end, { desc = '[F]ind by [G]rep in Git Repo' }
+)
+
+-- Live grep (repo-wide), prefilled with word under cursor
+vim.keymap.set('n', '<leader>gg', function()
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if vim.v.shell_error ~= 0 then
+    git_root = vim.fn.getcwd()
+  end
+
+  require('telescope.builtin').live_grep({
+    cwd = git_root,
+    default_text = vim.fn.expand('<cword>'),  -- Prefills the prompt
+  })
+end, { desc = '[G]rep repo-wide (prefilled with <cword>)' })
+
+vim.keymap.set('v', '<leader>gg', function()
+  local text = get_visual_selection()
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if vim.v.shell_error ~= 0 then
+    git_root = vim.fn.getcwd()
+  end
+
+  require('telescope.builtin').live_grep({
+    cwd = git_root,
+    default_text = text,
+  })
+end, { desc = '[G]rep repo-wide (visually selected text)' })
+
+vim.keymap.set('n', '<leader>gf', function()
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if vim.v.shell_error ~= 0 then
+    git_root = vim.fn.getcwd()
+  end
+
+  require("telescope").extensions.live_grep_args.live_grep_args({
+    cwd = git_root,
+    additional_args = {"--fuzzy=3", "-F"},  -- -F for fixed strings (safer, avoids regex interpretation)
+    print_args = true,  -- Temporary: Prints the full command to :messages for debugging
+  })
+end, { desc = '[G]rep repo-wide (fuzzy mode)' })
+
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
 vim.keymap.set('n', '<leader>h', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
 vim.keymap.set('n', '<leader>s', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [F]unctions/Symbols' })
@@ -526,7 +667,6 @@ local function lsp_on_attach(client, bufnr)
   -- Your existing keymaps (moved here for auto-attach)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 
   -- Disable formatting for pyright (as in your original config)
   if client.name == "pyright" then
