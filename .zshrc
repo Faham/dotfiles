@@ -73,6 +73,13 @@ export FZF_COMPLETION_TRIGGER='**'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 
+# Use fd instead of find for faster file searching (add --hidden to include dotfiles if needed)
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --exclude .git'  # Or add --hidden for dotfiles: 'fd --type f --hidden --strip-cwd-prefix --exclude .git'
+
+# Remap fuzzy file widget to Ctrl+F (overrides default forward-char)
+bindkey -r '^T'  # Optional: Remove default Ctrl+T binding if you don't want it
+bindkey '^F' fzf-file-widget
+
 # -----------------------------------------------------------------------------
 
 # Aliases
@@ -106,8 +113,10 @@ export CVS_RSH=ssh
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 export ANDROID_HOME=$HOME/Android/Sdk
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PYENV_ROOT="$HOME/.pyenv"
 export PATH=$JAVA_HOME/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 # -----------------------------------------------------------------------------
 

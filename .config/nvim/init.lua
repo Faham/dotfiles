@@ -140,6 +140,32 @@ require('lazy').setup({
       })
     end
   },
+  {
+    'nvim-pack/nvim-spectre',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('spectre').setup({
+        color_devicons = true,
+        live_update = true,
+        line_sep_start = '┌-----------------------------------------',
+        result_padding = '¦  ',
+        line_sep       = '└-----------------------------------------',
+        mapping = {
+          ['toggle_line'] = { map = "dd", cmd = "<cmd>lua require('spectre').toggle_line()<CR>" },
+          ['run_replace'] = { map = "<leader>R", cmd = "<cmd>lua require('spectre.actions').run_replace()<CR>" },
+        },
+        default = {
+          find = {
+            cmd = "rg",  -- Or "ugrep" if preferred
+            options = { "fixed-strings" },  -- Added "fixed-strings" for literal searches (handles @, /, etc.)
+          },
+          replace = {
+            cmd = "sed",
+          },
+        },
+      })
+    end,
+  },
 
   -- Syntax and Code Quality
   { "honza/vim-snippets" },
@@ -286,7 +312,6 @@ require('lazy').setup({
           "--column-number",
           "--smart-case",
           "--ignore-binary",  -- Skip binary files
-          "--hidden",         -- Search hidden files (optional; remove if unwanted)
           "--glob=!.git/",    -- Ignore .git (respects .gitignore via ugrep's logic)
           "--recursive",      -- Recursive search
         },
@@ -514,12 +539,61 @@ require('lazy').setup({
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local function lsp_on_attach(client, bufnr)
+        -- Your existing keymaps (moved here for auto-attach)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
+
+        -- Disable formatting for pyright (as in your original config)
+        if client.name == "pyright" then
+          client.server_capabilities.documentFormattingProvider = false
+        end
+      end
       require("mason-lspconfig").setup({
         ensure_installed = { "pyright", "ts_ls" },
         automatic_installation = true,  -- Auto-setup servers on first use
         handlers = {
-          function(server_name)  -- Default handler for all servers
-            require("lspconfig")[server_name].setup({})
+          ["pyright"] = function()
+            require("lspconfig").pyright.setup({
+              capabilities = capabilities,
+              on_attach = lsp_on_attach,
+              settings = {
+                python = {
+                  analysis = {
+                    autoSearchPaths = true,
+                    useLibraryCodeForTypes = true,
+                    diagnosticMode = "workspace",
+                  },
+                },
+              },
+              root_dir = function(_)
+                return get_git_root()
+              end,
+            })
+          end,
+          ["ts_ls"] = function()
+            require("lspconfig").ts_ls.setup({
+              capabilities = capabilities,
+              on_attach = lsp_on_attach,
+              filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },  -- Covers JS/TS
+              settings = {
+                typescript = {
+                  inlayHints = {
+                    includeInlayParameterNameHints = 'all',
+                    includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                    includeInlayFunctionParameterTypeHints = true,
+                    includeInlayVariableTypeHints = true,
+                    includeInlayPropertyDeclarationTypeHints = true,
+                    includeInlayFunctionLikeReturnTypeHints = true,
+                    includeInlayEnumMemberValueHints = true,
+                  },
+                },
+              },
+              root_dir = function(_)
+                return get_git_root()
+              end,
+            })
           end,
         },
       })
@@ -623,6 +697,31 @@ vim.keymap.set('n', '<leader>gf', function()
   })
 end, { desc = '[G]rep repo-wide (fuzzy mode)' })
 
+-- Spectre for IDE-like search/replace panel
+vim.keymap.set('n', '<leader>sr', function()
+  require('spectre').toggle({
+    cwd = get_git_root(),  -- Use your existing get_git_root() for repo-wide
+  })
+end, { desc = '[S]earch/[R]eplace Panel (repo-wide)' })
+
+vim.keymap.set('n', '<leader>sw', function()
+  require('spectre').open_visual({
+    select_word = true,
+    cwd = get_git_root(),  -- Use repo root
+  })
+end, { desc = '[S]earch/[R]eplace Word under cursor (repo-wide)' })
+
+vim.keymap.set('v', '<leader>sw', function()
+  require('spectre').open_visual({
+    cwd = get_git_root(),  -- Use repo root
+  })
+end, { desc = '[S]earch/[R]eplace Visual selection (repo-wide)' })
+
+vim.keymap.set("n", "<leader>rn", function()
+    return ":IncRename " .. vim.fn.expand("<cword>")
+  end, { expr = true, desc = "Rename symbol (with preview)"
+})
+
 vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
 vim.keymap.set('n', '<leader>h', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
 vim.keymap.set('n', '<leader>s', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [F]unctions/Symbols' })
@@ -659,59 +758,6 @@ cmp.setup({
     { name = 'buffer' },
   })
 })
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
--- Common on_attach function for LSP servers (attaches keymaps and settings)
-local function lsp_on_attach(client, bufnr)
-  -- Your existing keymaps (moved here for auto-attach)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
-
-  -- Disable formatting for pyright (as in your original config)
-  if client.name == "pyright" then
-    client.server_capabilities.documentFormattingProvider = false
-  end
-end
-
--- Setup pyright (your existing server)
-vim.lsp.config('pyright', {
-  capabilities = capabilities,
-  on_attach = lsp_on_attach,
-  settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        diagnosticMode = "workspace",
-      },
-    },
-  },
-})
-
--- Setup tsserver for TypeScript/JavaScript/TSX/JSX
-vim.lsp.config('ts_ls', {
-  capabilities = capabilities,
-  on_attach = lsp_on_attach,
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },  -- Covers JS/TS
-  settings = {
-    typescript = {
-      inlayHints = {
-        includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      },
-    },
-  },
-})
-
--- Enable the servers
-vim.lsp.enable('pyright')
-vim.lsp.enable('ts_ls')
 
 -- Functions ------------------------------------------------------------------
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -818,10 +864,6 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 
-vim.keymap.set("n", "<leader>rn", function()
-    return ":IncRename " .. vim.fn.expand("<cword>")
-  end, { expr = true, desc = "Rename symbol (with preview)"
-})
 vim.opt.inccommand = "split"  -- Shows a split with all changes as you type
 
 -- General Settings -----------------------------------------------------------
