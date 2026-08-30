@@ -240,6 +240,8 @@ bindsym --release $mod+c exec --no-startup-id osd
 bindsym --release $mod+Shift+p exec --no-startup-id shutdown_menu -c -p rofi
 # bindsym --release $mod+q exec --no-startup-id qalculate-gtk
 
+for_window [title="tmux-url-picker"] floating enable
+
 workspace 1 output eDP1
 workspace 2 output eDP1
 workspace 3 output HDMI1

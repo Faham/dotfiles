@@ -45,9 +45,9 @@
 #define _cursorColor   #d0d0d0
 #define _color0        #101010
 #define _color1        #960050
-#define _color2        #66aa11
+#define _color2        #8fd07a
 #define _color3        #c47f2c
-#define _color4        #30309b
+#define _color4        #6a9bff
 #define _color5        #7e40a5
 #define _color6        #3579a8
 #define _color7        #9999aa
@@ -288,7 +288,11 @@ URxvt.iso14755_52    : false
 ! xterm ----------------------------------------------------------------------
 
 *vt100*translations: #override Shift <Btn1Up>: exec-formatted("$BROWSER '%t'", PRIMARY)
-XTerm*vt100.translations: #override Ctrl ~Meta Shift <Key>j: string(0x1b) string("[74;5u") \n Ctrl ~Meta Shift <Key>b: string(0x1b) string("[66;5u") \n Ctrl ~Meta Shift <Key>f:
+XTerm*vt100.translations: #override \
+    Shift <Btn1Up>: exec-formatted("$BROWSER '%t'", PRIMARY) \n\
+    Ctrl ~Meta Shift <Key>j: string(0x1b) string("[74;5u") \n\
+    Ctrl ~Meta Shift <Key>b: string(0x1b) string("[66;5u") \n\
+    Ctrl ~Meta Shift <Key>f: string(0x1b) string("[102;5u")
 
 xterm*loginShell            : true
 xterm*termName              : xterm-256color
@@ -316,9 +320,9 @@ xterm*charClass             : 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:4
 xterm*on3Clicks             : regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 xterm*color0                : #101010
 xterm*color1                : #960050
-xterm*color2                : #66aa11
+xterm*color2                : #8fd07a
 xterm*color3                : #c47f2c
-xterm*color4                : #30309b
+xterm*color4                : #6a9bff
 xterm*color5                : #7e40a5
 xterm*color6                : #3579a8
 xterm*color7                : #9999aa
@@ -336,6 +340,7 @@ xterm*colorUL               : #ccdc90
 xterm*foreground            : #d0d0d0
 xterm*background            : #272822
 xterm*cursorColor           : #d0d0d0
+XTerm*fullscreen            : never
 
 !aterm settings---------------------------------------------------------------
 

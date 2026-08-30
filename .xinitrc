@@ -1,5 +1,23 @@
 #!/bin/sh
 
+# ─────────────────────────────────────────────────────────────
+# Tell systemd, portals, PipeWire, and browsers this is a real X11 session
+# (this is what was missing → Vivaldi/Meet device detection bug)
+export XDG_SESSION_TYPE=x11
+export XDG_SESSION_DESKTOP=i3
+export XDG_CURRENT_DESKTOP=i3
+
+# Import everything into the systemd user session so portals work
+dbus-update-activation-environment --systemd --all
+systemctl --user import-environment \
+    XDG_SESSION_TYPE \
+    XDG_SESSION_DESKTOP \
+    XDG_CURRENT_DESKTOP \
+    DISPLAY \
+    XAUTHORITY
+
+# ─────────────────────────────────────────────────────────────
+
 for file in "/etc/profile" "$HOME/.profile" "/etc/xprofile" "$HOME/.xprofile"; do
     if [ -f "$file" ]; then
         . "$file"
